@@ -3,6 +3,7 @@ import numpy as np
 from pygame.locals import*
 from tkinter import*
 import tensorflow as tf
+import concurrent.futures
 
 a=Tk()
 
@@ -128,6 +129,13 @@ screen=pygame.display.set_mode((WEIGHT,HEIGHT))
 pygame.display.set_caption("Pong")
 
 clock=pygame.time.Clock()
+
+frame_count = 0
+prediction_interval = 5
+ia=[0,0]
+# Utilizar ThreadPoolExecutor para predicciones en paralelo
+executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+future = None
 
 FPS=60
 
@@ -268,8 +276,12 @@ while running:
         screen.blit(text_pause,(WEIGHT/2-50,HEIGHT/2-100))
     if start1:
     #---------------IA-----------------------------------------
-        estado=[objeto1.y,objeto2.y,objeto3.x,objeto3.y,value1,value2]
-        ia=acciones_ia(estado)
+        if frame_count % prediction_interval == 0:
+        # Obtener la acción de la IA en un hilo separado
+            estado=[objeto1.y,objeto2.y,objeto3.x,objeto3.y,value1,value2]
+            future = executor.submit(acciones_ia, estado)
+        if future and future.done():
+            ia = future.result()
         if ia[0]< 0 and objeto2.top>0:
             value3=-4
         if ia[0]>0 and objeto2.bottom<HEIGHT:
@@ -357,10 +369,12 @@ while running:
             v8+=value7
     #-----------------------datos---------------------------------------
     # estado=[objeto1.y,objeto2.y,objeto3.x,objeto3.y,value1,value2]
-    registro(estado,action)
+    # registro(estado,action)
     
     pygame.display.flip()
     clock.tick(FPS)
+    frame_count += 1
 
+executor.shutdown()
 pygame.quit()
 # save('pong_states.npy', 'pong_actions.npy')
