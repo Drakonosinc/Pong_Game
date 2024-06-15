@@ -1,1 +1,1 @@
-This is my first game created with pygame, it is a space pong I will eventually add more functions and improvements, technical and visual.
+**This game is created with pygame and integrates a neural network as an opponent, it is a space pong. I will eventually add more features and improvements, technical and visual.**
