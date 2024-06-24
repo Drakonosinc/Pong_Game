@@ -3,6 +3,7 @@ import numpy as np
 from pygame.locals import*
 from tkinter import*
 import tensorflow as tf
+from keras.optimizers import Adam
 import concurrent.futures
 
 a=Tk()
@@ -107,10 +108,10 @@ def save(archivo_estado,archivo_accion):
     np.save(archivo_accion, np.array(acciones))
 
 # Cargar el modelo sin el optimizador
-modelo_IA = tf.keras.models.load_model("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/my_model_pong.keras", compile=False)
+modelo_IA = tf.keras.models.load_model("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/pong_ai_version_2.keras", compile=False)
 
 # Compilar el modelo nuevamente con el optimizador deseado
-modelo_IA.compile(optimizer='adam', loss='mse')
+modelo_IA.compile(optimizer=Adam(learning_rate=0.001), loss='mse')
 
 def acciones_ia(estado):
     global modelo_IA
@@ -368,8 +369,8 @@ while running:
             v7+=value6
             v8+=value7
     #-----------------------datos---------------------------------------
-    # estado=[objeto1.y,objeto2.y,objeto3.x,objeto3.y,value1,value2]
-    # registro(estado,action)
+    estado=[objeto1.y,objeto2.y,objeto3.x,objeto3.y,value1,value2]
+    registro(estado,action)
     
     pygame.display.flip()
     clock.tick(FPS)
@@ -377,4 +378,4 @@ while running:
 
 executor.shutdown()
 pygame.quit()
-# save('pong_states.npy', 'pong_actions.npy')
+save('pong_states.npy', 'pong_actions.npy')
