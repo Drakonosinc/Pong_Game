@@ -108,7 +108,7 @@ def save(archivo_estado,archivo_accion):
     np.save(archivo_accion, np.array(acciones))
 
 # Cargar el modelo sin el optimizador
-modelo_IA = tf.keras.models.load_model("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/pong_ai_version_2.keras", compile=False)
+modelo_IA = tf.keras.models.load_model("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/pong_ai_version_2_ia_base_de_datos.keras", compile=False)
 
 # Compilar el modelo nuevamente con el optimizador deseado
 modelo_IA.compile(optimizer=Adam(learning_rate=0.001), loss='mse')

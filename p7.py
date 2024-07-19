@@ -107,10 +107,14 @@ a.mainloop()
 
 def modelo_ia(tamaño_entrada, acciones_salida):
     model = Sequential()
-    model.add(Dense(8, input_dim=tamaño_entrada, activation='relu'))
-    model.add(Dense(16, activation='relu'))
-    model.add(Dense(8, activation='relu'))
-    model.add(Dense(acciones_salida, activation='linear'))
+    model.add(Dense(units=4,input_dim=tamaño_entrada, activation='relu'))
+    model.add(Dense(units=8, activation='relu'))
+    model.add(Dense(units=16, activation='relu'))
+    model.add(Dense(units=32, activation='relu'))
+    model.add(Dense(units=16, activation='relu'))
+    model.add(Dense(units=8, activation='relu'))
+    model.add(Dense(units=4, activation='relu'))
+    model.add(Dense(units=acciones_salida, activation='linear'))
     model.compile(loss='mse', optimizer=Adam(learning_rate=0.001))
     return model
 
@@ -147,35 +151,44 @@ terminate = threading.Event()
 experience_queue = queue.Queue()
 
 # Funciones de Memoria y Acción
-def remember(state, action, reward, next_state, done):
-    experience_queue.put((state, action, reward, next_state, done))
+def remember(state, action, reward, next_state):
+    experience_queue.put((state, action, reward, next_state))
 
 def act(state):
-    if np.random.rand() <= epsilon:
-        return random.randrange(action_size)
-    q_values = model.predict(state)
-    return np.argmax(q_values[0])
+    if np.random.random() < epsilon:
+        q_values = model.predict(state)
+        return np.argmax(q_values[0])
+    else:return random.randrange(action_size)
+
 
 def replay():
     global epsilon
     while not terminate.is_set():
+        # Esperar si no hay suficientes experiencias en la cola
         if experience_queue.qsize() < batch_size:
             time.sleep(0.1)
             continue
+        # Tomar una muestra aleatoria del batch de experiencias
         minibatch = random.sample(list(experience_queue.queue), batch_size)
-        for state, action, reward, next_state, done in minibatch:
-            target = reward
-            if not done:
-                target = (reward + gamma * np.amax(model.predict(next_state)[0]))
+        for state, action, reward, next_state in minibatch:
+            # Obtener la predicción del modelo para el siguiente estado
+            target = reward + gamma * np.amax(model.predict(next_state)[0])
+            # Obtener la predicción del modelo para el estado actual
             target_f = model.predict(state)
+            # Actualizar el valor Q para la acción seleccionada
             target_f[0][action] = target
+            # Entrenar el modelo en un solo paso (época)
             model.fit(state, target_f, epochs=1, verbose=0)
+            print("Entrenando modelo...")
+        # Reducir epsilon para decrementar la exploración
         if epsilon > epsilon_min:
             epsilon *= epsilon_decay
+        # Pausa para no saturar la CPU
         time.sleep(0.1)
 
 # Función de mutación
 def mutate(weights, mutation_rate=0.01):
+    print("Mutación aplicada")
     new_weights = []
     for weight in weights:
         if random.random() < mutation_rate:
@@ -205,7 +218,7 @@ future = None
 replay_thread = threading.Thread(target=replay)
 replay_thread.start()
 
-FPS=60
+FPS=120
 
 GRAY=(127,127,127)
 WHITE=(255,255,255)
@@ -234,7 +247,7 @@ fuente=pygame.font.Font(None,25)
 fuente1=pygame.font.Font(None,35)
 fuente2=pygame.font.Font(None,50)
 v1,v2,v3,v4,v5,v6,v7,v8=350,200,150,150,150,100,500,20
-valor,valor1,valor2,coon=0,0,0,0
+valor,valor1,valor2,coon=0,1,0,0
 value,value1,value2,value3,value4,value5,value6,value7,value8=0,3,3,0,2,2,1,1,0
 start1,speed,speed1=True,True,True
 sound=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong.wav")
@@ -244,6 +257,8 @@ sound_back.set_volume(0.3)
 contador=0
 player1_win,player2_win=False,False
 while running:
+    #reiniciamos la recompensa
+    reward=0
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
             terminate.set()
@@ -255,12 +270,10 @@ while running:
             elif event.key==K_2:two,three=True,False
             elif event.key==K_3:two,three=True,True
         if event.type==KEYDOWN:
-            if event.key==K_UP:value3=-4
-            elif event.key==K_DOWN:value3=4
-            elif event.key==K_w:
-                value8=-4
-            elif event.key==K_s:
-                value8=4
+            if event.key==K_UP:value3=-5
+            elif event.key==K_DOWN:value3=5
+            elif event.key==K_w:value8=-5
+            elif event.key==K_s:value8=5
             elif event.key==K_ESCAPE:running=False
             elif event.key==K_p:
                 start1,p=False,True
@@ -292,17 +305,16 @@ while running:
             #         player1_win,player2_win=False,False
             #         start1,speed,speed1=True,True,True
             #         game_over=False
-        if game_over:
-                v1,v2,v3,v4,v5,v6,v7,v8=350,200,150,150,150,100,500,20
-                valor1,valor2,coon=0,0,0
-                sound_back.play(loops=-1)
-                player1_win,player2_win=False,False
-                start1=True
-                contador+=1
-                game_over=False
-                if contador==10:
-                    terminate.set()
-                    running=False
+    if game_over:
+        v1,v2,v3,v4,v5,v6,v7,v8=350,200,150,150,150,100,500,20
+        valor1,valor2,coon=0,0,0
+        sound_back.play(loops=-1)
+        start1=True
+        contador+=1
+        game_over=False
+        if contador==1:
+            terminate.set()
+            running=False
     screen.blit(imagen,[0,0])
     objeto1=pygame.draw.rect(screen,GREEN,(25,v3,11,90))
     objeto2=pygame.draw.rect(screen,GREEN,(665,v4,11,90))
@@ -328,69 +340,53 @@ while running:
     screen.blit(texto_jugador2,(580,10))
     # ------------game over--------------------------------------
     if valor1==puntos:
-            start1=False
-            terminate.set()
-            sound_back.stop()
-            screen.fill(background)
-            pygame.draw.rect(screen,"black",(12,12,675,375),10)
-            text_game_over=fuente2.render("GAME OVER",True,"black")
-            text_win_player=fuente1.render(f"player {player1} win",True,"lightgreen")
-            text_reset=fuente.render("Reset Press R",True,"black")
-            screen.blit(text_game_over,(WEIGHT/2-100,HEIGHT/2-100))
-            screen.blit(text_win_player,(25,350))
-            screen.blit(text_reset,(WEIGHT/2-50,HEIGHT/2-60))
-            reward=-1
-            player1_win,player2_win=True,False
-            game_over=True
+        start1=False
+        terminate.set()
+        sound_back.stop()
+        screen.fill(background)
+        pygame.draw.rect(screen,"black",(12,12,675,375),10)
+        text_game_over=fuente2.render("GAME OVER",True,"black")
+        text_win_player=fuente1.render(f"player {player1} win",True,"lightgreen")
+        text_reset=fuente.render("Reset Press R",True,"black")
+        screen.blit(text_game_over,(WEIGHT/2-100,HEIGHT/2-100))
+        screen.blit(text_win_player,(25,350))
+        screen.blit(text_reset,(WEIGHT/2-50,HEIGHT/2-60))
+        reward=-1
+        player1_win,player2_win=True,False
+        game_over=True
     if valor2==puntos:
-            start1=False
-            terminate.set()
-            sound_back.stop()
-            screen.fill(background)
-            pygame.draw.rect(screen,"black",(12,12,675,375),10)
-            text_game_over=fuente2.render("GAME OVER",True,"black")
-            text_win_player=fuente1.render(f"player {player2} win",True,"lightgreen")
-            text_reset=fuente.render("Reset Press R",True,"black")
-            screen.blit(text_game_over,(WEIGHT/2-100,HEIGHT/2-100))
-            screen.blit(text_win_player,(25,350))
-            screen.blit(text_reset,(WEIGHT/2-50,HEIGHT/2-60))
-            player1_win,player2_win=False,True
-            reward=1
-            game_over=True
+        start1=False
+        terminate.set()
+        sound_back.stop()
+        screen.fill(background)
+        pygame.draw.rect(screen,"black",(12,12,675,375),10)
+        text_game_over=fuente2.render("GAME OVER",True,"black")
+        text_win_player=fuente1.render(f"player {player2} win",True,"lightgreen")
+        text_reset=fuente.render("Reset Press R",True,"black")
+        screen.blit(text_game_over,(WEIGHT/2-100,HEIGHT/2-100))
+        screen.blit(text_win_player,(25,350))
+        screen.blit(text_reset,(WEIGHT/2-50,HEIGHT/2-60))
+        player1_win,player2_win=False,True
+        reward=1
+        game_over=True
     # ------------------pause-----------------------------------
     if p:
         text_pause=fuente2.render("PAUSE",True,"black")
         screen.blit(text_pause,(WEIGHT/2-50,HEIGHT/2-100))
-    #-----------------mutations------------------------------------
-    if player1_win:
-        print("Mutación aplicada")
-        current_weights = model.get_weights()
-        mutated_weights = mutate(current_weights, mutation_rate=0.01)
-        model.set_weights(mutated_weights)
-        player1_win,player2_win=False,False
     if start1:
     #-------------IA---------------------------------------------
         if frame_count % prediction_interval == 0:
             state =np.array([objeto1.y,objeto2.y,objeto3.x,objeto3.y])
             state = np.reshape(state, [1, state_size])
             future=executor.submit(act,state)
-        if future and future.done():
-            action=future.result()
-        if action == 0:
-            value3=-4
-        elif action == 1:
-            value3=4
+        if future and future.done():action=future.result()
+        if action == 0:value3=-5
+        elif action == 1:value3=5
         else:pass
-        reward=0
-        # Actualiza el juego y obtén el nuevo estado y la recompensa
-        next_state =np.array([objeto1.y,objeto2.y,objeto3.x,objeto3.y])
-        next_state = np.reshape(next_state, [1, state_size])
-        # Almacena la experiencia y actualiza el estado
-        remember(state, action, reward, next_state,running)
-        state = next_state
     # ------------players----------------------------------------
         # if v1>=WEIGHT/2-50:v4+=value2
-        if v1<=WEIGHT/2-50:v3+=value2
+        # if v1<=WEIGHT/2-50:v3+=value2
+        v3+=value2
         # elif v5>=WEIGHT/2-50:v4+=value5
         # elif v7>=WEIGHT/2-50:v4+=value7
         # v3+=value8
@@ -405,16 +401,17 @@ while running:
             sound.play(loops=1)
             if v1>=WEIGHT-25:
                 valor1+=1
-                reward=-1
+                reward+=-1
                 v1=300
                 v2=200
             if v1<=0:
                 valor2+=1
-                reward=1
+                reward+=1
                 v1=300
                 v2=200
         if v2>=HEIGHT-25 or v2<=0:value2*=-1
         if objeto3.colliderect(objeto1):
+            # reward=-1
             value1*=-1
             coon+=1
             sound.play(loops=0)
@@ -424,7 +421,7 @@ while running:
                 coon=0
                 valor2+=1
         if objeto3.colliderect(objeto2):
-            reward=0.5
+            # reward=1
             value1*=-1
             coon+=1
             sound.play(loops=0)
@@ -473,6 +470,21 @@ while running:
                 sound.play(loops=0)
             v7+=value6
             v8+=value7
+    # Actualiza el juego y obtén el nuevo estado y la recompensa
+    next_state =np.array([objeto1.y,objeto2.y,objeto3.x,objeto3.y])
+    next_state = np.reshape(next_state, [1, state_size])
+    # Almacena la experiencia y actualiza el estado
+    remember(state, action, reward, next_state)
+    state = next_state
+    #-----------------mutations------------------------------------
+    if valor1%10==0:
+        current_weights = model.get_weights()
+        mutated_weights = mutate(current_weights, mutation_rate=0.01)
+        model.set_weights(mutated_weights)
+        valor1+=1
+        puntos+=1
+        player1_win,player2_win=False,False
+    if player2_win:print("jugador 2 gano")
     pygame.display.flip()
     clock.tick(FPS)
     frame_count += 1
