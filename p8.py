@@ -69,7 +69,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
+        self.main=2 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
@@ -222,11 +222,14 @@ class Space_pong_game():
             self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
+            self.continue_button=pygame.draw.polygon(self.screen, self.WHITE, ((650, 350), (650, 380), (675, 365)))
             if self.back_button.collidepoint(self.mouse_pos):pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
+            if self.continue_button.collidepoint(self.mouse_pos):pygame.draw.polygon(self.screen, self.WHITE, ((650, 340), (650, 390), (690, 365)))
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
                 if self.back_button.collidepoint(self.mouse_pos):self.main=0
+                if self.continue_button.collidepoint(self.mouse_pos):self.main=-1
     def Pause(self):
         if self.main==3:self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-62,self.HEIGHT/2-100))
     def name_players(self):
