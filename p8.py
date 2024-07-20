@@ -69,7 +69,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=2 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
+        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
