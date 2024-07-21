@@ -30,7 +30,7 @@ class Space_pong_game():
         self.HEIGHT=400
         self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
         self.clock=pygame.time.Clock()
-        self.FPS=120
+        self.FPS=60
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
         self.BLACK=(0,0,0)
@@ -74,6 +74,9 @@ class Space_pong_game():
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
         self.text_player2="PC"
+        self.speed=0
+        self.speed_up=True
+        self.speed_down=True
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -89,6 +92,18 @@ class Space_pong_game():
                         self.main=3
                         self.pause_counter+=1
                         if self.pause_counter%2==0:self.main=-1
+                    if self.speed_up:
+                        if event.key==K_KP_PLUS:
+                            self.FPS+=15
+                            self.speed+=1
+                            self.speed_down=True
+                            if self.speed==10:self.speed_up=False
+                    if self.speed_down:
+                        if event.key==K_KP_MINUS:
+                            self.FPS-=15
+                            self.speed-=1
+                            self.speed_up=True
+                            if self.speed==-1:self.speed_down=False
                 if self.main==2:
                     if self.color_inputtext1==self.SKYBLUE:
                         if event.key == pygame.K_BACKSPACE:self.text_player1 = self.text_player1[:-1]
@@ -116,6 +131,7 @@ class Space_pong_game():
         self.screen.blit(self.planet, (self.object3.x,self.object3.y))
         self.scores()
         self.name_players()
+        self.mode_speed()
         self.Pause()
         self.main_menu()
         self.game_mode()
@@ -152,9 +168,8 @@ class Space_pong_game():
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
     def IA_actions(self,action):
-        if self.main==-1:
-            if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
-            if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
+        if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
+        if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
         if self.score1==5 or self.score2==5:
             self.running=False
@@ -235,6 +250,8 @@ class Space_pong_game():
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
+    def mode_speed(self):
+        self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def run_with_model(self):
         self.objects()
         self.running=True
