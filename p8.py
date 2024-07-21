@@ -58,6 +58,8 @@ class Space_pong_game():
         self.font4=pygame.font.Font("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/fonts/8bitOperatorPlusSC-Bold.ttf",75)
         self.font5=pygame.font.Font("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/fonts/8bitOperatorPlusSC-Bold.ttf",20)
         self.sound=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong.wav")
+        self.sound_touchletters=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/touchletters.wav")
+        self.sound_exitbutton=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/exitbutton.wav")
         self.sound_back=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong_back.mp3")
         self.sound_back.play(loops=-1)
         self.sound_back.set_volume(0.2)
@@ -85,7 +87,9 @@ class Space_pong_game():
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
         for event in pygame.event.get():
-            if event.type==pygame.QUIT:self.running,self.game_over=False,True
+            if event.type==pygame.QUIT:
+                self.sound_exitbutton.play(loops=0)
+                self.running,self.game_over=False,True
             if event.type==KEYDOWN:
                 if self.main==3 or self.main==-1:
                     if event.key==K_p:
@@ -215,8 +219,12 @@ class Space_pong_game():
             if self.press_play.collidepoint(self.mouse_pos):self.screen.blit(self.font5.render("Press To Start", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-80))
             if self.press_quit.collidepoint(self.mouse_pos):self.screen.blit(self.font5.render("Press To Exit", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-50))
             if self.pressed_mouse[0]:
-                if self.press_play.collidepoint(self.mouse_pos):self.main=2
-                if self.press_quit.collidepoint(self.mouse_pos):self.game_over=True
+                if self.press_play.collidepoint(self.mouse_pos):
+                    self.sound_touchletters.play(loops=0)
+                    self.main=2
+                if self.press_quit.collidepoint(self.mouse_pos):
+                    self.sound_exitbutton.play(loops=0)
+                    self.game_over=True
     def Game_over(self):
         if self.main==1:
             self.screen.fill(self.background)
@@ -243,8 +251,12 @@ class Space_pong_game():
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-                if self.back_button.collidepoint(self.mouse_pos):self.main=0
-                if self.continue_button.collidepoint(self.mouse_pos):self.main=-1
+                if self.back_button.collidepoint(self.mouse_pos):
+                    self.sound_touchletters.play(loops=0)
+                    self.main=0
+                if self.continue_button.collidepoint(self.mouse_pos):
+                    self.sound_touchletters.play(loops=0)
+                    self.main=-1
     def Pause(self):
         if self.main==3:self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-62,self.HEIGHT/2-100))
     def name_players(self):
