@@ -60,6 +60,7 @@ class Space_pong_game():
         self.sound=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong.wav")
         self.sound_touchletters=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/touchletters.wav")
         self.sound_exitbutton=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/exitbutton.wav")
+        self.sound_buttonletters=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/buttonletters.mp3")
         self.sound_back=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong_back.mp3")
         self.sound_back.play(loops=-1)
         self.sound_back.set_volume(0.2)
@@ -79,6 +80,7 @@ class Space_pong_game():
         self.speed=0
         self.speed_up=True
         self.speed_down=True
+        self.notsound_playing=[True,True,True,True]
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -216,8 +218,18 @@ class Space_pong_game():
             self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
             self.press_play=self.screen.blit(self.font5.render("Press To Start", True, self.WHITE),(self.WIDTH//2-200,self.HEIGHT//2-80))
             self.press_quit=self.screen.blit(self.font5.render("Press To Exit", True, self.WHITE),(self.WIDTH//2-200,self.HEIGHT//2-50))
-            if self.press_play.collidepoint(self.mouse_pos):self.screen.blit(self.font5.render("Press To Start", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-80))
-            if self.press_quit.collidepoint(self.mouse_pos):self.screen.blit(self.font5.render("Press To Exit", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-50))
+            if self.press_play.collidepoint(self.mouse_pos):
+                self.screen.blit(self.font5.render("Press To Start", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-80))
+                if self.notsound_playing[0]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[0]=False
+            else:self.notsound_playing[0]=True
+            if self.press_quit.collidepoint(self.mouse_pos):
+                self.screen.blit(self.font5.render("Press To Exit", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-50))
+                if self.notsound_playing[1]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[1]=False
+            else:self.notsound_playing[1]=True
             if self.pressed_mouse[0]:
                 if self.press_play.collidepoint(self.mouse_pos):
                     self.sound_touchletters.play(loops=0)
@@ -246,8 +258,18 @@ class Space_pong_game():
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
             self.continue_button=pygame.draw.polygon(self.screen, self.WHITE, ((650, 350), (650, 380), (675, 365)))
-            if self.back_button.collidepoint(self.mouse_pos):pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
-            if self.continue_button.collidepoint(self.mouse_pos):pygame.draw.polygon(self.screen, self.WHITE, ((650, 340), (650, 390), (690, 365)))
+            if self.back_button.collidepoint(self.mouse_pos):
+                pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
+                if self.notsound_playing[2]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[2]=False
+            else:self.notsound_playing[2]=True
+            if self.continue_button.collidepoint(self.mouse_pos):
+                pygame.draw.polygon(self.screen, self.WHITE, ((650, 340), (650, 390), (690, 365)))
+                if self.notsound_playing[3]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[3]=False
+            else:self.notsound_playing[3]=True
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
