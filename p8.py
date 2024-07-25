@@ -3,7 +3,6 @@ from pygame.locals import*
 import numpy as np
 import torch
 import torch.nn as nn
-import torch.optim as optim
 
 # Definición del modelo de red neuronal en PyTorch
 class SimpleNN(nn.Module):
@@ -42,26 +41,27 @@ class Space_pong_game():
         self.GOLDEN=(255,199,51)
         self.background=self.GRAY
         self.angle=90
-        self.image=pygame.image.load(os.path.join("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/images/planeta.jpg"))
+        self.image_path = os.path.join(os.path.dirname(__file__), "images")
+        self.image=pygame.image.load(os.path.join(self.image_path,"planeta.jpg"))
         self.image=pygame.transform.scale(self.image,(700,400))
-        self.planet=pygame.image.load(os.path.join("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/images/marte1.png")).convert_alpha()
+        self.planet=pygame.image.load(os.path.join(self.image_path,"marte1.png")).convert_alpha()
         self.planet=pygame.transform.scale(self.planet,(36,36))
-        self.spacecraft=pygame.image.load(os.path.join("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/images/nave1.png")).convert_alpha()
+        self.spacecraft=pygame.image.load(os.path.join(self.image_path,"nave1.png")).convert_alpha()
         self.spacecraft=pygame.transform.scale(self.spacecraft,(350,200))
         self.spacecraft=pygame.transform.rotate(self.spacecraft,self.angle)
-        self.spacecraft2=pygame.image.load(os.path.join("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/images/nave1.png")).convert_alpha()
-        self.spacecraft2=pygame.transform.scale(self.spacecraft2,(350,200))
-        self.spacecraft2=pygame.transform.rotate(self.spacecraft2,self.angle*3)
+        self.spacecraft2=pygame.transform.rotate(self.spacecraft,self.angle*2)
+        self.font_path = os.path.join(os.path.dirname(__file__), "fonts")
         self.font=pygame.font.Font(None,25)
         self.font2=pygame.font.Font(None,35)
         self.font3=pygame.font.Font(None,60)
-        self.font4=pygame.font.Font("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/fonts/8bitOperatorPlusSC-Bold.ttf",75)
-        self.font5=pygame.font.Font("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/fonts/8bitOperatorPlusSC-Bold.ttf",20)
-        self.sound=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong.wav")
-        self.sound_touchletters=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/touchletters.wav")
-        self.sound_exitbutton=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/exitbutton.wav")
-        self.sound_buttonletters=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/buttonletters.mp3")
-        self.sound_back=pygame.mixer.Sound("C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/sounds/pong_back.mp3")
+        self.font4=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),75)
+        self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
+        self.sound_path = os.path.join(os.path.dirname(__file__), "sounds")
+        self.sound=pygame.mixer.Sound(os.path.join(self.sound_path,"pong.wav"))
+        self.sound_touchletters=pygame.mixer.Sound(os.path.join(self.sound_path,"touchletters.wav"))
+        self.sound_exitbutton=pygame.mixer.Sound(os.path.join(self.sound_path,"exitbutton.wav"))
+        self.sound_buttonletters=pygame.mixer.Sound(os.path.join(self.sound_path,"buttonletters.mp3"))
+        self.sound_back=pygame.mixer.Sound(os.path.join(self.sound_path,"pong_back.mp3"))
         self.sound_back.play(loops=-1)
         self.sound_back.set_volume(0.2)
         self.generation = 0
@@ -72,15 +72,17 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
+        self.main=2 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
+        self.colors_game_mode=[self.WHITE,self.WHITE,self.WHITE]
         self.text_player1="player 1"
         self.text_player2="PC"
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.notsound_playing=[True,True,True,True]
+        self.notsound_playing=[True,True,True,True,True,True,True]
+        self.mode_game=[False,False,False]
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -117,14 +119,17 @@ class Space_pong_game():
                     if self.color_inputtext2==self.SKYBLUE:
                         if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
                         else:self.text_player2 += event.unicode
+                if self.main==-1:
+                    if event.key==K_1:save_model(self.model, "C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/best_model.pth")
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
         if self.pressed_keys[K_ESCAPE]:self.running=False
-        if self.pressed_keys[K_1]:save_model(self.model, "C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/best_model.pth")
         if self.main==-1:
             if self.pressed_keys[K_w] and self.object1.top > 0:self.object1.y -= 5
             if self.pressed_keys[K_s] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
+            if self.pressed_keys[K_UP] and self.object2.top > 0:self.object2.y -= 5
+            if self.pressed_keys[K_DOWN] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
             if self.pressed_keys[K_r]:self.main=-1
     def draw(self):
@@ -182,7 +187,7 @@ class Space_pong_game():
             self.score1=0
             self.score2=0
     def player1_code(self):
-        if (self.object1.top > 0 or self.object1.bottom < self.HEIGHT) and self.object3.x<=self.WIDTH//2:self.object1.y+=self.value2
+        if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.value2
         if self.object1.y>=310:self.object1.y=310
         if self.object1.y<=0:self.object1.y=0
     def draw_activations(self):
@@ -248,16 +253,20 @@ class Space_pong_game():
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
-            self.screen.blit(self.font5.render("Enter Player Name One",True,"white"),(8,10))
-            self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(415,10))
-            pygame.draw.rect(self.screen,self.color_inputtext1,(10,40,271,25))
-            pygame.draw.rect(self.screen,self.color_inputtext2,(416,40,275,25))
-            self.input_player1=pygame.draw.rect(self.screen,self.GRAY,(10,40,271,25),2)
-            self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(416,40,275,25),2)
+            self.screen.blit(self.font5.render("Enter Player Name One",True,"white"),(7,10))
+            self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(416,10))
+            pygame.draw.rect(self.screen,self.color_inputtext1,(8,40,271,25))
+            pygame.draw.rect(self.screen,self.color_inputtext2,(418,40,275,25))
+            self.input_player1=pygame.draw.rect(self.screen,self.GRAY,(8,40,271,25),2)
+            self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
             self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
             self.continue_button=pygame.draw.polygon(self.screen, self.WHITE, ((650, 350), (650, 380), (675, 365)))
+            self.screen.blit(pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
+            self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,self.colors_game_mode[0]),(self.WIDTH/2-70,self.HEIGHT/2-136))
+            self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,self.colors_game_mode[1]),(self.WIDTH/2-64,self.HEIGHT/2-110))
+            self.one_vs_ai_button=self.screen.blit(self.font5.render("One Vs Ai",True,self.colors_game_mode[2]),(self.WIDTH/2-58,self.HEIGHT/2-84))
             if self.back_button.collidepoint(self.mouse_pos):
                 pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
                 if self.notsound_playing[2]:
@@ -279,6 +288,27 @@ class Space_pong_game():
                 if self.continue_button.collidepoint(self.mouse_pos):
                     self.sound_touchletters.play(loops=0)
                     self.main=-1
+                if self.training_ai_button.collidepoint(self.mouse_pos):
+                    self.mode_game[0],self.mode_game[1],self.mode_game[2]=True,False,False
+                    if self.notsound_playing[4]:
+                        self.sound_buttonletters.play(loops=0)
+                        self.notsound_playing[4]=False
+                else:self.notsound_playing[4]=True
+                if self.one_vs_one_button.collidepoint(self.mouse_pos):
+                    self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,True,False
+                    if self.notsound_playing[5]:
+                        self.sound_buttonletters.play(loops=0)
+                        self.notsound_playing[5]=False
+                else:self.notsound_playing[5]=True
+                if self.one_vs_ai_button.collidepoint(self.mouse_pos):
+                    self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,False,True
+                    if self.notsound_playing[6]:
+                        self.sound_buttonletters.play(loops=0)
+                        self.notsound_playing[6]=False
+                else:self.notsound_playing[6]=True
+            self.colors_game_mode[0]=self.SKYBLUE if self.mode_game[0] else self.WHITE
+            self.colors_game_mode[1]=self.SKYBLUE if self.mode_game[1] else self.WHITE
+            self.colors_game_mode[2]=self.SKYBLUE if self.mode_game[2] else self.WHITE
     def Pause(self):
         if self.main==3:self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-62,self.HEIGHT/2-100))
     def name_players(self):
@@ -360,10 +390,12 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
         population = next_population
     best_model = population[fitness_scores.index(max(fitness_scores))]
     return best_model
+
 # Guardar el modelo
 def save_model(model, path):
     print("save model")
     torch.save(model.state_dict(), path)
+
 # Cargar el modelo
 def load_model(path, input_size, output_size):
     print("load model")
@@ -374,7 +406,7 @@ def load_model(path, input_size, output_size):
 if __name__=="__main__":
     input_size = 6  # Definir el tamaño de entrada
     output_size = 2  # Definir el tamaño de salida
-    model_path="C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/best_model.pth"
+    model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
     game=Space_pong_game()
     if os.path.exists(model_path):best_model = load_model(model_path, input_size, output_size)
     best_model = genetic_algorithm(game, input_size, output_size)
