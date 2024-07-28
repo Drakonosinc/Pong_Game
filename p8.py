@@ -72,7 +72,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=2 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
+        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.colors_game_mode=[self.WHITE,self.WHITE,self.WHITE]
@@ -81,8 +81,9 @@ class Space_pong_game():
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.notsound_playing=[True,True,True,True,True,True,True]
-        self.mode_game=[False,False,False]
+        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True]
+        self.mode_game=[True,False,False]
+        self.max_score=5
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -182,7 +183,7 @@ class Space_pong_game():
         if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
         if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
-        if self.score1==5 or self.score2==5:
+        if self.score1==self.max_score or self.score2==self.max_score:
             self.running=False
             self.score1=0
             self.score2=0
@@ -263,10 +264,14 @@ class Space_pong_game():
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
             self.continue_button=pygame.draw.polygon(self.screen, self.WHITE, ((650, 350), (650, 380), (675, 365)))
-            self.screen.blit(pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
+            self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
             self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,self.colors_game_mode[0]),(self.WIDTH/2-70,self.HEIGHT/2-136))
             self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,self.colors_game_mode[1]),(self.WIDTH/2-64,self.HEIGHT/2-110))
             self.one_vs_ai_button=self.screen.blit(self.font5.render("One Vs Ai",True,self.colors_game_mode[2]),(self.WIDTH/2-58,self.HEIGHT/2-84))
+            self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
+            self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
+            self.decrease_point=pygame.draw.polygon(self.screen, self.BLACK, ((320, 185), (320, 205), (300, 195)))
+            self.increase_point=pygame.draw.polygon(self.screen, self.BLACK, ((380, 185), (380, 205), (400, 195)))
             if self.back_button.collidepoint(self.mouse_pos):
                 pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
                 if self.notsound_playing[2]:
@@ -279,6 +284,18 @@ class Space_pong_game():
                     self.sound_buttonletters.play(loops=0)
                     self.notsound_playing[3]=False
             else:self.notsound_playing[3]=True
+            if self.decrease_point.collidepoint(self.mouse_pos):
+                pygame.draw.polygon(self.screen, self.WHITE, ((320, 185), (320, 205), (300, 195)))
+                if self.notsound_playing[7]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[7]=False
+            else:self.notsound_playing[7]=True
+            if self.increase_point.collidepoint(self.mouse_pos):
+                pygame.draw.polygon(self.screen, self.WHITE, ((380, 185), (380, 205), (400, 195)))
+                if self.notsound_playing[8]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[8]=False
+            else:self.notsound_playing[8]=True
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
@@ -291,21 +308,33 @@ class Space_pong_game():
                 if self.training_ai_button.collidepoint(self.mouse_pos):
                     self.mode_game[0],self.mode_game[1],self.mode_game[2]=True,False,False
                     if self.notsound_playing[4]:
-                        self.sound_buttonletters.play(loops=0)
+                        self.sound_touchletters.play(loops=0)
                         self.notsound_playing[4]=False
                 else:self.notsound_playing[4]=True
                 if self.one_vs_one_button.collidepoint(self.mouse_pos):
                     self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,True,False
                     if self.notsound_playing[5]:
-                        self.sound_buttonletters.play(loops=0)
+                        self.sound_touchletters.play(loops=0)
                         self.notsound_playing[5]=False
                 else:self.notsound_playing[5]=True
                 if self.one_vs_ai_button.collidepoint(self.mouse_pos):
                     self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,False,True
                     if self.notsound_playing[6]:
-                        self.sound_buttonletters.play(loops=0)
+                        self.sound_touchletters.play(loops=0)
                         self.notsound_playing[6]=False
                 else:self.notsound_playing[6]=True
+                if self.increase_point.collidepoint(self.mouse_pos):
+                    if self.notsound_playing[9]:
+                        self.max_score+=1
+                        self.sound_touchletters.play(loops=0)
+                        self.notsound_playing[9]=False
+                else:self.notsound_playing[9]=True
+                if self.decrease_point.collidepoint(self.mouse_pos):
+                    if self.notsound_playing[10]:
+                        self.max_score-=1
+                        self.sound_touchletters.play(loops=0)
+                        self.notsound_playing[10]=False
+                else:self.notsound_playing[10]=True
             self.colors_game_mode[0]=self.SKYBLUE if self.mode_game[0] else self.WHITE
             self.colors_game_mode[1]=self.SKYBLUE if self.mode_game[1] else self.WHITE
             self.colors_game_mode[2]=self.SKYBLUE if self.mode_game[2] else self.WHITE
