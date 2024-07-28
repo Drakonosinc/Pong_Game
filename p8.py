@@ -84,6 +84,8 @@ class Space_pong_game():
         self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True]
         self.mode_game=[True,False,False]
         self.max_score=5
+        self.EVENT_SCORE = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.EVENT_SCORE,400)
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -95,6 +97,9 @@ class Space_pong_game():
             if event.type==pygame.QUIT:
                 self.sound_exitbutton.play(loops=0)
                 self.running,self.game_over=False,True
+            elif event.type == self.EVENT_SCORE:
+                self.notsound_playing[9]=True
+                self.notsound_playing[10]=True
             if event.type==KEYDOWN:
                 if self.main==3 or self.main==-1:
                     if event.key==K_p:
@@ -284,7 +289,7 @@ class Space_pong_game():
                     self.sound_buttonletters.play(loops=0)
                     self.notsound_playing[3]=False
             else:self.notsound_playing[3]=True
-            if self.decrease_point.collidepoint(self.mouse_pos):
+            if self.decrease_point.collidepoint(self.mouse_pos) and self.max_score>1:
                 pygame.draw.polygon(self.screen, self.WHITE, ((320, 185), (320, 205), (300, 195)))
                 if self.notsound_playing[7]:
                     self.sound_buttonletters.play(loops=0)
@@ -330,7 +335,7 @@ class Space_pong_game():
                         self.notsound_playing[9]=False
                 else:self.notsound_playing[9]=True
                 if self.decrease_point.collidepoint(self.mouse_pos):
-                    if self.notsound_playing[10]:
+                    if self.notsound_playing[10] and self.max_score>1:
                         self.max_score-=1
                         self.sound_touchletters.play(loops=0)
                         self.notsound_playing[10]=False
