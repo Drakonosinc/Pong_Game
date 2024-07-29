@@ -23,6 +23,8 @@ class Space_pong_game():
         pygame.init()
         pygame.display.set_caption("Pong")
         self.model=model
+        self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
+        if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
         self.running=False
         self.game_over=False
         self.WIDTH =700
@@ -126,23 +128,25 @@ class Space_pong_game():
                         if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
                         else:self.text_player2 += event.unicode
                 if self.main==-1:
-                    if event.key==K_1:save_model(self.model, "C:/Users/Cancino/Desktop/codigos de programacion/Python/proyecto/1/final_version/IA/best_model.pth")
+                    if event.key==K_1:save_model(self.model, self.model_path)
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
         if self.pressed_keys[K_ESCAPE]:self.running=False
-        if self.main==-1:
+        if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
             if self.pressed_keys[K_w] and self.object1.top > 0:self.object1.y -= 5
             if self.pressed_keys[K_s] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
+        if self.main==-1 and self.mode_game[1]:
             if self.pressed_keys[K_UP] and self.object2.top > 0:self.object2.y -= 5
             if self.pressed_keys[K_DOWN] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
             if self.pressed_keys[K_r]:self.main=-1
     def draw(self):
         self.screen.blit(self.image, (0, 0))
-        self.draw_activations()
-        self.draw_generation()
-        self.draw_model_data()
+        if self.mode_game[0] or self.mode_game[2]:
+            self.draw_activations()
+            self.draw_generation()
+            self.draw_model_data()
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
         self.screen.blit(self.planet, (self.object3.x,self.object3.y))
@@ -188,15 +192,24 @@ class Space_pong_game():
         if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
         if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
-        if self.score1==self.max_score or self.score2==self.max_score:
+        if self.mode_game[0] and (self.score1==self.max_score or self.score2==self.max_score):
             self.running=False
             self.score1=0
             self.score2=0
+        if (self.mode_game[1] or self.mode_game[2]) and (self.score1==self.max_score or self.score2==self.max_score):
+            self.score1=0
+            self.score2=0
+            self.FPS=60
+            self.speed=0
+            self.speed_up=True
+            self.speed_down=True
+            self.main=1
     def player1_code(self):
         if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.value2
         if self.object1.y>=310:self.object1.y=310
         if self.object1.y<=0:self.object1.y=0
     def draw_activations(self):
+        if self.mode_game[2]:self.model=self.model_training
         if self.model.activations is not None:
             activations = self.model.activations
             num_activations = activations.shape[1]
@@ -214,9 +227,11 @@ class Space_pong_game():
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.screen, color, neuron_positions[i], 5)
     def draw_generation(self):
+        if self.mode_game[2]:self.model=self.model_training
         generation_text = self.font2.render(f"Generation: {self.generation}", True, self.YELLOW)
         self.screen.blit(generation_text, (10, 10))
     def draw_model_data(self):
+        if self.mode_game[2]:self.model=self.model_training
         if self.model is not None:
             weights_text = self.font.render(f"Model Weights: {self.model.fc1.weight.data.numpy().flatten()[:5]}", True, self.YELLOW)
             self.screen.blit(weights_text, (10, 50))
@@ -357,7 +372,7 @@ class Space_pong_game():
         while self.running and self.game_over==False:
             self.handle_keys()
             self.draw()
-            if self.main==-1:
+            if self.main==-1 and self.mode_game[0]:
                 state=self.get_state()
                 action = self.model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
                 self.IA_actions(action)
@@ -365,6 +380,15 @@ class Space_pong_game():
                 self.player1_code()
                 self.restart()
                 score =self.reward
+            if self.main==-1 and self.mode_game[1]:
+                self.move_ball()
+                self.restart()
+            if self.main==-1 and self.mode_game[2]:
+                state=self.get_state()
+                action = self.model_training(torch.tensor(state, dtype=torch.float32)).detach().numpy()
+                self.IA_actions(action)
+                self.move_ball()
+                self.restart()
             pygame.display.flip()
             self.clock.tick(self.FPS)
         return score
@@ -440,12 +464,9 @@ def load_model(path, input_size, output_size):
 if __name__=="__main__":
     input_size = 6  # Definir el tamaño de entrada
     output_size = 2  # Definir el tamaño de salida
-    model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
     game=Space_pong_game()
-    if os.path.exists(model_path):best_model = load_model(model_path, input_size, output_size)
     best_model = genetic_algorithm(game, input_size, output_size)
-    # Guardar el mejor modelo
-    # save_model(best_model, path)
+    save_model(best_model, game.model_path)
     game.model = best_model
     game.run_with_model()
 
