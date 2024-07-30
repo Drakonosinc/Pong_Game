@@ -55,7 +55,8 @@ class Space_pong_game():
         self.font_path = os.path.join(os.path.dirname(__file__), "fonts")
         self.font=pygame.font.Font(None,25)
         self.font2=pygame.font.Font(None,35)
-        self.font3=pygame.font.Font(None,60)
+        self.font2_5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),30)
+        self.font3=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),60)
         self.font4=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),75)
         self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
         self.sound_path = os.path.join(os.path.dirname(__file__), "sounds")
@@ -141,6 +142,7 @@ class Space_pong_game():
             if self.pressed_keys[K_DOWN] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
             if self.pressed_keys[K_r]:self.main=-1
+            if self.pressed_keys[K_e]:self.main=0
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game[0] or self.mode_game[2]:
@@ -197,12 +199,7 @@ class Space_pong_game():
             self.score1=0
             self.score2=0
         if (self.mode_game[1] or self.mode_game[2]) and (self.score1==self.max_score or self.score2==self.max_score):
-            self.score1=0
-            self.score2=0
-            self.FPS=60
-            self.speed=0
-            self.speed_up=True
-            self.speed_down=True
+            self.reset()
             self.main=1
     def player1_code(self):
         if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.value2
@@ -267,10 +264,9 @@ class Space_pong_game():
         if self.main==1:
             self.screen.fill(self.background)
             pygame.draw.rect(self.screen,"black",(0,0,700,400),15)
-            self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-130,self.HEIGHT/2-150))
-            self.screen.blit(self.font2.render("Reset Press R",True,"black"),(self.WIDTH/2-80,self.HEIGHT/2-110))
-            self.score1=0
-            self.score2=0
+            self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
+            self.screen.blit(self.font2_5.render("Main Menu Press E",True,"black"),(self.WIDTH/2-166,self.HEIGHT/2-110))
+            self.screen.blit(self.font2_5.render("Reset Press R",True,"black"),(self.WIDTH/2-130,self.HEIGHT/2-80))
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
@@ -359,12 +355,37 @@ class Space_pong_game():
             self.colors_game_mode[1]=self.SKYBLUE if self.mode_game[1] else self.WHITE
             self.colors_game_mode[2]=self.SKYBLUE if self.mode_game[2] else self.WHITE
     def Pause(self):
-        if self.main==3:self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-62,self.HEIGHT/2-100))
+        if self.main==3:
+            self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-105,self.HEIGHT/2-150))
+            reset_button=self.screen.blit(self.font2_5.render("Reset",True,"black"),(self.WIDTH/2-55,self.HEIGHT/2-85))
+            menu=self.screen.blit(self.font2_5.render("Menu",True,"black"),(self.WIDTH/2-45,self.HEIGHT/2-50))
+            close=self.screen.blit(self.font2_5.render("Exit",True,"black"),(self.WIDTH/2-40,self.HEIGHT/2-15))
+            if self.pressed_mouse[0]:
+                if reset_button.collidepoint(self.mouse_pos):
+                    self.reset()
+                    self.sound_touchletters.play(loops=0)
+                    self.main=-1
+                if menu.collidepoint(self.mouse_pos):
+                    self.reset()
+                    self.sound_touchletters.play(loops=0)
+                    self.main=0
+                if close.collidepoint(self.mouse_pos):
+                    self.sound_exitbutton.play(loops=0)
+                    self.game_over=True
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
+    def reset(self):
+        self.score1=0
+        self.score2=0
+        self.pause_counter=0
+        self.FPS=60
+        self.speed=0
+        self.speed_up=True
+        self.speed_down=True
+        self.running=False
     def run_with_model(self):
         self.objects()
         self.running=True
@@ -456,10 +477,17 @@ def save_model(model, path):
 
 # Cargar el modelo
 def load_model(path, input_size, output_size):
-    print("load model")
-    model = SimpleNN(input_size, output_size)
-    model.load_state_dict(torch.load(path))
-    return model
+    try:
+        print("load model")
+        model = SimpleNN(input_size, output_size)
+        model.load_state_dict(torch.load(path))
+        return model
+    except FileNotFoundError:
+        print(f"The file {path} was not found.")
+        return None
+    except Exception as e:
+        print(f"An error occurred while loading the model:{e}")
+        return None
 
 if __name__=="__main__":
     input_size = 6  # Definir el tamaño de entrada
@@ -469,5 +497,4 @@ if __name__=="__main__":
     save_model(best_model, game.model_path)
     game.model = best_model
     game.run_with_model()
-
 pygame.quit()
