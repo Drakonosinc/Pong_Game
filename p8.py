@@ -89,6 +89,7 @@ class Space_pong_game():
         self.max_score=5
         self.EVENT_SCORE = pygame.USEREVENT + 1
         pygame.time.set_timer(self.EVENT_SCORE,400)
+        self.touch_ball=[True,True]
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
@@ -174,17 +175,20 @@ class Space_pong_game():
                 self.object3.x=300
                 self.object3.y=200
         if self.object3.y>=self.HEIGHT-25 or self.object3.y<=0:self.value2*=-1
-        if self.object3.colliderect(self.object1) or self.object3.colliderect(self.object2):
-            self.value1*=-1
-            self.sound.play(loops=0)
-            self.counter+=1
-            if self.counter>=100:
-                self.object3.x=300
-                self.object3.y=200
+        if self.object3.colliderect(self.object1):
+            if self.touch_ball[0]:
+                self.reward+=-1
                 self.value1*=-1
-                self.score1+=1
-                self.score2+=1
-                self.counter=0
+                self.sound.play(loops=0)
+                self.touch_ball[0]=False
+        else:self.touch_ball[0]=True
+        if self.object3.colliderect(self.object2):
+            if self.touch_ball[1]:
+                self.reward+=1
+                self.value1*=-1
+                self.sound.play(loops=0)
+                self.touch_ball[1]=False
+        else:self.touch_ball[1]=True
         self.object3.x+=self.value1
         self.object3.y+=self.value2
     def scores(self):
@@ -497,4 +501,5 @@ if __name__=="__main__":
     save_model(best_model, game.model_path)
     game.model = best_model
     game.run_with_model()
+
 pygame.quit()
