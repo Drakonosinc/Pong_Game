@@ -10,6 +10,7 @@ class Space_pong_game():
         self.model=model
         self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
         if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
+        else:self.model_training = None
         self.running=False
         self.game_over=False
         self.WIDTH =700
@@ -88,7 +89,7 @@ class Space_pong_game():
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
-        self.object3=self.planet.get_rect(center=(self.WIDTH // 2, self.HEIGHT // 2))
+        self.object3=Rect(332,182,36,36)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
@@ -143,9 +144,9 @@ class Space_pong_game():
             if self.pressed_keys[K_e]:self.main=0
     def draw(self):
         self.screen.blit(self.image, (0, 0))
+        if self.mode_game[0]:self.draw_generation()
         if self.mode_game[0] or self.mode_game[2]:
             self.draw_activations()
-            self.draw_generation()
             self.draw_model_data()
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
@@ -337,12 +338,15 @@ class Space_pong_game():
                         self.sound_touchletters.play(loops=0)
                         self.notsound_playing[5]=False
                 else:self.notsound_playing[5]=True
-                if self.one_vs_ai_button.collidepoint(self.mouse_pos):
-                    self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,False,True
-                    if self.notsound_playing[6]:
-                        self.sound_touchletters.play(loops=0)
-                        self.notsound_playing[6]=False
-                else:self.notsound_playing[6]=True
+                if self.model_training!=None:
+                    if self.one_vs_ai_button.collidepoint(self.mouse_pos):
+                        self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,False,True
+                        if self.notsound_playing[6]:
+                            self.sound_touchletters.play(loops=0)
+                            self.notsound_playing[6]=False
+                    else:self.notsound_playing[6]=True
+                else:
+                    if self.one_vs_ai_button.collidepoint(self.mouse_pos) and os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
                 if self.increase_point.collidepoint(self.mouse_pos):
                     if self.notsound_playing[9]:
                         self.max_score+=1

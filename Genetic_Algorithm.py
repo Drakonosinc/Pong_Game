@@ -54,6 +54,7 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
             next_population.append(mutate(child2, mutation_rate))
         population = next_population
     best_model = population[fitness_scores.index(max(fitness_scores))]
+    game.model = best_model
     return best_model
 
 # Guardar el modelo
