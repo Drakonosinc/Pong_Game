@@ -9,7 +9,7 @@ class SimpleNN(nn.Module):
         self.activations=None
     def forward(self, x):
         x = torch.relu(self.fc1(x))
-        self.activations = x.detach().numpy().reshape(1, -1)  # Asegúrate de que las activaciones sean una matriz 2D
+        self.activations = x.detach().numpy().reshape(1, -1)  
         self.activations = (self.activations - self.activations.min()) / (self.activations.max() - self.activations.min())  # Normaliza las activaciones
         x = self.fc2(x)
         return x

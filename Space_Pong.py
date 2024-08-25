@@ -5,6 +5,7 @@ import numpy as np
 
 class Space_pong_game():
     def __init__(self,model=None):
+        self.config()
         pygame.init()
         pygame.display.set_caption("Pong")
         self.model=model
@@ -13,8 +14,8 @@ class Space_pong_game():
         else:self.model_training = None
         self.running=False
         self.game_over=False
-        self.WIDTH =700
-        self.HEIGHT=400
+        self.WIDTH=self.config_visuals["WIDTH"]
+        self.HEIGHT=self.config_visuals["HEIGHT"]
         self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
         self.clock=pygame.time.Clock()
         self.FPS=60
@@ -47,6 +48,19 @@ class Space_pong_game():
         pygame.time.set_timer(self.EVENT_SCORE,400)
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
+    def load_config(self):
+        pass
+    def config(self):
+        self.config_visuals={"WIDTH":700,"HEIGHT":400,
+                            "image_background":["background1.jpg "],
+                            "planets":["Mars.png"],
+                            "spacecrafts":["nave1.png"]}
+        self.config_keys={"UP_W":K_w,"DOWN_S":K_s,
+                        "UP_ARROW":K_UP,"DOWN_ARROW":K_DOWN}
+    def save_config(self):
+        pass
+    def prefinished_config(self):
+        pass
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
@@ -61,11 +75,11 @@ class Space_pong_game():
     def load_images(self):
         self.angle=90
         self.image_path = os.path.join(os.path.dirname(__file__), "images")
-        self.image=pygame.image.load(os.path.join(self.image_path,"planeta.jpg"))
+        self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][0]))
         self.image=pygame.transform.scale(self.image,(700,400))
-        self.planet=pygame.image.load(os.path.join(self.image_path,"marte1.png")).convert_alpha()
+        self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][0])).convert_alpha()
         self.planet=pygame.transform.scale(self.planet,(36,36))
-        self.spacecraft=pygame.image.load(os.path.join(self.image_path,"nave1.png")).convert_alpha()
+        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][0])).convert_alpha()
         self.spacecraft=pygame.transform.scale(self.spacecraft,(350,200))
         self.spacecraft=pygame.transform.rotate(self.spacecraft,self.angle)
         self.spacecraft2=pygame.transform.rotate(self.spacecraft,self.angle*2)
@@ -134,23 +148,25 @@ class Space_pong_game():
         self.mouse_pos = pygame.mouse.get_pos()
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
-            if self.pressed_keys[K_w] and self.object1.top > 0:self.object1.y -= 5
-            if self.pressed_keys[K_s] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
+            if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.top > 0:self.object1.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
         if self.main==-1 and self.mode_game[1]:
-            if self.pressed_keys[K_UP] and self.object2.top > 0:self.object2.y -= 5
-            if self.pressed_keys[K_DOWN] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
+            if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
             if self.pressed_keys[K_r]:self.main=-1
             if self.pressed_keys[K_e]:self.main=0
-    def draw(self):
+    def images_elements(self):
         self.screen.blit(self.image, (0, 0))
+        self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
+        self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
+        self.screen.blit(self.planet, (self.object3.x,self.object3.y))
+    def draw(self):
+        self.images_elements()
         if self.mode_game[0]:self.draw_generation()
         if self.mode_game[0] or self.mode_game[2]:
             self.draw_activations()
             self.draw_model_data()
-        self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
-        self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
-        self.screen.blit(self.planet, (self.object3.x,self.object3.y))
         self.scores()
         self.name_players()
         self.mode_speed()
@@ -473,6 +489,7 @@ class Space_pong_game():
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self):
+        self.objects()
         self.score1=0
         self.score2=0
         self.pause_counter=0
