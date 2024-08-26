@@ -52,9 +52,12 @@ class Space_pong_game():
         pass
     def config(self):
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
-                            "image_background":["background1.jpg "],
+                            "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
+                            "value_background":0,
                             "planets":["Mars.png"],
-                            "spacecrafts":["nave1.png"]}
+                            "value_planet":0,
+                            "spacecrafts":["nave1.png"],
+                            "value_spacecraft":0}
         self.config_keys={"UP_W":K_w,"DOWN_S":K_s,
                         "UP_ARROW":K_UP,"DOWN_ARROW":K_DOWN}
     def save_config(self):
@@ -75,11 +78,11 @@ class Space_pong_game():
     def load_images(self):
         self.angle=90
         self.image_path = os.path.join(os.path.dirname(__file__), "images")
-        self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][0]))
+        self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][self.config_visuals["value_background"]])).convert()
         self.image=pygame.transform.scale(self.image,(700,400))
-        self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][0])).convert_alpha()
+        self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][self.config_visuals["value_planet"]])).convert_alpha()
         self.planet=pygame.transform.scale(self.planet,(36,36))
-        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][0])).convert_alpha()
+        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft"]])).convert_alpha()
         self.spacecraft=pygame.transform.scale(self.spacecraft,(350,200))
         self.spacecraft=pygame.transform.rotate(self.spacecraft,self.angle)
         self.spacecraft2=pygame.transform.rotate(self.spacecraft,self.angle*2)
