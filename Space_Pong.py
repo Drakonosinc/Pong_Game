@@ -1,11 +1,11 @@
-import pygame,os
+import pygame,os,json
 from pygame.locals import *
 from Genetic_Algorithm import *
 import numpy as np
 
 class Space_pong_game():
     def __init__(self,model=None):
-        self.config()
+        self.load_config()
         pygame.init()
         pygame.display.set_caption("Pong")
         self.model=model
@@ -24,7 +24,7 @@ class Space_pong_game():
         self.load_fonts()
         self.load_sounds()
         self.objects()
-        self.generation = 0
+        self.generation=0
         self.value1=4
         self.value2=4
         self.score1=0
@@ -49,7 +49,12 @@ class Space_pong_game():
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
     def load_config(self):
-        pass
+        config_path = os.path.join(os.path.dirname(__file__), "Config")
+        with open(os.path.join(config_path,"config.txt"), 'r') as file:
+            config = json.load(file)
+        self.config_visuals = config["config_visuals"]
+        self.config_keys = config["config_keys"]
+# this method is unnecessary its only use is for quick corrections in the future.
     def config(self):
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
@@ -61,9 +66,22 @@ class Space_pong_game():
         self.config_keys={"UP_W":K_w,"DOWN_S":K_s,
                         "UP_ARROW":K_UP,"DOWN_ARROW":K_DOWN}
     def save_config(self):
-        pass
-    def prefinished_config(self):
-        pass
+        config_path = os.path.join(os.path.dirname(__file__), "Config")
+        config = {"config_visuals": self.config_visuals,
+                    "config_keys": self.config_keys}
+        with open(os.path.join(config_path,"config.txt"), 'w') as file:
+            json.dump(config, file, indent=4)
+    def prefinished_config_visuals(self):
+        self.config_visuals["WIDTH"]=700
+        self.config_visuals["HEIGHT"]=400
+        self.config_visuals["value_background"]=0
+        self.config_visuals["value_planet"]=0
+        self.config_visuals["value_spacecraft"]=0
+    def prefinished_config_keys(self):
+        self.config_keys["UP_W"]=K_w
+        self.config_keys["DOWN_S"]=K_s
+        self.config_keys["UP_ARROW"]=K_UP
+        self.config_keys["DOWN_ARROW"]=K_DOWN
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
