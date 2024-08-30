@@ -32,7 +32,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=4 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.main=5 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.colors_game_mode=[self.WHITE,self.WHITE,self.WHITE]
@@ -45,7 +45,7 @@ class Space_pong_game():
         self.mode_game=[True,False,False]
         self.max_score=5
         self.EVENT_SCORE = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.EVENT_SCORE,400)
+        pygame.time.set_timer(self.EVENT_SCORE,500)
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
     def load_config(self):
@@ -56,6 +56,7 @@ class Space_pong_game():
         self.config_keys = config["config_keys"]
 # this method is unnecessary its only use is for quick corrections in the future.
     def config(self):
+        # print(event.key) con eso podre tomar el boton que presione y cambiarlo al que quiera
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
@@ -97,7 +98,7 @@ class Space_pong_game():
         self.angle=90
         self.image_path = os.path.join(os.path.dirname(__file__), "images")
         self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][self.config_visuals["value_background"]])).convert()
-        self.image=pygame.transform.scale(self.image,(700,400))
+        self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
         self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][self.config_visuals["value_planet"]])).convert_alpha()
         self.planet=pygame.transform.scale(self.planet,(36,36))
         self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft"]])).convert_alpha()
@@ -329,8 +330,8 @@ class Space_pong_game():
             self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
             self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
-            self.buttonback()
-            continue_button=pygame.draw.polygon(self.screen, self.WHITE, ((650, 350), (650, 380), (675, 365)))
+            self.button_arrow(0,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)))
+            self.button_arrow(-1,((650, 350), (650, 380), (675, 365)),((650, 340), (650, 390), (690, 365)))
             self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
             self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,self.colors_game_mode[0]),(self.WIDTH/2-70,self.HEIGHT/2-136))
             self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,self.colors_game_mode[1]),(self.WIDTH/2-64,self.HEIGHT/2-110))
@@ -339,12 +340,6 @@ class Space_pong_game():
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
             self.decrease_point=pygame.draw.polygon(self.screen, self.BLACK, ((320, 185), (320, 205), (300, 195)))
             self.increase_point=pygame.draw.polygon(self.screen, self.BLACK, ((380, 185), (380, 205), (400, 195)))
-            if continue_button.collidepoint(self.mouse_pos):
-                pygame.draw.polygon(self.screen, self.WHITE, ((650, 340), (650, 390), (690, 365)))
-                if self.notsound_playing[3]:
-                    self.sound_buttonletters.play(loops=0)
-                    self.notsound_playing[3]=False
-            else:self.notsound_playing[3]=True
             if self.decrease_point.collidepoint(self.mouse_pos) and self.max_score>1:
                 pygame.draw.polygon(self.screen, self.WHITE, ((320, 185), (320, 205), (300, 195)))
                 if self.notsound_playing[7]:
@@ -360,9 +355,6 @@ class Space_pong_game():
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-                if continue_button.collidepoint(self.mouse_pos):
-                    self.sound_touchletters.play(loops=0)
-                    self.main=-1
                 if self.training_ai_button.collidepoint(self.mouse_pos):
                     self.mode_game[0],self.mode_game[1],self.mode_game[2]=True,False,False
                     if self.notsound_playing[4]:
@@ -417,42 +409,26 @@ class Space_pong_game():
                 if close.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
                     self.game_over=True
-    def buttonback(self):
-        back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
-        if back_button.collidepoint(self.mouse_pos):
-            pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
+    def button_arrow(self,main,position,position2):
+        arrow_button=pygame.draw.polygon(self.screen, self.WHITE, position)
+        if arrow_button.collidepoint(self.mouse_pos):
+            pygame.draw.polygon(self.screen, self.WHITE, position2)
             if self.notsound_playing[2]:
                 self.sound_buttonletters.play(loops=0)
                 self.notsound_playing[2]=False
         else:self.notsound_playing[2]=True
         if self.pressed_mouse[0]:
-            if back_button.collidepoint(self.mouse_pos):
+            if arrow_button.collidepoint(self.mouse_pos):
                 if self.notsound_playing[13]:
                     self.sound_touchletters.play(loops=0)
-                    self.main=0
+                    self.main=main
                     self.notsound_playing[13]=False
             else:self.notsound_playing[13]=True
-    def buttonback_options(self):
-        back_button=pygame.draw.polygon(self.screen, self.WHITE, ((50, 350), (50, 380), (25, 365)))
-        if back_button.collidepoint(self.mouse_pos):
-            pygame.draw.polygon(self.screen, self.WHITE, ((50, 340), (50, 390), (10, 365)))
-            if self.notsound_playing[2]:
-                self.sound_buttonletters.play(loops=0)
-                self.notsound_playing[2]=False
-        else:self.notsound_playing[2]=True
-        if self.pressed_mouse[0]:
-            if back_button.collidepoint(self.mouse_pos):
-                if self.notsound_playing[12]:
-                    self.sound_touchletters.play(loops=0)
-                    self.main=4
-                    self.notsound_playing[12]=False
-                    self.notsound_playing[13]=False
-            else:self.notsound_playing[12]=True
     def options_menu(self):
         if self.main==4:
             self.screen.fill(self.BLACK)
             self.anim_options()
-            self.buttonback()
+            self.button_arrow(0,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)))
     def anim_options(self):
         visuals=self.screen.blit(self.font2_5.render("Visuals",True,self.WHITE),(self.WIDTH/2-80,self.HEIGHT/2-150))
         sound_action=self.screen.blit(self.font2_5.render(self.sound_type["sound"],True,self.sound_type["color"]),(self.WIDTH/2-80,self.HEIGHT/2-115))
@@ -498,12 +474,25 @@ class Space_pong_game():
                 self.main=6
     def visuals_menu(self):
         if self.main==5:
-            self.screen.fill(self.BLACK)
-            self.buttonback_options()
+            self.images_elements()
+            self.anim_visuals()
+            self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)))
+    def anim_visuals(self):
+        self.screen.blit(self.font2_5.render("WIDTH",True,self.WHITE),(self.WIDTH/2-163,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("HEIGHT",True,self.WHITE),(self.WIDTH/2+60,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
+        lower_width=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-200,self.HEIGHT/2-200))
+        higher_width=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2-40,self.HEIGHT/2-200))
+        lower_height=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2+20,self.HEIGHT/2-200))
+        higher_height=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+200,self.HEIGHT/2-200))
+        lower_Ball=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-40,self.HEIGHT/2-22))
+        higher_ball=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+20,self.HEIGHT/2-22))
+        previous_image=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-80,self.HEIGHT/2+160))
+        next_image=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+65,self.HEIGHT/2+160))
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
-            self.buttonback_options()
+            self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)))
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
