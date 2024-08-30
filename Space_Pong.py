@@ -537,7 +537,3 @@ class Space_pong_game():
             pygame.display.flip()
             self.clock.tick(self.FPS)
         return score
-
-# tratar de remplazar la mayor cantidad de botones y cosas asi por metodos con parametros que se cambian 
-# y con eso le damos el nombre de los botones la posición y cosas asi los textos etc, cambialo por parametros
-#dentro de los metodos
