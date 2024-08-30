@@ -281,37 +281,13 @@ class Space_pong_game():
         if self.main==0:
             self.screen.fill(self.BLACK)
             self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
-            self.press_play=self.screen.blit(self.font5.render("Press To Start", True, self.WHITE),(self.WIDTH//2-200,self.HEIGHT//2-80))
-            self.press_quit=self.screen.blit(self.font5.render("Press To Exit", True, self.WHITE),(self.WIDTH//2-200,self.HEIGHT//2-50))
-            self.press_options=self.screen.blit(self.font5.render("Options", True, self.WHITE),(self.WIDTH-110,self.HEIGHT-40))
-            if self.press_play.collidepoint(self.mouse_pos):
-                self.screen.blit(self.font5.render("Press To Start", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-80))
-                if self.notsound_playing[0]:
-                    self.sound_buttonletters.play(loops=0)
-                    self.notsound_playing[0]=False
-            else:self.notsound_playing[0]=True
-            if self.press_quit.collidepoint(self.mouse_pos):
-                self.screen.blit(self.font5.render("Press To Exit", True, self.GOLDEN),(self.WIDTH//2-200,self.HEIGHT//2-50))
-                if self.notsound_playing[1]:
-                    self.sound_buttonletters.play(loops=0)
-                    self.notsound_playing[1]=False
-            else:self.notsound_playing[1]=True
-            if self.press_options.collidepoint(self.mouse_pos):
-                self.press_options=self.screen.blit(self.font5.render("Options", True, self.GOLDEN),(self.WIDTH-110,self.HEIGHT-40))
-                if self.notsound_playing[11]:
-                    self.sound_buttonletters.play(loops=0)
-                    self.notsound_playing[11]=False
-            else:self.notsound_playing[11]=True
+            self.button(self.screen,2,self.font5,"Press To Start",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-80),0,self.GOLDEN)
+            press_quit=self.button(self.screen,None,self.font5,"Press To Exit",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-50),1,self.GOLDEN,False)
+            self.button(self.screen,4,self.font5,"Options",self.WHITE,(self.WIDTH-110,self.HEIGHT-40),11,self.GOLDEN)
             if self.pressed_mouse[0]:
-                if self.press_play.collidepoint(self.mouse_pos):
-                    self.sound_touchletters.play(loops=0)
-                    self.main=2
-                if self.press_quit.collidepoint(self.mouse_pos):
+                if press_quit.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
                     self.game_over=True
-                if self.press_options.collidepoint(self.mouse_pos):
-                    self.sound_touchletters.play(loops=0)
-                    self.main=4
     def Game_over(self):
         if self.main==1:
             self.screen.fill(self.background)
@@ -409,7 +385,7 @@ class Space_pong_game():
                 if close.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
                     self.game_over=True
-    def button(self,screen,main,font,text,color,position,number,color2=None,pressed=False):
+    def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True):
         button=screen.blit(font.render(text,True,color),position)
         if button.collidepoint(self.mouse_pos):
             screen.blit(font.render(text,True,color2),position)
