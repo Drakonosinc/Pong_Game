@@ -35,7 +35,6 @@ class Space_pong_game():
         self.main=4 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
-        self.colors_game_mode=[self.WHITE,self.WHITE,self.WHITE]
         self.text_player1="player 1"
         self.text_player2="PC"
         self.speed=0
@@ -309,9 +308,9 @@ class Space_pong_game():
             self.button_arrow(0,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
             self.button_arrow(-1,((650, 350), (650, 380), (675, 365)),((650, 340), (650, 390), (690, 365)),self.WHITE,16,15)
             self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
-            self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,self.colors_game_mode[0]),(self.WIDTH/2-70,self.HEIGHT/2-136))
-            self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,self.colors_game_mode[1]),(self.WIDTH/2-64,self.HEIGHT/2-110))
-            self.one_vs_ai_button=self.screen.blit(self.font5.render("One Vs Ai",True,self.colors_game_mode[2]),(self.WIDTH/2-58,self.HEIGHT/2-84))
+            self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,(self.SKYBLUE if self.mode_game[0] else self.WHITE)),(self.WIDTH/2-70,self.HEIGHT/2-136))
+            self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,(self.SKYBLUE if self.mode_game[1] else self.WHITE)),(self.WIDTH/2-64,self.HEIGHT/2-110))
+            self.one_vs_ai_button=self.screen.blit(self.font5.render("One Vs Ai",True,(self.SKYBLUE if self.mode_game[2] else self.WHITE)),(self.WIDTH/2-58,self.HEIGHT/2-84))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
             self.decrease_point=self.button_arrow(None,((320, 185), (320, 205), (300, 195)),((320, 185), (320, 205), (300, 195)),self.BLACK,7,None,False,(True if self.max_score>1 else False))
@@ -352,9 +351,6 @@ class Space_pong_game():
                         self.sound_touchletters.play(loops=0)
                         self.notsound_playing[10]=False
                 else:self.notsound_playing[10]=True
-            self.colors_game_mode[0]=self.SKYBLUE if self.mode_game[0] else self.WHITE
-            self.colors_game_mode[1]=self.SKYBLUE if self.mode_game[1] else self.WHITE
-            self.colors_game_mode[2]=self.SKYBLUE if self.mode_game[2] else self.WHITE
     def Pause(self):
         if self.main==3:
             self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-105,self.HEIGHT/2-150))
