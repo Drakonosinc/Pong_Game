@@ -395,6 +395,7 @@ class Space_pong_game():
             else:self.notsound_playing[14]=True
     def visuals_menu(self):
         if self.main==5:
+            self.screen.blit(self.image, (0, 0))
             self.images_elements()
             self.anim_visuals()
             self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
