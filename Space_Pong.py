@@ -178,16 +178,16 @@ class Space_pong_game():
             if self.pressed_keys[K_r]:self.main=-1
             if self.pressed_keys[K_e]:self.main=0
     def images_elements(self):
-        self.screen.blit(self.image, (0, 0))
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
         self.screen.blit(self.planet, (self.object3.x,self.object3.y))
     def draw(self):
-        self.images_elements()
+        self.screen.blit(self.image, (0, 0))
         if self.mode_game[0]:self.draw_generation()
         if self.mode_game[0] or self.mode_game[2]:
             self.draw_activations()
             self.draw_model_data()
+        self.images_elements()
         self.scores()
         self.name_players()
         self.mode_speed()
@@ -310,9 +310,9 @@ class Space_pong_game():
             self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
             self.button(self.screen,None,self.font5,"Training AI",(self.SKYBLUE if self.mode_game[0] else self.WHITE),(self.WIDTH/2-70,self.HEIGHT/2-136),None,None,True,lambda:(self.mode_game.__setitem__(0, True), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, False)),False,4)
             self.button(self.screen,None,self.font5,"One Vs One",(self.SKYBLUE if self.mode_game[1] else self.WHITE),(self.WIDTH/2-64,self.HEIGHT/2-110),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, True), self.mode_game.__setitem__(2, False)),False,5)
-            try:self.button(self.screen,None,self.font5,"One Vs Ai",(self.SKYBLUE if self.mode_game[2] else self.WHITE),(self.WIDTH/2-58,self.HEIGHT/2-84),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, True)),False,6)
-            except:
-                if self.one_vs_ai_button.collidepoint(self.mouse_pos) and os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
+            if self.model_training!=None:self.button(self.screen,None,self.font5,"One Vs Ai",(self.SKYBLUE if self.mode_game[2] else self.WHITE),(self.WIDTH/2-58,self.HEIGHT/2-84),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, True)),False,6)
+            else:
+                if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
             self.button_arrow(None,((320, 185), (320, 205), (300, 195)),((320, 185), (320, 205), (300, 195)),self.BLACK,7,10,(x:=True if self.max_score>1 else False),x,command=lambda: setattr(self, 'max_score', self.max_score - 1))
