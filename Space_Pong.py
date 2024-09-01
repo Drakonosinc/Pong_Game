@@ -32,7 +32,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=4 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
@@ -308,22 +308,16 @@ class Space_pong_game():
             self.button_arrow(0,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
             self.button_arrow(-1,((650, 350), (650, 380), (675, 365)),((650, 340), (650, 390), (690, 365)),self.WHITE,16,15)
             self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
-            self.training_ai_button=self.screen.blit(self.font5.render("Training AI",True,(self.SKYBLUE if self.mode_game[0] else self.WHITE)),(self.WIDTH/2-70,self.HEIGHT/2-136))
+            self.button(self.screen,None,self.font5,"Training AI",(self.SKYBLUE if self.mode_game[0] else self.WHITE),(self.WIDTH/2-70,self.HEIGHT/2-136),None,None,True,lambda:(self.mode_game.__setitem__(0, True), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, False)),False,4)
             self.one_vs_one_button=self.screen.blit(self.font5.render("One Vs One",True,(self.SKYBLUE if self.mode_game[1] else self.WHITE)),(self.WIDTH/2-64,self.HEIGHT/2-110))
             self.one_vs_ai_button=self.screen.blit(self.font5.render("One Vs Ai",True,(self.SKYBLUE if self.mode_game[2] else self.WHITE)),(self.WIDTH/2-58,self.HEIGHT/2-84))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
-            self.decrease_point=self.button_arrow(None,((320, 185), (320, 205), (300, 195)),((320, 185), (320, 205), (300, 195)),self.BLACK,7,10,(x:=True if self.max_score>1 else False),x,command=lambda: setattr(self, 'max_score', self.max_score - 1))
-            self.increase_point=self.button_arrow(None,((380, 185), (380, 205), (400, 195)),((380, 185), (380, 205), (400, 195)),self.BLACK,8,9,command=lambda: setattr(self, 'max_score', self.max_score + 1))
+            self.button_arrow(None,((320, 185), (320, 205), (300, 195)),((320, 185), (320, 205), (300, 195)),self.BLACK,7,10,(x:=True if self.max_score>1 else False),x,command=lambda: setattr(self, 'max_score', self.max_score - 1))
+            self.button_arrow(None,((380, 185), (380, 205), (400, 195)),((380, 185), (380, 205), (400, 195)),self.BLACK,8,9,command=lambda: setattr(self, 'max_score', self.max_score + 1))
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-                if self.training_ai_button.collidepoint(self.mouse_pos):
-                    if self.notsound_playing[4] and self.mode_game[0]==False:
-                        self.mode_game[0],self.mode_game[1],self.mode_game[2]=True,False,False
-                        self.sound_touchletters.play(loops=0)
-                        self.notsound_playing[4]=False
-                else:self.notsound_playing[4]=True
                 if self.one_vs_one_button.collidepoint(self.mouse_pos):
                     if self.notsound_playing[5] and self.mode_game[1]==False:
                         self.mode_game[0],self.mode_game[1],self.mode_game[2]=False,True,False
@@ -349,19 +343,27 @@ class Space_pong_game():
                 if close.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
                     self.game_over=True
-    def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True,command=None,detect_mouse=True):
+    def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True,command=None,detect_mouse=True,number2=None):
         button=screen.blit(font.render(text,True,color),position)
-        if button.collidepoint(self.mouse_pos) and detect_mouse:
-            screen.blit(font.render(text,True,color2),position)
-            if self.notsound_playing[number]:
-                self.sound_buttonletters.play(loops=0)
-                self.notsound_playing[number]=False
-        else:self.notsound_playing[number]=True
-        if self.pressed_mouse[0] and pressed:
+        if detect_mouse:
             if button.collidepoint(self.mouse_pos):
+                screen.blit(font.render(text,True,color2),position)
+                if self.notsound_playing[number]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[number]=False
+            else:self.notsound_playing[number]=True
+        if self.pressed_mouse[0] and pressed:
+            if button.collidepoint(self.mouse_pos) and number2==None:
                 self.sound_touchletters.play(loops=0)
                 if main!=None:self.main=main
                 if command!=None:command()
+            if number2!=None:
+                if button.collidepoint(self.mouse_pos):
+                    if self.notsound_playing[number2]:
+                        self.sound_touchletters.play(loops=0)
+                        self.notsound_playing[number2]=False
+                        if command!=None:command()
+                else:self.notsound_playing[number2]=True
         if pressed==False:return button
     def button_arrow(self,main,position,position2,color,number:int,number2=None,pressed=True,detect_mouse=True,command=None):
         arrow_button=pygame.draw.polygon(self.screen, color, position)
