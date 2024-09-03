@@ -406,12 +406,13 @@ class Space_pong_game():
         self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
         self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,number2=18)
         self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,number2=19)
-        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,number2=20)
-        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=21)
+        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20)
+        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),number2=21)
         # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=22)
         # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=23)
         # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=24)
         # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=25)
+        self.load_images()
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
