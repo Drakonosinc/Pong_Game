@@ -32,7 +32,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.main=5 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
@@ -40,7 +40,8 @@ class Space_pong_game():
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
+        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,
+                            True,True,True,True,True,True,True,True,True,True,True,True,True]
         self.mode_game=[True,False,False]
         self.max_score=5
         self.EVENT_SCORE = pygame.USEREVENT + 1
@@ -133,10 +134,8 @@ class Space_pong_game():
                 self.sound_exitbutton.play(loops=0)
                 self.running,self.game_over=False,True
             elif event.type == self.EVENT_SCORE:
-                self.notsound_playing[9]=True
-                self.notsound_playing[10]=True
-                self.notsound_playing[13]=True
-                self.notsound_playing[14]=True
+                self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18]=True,True,True,True,True,True
+                self.notsound_playing[19],self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25]=True,True,True,True,True,True,True
             if event.type==KEYDOWN:
                 if self.main==3 or self.main==-1:
                     if event.key==K_p:
@@ -213,6 +212,10 @@ class Space_pong_game():
                 self.object3.x=300
                 self.object3.y=200
         if self.object3.y>=self.HEIGHT-25 or self.object3.y<=0:self.value2*=-1
+        self.ball_collision()
+        self.object3.x+=self.value1
+        self.object3.y+=self.value2
+    def ball_collision(self):
         if self.object3.colliderect(self.object1):
             if self.touch_ball[0]:
                 self.reward+=-1
@@ -227,8 +230,6 @@ class Space_pong_game():
                 self.sound.play(loops=0)
                 self.touch_ball[1]=False
         else:self.touch_ball[1]=True
-        self.object3.x+=self.value1
-        self.object3.y+=self.value2
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
@@ -354,12 +355,13 @@ class Space_pong_game():
         if pressed==False:return button
     def button_arrow(self,main,position,position2,color,number:int,number2=None,pressed=True,detect_mouse=True,command=None):
         arrow_button=pygame.draw.polygon(self.screen, color, position)
-        if arrow_button.collidepoint(self.mouse_pos) and detect_mouse:
-            pygame.draw.polygon(self.screen, self.WHITE, position2)
-            if self.notsound_playing[number]:
-                self.sound_buttonletters.play(loops=0)
-                self.notsound_playing[number]=False
-        else:self.notsound_playing[number]=True
+        if detect_mouse:
+            if arrow_button.collidepoint(self.mouse_pos):
+                pygame.draw.polygon(self.screen, self.WHITE, position2)
+                if self.notsound_playing[number]:
+                    self.sound_buttonletters.play(loops=0)
+                    self.notsound_playing[number]=False
+            else:self.notsound_playing[number]=True
         if self.pressed_mouse[0] and pressed:
             if arrow_button.collidepoint(self.mouse_pos):
                 if self.notsound_playing[number2]:
@@ -398,14 +400,18 @@ class Space_pong_game():
         self.screen.blit(self.font2_5.render("WIDTH",True,self.WHITE),(self.WIDTH/2-163,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("HEIGHT",True,self.WHITE),(self.WIDTH/2+60,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
-        lower_width=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-200,self.HEIGHT/2-200))
-        higher_width=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2-40,self.HEIGHT/2-200))
-        lower_height=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2+20,self.HEIGHT/2-200))
-        higher_height=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+200,self.HEIGHT/2-200))
-        lower_Ball=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-40,self.HEIGHT/2-22))
-        higher_ball=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+20,self.HEIGHT/2-22))
-        previous_image=self.screen.blit(self.font2_5.render("<",True,self.WHITE),(self.WIDTH/2-80,self.HEIGHT/2+160))
-        next_image=self.screen.blit(self.font2_5.render(">",True,self.WHITE),(self.WIDTH/2+65,self.HEIGHT/2+160))
+        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,number2=9)
+        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,number2=10)
+        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,number2=14)
+        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
+        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,number2=18)
+        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,number2=19)
+        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,number2=20)
+        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=21)
+        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=22)
+        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=23)
+        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=24)
+        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=25)
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)

@@ -1,3 +1,4 @@
+import sys
 from Genetic_Algorithm import *
 from Space_Pong import *
 
@@ -10,3 +11,4 @@ if __name__=="__main__":
     game.model = best_model
     game.run_with_model()
 pygame.quit()
+sys.exit()
