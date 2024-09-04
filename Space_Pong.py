@@ -5,7 +5,7 @@ import numpy as np
 
 class Space_pong_game():
     def __init__(self,model=None):
-        self.load_config()
+        self.config()
         pygame.init()
         pygame.display.set_caption("Pong")
         self.model=model
@@ -62,8 +62,9 @@ class Space_pong_game():
                             "value_background":0,
                             "planets":["Mars.png","Mars1.png","meteorite.png","Saturn.png","earth.png","moon.png"],
                             "value_planet":0,
-                            "spacecrafts":["nave1.png"],
-                            "value_spacecraft":0}
+                            "spacecrafts":["spaceship.png","spaceship2.png","spaceship3.png"],
+                            "value_spacecraft1":0,
+                            "value_spacecraft2":0}
         self.config_keys={"UP_W":K_w,"DOWN_S":K_s,
                         "UP_ARROW":K_UP,"DOWN_ARROW":K_DOWN}
     def save_config(self):
@@ -100,11 +101,13 @@ class Space_pong_game():
         self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][self.config_visuals["value_background"]])).convert()
         self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
         self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][self.config_visuals["value_planet"]])).convert_alpha()
-        self.planet=pygame.transform.scale(self.planet,(36,36))
-        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft"]])).convert_alpha()
+        self.planet=pygame.transform.scale(self.planet,(40,40))
+        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft1"]])).convert_alpha()
         self.spacecraft=pygame.transform.scale(self.spacecraft,(350,200))
         self.spacecraft=pygame.transform.rotate(self.spacecraft,self.angle)
-        self.spacecraft2=pygame.transform.rotate(self.spacecraft,self.angle*2)
+        self.spacecraft2=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft2"]])).convert_alpha()
+        self.spacecraft2=pygame.transform.scale(self.spacecraft2,(350,200))
+        self.spacecraft2=pygame.transform.rotate(self.spacecraft2,self.angle*3)
     def load_fonts(self):
         self.font_path = os.path.join(os.path.dirname(__file__), "fonts")
         self.font=pygame.font.Font(None,25)
@@ -411,10 +414,10 @@ class Space_pong_game():
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_planet": (self.config_visuals["value_planet"] + 1) % len(self.config_visuals["planets"])}),number2=19,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),number2=21,command2=self.load_images)
-        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),11,self.SKYBLUE,number2=22)
-        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),12,self.SKYBLUE,number2=23)
-        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),15,self.SKYBLUE,number2=24)
-        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),26,self.SKYBLUE,number2=25)
+        self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 30),"Λ",self.WHITE,(self.WIDTH/2-330,self.HEIGHT/2-120),11,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] + 1) % len(self.config_visuals["spacecrafts"])}),number2=22,command2=self.load_images)
+        self.button(self.screen,None,font2:=pygame.font.SysFont("times new roman", 38),"v",self.WHITE,(self.WIDTH/2-330,self.HEIGHT/2+50),12,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] - 1) % len(self.config_visuals["spacecrafts"])}),number2=23,command2=self.load_images)
+        self.button(self.screen,None,font,"Λ",self.WHITE,(self.WIDTH/2+310,self.HEIGHT/2-120),15,self.SKYBLUE,number2=24,command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] + 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
+        self.button(self.screen,None,font2,"v",self.WHITE,(self.WIDTH/2+310,self.HEIGHT/2+50),26,self.SKYBLUE,number2=25,command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] - 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
         self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_visuals,number2=29,command2=self.load_images)
     def menu_keys(self):

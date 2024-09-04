@@ -23,9 +23,12 @@
         ],
         "value_planet": 0,
         "spacecrafts": [
-            "nave1.png"
+            "spaceship.png",
+            "spaceship2.png",
+            "spaceship3.png"
         ],
-        "value_spacecraft": 0
+        "value_spacecraft1": 0,
+        "value_spacecraft2": 0
     },
     "config_keys": {
         "UP_W": 119,
