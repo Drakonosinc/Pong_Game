@@ -40,8 +40,8 @@ class Space_pong_game():
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,
-                            True,True,True,True,True,True,True,True,True,True,True,True,True]
+        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,
+                            True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
         self.mode_game=[True,False,False]
         self.max_score=5
         self.EVENT_SCORE = pygame.USEREVENT + 1
@@ -134,8 +134,9 @@ class Space_pong_game():
                 self.sound_exitbutton.play(loops=0)
                 self.running,self.game_over=False,True
             elif event.type == self.EVENT_SCORE:
-                self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18]=True,True,True,True,True,True
-                self.notsound_playing[19],self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25]=True,True,True,True,True,True,True
+                self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
+                self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25],self.notsound_playing[27]=True,True,True,True,True,True,True
+                self.notsound_playing[29]=True
             if event.type==KEYDOWN:
                 if self.main==3 or self.main==-1:
                     if event.key==K_p:
@@ -331,7 +332,7 @@ class Space_pong_game():
                 if close.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
                     self.game_over=True
-    def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True,command=None,detect_mouse=True,number2=None):
+    def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True,command=None,detect_mouse=True,number2=None,command2=None):
         button=screen.blit(font.render(text,True,color),position)
         if detect_mouse:
             if button.collidepoint(self.mouse_pos):
@@ -345,12 +346,14 @@ class Space_pong_game():
                 self.sound_touchletters.play(loops=0)
                 if main!=None:self.main=main
                 if command!=None:command()
+                if command2!=None:command2()
             if number2!=None:
                 if button.collidepoint(self.mouse_pos):
                     if self.notsound_playing[number2]:
                         self.sound_touchletters.play(loops=0)
                         self.notsound_playing[number2]=False
                         if command!=None:command()
+                        if command2!=None:command2()
                 else:self.notsound_playing[number2]=True
         if pressed==False:return button
     def button_arrow(self,main,position,position2,color,number:int,number2=None,pressed=True,detect_mouse=True,command=None):
@@ -397,22 +400,23 @@ class Space_pong_game():
             self.anim_visuals()
             self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
     def anim_visuals(self):
-        self.screen.blit(self.font2_5.render("WIDTH",True,self.WHITE),(self.WIDTH/2-163,self.HEIGHT/2-200))
-        self.screen.blit(self.font2_5.render("HEIGHT",True,self.WHITE),(self.WIDTH/2+60,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
-        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,number2=9)
-        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,number2=10)
-        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,number2=14)
-        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
-        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,number2=18)
-        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,number2=19)
-        self.button(self.screen,None,self.font2_5,"<",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20)
-        self.button(self.screen,None,self.font2_5,">",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),number2=21)
-        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=22)
-        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=23)
-        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=24)
-        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,number2=25)
-        self.load_images()
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,number2=9)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,number2=10)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,number2=14)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,number2=18)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,number2=19)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20,command2=self.load_images)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),number2=21,command2=self.load_images)
+        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),11,self.SKYBLUE,number2=22)
+        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),12,self.SKYBLUE,number2=23)
+        # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),15,self.SKYBLUE,number2=24)
+        # self.button(self.screen,None,self.font2_5,"∨",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),26,self.SKYBLUE,number2=25)
+        self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
+        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_visuals,number2=29,command2=self.load_images)
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)

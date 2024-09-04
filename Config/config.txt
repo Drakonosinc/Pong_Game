@@ -12,7 +12,7 @@
             "background7.jpg",
             "background8.jpg"
         ],
-        "value_background": 0,
+        "value_background": 1,
         "planets": [
             "Mars.png"
         ],
