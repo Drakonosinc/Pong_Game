@@ -60,7 +60,7 @@ class Space_pong_game():
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
-                            "planets":["Mars.png"],
+                            "planets":["Mars.png","Mars1.png","meteorite.png","Saturn.png","earth.png","moon.png"],
                             "value_planet":0,
                             "spacecrafts":["nave1.png"],
                             "value_spacecraft":0}
@@ -407,8 +407,8 @@ class Space_pong_game():
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,number2=10)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,number2=14)
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
-        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,number2=18)
-        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,number2=19)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_planet": (self.config_visuals["value_planet"] - 1) % len(self.config_visuals["planets"])}),number2=18,command2=self.load_images)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_planet": (self.config_visuals["value_planet"] + 1) % len(self.config_visuals["planets"])}),number2=19,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+65,self.HEIGHT/2+160),8,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),number2=21,command2=self.load_images)
         # self.button(self.screen,None,self.font2_5,"∧",self.WHITE,(self.WIDTH/2+65,self.HEIGHT/2+160),11,self.SKYBLUE,number2=22)

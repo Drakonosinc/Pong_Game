@@ -12,9 +12,14 @@
             "background7.jpg",
             "background8.jpg"
         ],
-        "value_background": 1,
+        "value_background": 0,
         "planets": [
-            "Mars.png"
+            "Mars.png",
+            "Mars1.png",
+            "meteorite.png",
+            "Saturn.png",
+            "earth.png",
+            "moon.png"
         ],
         "value_planet": 0,
         "spacecrafts": [
