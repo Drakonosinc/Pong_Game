@@ -5,7 +5,7 @@ import numpy as np
 
 class Space_pong_game():
     def __init__(self,model=None):
-        self.config()
+        self.load_config()
         pygame.init()
         pygame.display.set_caption("Pong")
         self.model=model
@@ -14,9 +14,7 @@ class Space_pong_game():
         else:self.model_training = None
         self.running=False
         self.game_over=False
-        self.WIDTH=self.config_visuals["WIDTH"]
-        self.HEIGHT=self.config_visuals["HEIGHT"]
-        self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
+        self.config_screen()
         self.clock=pygame.time.Clock()
         self.FPS=60
         self.define_colors()
@@ -32,7 +30,7 @@ class Space_pong_game():
         self.reward=0
         self.counter=0
         self.pause_counter=0
-        self.main=5 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
@@ -60,7 +58,7 @@ class Space_pong_game():
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
-                            "planets":["Mars.png","Mars1.png","meteorite.png","Saturn.png","earth.png","moon.png"],
+                            "planets":["Mars.png","Mars1.png","meteorite.png","Saturn.png","earth.png"],
                             "value_planet":0,
                             "spacecrafts":["spaceship.png","spaceship2.png","spaceship3.png"],
                             "value_spacecraft1":0,
@@ -84,6 +82,11 @@ class Space_pong_game():
         self.config_keys["DOWN_S"]=K_s
         self.config_keys["UP_ARROW"]=K_UP
         self.config_keys["DOWN_ARROW"]=K_DOWN
+    def config_screen(self):
+        self.WIDTH=self.config_visuals["WIDTH"]
+        self.HEIGHT=self.config_visuals["HEIGHT"]
+        self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
+        self.load_images()
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
@@ -128,7 +131,7 @@ class Space_pong_game():
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
-        self.object3=Rect(332,182,36,36)
+        self.object3=Rect(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
@@ -181,9 +184,10 @@ class Space_pong_game():
             if self.pressed_keys[K_r]:self.main=-1
             if self.pressed_keys[K_e]:self.main=0
     def images_elements(self):
+        self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
-        self.screen.blit(self.planet, (self.object3.x,self.object3.y))
+        self.screen.blit(self.rotated_ball, (self.object3.x,self.object3.y))
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game[0]:self.draw_generation()
@@ -406,10 +410,10 @@ class Space_pong_game():
         self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
-        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,number2=9)
-        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,number2=10)
-        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,number2=14)
-        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,number2=17)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,command=lambda: self.config_visuals.update({"WIDTH": (self.config_visuals["WIDTH"] - 10)}),number2=9,command2=self.config_screen)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,command=lambda: self.config_visuals.update({"WIDTH": (self.config_visuals["WIDTH"] + 10)}),number2=10,command2=self.config_screen)
+        self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,command=lambda: self.config_visuals.update({"HEIGHT": (self.config_visuals["HEIGHT"] - 10)}),number2=14,command2=self.config_screen)
+        self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+200,self.HEIGHT/2-200),0,self.SKYBLUE,command=lambda: self.config_visuals.update({"HEIGHT": (self.config_visuals["HEIGHT"] + 10)}),number2=17,command2=self.config_screen)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-22),5,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_planet": (self.config_visuals["value_planet"] - 1) % len(self.config_visuals["planets"])}),number2=18,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-22),6,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_planet": (self.config_visuals["value_planet"] + 1) % len(self.config_visuals["planets"])}),number2=19,command2=self.load_images)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-80,self.HEIGHT/2+160),7,self.SKYBLUE,command=lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] - 1) % len(self.config_visuals["image_background"])}),number2=20,command2=self.load_images)

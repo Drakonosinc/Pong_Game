@@ -18,10 +18,9 @@
             "Mars1.png",
             "meteorite.png",
             "Saturn.png",
-            "earth.png",
-            "moon.png"
+            "earth.png"
         ],
-        "value_planet": 0,
+        "value_planet": 2,
         "spacecrafts": [
             "spaceship.png",
             "spaceship2.png",
