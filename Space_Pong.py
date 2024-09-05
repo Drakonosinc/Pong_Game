@@ -28,8 +28,6 @@ class Space_pong_game():
         self.score1=0
         self.score2=0
         self.reward=0
-        self.counter=0
-        self.pause_counter=0
         self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
@@ -42,8 +40,8 @@ class Space_pong_game():
                             True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
         self.mode_game=[True,False,False]
         self.max_score=5
-        self.EVENT_SCORE = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.EVENT_SCORE,500)
+        self.EVENT_NEW = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.EVENT_NEW,500)
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
     def load_config(self):
@@ -136,40 +134,9 @@ class Space_pong_game():
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
         for event in pygame.event.get():
-            if event.type==pygame.QUIT:
-                self.sound_exitbutton.play(loops=0)
-                self.running,self.game_over=False,True
-            elif event.type == self.EVENT_SCORE:
-                self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
-                self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25],self.notsound_playing[27]=True,True,True,True,True,True,True
-                self.notsound_playing[29]=True
-            if event.type==KEYDOWN:
-                if self.main==3 or self.main==-1:
-                    if event.key==K_p:
-                        self.main=3
-                        self.pause_counter+=1
-                        if self.pause_counter%2==0:self.main=-1
-                    if self.speed_up:
-                        if event.key==K_KP_PLUS:
-                            self.FPS+=15
-                            self.speed+=1
-                            self.speed_down=True
-                            if self.speed==10:self.speed_up=False
-                    if self.speed_down:
-                        if event.key==K_KP_MINUS:
-                            self.FPS-=15
-                            self.speed-=1
-                            self.speed_up=True
-                            if self.speed==-1:self.speed_down=False
-                if self.main==2:
-                    if self.color_inputtext1==self.SKYBLUE:
-                        if event.key == pygame.K_BACKSPACE:self.text_player1 = self.text_player1[:-1]
-                        else:self.text_player1 += event.unicode
-                    if self.color_inputtext2==self.SKYBLUE:
-                        if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
-                        else:self.text_player2 += event.unicode
-                if self.main==-1:
-                    if event.key==K_1:save_model(self.model, self.model_path)
+            self.event_quit(event)
+            self.news_events(event)
+            self.event_keydown(event)
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
@@ -183,6 +150,41 @@ class Space_pong_game():
         if self.main==1:
             if self.pressed_keys[K_r]:self.main=-1
             if self.pressed_keys[K_e]:self.main=0
+    def event_quit(self,event):
+        if event.type==pygame.QUIT:
+            self.sound_exitbutton.play(loops=0)
+            self.running,self.game_over=False,True
+    def news_events(self,event):
+        if event.type == self.EVENT_NEW:
+            self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
+            self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25],self.notsound_playing[27]=True,True,True,True,True,True,True
+            self.notsound_playing[29]=True
+    def event_keydown(self,event):
+        if event.type==KEYDOWN:
+            if self.main==3 and event.key==K_p:self.main=-1
+            elif self.main==-1 and event.key==K_p:self.main=3
+            if self.main==3 or self.main==-1:
+                if self.speed_up:
+                    if event.key==K_KP_PLUS:
+                        self.FPS+=15
+                        self.speed+=1
+                        self.speed_down=True
+                        if self.speed==10:self.speed_up=False
+                if self.speed_down:
+                    if event.key==K_KP_MINUS:
+                        self.FPS-=15
+                        self.speed-=1
+                        self.speed_up=True
+                        if self.speed==-1:self.speed_down=False
+            if self.main==2:
+                if self.color_inputtext1==self.SKYBLUE:
+                    if event.key == pygame.K_BACKSPACE:self.text_player1 = self.text_player1[:-1]
+                    else:self.text_player1 += event.unicode
+                if self.color_inputtext2==self.SKYBLUE:
+                    if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
+                    else:self.text_player2 += event.unicode
+            if self.main==-1:
+                if event.key==K_1:save_model(self.model, self.model_path)
     def images_elements(self):
         self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
@@ -437,7 +439,6 @@ class Space_pong_game():
         self.objects()
         self.score1=0
         self.score2=0
-        self.pause_counter=0
         self.FPS=60
         self.speed=0
         self.speed_up=True
