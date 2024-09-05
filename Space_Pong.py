@@ -28,7 +28,7 @@ class Space_pong_game():
         self.score1=0
         self.score2=0
         self.reward=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.main=6 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
         self.text_player1="player 1"
@@ -429,7 +429,13 @@ class Space_pong_game():
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
+            self.anim_keys()
             self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
+    def anim_keys(self):
+        self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 80),"W",self.WHITE,(self.WIDTH/2-240,self.HEIGHT/2-170),0,self.GOLDEN,number2=9)
+        self.button(self.screen,None,font,"s",self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,number2=10)
+        self.button(self.screen,None,font,"↑",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,number2=14)
+        self.button(self.screen,None,font,"↓",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,number2=17)
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
