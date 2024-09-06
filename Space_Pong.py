@@ -54,7 +54,6 @@ class Space_pong_game():
         self.config_keys = config["config_keys"]
 # this method is unnecessary its only use is for quick corrections in the future.
     def config(self):
-        # print(event.key) con eso podre tomar el boton que presione y cambiarlo al que quiera
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
