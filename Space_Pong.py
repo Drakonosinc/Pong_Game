@@ -436,6 +436,8 @@ class Space_pong_game():
         self.button(self.screen,None,font,"s",self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,number2=10)
         self.button(self.screen,None,font,"↑",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,number2=14)
         self.button(self.screen,None,font,"↓",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,number2=17)
+        self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
+        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_keys,number2=29)
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
