@@ -44,6 +44,8 @@ class Space_pong_game():
         pygame.time.set_timer(self.EVENT_NEW,500)
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
+        self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
+        self.key=None
     def load_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
         with open(os.path.join(config_path,"config.txt"), 'r') as file:
@@ -61,8 +63,10 @@ class Space_pong_game():
                             "spacecrafts":["spaceship.png","spaceship2.png","spaceship3.png"],
                             "value_spacecraft1":0,
                             "value_spacecraft2":0}
-        self.config_keys={"UP_W":K_w,"DOWN_S":K_s,
-                        "UP_ARROW":K_UP,"DOWN_ARROW":K_DOWN}
+        self.config_keys={"UP_W":K_w,"Name_key1":"W",
+                        "DOWN_S":K_s,"Name_key2":"S",
+                        "UP_ARROW":K_UP,"Name_key3":"↑",
+                        "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
         config = {"config_visuals": self.config_visuals,
@@ -77,9 +81,13 @@ class Space_pong_game():
         self.config_visuals["value_spacecraft"]=0
     def prefinished_config_keys(self):
         self.config_keys["UP_W"]=K_w
+        self.config_keys["Name_key1"]="W"
         self.config_keys["DOWN_S"]=K_s
+        self.config_keys["Name_key2"]="S"
         self.config_keys["UP_ARROW"]=K_UP
+        self.config_keys["Name_key3"]="↑"
         self.config_keys["DOWN_ARROW"]=K_DOWN
+        self.config_keys["Name_key4"]="↓"
     def config_screen(self):
         self.WIDTH=self.config_visuals["WIDTH"]
         self.HEIGHT=self.config_visuals["HEIGHT"]
@@ -137,6 +145,7 @@ class Space_pong_game():
             self.event_quit(event)
             self.news_events(event)
             self.event_keydown(event)
+            if self.main==6:self.event_keys(event)
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
@@ -432,12 +441,22 @@ class Space_pong_game():
             self.anim_keys()
             self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
     def anim_keys(self):
-        self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 80),"W",self.WHITE,(self.WIDTH/2-240,self.HEIGHT/2-170),0,self.GOLDEN,number2=9)
-        self.button(self.screen,None,font,"s",self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,number2=10)
-        self.button(self.screen,None,font,"↑",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,number2=14)
-        self.button(self.screen,None,font,"↓",self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,number2=17)
+        self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 80),self.config_keys["Name_key1"],self.SKYBLUE if self.utils_keys["UP_W"] else self.WHITE,(self.WIDTH/2-240,self.HEIGHT/2-170),0,self.GOLDEN,command=lambda:self.change_keys("UP_W","Name_key1"),number2=9)
+        self.button(self.screen,None,font,self.config_keys["Name_key2"],self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,number2=10)
+        self.button(self.screen,None,font,self.config_keys["Name_key3"],self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,number2=14)
+        self.button(self.screen,None,font,self.config_keys["Name_key4"],self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,number2=17)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
         self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_keys,number2=29)
+    def change_keys(self,key,key_name):
+        self.key=key
+        self.key_name=key_name
+        self.utils_keys[self.key]= not self.utils_keys[key]
+    def event_keys(self,event):
+        if self.key!=None:
+            if self.utils_keys[self.key]:
+                if event.type==KEYDOWN:
+                    self.config_keys[self.key]=event.key
+                    self.config_keys[self.key_name]=event.unicode.upper()
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
