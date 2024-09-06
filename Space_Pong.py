@@ -442,9 +442,9 @@ class Space_pong_game():
             self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
     def anim_keys(self):
         self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 80),self.config_keys["Name_key1"],self.SKYBLUE if self.utils_keys["UP_W"] else self.WHITE,(self.WIDTH/2-240,self.HEIGHT/2-170),0,self.GOLDEN,command=lambda:self.change_keys("UP_W","Name_key1"),number2=9)
-        self.button(self.screen,None,font,self.config_keys["Name_key2"],self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,number2=10)
-        self.button(self.screen,None,font,self.config_keys["Name_key3"],self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,number2=14)
-        self.button(self.screen,None,font,self.config_keys["Name_key4"],self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,number2=17)
+        self.button(self.screen,None,font,self.config_keys["Name_key2"],self.SKYBLUE if self.utils_keys["DOWN_S"] else self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,command=lambda:self.change_keys("DOWN_S","Name_key2"),number2=10)
+        self.button(self.screen,None,font,self.config_keys["Name_key3"],self.SKYBLUE if self.utils_keys["UP_ARROW"] else self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,command=lambda:self.change_keys("UP_ARROW","Name_key3"),number2=14)
+        self.button(self.screen,None,font,self.config_keys["Name_key4"],self.SKYBLUE if self.utils_keys["DOWN_ARROW"] else self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,command=lambda:self.change_keys("DOWN_ARROW","Name_key4"),number2=17)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
         self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_keys,number2=29)
     def change_keys(self,key,key_name):

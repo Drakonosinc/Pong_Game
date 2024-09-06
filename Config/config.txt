@@ -20,7 +20,7 @@
             "Saturn.png",
             "earth.png"
         ],
-        "value_planet": 0,
+        "value_planet": 2,
         "spacecrafts": [
             "spaceship.png",
             "spaceship2.png",
