@@ -450,13 +450,14 @@ class Space_pong_game():
     def change_keys(self,key,key_name):
         self.key=key
         self.key_name=key_name
-        self.utils_keys[self.key]= not self.utils_keys[key]
+        self.utils_keys[self.key]= not self.utils_keys[self.key]
     def event_keys(self,event):
         if self.key!=None:
             if self.utils_keys[self.key]:
                 if event.type==KEYDOWN:
                     self.config_keys[self.key]=event.key
                     self.config_keys[self.key_name]=event.unicode.upper()
+                    self.utils_keys[self.key]= not self.utils_keys[self.key]
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
