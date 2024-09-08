@@ -192,7 +192,7 @@ class Space_pong_game():
                     if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
                     else:self.text_player2 += event.unicode
             if self.main==-1:
-                if event.key==K_1:save_model(self.model, self.model_path)
+                if event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
     def images_elements(self):
         self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))

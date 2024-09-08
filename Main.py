@@ -7,8 +7,8 @@ if __name__=="__main__":
     output_size = 2  # Definir el tamaño de salida
     game=Space_pong_game()
     best_model = genetic_algorithm(game, input_size, output_size)
-    save_model(best_model, game.model_path)
     game.model = best_model
     game.run_with_model()
+    save_model(best_model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
 pygame.quit()
 sys.exit()

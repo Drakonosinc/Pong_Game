@@ -57,21 +57,25 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
     game.model = best_model
     return best_model
 
-# Guardar el modelo
-def save_model(model, path):
+def save_model(model, optimizer, path):
     print("save model")
-    torch.save(model.state_dict(), path)
+    torch.save({
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+    }, path)
 
-# Cargar el modelo
-def load_model(path, input_size, output_size):
+def load_model(path, input_size, output_size, optimizer=None):
     try:
         print("load model")
         model = SimpleNN(input_size, output_size)
-        model.load_state_dict(torch.load(path))
+        checkpoint = torch.load(path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        if optimizer:
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         return model
     except FileNotFoundError:
         print(f"The file {path} was not found.")
         return None
     except Exception as e:
-        print(f"An error occurred while loading the model:{e}")
+        print(f"An error occurred while loading the model: {e}")
         return None
