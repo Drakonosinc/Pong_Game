@@ -341,10 +341,13 @@ class Space_pong_game():
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
     def Pause(self):
         if self.main==3:
-            self.screen.blit(self.font3.render("Pause",True,"black"),(self.WIDTH/2-105,self.HEIGHT/2-150))
-            close=self.button(self.screen,None,self.font2_5,"Exit",self.BLACK,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
-            self.button(self.screen,-1,self.font2_5,"Reset",self.BLACK,(self.WIDTH/2-55,self.HEIGHT/2-85),0,self.SKYBLUE,command=self.reset)
-            self.button(self.screen,0,self.font2_5,"Menu",self.BLACK,(self.WIDTH/2-45,self.HEIGHT/2-50),1,self.SKYBLUE,command=self.reset)
+            background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
+            background.fill((0,0,0,180))
+            self.screen.blit(background,(0,0))
+            self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
+            close=self.button(self.screen,None,self.font2_5,"Exit",self.GRAY,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
+            self.button(self.screen,-1,self.font2_5,"Reset",self.GRAY,(self.WIDTH/2-55,self.HEIGHT/2-85),0,self.SKYBLUE,command=self.reset)
+            self.button(self.screen,0,self.font2_5,"Menu",self.GRAY,(self.WIDTH/2-45,self.HEIGHT/2-50),1,self.SKYBLUE,command=self.reset)
             if self.pressed_mouse[0]:
                 if close.collidepoint(self.mouse_pos):
                     self.sound_exitbutton.play(loops=0)
