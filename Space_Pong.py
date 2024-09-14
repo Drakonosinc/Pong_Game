@@ -47,12 +47,13 @@ class Space_pong_game():
         self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def load_config(self):
-        config_path = os.path.join(os.path.dirname(__file__), "Config")
-        with open(os.path.join(config_path,"config.txt"), 'r') as file:
-            config = json.load(file)
-        self.config_visuals = config["config_visuals"]
-        self.config_keys = config["config_keys"]
-# this method is unnecessary its only use is for quick corrections in the future.
+        try:
+            config_path = os.path.join(os.path.dirname(__file__), "Config")
+            with open(os.path.join(config_path,"config.txt"), 'r') as file:
+                config = json.load(file)
+            self.config_visuals = config["config_visuals"]
+            self.config_keys = config["config_keys"]
+        except:self.config()
     def config(self):
         self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
