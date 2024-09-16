@@ -7,45 +7,16 @@ class Space_pong_game():
     def __init__(self,model=None):
         self.load_config()
         pygame.init()
-        pygame.display.set_caption("Pong")
-        self.model=model
-        self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
-        if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
-        else:self.model_training = None
-        self.running=False
-        self.game_over=False
-        self.config_screen()
-        self.clock=pygame.time.Clock()
-        self.FPS=60
+        pygame.display.set_caption("Space Pong")
+        self.load_model(model)
         self.define_colors()
-        self.load_images()
         self.load_fonts()
         self.load_sounds()
+        self.load_varials()
+        self.config_screen()
+        self.load_images()
         self.objects()
-        self.generation=0
-        self.value1=4
-        self.value2=4
-        self.score1=0
-        self.score2=0
-        self.reward=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
-        self.color_inputtext1=self.WHITE
-        self.color_inputtext2=self.WHITE
-        self.text_player1="player 1"
-        self.text_player2="PC"
-        self.speed=0
-        self.speed_up=True
-        self.speed_down=True
-        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,
-                            True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
-        self.mode_game=[True,False,False]
-        self.max_score=5
-        self.EVENT_NEW = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.EVENT_NEW,500)
-        self.touch_ball=[True,True]
-        self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
-        self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
-        self.key=None
+        self.new_events()
     def load_config(self):
         try:
             config_path = os.path.join(os.path.dirname(__file__), "Config")
@@ -88,6 +59,38 @@ class Space_pong_game():
         self.config_keys["Name_key3"]="↑"
         self.config_keys["DOWN_ARROW"]=K_DOWN
         self.config_keys["Name_key4"]="↓"
+    def load_model(self,model):
+        self.model=model
+        self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
+        if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
+        else:self.model_training = None
+    def load_varials(self):
+        self.running=False
+        self.game_over=False
+        self.clock=pygame.time.Clock()
+        self.FPS=60
+        self.generation=0
+        self.value1=4
+        self.value2=4
+        self.score1=0
+        self.score2=0
+        self.reward=0
+        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.color_inputtext1=self.WHITE
+        self.color_inputtext2=self.WHITE
+        self.text_player1="player 1"
+        self.text_player2="PC"
+        self.speed=0
+        self.speed_up=True
+        self.speed_down=True
+        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,
+                            True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
+        self.mode_game=[True,False,False]
+        self.max_score=5
+        self.touch_ball=[True,True]
+        self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
+        self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
+        self.key=None
     def config_screen(self):
         self.WIDTH=self.config_visuals["WIDTH"]
         self.HEIGHT=self.config_visuals["HEIGHT"]
@@ -138,6 +141,9 @@ class Space_pong_game():
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
         self.object3=Rect(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
+    def new_events(self):
+        self.EVENT_NEW = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.EVENT_NEW,500)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
