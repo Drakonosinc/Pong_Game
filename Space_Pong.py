@@ -476,29 +476,26 @@ class Space_pong_game():
         self.speed_up=True
         self.speed_down=True
         self.running=False
+    def type_game(self):
+        if self.mode_game[0]:
+            self.action_ai(self.model)
+            self.player1_code()
+        if self.mode_game[2]:self.action_ai(self.model_training)
+    def action_ai(self,model):
+        state=self.get_state()
+        action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
+        self.IA_actions(action)
     def run_with_model(self):
         self.running=True
         score = 0
         while self.running and self.game_over==False:
             self.handle_keys()
             self.draw()
-            if self.main==-1 and self.mode_game[0]:
-                state=self.get_state()
-                action = self.model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
-                self.IA_actions(action)
+            if self.main==-1:
                 self.move_ball()
-                self.player1_code()
                 self.restart()
+                self.type_game()
                 score =self.reward
-            if self.main==-1 and self.mode_game[1]:
-                self.move_ball()
-                self.restart()
-            if self.main==-1 and self.mode_game[2]:
-                state=self.get_state()
-                action = self.model_training(torch.tensor(state, dtype=torch.float32)).detach().numpy()
-                self.IA_actions(action)
-                self.move_ball()
-                self.restart()
             pygame.display.flip()
             self.clock.tick(self.FPS)
         return score
