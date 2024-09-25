@@ -155,16 +155,7 @@ class Space_pong_game():
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
-        if self.pressed_keys[K_ESCAPE]:self.running=False
-        if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
-            if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.top > 0:self.object1.y -= 5
-            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
-        if self.main==-1 and self.mode_game[1]:
-            if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
-            if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
-        if self.main==1:
-            if self.pressed_keys[K_r]:self.main=-1
-            if self.pressed_keys[K_e]:self.main=0
+        self.press_keys()
     def event_quit(self,event):
         if event.type==pygame.QUIT:
             self.sound_exitbutton.play(loops=0)
@@ -200,6 +191,17 @@ class Space_pong_game():
                     else:self.text_player2 += event.unicode
             if self.main==-1:
                 if event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
+    def press_keys(self):
+        if self.pressed_keys[K_ESCAPE]:self.running=False
+        if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
+            if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.top > 0:self.object1.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
+        if self.main==-1 and self.mode_game[1]:
+            if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
+        if self.main==1:
+            if self.pressed_keys[K_r]:self.main=-1
+            if self.pressed_keys[K_e]:self.main=0
     def images_elements(self):
         self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
