@@ -228,35 +228,26 @@ class Space_pong_game():
         if self.object3.x>=self.WIDTH-25 or self.object3.x<=0:
             self.value1*=-1
             self.sound.play(loops=1)
-            if self.object3.x>=self.WIDTH-25:
-                self.score1+=1
-                self.reward+=-1
+            def repeat(reward,objet):
                 self.object3.x=300
                 self.object3.y=200
-            if self.object3.x<=0:
-                self.score2+=1
-                self.reward+=1
-                self.object3.x=300
-                self.object3.y=200
+                self.reward+=reward
+                setattr(self,objet,getattr(self,objet)+1)
+            if self.object3.x>=self.WIDTH-25:repeat(-1,"score1")
+            if self.object3.x<=0:repeat(1,"score2")
         if self.object3.y>=self.HEIGHT-25 or self.object3.y<=0:self.value2*=-1
-        self.ball_collision()
+        self.ball_collision(0,-1,self.object1)
+        self.ball_collision(1,1,self.object2)
         self.object3.x+=self.value1
         self.object3.y+=self.value2
-    def ball_collision(self):
-        if self.object3.colliderect(self.object1):
-            if self.touch_ball[0]:
-                self.reward+=-1
+    def ball_collision(self,number1,reward,objet):
+        if self.object3.colliderect(objet):
+            if self.touch_ball[number1]:
+                self.reward+=reward
                 self.value1*=-1
                 self.sound.play(loops=0)
-                self.touch_ball[0]=False
-        else:self.touch_ball[0]=True
-        if self.object3.colliderect(self.object2):
-            if self.touch_ball[1]:
-                self.reward+=1
-                self.value1*=-1
-                self.sound.play(loops=0)
-                self.touch_ball[1]=False
-        else:self.touch_ball[1]=True
+                self.touch_ball[number1]=False
+        else:self.touch_ball[number1]=True
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
