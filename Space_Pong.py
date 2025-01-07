@@ -417,14 +417,11 @@ class Space_pong_game():
         self.button(self.screen,None,self.font2_5,"Language",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-45),4,self.GOLDEN,True,number2=9)
     def sound_on_off(self):
         self.sound_type["value"]=not self.sound_type["value"]
-        if self.sound_type["value"]:
-            self.sound_type["color"]=self.SKYBLUE
-            self.sound_type["sound"]="Sound ON"
-            self.sound_back.play(loops=-1)
-        else:
-            self.sound_type["color"]=self.RED
-            self.sound_type["sound"]="Sound off"
-            self.sound_back.stop()
+        def sound(color,sound_on_off,sound):
+            self.sound_type["color"]=color
+            self.sound_type["sound"]=sound_on_off
+            sound.play(loops=-1) if color==self.SKYBLUE else sound.stop()
+        sound(*(self.SKYBLUE,"Sound ON",self.sound_back) if self.sound_type["value"] else (self.RED,"Sound off",self.sound_back))
     def visuals_menu(self):
         if self.main==5:
             self.screen.blit(self.image, (0, 0))
