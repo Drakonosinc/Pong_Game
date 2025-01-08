@@ -171,6 +171,10 @@ class Space_pong_game():
         self.speed_down=speed_down
         self.speed_up=speed_up
         if self.speed==number:setattr(self,objet,False)
+    def input_text(self,event,color_objet,objet,objet_text):
+        if color_objet==self.SKYBLUE:
+            if event.key == K_BACKSPACE:setattr(self,objet,objet_text[:-1])
+            else:setattr(self,objet,getattr(self,objet)+event.unicode)
     def event_keydown(self,event):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
@@ -179,12 +183,8 @@ class Space_pong_game():
                 if self.speed_up and event.key==K_KP_PLUS:self.change_speed(15,1,10,"speed_up",speed_up=self.speed_up)
                 if self.speed_down and event.key==K_KP_MINUS:self.change_speed(-15,-1,-1,"speed_down",speed_down=self.speed_down)
             if self.main==2:
-                if self.color_inputtext1==self.SKYBLUE:
-                    if event.key == pygame.K_BACKSPACE:self.text_player1 = self.text_player1[:-1]
-                    else:self.text_player1 += event.unicode
-                if self.color_inputtext2==self.SKYBLUE:
-                    if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
-                    else:self.text_player2 += event.unicode
+                self.input_text(event,self.color_inputtext1,"text_player1",self.text_player1)
+                self.input_text(event,self.color_inputtext2,"text_player2",self.text_player2)
             if self.main==-1 and event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
