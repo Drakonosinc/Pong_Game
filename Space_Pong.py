@@ -255,10 +255,7 @@ class Space_pong_game():
         if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
         if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
-        if self.mode_game[0] and (self.score1==self.max_score or self.score2==self.max_score):
-            self.running=False
-            self.score1=0
-            self.score2=0
+        if self.mode_game[0] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game[1] or self.mode_game[2]) and (self.score1==self.max_score or self.score2==self.max_score):
             self.reset()
             self.main=1
@@ -467,8 +464,7 @@ class Space_pong_game():
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self,running=True,fps=60,speed=0,speed_up=True,speed_down=True):
         self.objects()
-        self.score1=0
-        self.score2=0
+        self.score1,self.score2=0,0
         self.FPS=fps
         self.speed=speed
         self.speed_up=speed_up
