@@ -185,8 +185,7 @@ class Space_pong_game():
                 if self.color_inputtext2==self.SKYBLUE:
                     if event.key == pygame.K_BACKSPACE:self.text_player2 = self.text_player2[:-1]
                     else:self.text_player2 += event.unicode
-            if self.main==-1:
-                if event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
+            if self.main==-1 and event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
