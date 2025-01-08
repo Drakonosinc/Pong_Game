@@ -490,9 +490,9 @@ class Space_pong_game():
             self.handle_keys()
             self.draw()
             if self.main==-1:
+                if self.mode_game[0] or self.mode_game[2]:self.type_game()
                 self.move_ball()
                 self.restart()
-                self.type_game()
                 score =self.reward
             pygame.display.flip()
             self.clock.tick(self.FPS)
