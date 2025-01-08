@@ -2,7 +2,6 @@ import pygame,os,json
 from pygame.locals import *
 from Genetic_Algorithm import *
 import numpy as np
-
 class Space_pong_game():
     def __init__(self,model=None):
         self.load_config()
@@ -148,7 +147,7 @@ class Space_pong_game():
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):
         for event in pygame.event.get():
-            self.event_quit(event)
+            if event.type==pygame.QUIT:self.event_quit()
             self.news_events(event)
             self.event_keydown(event)
             if self.main==6:self.event_keys(event)
@@ -156,10 +155,9 @@ class Space_pong_game():
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
         self.press_keys()
-    def event_quit(self,event):
-        if event.type==pygame.QUIT:
-            self.sound_exitbutton.play(loops=0)
-            self.running,self.game_over=False,True
+    def event_quit(self):
+        self.sound_exitbutton.play(loops=0)
+        self.running,self.game_over=False,True
     def news_events(self,event):
         if event.type == self.EVENT_NEW:
             self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
@@ -290,9 +288,7 @@ class Space_pong_game():
             self.button(self.screen,2,self.font5,"Press To Start",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-80),0,self.GOLDEN)
             press_quit=self.button(self.screen,None,self.font5,"Press To Exit",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-50),1,self.GOLDEN,False)
             self.button(self.screen,4,self.font5,"Options",self.WHITE,(self.WIDTH-110,self.HEIGHT-40),11,self.GOLDEN)
-            if self.pressed_mouse[0] and press_quit.collidepoint(self.mouse_pos):
-                self.sound_exitbutton.play(loops=0)
-                self.game_over=True
+            if self.pressed_mouse[0] and press_quit.collidepoint(self.mouse_pos):self.event_quit()
     def Game_over(self):
         if self.main==1:
             self.filt(80)
@@ -333,9 +329,7 @@ class Space_pong_game():
             close=self.button(self.screen,None,self.font2_5,"Exit",self.GRAY,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
             self.button(self.screen,-1,self.font2_5,"Reset",self.GRAY,(self.WIDTH/2-55,self.HEIGHT/2-85),0,self.SKYBLUE,command=self.reset)
             self.button(self.screen,0,self.font2_5,"Menu",self.GRAY,(self.WIDTH/2-45,self.HEIGHT/2-50),1,self.SKYBLUE,command=self.reset)
-            if self.pressed_mouse[0] and close.collidepoint(self.mouse_pos):
-                self.sound_exitbutton.play(loops=0)
-                self.game_over=True
+            if self.pressed_mouse[0] and close.collidepoint(self.mouse_pos):self.event_quit()
     def filt(self,number):
         background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
         background.fill((0,0,0,number))
