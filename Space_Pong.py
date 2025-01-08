@@ -465,34 +465,31 @@ class Space_pong_game():
         self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
-    def reset(self):
+    def reset(self,running=True,fps=60,speed=0,speed_up=True,speed_down=True):
         self.objects()
         self.score1=0
         self.score2=0
-        self.FPS=60
-        self.speed=0
-        self.speed_up=True
-        self.speed_down=True
-        self.running=False
+        self.FPS=fps
+        self.speed=speed
+        self.speed_up=speed_up
+        self.speed_down=speed_down
+        self.running=running
     def type_game(self):
-        if self.mode_game[0]:
-            self.action_ai(self.model)
-            self.player1_code()
-        if self.mode_game[2]:self.action_ai(self.model_training)
+        if self.mode_game[0]:self.player1_code()
+        self.action_ai(self.model if self.mode_game[0] else self.model_training)
     def action_ai(self,model):
         state=self.get_state()
         action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
         self.IA_actions(action)
     def run_with_model(self):
         self.running=True
-        score = 0
+        score,self.reward=0,0
         while self.running and self.game_over==False:
             self.handle_keys()
             self.draw()
             if self.main==-1:
                 if self.mode_game[0] or self.mode_game[2]:self.type_game()
-                self.move_ball()
-                self.restart()
+                self.move_ball(),self.restart()
                 score =self.reward
             pygame.display.flip()
             self.clock.tick(self.FPS)
