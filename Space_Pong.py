@@ -210,9 +210,7 @@ class Space_pong_game():
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game[0]:self.draw_generation()
-        if self.mode_game[0] or self.mode_game[2]:
-            self.draw_activations()
-            self.draw_model_data()
+        if self.mode_game[0] or self.mode_game[2]:self.draw_activations(),self.draw_model_data()
         self.images_elements()
         self.scores()
         self.name_players()
@@ -268,9 +266,7 @@ class Space_pong_game():
         if self.model.activations is not None:
             activations = self.model.activations
             num_activations = activations.shape[1]
-            # Define las posiciones de las neuronas en la capa oculta
             neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
-            # Dibuja las conexiones y las neuronas
             for pos in neuron_positions:
                 pygame.draw.circle(self.screen, self.WHITE, pos, 5)
                 pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 210, self.HEIGHT // 2), pos, 1)
@@ -299,10 +295,9 @@ class Space_pong_game():
             self.button(self.screen,2,self.font5,"Press To Start",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-80),0,self.GOLDEN)
             press_quit=self.button(self.screen,None,self.font5,"Press To Exit",self.WHITE,(self.WIDTH//2-200,self.HEIGHT//2-50),1,self.GOLDEN,False)
             self.button(self.screen,4,self.font5,"Options",self.WHITE,(self.WIDTH-110,self.HEIGHT-40),11,self.GOLDEN)
-            if self.pressed_mouse[0]:
-                if press_quit.collidepoint(self.mouse_pos):
-                    self.sound_exitbutton.play(loops=0)
-                    self.game_over=True
+            if self.pressed_mouse[0] and press_quit.collidepoint(self.mouse_pos):
+                self.sound_exitbutton.play(loops=0)
+                self.game_over=True
     def Game_over(self):
         if self.main==1:
             self.filt(80)
@@ -343,10 +338,9 @@ class Space_pong_game():
             close=self.button(self.screen,None,self.font2_5,"Exit",self.GRAY,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
             self.button(self.screen,-1,self.font2_5,"Reset",self.GRAY,(self.WIDTH/2-55,self.HEIGHT/2-85),0,self.SKYBLUE,command=self.reset)
             self.button(self.screen,0,self.font2_5,"Menu",self.GRAY,(self.WIDTH/2-45,self.HEIGHT/2-50),1,self.SKYBLUE,command=self.reset)
-            if self.pressed_mouse[0]:
-                if close.collidepoint(self.mouse_pos):
-                    self.sound_exitbutton.play(loops=0)
-                    self.game_over=True
+            if self.pressed_mouse[0] and close.collidepoint(self.mouse_pos):
+                self.sound_exitbutton.play(loops=0)
+                self.game_over=True
     def filt(self,number):
         background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
         background.fill((0,0,0,number))
