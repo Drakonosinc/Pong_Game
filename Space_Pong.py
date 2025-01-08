@@ -165,23 +165,19 @@ class Space_pong_game():
             self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
             self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25],self.notsound_playing[27]=True,True,True,True,True,True,True
             self.notsound_playing[29]=True
+    def change_speed(self,fps,speed,number,objet,speed_down=True,speed_up=True):
+        self.FPS+=fps
+        self.speed+=speed
+        self.speed_down=speed_down
+        self.speed_up=speed_up
+        if self.speed==number:setattr(self,objet,False)
     def event_keydown(self,event):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
             elif self.main==-1 and event.key==K_p:self.main=3
             if self.main==3 or self.main==-1:
-                if self.speed_up:
-                    if event.key==K_KP_PLUS:
-                        self.FPS+=15
-                        self.speed+=1
-                        self.speed_down=True
-                        if self.speed==10:self.speed_up=False
-                if self.speed_down:
-                    if event.key==K_KP_MINUS:
-                        self.FPS-=15
-                        self.speed-=1
-                        self.speed_up=True
-                        if self.speed==-1:self.speed_down=False
+                if self.speed_up and event.key==K_KP_PLUS:self.change_speed(15,1,10,"speed_up",speed_up=self.speed_up)
+                if self.speed_down and event.key==K_KP_MINUS:self.change_speed(-15,-1,-1,"speed_down",speed_down=self.speed_down)
             if self.main==2:
                 if self.color_inputtext1==self.SKYBLUE:
                     if event.key == pygame.K_BACKSPACE:self.text_player1 = self.text_player1[:-1]
