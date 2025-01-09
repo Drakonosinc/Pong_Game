@@ -464,8 +464,7 @@ class Space_pong_game():
         self.running=True
         score,self.reward=0,0
         while self.running and self.game_over==False:
-            self.handle_keys()
-            self.draw()
+            self.handle_keys(),self.draw()
             if self.main==-1:
                 if self.mode_game[0] or self.mode_game[2]:self.type_game()
                 self.move_ball(),self.restart()
