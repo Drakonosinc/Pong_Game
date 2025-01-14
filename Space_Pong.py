@@ -265,8 +265,7 @@ class Space_pong_game(interface):
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.screen, color, neuron_positions[i], 5)
     def draw_generation(self):
-        generation_text = self.font2.render(f"Generation: {self.generation}", True, self.YELLOW)
-        self.screen.blit(generation_text, (10, 10))
+        self.screen.blit(self.font2.render(f"Generation: {self.generation}", True, self.YELLOW), (10, 10))
     def draw_model_data(self):
         if self.mode_game[2]:self.model=self.model_training
         if self.model is not None:
