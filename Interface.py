@@ -122,11 +122,10 @@ class interface():
         self.utils_keys[self.key]= not self.utils_keys[self.key]
     def event_keys(self,event):
         if self.key!=None:
-            if self.utils_keys[self.key]:
-                if event.type==KEYDOWN:
-                    self.config_keys[self.key]=event.key
-                    self.config_keys[self.key_name]=event.unicode.upper()
-                    self.utils_keys[self.key]= not self.utils_keys[self.key]
+            if self.utils_keys[self.key] and event.type==KEYDOWN:
+                self.config_keys[self.key]=event.key
+                self.config_keys[self.key_name]=event.unicode.upper()
+                self.utils_keys[self.key]= not self.utils_keys[self.key]
     def button(self,screen,main:int,font,text:str,color,position,number:int,color2=None,pressed=True,command=None,detect_mouse=True,number2=None,command2=None):
         button=screen.blit(font.render(text,True,color),position)
         if detect_mouse:
