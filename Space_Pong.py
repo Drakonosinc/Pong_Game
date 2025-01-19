@@ -20,8 +20,7 @@ class Space_pong_game(interface):
     def load_config(self):
         try:
             config_path = os.path.join(os.path.dirname(__file__), "Config")
-            with open(os.path.join(config_path,"config.txt"), 'r') as file:
-                config = json.load(file)
+            with open(os.path.join(config_path,"config.json"), 'r') as file:config = json.load(file)
             self.config_visuals = config["config_visuals"]
             self.config_keys = config["config_keys"]
         except:self.config()
@@ -42,8 +41,7 @@ class Space_pong_game(interface):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
         config = {"config_visuals": self.config_visuals,
                     "config_keys": self.config_keys}
-        with open(os.path.join(config_path,"config.txt"), 'w') as file:
-            json.dump(config, file, indent=4)
+        with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
     def prefinished_config_visuals(self):
         self.config_visuals["WIDTH"]=700
         self.config_visuals["HEIGHT"]=400
