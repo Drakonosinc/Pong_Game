@@ -103,7 +103,7 @@ class interface():
         self.button(self.screen,None,font,"Λ",self.WHITE,(self.WIDTH/2+310,self.HEIGHT/2-120),15,self.SKYBLUE,number2=24,command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] + 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
         self.button(self.screen,None,font2,"v",self.WHITE,(self.WIDTH/2+310,self.HEIGHT/2+50),26,self.SKYBLUE,number2=25,command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] - 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
-        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_visuals,number2=29,command2=self.load_images)
+        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=lambda:self.config(visuals=True),number2=29,command2=self.load_images)
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
@@ -115,7 +115,7 @@ class interface():
         self.button(self.screen,None,font,self.config_keys["Name_key3"] if self.config_keys["Name_key3"]!="" else "↑",self.SKYBLUE if self.utils_keys["UP_ARROW"] else self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-170),4,self.GOLDEN,command=lambda:self.change_keys("UP_ARROW","Name_key3"),number2=14)
         self.button(self.screen,None,font,self.config_keys["Name_key4"] if self.config_keys["Name_key4"]!="" else "↓",self.SKYBLUE if self.utils_keys["DOWN_ARROW"] else self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,command=lambda:self.change_keys("DOWN_ARROW","Name_key4"),number2=17)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
-        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=self.prefinished_config_keys,number2=29)
+        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=lambda:self.config(keys=True),number2=29)
     def change_keys(self,key,key_name):
         self.key=key
         self.key_name=key_name

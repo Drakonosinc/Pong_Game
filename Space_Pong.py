@@ -23,9 +23,9 @@ class Space_pong_game(interface):
             with open(os.path.join(config_path,"config.json"), 'r') as file:config = json.load(file)
             self.config_visuals = config["config_visuals"]
             self.config_keys = config["config_keys"]
-        except:self.config()
-    def config(self):
-        self.config_visuals={"WIDTH":700,"HEIGHT":400,
+        except:self.config(alls=True)
+    def config(self,visuals=False,keys=False,alls=False):
+        if visuals or alls:self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
                             "planets":["Mars.png","Mars1.png","meteorite.png","Saturn.png","earth.png"],
@@ -33,30 +33,14 @@ class Space_pong_game(interface):
                             "spacecrafts":["spaceship.png","spaceship2.png","spaceship3.png"],
                             "value_spacecraft1":0,
                             "value_spacecraft2":0}
-        self.config_keys={"UP_W":K_w,"Name_key1":"W",
+        if keys or alls:self.config_keys={"UP_W":K_w,"Name_key1":"W",
                         "DOWN_S":K_s,"Name_key2":"S",
                         "UP_ARROW":K_UP,"Name_key3":"↑",
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
-        config = {"config_visuals": self.config_visuals,
-                    "config_keys": self.config_keys}
+        config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys}
         with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
-    def prefinished_config_visuals(self):
-        self.config_visuals["WIDTH"]=700
-        self.config_visuals["HEIGHT"]=400
-        self.config_visuals["value_background"]=0
-        self.config_visuals["value_planet"]=0
-        self.config_visuals["value_spacecraft"]=0
-    def prefinished_config_keys(self):
-        self.config_keys["UP_W"]=K_w
-        self.config_keys["Name_key1"]="W"
-        self.config_keys["DOWN_S"]=K_s
-        self.config_keys["Name_key2"]="S"
-        self.config_keys["UP_ARROW"]=K_UP
-        self.config_keys["Name_key3"]="↑"
-        self.config_keys["DOWN_ARROW"]=K_DOWN
-        self.config_keys["Name_key4"]="↓"
     def load_model(self,model):
         self.model=model
         self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
