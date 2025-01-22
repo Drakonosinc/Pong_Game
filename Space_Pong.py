@@ -44,8 +44,7 @@ class Space_pong_game(interface):
     def load_model(self,model):
         self.model=model
         self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
-        if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
-        else:self.model_training = None
+        self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
     def load_varials(self):
         self.running=False
         self.game_over=False
