@@ -1,13 +1,10 @@
-import pygame,os,json
 from pygame.locals import *
 from Genetic_Algorithm import *
 from Interface import *
 import numpy as np
 class Space_pong_game(interface):
     def __init__(self,model=None):
-        self.load_config()
-        pygame.init()
-        pygame.display.set_caption("Space Pong")
+        super().__init__()
         self.model=model
         self.load_AI()
         self.load_varials()
@@ -43,9 +40,6 @@ class Space_pong_game(interface):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
         self.object3=Rect(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
-    def new_events(self):
-        self.EVENT_NEW = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.EVENT_NEW,500)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
     def handle_keys(self):

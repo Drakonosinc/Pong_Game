@@ -2,7 +2,7 @@ import pygame,os,json
 from pygame.locals import *
 from Genetic_Algorithm import *
 class load_elements():
-    def __init__(self,width=0, height=0):
+    def __init__(self):
         pygame.init()
         pygame.display.set_caption("Space Pong")
         self.load_config()
@@ -84,3 +84,6 @@ class load_elements():
         self.sound_back=pygame.mixer.Sound(os.path.join(self.sound_path,"pong_back.mp3"))
         self.sound_back.play(loops=-1)
         self.sound_back.set_volume(0.2)
+    def new_events(self):
+        self.EVENT_NEW = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.EVENT_NEW,500)
