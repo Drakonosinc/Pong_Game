@@ -10,14 +10,8 @@ class Space_pong_game(interface):
         pygame.display.set_caption("Space Pong")
         self.model=model
         self.load_AI()
-        self.define_colors()
-        self.load_fonts()
-        self.load_sounds()
         self.load_varials()
-        self.config_screen()
-        self.load_images()
         self.objects()
-        self.new_events()
     def load_varials(self):
         self.running=False
         self.game_over=False
@@ -45,52 +39,6 @@ class Space_pong_game(interface):
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
         self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
-    def config_screen(self):
-        self.WIDTH=self.config_visuals["WIDTH"]
-        self.HEIGHT=self.config_visuals["HEIGHT"]
-        self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
-        self.load_images()
-    def define_colors(self):
-        self.GRAY=(127,127,127)
-        self.WHITE=(255,255,255)
-        self.BLACK=(0,0,0)
-        self.GREEN=(0,255,0)
-        self.BLUE=(0,0,255)
-        self.SKYBLUE=(135,206,235)
-        self.YELLOW=(255,255,0)
-        self.RED=(255,0,0)
-        self.GOLDEN=(255,199,51)
-        self.background=self.GRAY
-    def load_images(self):
-        self.angle=90
-        self.image_path = os.path.join(os.path.dirname(__file__), "images")
-        self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][self.config_visuals["value_background"]])).convert()
-        self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
-        self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][self.config_visuals["value_planet"]])).convert_alpha()
-        self.planet=pygame.transform.scale(self.planet,(40,40))
-        self.spacecraft=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft1"]])).convert_alpha()
-        self.spacecraft=pygame.transform.scale(self.spacecraft,(350,200))
-        self.spacecraft=pygame.transform.rotate(self.spacecraft,self.angle)
-        self.spacecraft2=pygame.image.load(os.path.join(self.image_path,self.config_visuals["spacecrafts"][self.config_visuals["value_spacecraft2"]])).convert_alpha()
-        self.spacecraft2=pygame.transform.scale(self.spacecraft2,(350,200))
-        self.spacecraft2=pygame.transform.rotate(self.spacecraft2,self.angle*3)
-    def load_fonts(self):
-        self.font_path = os.path.join(os.path.dirname(__file__), "fonts")
-        self.font=pygame.font.Font(None,25)
-        self.font2=pygame.font.Font(None,35)
-        self.font2_5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),30)
-        self.font3=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),60)
-        self.font4=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),75)
-        self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
-    def load_sounds(self):
-        self.sound_path = os.path.join(os.path.dirname(__file__), "sounds")
-        self.sound=pygame.mixer.Sound(os.path.join(self.sound_path,"pong.wav"))
-        self.sound_touchletters=pygame.mixer.Sound(os.path.join(self.sound_path,"touchletters.wav"))
-        self.sound_exitbutton=pygame.mixer.Sound(os.path.join(self.sound_path,"exitbutton.wav"))
-        self.sound_buttonletters=pygame.mixer.Sound(os.path.join(self.sound_path,"buttonletters.mp3"))
-        self.sound_back=pygame.mixer.Sound(os.path.join(self.sound_path,"pong_back.mp3"))
-        self.sound_back.play(loops=-1)
-        self.sound_back.set_volume(0.2)
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
