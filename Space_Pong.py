@@ -8,7 +8,8 @@ class Space_pong_game(interface):
         self.load_config()
         pygame.init()
         pygame.display.set_caption("Space Pong")
-        self.load_model(model)
+        self.model=model
+        self.load_AI()
         self.define_colors()
         self.load_fonts()
         self.load_sounds()
@@ -17,10 +18,6 @@ class Space_pong_game(interface):
         self.load_images()
         self.objects()
         self.new_events()
-    def load_model(self,model):
-        self.model=model
-        self.model_path=os.path.join(os.path.dirname(__file__), "IA/best_model.pth")
-        self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
     def load_varials(self):
         self.running=False
         self.game_over=False

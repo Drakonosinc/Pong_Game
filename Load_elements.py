@@ -30,3 +30,6 @@ class load_elements():
         config_path = os.path.join(os.path.dirname(__file__), "Config")
         config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys}
         with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
+    def load_AI(self):
+        self.model_path=os.path.join(os.path.dirname(__file__), "AI/best_model.pth")
+        self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
