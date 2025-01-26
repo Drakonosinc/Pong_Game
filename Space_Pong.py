@@ -192,13 +192,12 @@ class Space_pong_game(interface):
         self.IA_actions(action)
     def run_with_model(self):
         self.running=True
-        score,self.reward=0,0
+        self.reward=0
         while self.running and self.game_over==False:
             self.handle_keys(),self.draw()
             if self.main==-1:
                 if self.mode_game[0] or self.mode_game[2]:self.type_game()
                 self.move_ball(),self.restart()
-                score =self.reward
             pygame.display.flip()
             self.clock.tick(self.FPS)
-        return score
+        return self.reward
