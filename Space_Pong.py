@@ -1,5 +1,3 @@
-from pygame.locals import *
-from Genetic_Algorithm import *
 from Interface import *
 import numpy as np
 class Space_pong_game(interface):

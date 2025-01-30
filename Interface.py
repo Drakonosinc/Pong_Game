@@ -1,7 +1,5 @@
-import pygame,os
-from pygame.locals import *
 from Load_elements import *
-from Genetic_Algorithm import *
+from Button import *
 class interface(load_elements):
     def menus(self):
         self.Pause()
