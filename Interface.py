@@ -12,7 +12,7 @@ class interface(load_elements):
     def draw_buttons(self):
         self.buttons_main_menu()
         self.buttons_game_over()
-        # self.buttons_mode_game()
+        self.buttons_mode_game()
         # self.buttons_pausa()
         # self.buttons_menu_options()
         # self.buttons_visual()
@@ -62,6 +62,7 @@ class interface(load_elements):
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
+    def buttons_mode_game(self):pass
     def Pause(self):
         if self.main==3:
             self.filt(180)
