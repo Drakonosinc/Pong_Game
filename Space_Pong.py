@@ -27,7 +27,7 @@ class Space_pong_game(interface):
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.mode_game=[True,False,False]
+        self.mode_game={"Training AI":False,"Player":True,"AI":False}
         self.max_score=5
         self.touch_ball=[True,True]
         self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
@@ -73,10 +73,10 @@ class Space_pong_game(interface):
             if self.main==-1 and event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
-        if self.main==-1 and (self.mode_game[1] or self.mode_game[2]):
+        if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
             if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.top > 0:self.object1.y -= 5
             if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
-        if self.main==-1 and self.mode_game[1]:
+        if self.main==-1 and self.mode_game["Player"]:
             if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
             if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
@@ -89,8 +89,8 @@ class Space_pong_game(interface):
         self.screen.blit(self.rotated_ball, (self.object3.x,self.object3.y))
     def draw(self):
         self.screen.blit(self.image, (0, 0))
-        if self.mode_game[0]:self.draw_generation()
-        if self.mode_game[0] or self.mode_game[2]:self.draw_activations(),self.draw_model_data()
+        if self.mode_game["Training AI"]:self.draw_generation()
+        if self.mode_game["Training AI"] or self.mode_game["AI"]:self.draw_activations(),self.draw_model_data()
         self.images_elements()
         self.scores()
         self.name_players()
@@ -127,8 +127,8 @@ class Space_pong_game(interface):
         if action[0]>0 and self.object2.top > 0:self.object2.y -= 5
         if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
-        if self.mode_game[0] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
-        if (self.mode_game[1] or self.mode_game[2]) and (self.score1==self.max_score or self.score2==self.max_score):
+        if self.mode_game["Training AI"] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
+        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):
             self.reset()
             self.main=1
     def player1_code(self):
@@ -136,7 +136,7 @@ class Space_pong_game(interface):
         if self.object1.y>=310:self.object1.y=310
         if self.object1.y<=0:self.object1.y=0
     def draw_activations(self):
-        if self.mode_game[2]:self.model=self.model_training
+        if self.mode_game["AI"]:self.model=self.model_training
         if self.model.activations is not None:
             activations = self.model.activations
             num_activations = activations.shape[1]
@@ -154,7 +154,7 @@ class Space_pong_game(interface):
     def draw_generation(self):
         self.screen.blit(self.font2.render(f"Generation: {self.generation}", True, self.YELLOW), (10, 10))
     def draw_model_data(self):
-        if self.mode_game[2]:self.model=self.model_training
+        if self.mode_game["AI"]:self.model=self.model_training
         if self.model is not None:
             weights_text = self.font.render(f"Model Weights: {self.model.fc1.weight.data.numpy().flatten()[:5]}", True, self.YELLOW)
             self.screen.blit(weights_text, (10, 50))
@@ -175,8 +175,8 @@ class Space_pong_game(interface):
         self.speed_down=speed_down
         self.running=running
     def type_game(self):
-        if self.mode_game[0]:self.player1_code()
-        self.action_ai(self.model if self.mode_game[0] else self.model_training)
+        if self.mode_game["Training AI"]:self.player1_code()
+        self.action_ai(self.model if self.mode_game["Training AI"] else self.model_training)
     def action_ai(self,model):
         state=self.get_state()
         action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
@@ -187,7 +187,7 @@ class Space_pong_game(interface):
         while self.running and self.game_over==False:
             self.handle_keys(),self.draw()
             if self.main==-1:
-                if self.mode_game[0] or self.mode_game[2]:self.type_game()
+                if self.mode_game["Training AI"] or self.mode_game["AI"]:self.type_game()
                 self.move_ball(),self.restart()
             pygame.display.flip()
             self.clock.tick(self.FPS)
