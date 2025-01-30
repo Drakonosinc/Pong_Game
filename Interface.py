@@ -32,8 +32,10 @@ class interface(load_elements):
             self.filt(80)
             pygame.draw.rect(self.screen,"black",(0,0,700,400),15)
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
-            self.screen.blit(self.font2_5.render("Main Menu Press E",True,"black"),(self.WIDTH/2-166,self.HEIGHT/2-110))
-            self.screen.blit(self.font2_5.render("Reset Press R",True,"black"),(self.WIDTH/2-130,self.HEIGHT/2-80))
+            self.execute_buttons(self.main_button,self.reset_button)
+    def buttons_game_over(self):
+        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
+        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:setattr(self,'main',2)})
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
