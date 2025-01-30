@@ -7,6 +7,7 @@ class Space_pong_game(interface):
         self.load_AI()
         self.load_varials()
         self.objects()
+        self.draw_buttons()
     def load_varials(self):
         self.running=False
         self.game_over=False
@@ -41,7 +42,6 @@ class Space_pong_game(interface):
     def handle_keys(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:self.event_quit()
-            self.news_events(event)
             self.event_keydown(event)
             if self.main==6:self.event_keys(event)
         self.pressed_keys=pygame.key.get_pressed()

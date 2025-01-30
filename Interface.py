@@ -12,10 +12,12 @@ class interface(load_elements):
     def draw_buttons(self):
         self.buttons_main_menu()
         self.buttons_game_over()
-        self.buttons_mode_game()
-        self.buttons_pausa()
-        self.buttons_menu_options()
-        self.buttons_visual()
+        # self.buttons_mode_game()
+        # self.buttons_pausa()
+        # self.buttons_menu_options()
+        # self.buttons_visual()
+    def execute_buttons(self,*args):
+        for button in args:button.draw()
     def main_menu(self):
         if self.main==0:
             self.screen.fill(self.BLACK)
@@ -23,16 +25,8 @@ class interface(load_elements):
             self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
         self.play_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Start","color": self.WHITE,"position": (self.WIDTH//2-200,self.HEIGHT//2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',2)})
-        self.quit_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Exit","color": self.WHITE,"position": (self.WIDTH//2-200,self.HEIGHT//2-50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_exit,"command1": self.event_quit})
-        self.options_button = Button({"screen": self.screen,
-                                    "font": self.font5,
-                                    "text": "Options",
-                                    "color": self.WHITE,
-                                    "position": (self.WIDTH-110,self.HEIGHT-40),
-                                    "color2": self.GOLDEN,
-                                    "sound_hover": self.sound_buttonletters,
-                                    "sound_touch": self.sound_touchletters,
-                                    "command1":lambda:setattr(self,'main',4)})
+        self.quit_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Exit","color": self.WHITE,"position": (self.WIDTH//2-200,self.HEIGHT//2-50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_exitbutton,"command1": self.event_quit})
+        self.options_button = Button({"screen": self.screen,"font": self.font5,"text": "Options","color": self.WHITE,"position": (self.WIDTH-110,self.HEIGHT-40),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
     def Game_over(self):
         if self.main==1:
             self.filt(80)
