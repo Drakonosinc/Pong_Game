@@ -48,9 +48,8 @@ class interface(load_elements):
             self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
             self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
-            self.button(self.screen,None,self.font5,"Training AI",(self.SKYBLUE if self.mode_game[0] else self.WHITE),(self.WIDTH/2-70,self.HEIGHT/2-136),None,None,True,lambda:(self.mode_game.__setitem__(0, True), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, False)),False,4)
-            self.button(self.screen,None,self.font5,"One Vs One",(self.SKYBLUE if self.mode_game[1] else self.WHITE),(self.WIDTH/2-64,self.HEIGHT/2-110),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, True), self.mode_game.__setitem__(2, False)),False,5)
-            if self.model_training!=None:self.button(self.screen,None,self.font5,"One Vs Ai",(self.SKYBLUE if self.mode_game[2] else self.WHITE),(self.WIDTH/2-58,self.HEIGHT/2-84),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, True)),False,6)
+            self.button(self.screen,None,self.font5,"One Vs One",(self.SKYBLUE if self.mode_game["Player"] else self.WHITE),(self.WIDTH/2-64,self.HEIGHT/2-110),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, True), self.mode_game.__setitem__(2, False)),False,5)
+            if self.model_training!=None:self.button(self.screen,None,self.font5,"One Vs Ai",(self.SKYBLUE if self.mode_game["AI"] else self.WHITE),(self.WIDTH/2-58,self.HEIGHT/2-84),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, True)),False,6)
             else:
                 if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
@@ -60,10 +59,24 @@ class interface(load_elements):
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button)
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button)
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
         self.continue_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',-1)})
+        self.training_ai_button = Button({"screen": self.screen,
+                                        "font": self.font5,
+                                        "text": "Training AI",
+                                        "color": self.WHITE,
+                                        "position": (self.WIDTH/2-70,self.HEIGHT/2-136),
+                                        "color2": self.GOLDEN,
+                                        "sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters,
+                                        "command1":lambda:self.type_game(True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Training AI":self.Training_AI_button,"Player":self.player_button,"AI":self.ai_button})})
+    def type_game(self,mode_one=False,mode_two=False,mode_three=False):
+        self.mode_game["Training AI"]=mode_one
+        self.mode_game["Player"]=mode_two
+        if self.model_training!=None:self.mode_game["AI"]=mode_three
+        else:self.load_AI()
     def Pause(self):
         if self.main==3:
             self.filt(180)
@@ -138,3 +151,5 @@ class interface(load_elements):
             self.config_keys[self.key]=event.key
             self.config_keys[self.key_name]=event.unicode.upper()
             self.utils_keys[self.key]= not self.utils_keys[self.key]
+    def check_colors(self,dic,color1,color2,**kwargs):
+        for key,button in kwargs.items():setattr(button,"color",(color1 if dic[key] else color2))
