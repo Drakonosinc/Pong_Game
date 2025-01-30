@@ -28,8 +28,6 @@ class Space_pong_game(interface):
         self.speed=0
         self.speed_up=True
         self.speed_down=True
-        self.notsound_playing=[True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,True,
-                            True,True,True,True,True,True,True,True,True,True,True,True,True,True,True]
         self.mode_game=[True,False,False]
         self.max_score=5
         self.touch_ball=[True,True]
@@ -55,11 +53,6 @@ class Space_pong_game(interface):
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
         self.running,self.game_over=False,True
-    def news_events(self,event):
-        if event.type == self.EVENT_NEW:
-            self.notsound_playing[9],self.notsound_playing[10],self.notsound_playing[13],self.notsound_playing[14],self.notsound_playing[17],self.notsound_playing[18],self.notsound_playing[19]=True,True,True,True,True,True,True
-            self.notsound_playing[20],self.notsound_playing[21],self.notsound_playing[22],self.notsound_playing[23],self.notsound_playing[24],self.notsound_playing[25],self.notsound_playing[27]=True,True,True,True,True,True,True
-            self.notsound_playing[29]=True
     def change_speed(self,fps,speed,number,objet,speed_down=True,speed_up=True):
         self.FPS+=fps
         self.speed+=speed
