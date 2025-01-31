@@ -83,12 +83,20 @@ class interface(load_elements):
     def options_menu(self):
         if self.main==4:
             self.screen.fill(self.BLACK)
-            self.execute_buttons(self.back_button)
+            self.execute_buttons(self.back_button,self.visual_buttons)
     def buttons_menu_options(self):
         self.back_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
-        
+        self.visual_buttons=Button({"screen": self.screen,
+                                    "font": self.font2_5,
+                                    "text": "Visuals",
+                                    "color": self.GRAY,
+                                    "position": (self.WIDTH/2-55,self.HEIGHT/2-85),
+                                    "color2": self.SKYBLUE,
+                                    "sound_hover": self.sound_buttonletters,
+                                    "sound_touch": self.sound_touchletters,
+                                    "command1":lambda:setattr(self,'main',5),"command2":self.reset})
     def anim_options(self):
-        self.button(self.screen,5,self.font2_5,"Visuals",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-150),0,self.GOLDEN,True)
+        self.button(self.screen,5,self.font2_5,"",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-150),0,self.GOLDEN,True)
         self.button(self.screen,None,self.font2_5,self.sound_type["sound"],self.sound_type["color"],(self.WIDTH/2-80,self.HEIGHT/2-115),1,self.GOLDEN,command=self.sound_on_off,number2=14)
         self.button(self.screen,6,self.font2_5,"Keys",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-80),3,self.GOLDEN,True)
         self.button(self.screen,None,self.font2_5,"Language",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-45),4,self.GOLDEN,True,number2=9)
