@@ -7,7 +7,7 @@ class Button:
         self.color=config.get("color",(255,255,255))
         self.color2=config.get("color2",(0,0,0))
         self.position=config.get("position",(0,0))
-        self.position2=config.get("position2",None)
+        self.position2=config.get("position2",self.position)
         self.pressed=config.get("pressed",True)
         self.detect_mouse=config.get("detect_mouse",True)
         self.type_button=config.get("type_button",0)
@@ -43,3 +43,5 @@ class Button:
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
+    def change_color(self,config):
+        self.color=config.get("color",(255,255,255))
