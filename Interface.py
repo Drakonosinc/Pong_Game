@@ -13,7 +13,7 @@ class interface(load_elements):
         self.buttons_main_menu()
         self.buttons_game_over()
         self.buttons_mode_game()
-        # self.buttons_pausa()
+        self.buttons_pausa()
         # self.buttons_menu_options()
         # self.buttons_visual()
     def execute_buttons(self,*args):
@@ -71,10 +71,15 @@ class interface(load_elements):
         if self.main==3:
             self.filt(180)
             self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
-            close=self.button(self.screen,None,self.font2_5,"Exit",self.GRAY,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
+            self.button(self.screen,None,self.font2_5,"Exit",self.GRAY,(self.WIDTH/2-40,self.HEIGHT/2-15),3,self.SKYBLUE,False)
             self.button(self.screen,-1,self.font2_5,"Reset",self.GRAY,(self.WIDTH/2-55,self.HEIGHT/2-85),0,self.SKYBLUE,command=self.reset)
             self.button(self.screen,0,self.font2_5,"Menu",self.GRAY,(self.WIDTH/2-45,self.HEIGHT/2-50),1,self.SKYBLUE,command=self.reset)
             if self.pressed_mouse[0] and close.collidepoint(self.mouse_pos):self.event_quit()
+            self.execute_buttons(self.exit_button)
+    def buttons_pausa(self):
+        self.exit_button=Button({"screen": self.screen,
+                                "font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
+        
     def filt(self,number):
         background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
         background.fill((0,0,0,number))
