@@ -48,9 +48,6 @@ class interface(load_elements):
             self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
             self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
-            if self.model_training!=None:self.button(self.screen,None,self.font5,"One Vs Ai",(self.SKYBLUE if self.mode_game["AI"] else self.WHITE),(self.WIDTH/2-58,self.HEIGHT/2-84),None,None,True,lambda:(self.mode_game.__setitem__(0, False), self.mode_game.__setitem__(1, False), self.mode_game.__setitem__(2, True)),False,6)
-            else:
-                if os.path.exists(self.model_path):self.model_training = load_model(self.model_path, 6, 2)
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
             self.button_arrow(None,((320, 185), (320, 205), (300, 195)),((320, 185), (320, 205), (300, 195)),self.BLACK,7,10,(x:=True if self.max_score>1 else False),x,command=lambda: setattr(self, 'max_score', self.max_score - 1))
@@ -63,11 +60,12 @@ class interface(load_elements):
         self.back_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
         self.continue_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',-1)})
         self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","color": self.WHITE,"position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_game(True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
-        self.player_button = Button({"screen": self.screen,
+        self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","color": self.WHITE,"position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_game(False,True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
+        self.ai_button = Button({"screen": self.screen,
                                         "font": self.font5,
-                                        "text": "One Vs One",
+                                        "text": "One Vs Ai",
                                         "color": self.WHITE,
-                                        "position": (self.WIDTH/2-64,self.HEIGHT/2-110),
+                                        "position": (self.WIDTH/2-58,self.HEIGHT/2-84),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters,
