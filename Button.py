@@ -18,7 +18,7 @@ class Button:
         self.new_events(time=config.get("time",500))
     def draw(self):
         if self.type_button==0:self.button=self.screen.blit(self.font.render(self.text,True,self.color),self.position)
-        if self.type_button==1:pygame.draw.polygon(self.screen, self.color, self.position)
+        if self.type_button==1:self.button=pygame.draw.polygon(self.screen, self.color, self.position)
         if self.detect_mouse:self.mouse_collision(mouse_pos:=pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pressed_mouse=pygame.mouse.get_pressed(),mouse_pos=mouse_pos)
         else:return self.button

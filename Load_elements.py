@@ -10,7 +10,6 @@ class load_elements():
         self.load_fonts()
         self.load_sounds()
         self.config_screen()
-        self.new_events()
     def load_config(self):
         try:
             config_path = os.path.join(os.path.dirname(__file__), "Config")
