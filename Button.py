@@ -17,8 +17,7 @@ class Button:
         self.button_states=config.get("button_states",{"sound_hover":True,"sound_touch":True})
         self.new_events(time=config.get("time",500))
     def draw(self):
-        if self.type_button==0:self.button=self.screen.blit(self.font.render(self.text,True,self.color),self.position)
-        if self.type_button==1:self.button=pygame.draw.polygon(self.screen, self.color, self.position)
+        self.button=self.screen.blit(self.font.render(self.text,True,self.color),self.position) if self.type_button==0 else pygame.draw.polygon(self.screen, self.color, self.position)
         if self.detect_mouse:self.mouse_collision(mouse_pos:=pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pressed_mouse=pygame.mouse.get_pressed(),mouse_pos=mouse_pos)
         else:return self.button
@@ -45,5 +44,6 @@ class Button:
         for command in self.commands:
             if callable(command):command()
     def change_item(self,config):
-        self.type_button=config.get("type_button",self.type_button)
         self.color=config.get("color",self.color)
+        self.pressed=config.get("pressed",self.pressed)
+        self.detect_mouse=config.get("detect_mouse",self.detect_mouse)

@@ -60,15 +60,8 @@ class interface(load_elements):
         self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","color": self.WHITE,"position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
         self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","color": self.WHITE,"position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
         self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","color": self.WHITE,"position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
-        self.decrease_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score - 1)})
-        self.increase_button = Button({"screen": self.screen,
-                                "color": self.WHITE,
-                                "position": ((380, 185), (380, 205), (400, 195)),
-                                "color2": self.GOLDEN,
-                                "type_button": 1,
-                                "sound_hover": self.sound_buttonletters,
-                                "sound_touch": self.sound_touchletters,
-                                "command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
+        self.decrease_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score - 1),"command2":lambda:self.decrease_button.change_item({"pressed":(x:=False if self.max_score<=1 else True),"detect_mouse":x})})
+        self.increase_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score + 1),"command2":lambda:self.decrease_button.change_item({"pressed":True,"detect_mouse":True})})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
