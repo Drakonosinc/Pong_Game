@@ -104,7 +104,7 @@ class interface(load_elements):
             self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
             self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
             self.images_elements()
-            self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button)
+            self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
     def buttons_visual(self):
         self.back_visual_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
         self.decrease_width_button=Button({"screen": self.screen,"font": self.font2_5,"text": "<","color": self.WHITE,"position": (self.WIDTH/2-200,self.HEIGHT/2-200),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"WIDTH": (self.config_visuals["WIDTH"] - 10)}),"command2":self.config_screen})
@@ -117,26 +117,10 @@ class interface(load_elements):
         self.increase_back_button=Button({"screen": self.screen,"font": self.font2_5,"text": ">","color": self.WHITE,"position": (self.WIDTH/2+65,self.HEIGHT/2+160),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"value_background": (self.config_visuals["value_background"] + 1) % len(self.config_visuals["image_background"])}),"command2":self.config_screen})
         self.decrease_player1_button=Button({"screen": self.screen,"font": (font:=pygame.font.SysFont("times new roman", 30)),"text": "Λ","color": self.WHITE,"position": (self.WIDTH/2-330,self.HEIGHT/2-120),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] + 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
         self.increase_player1_button=Button({"screen": self.screen,"font": (font2:=pygame.font.SysFont("times new roman", 38)),"text": "v","color": self.WHITE,"position": (self.WIDTH/2-330,self.HEIGHT/2+50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] - 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
-        self.decrease_player1_button=Button({"screen": self.screen,"font": font,"text": "Λ",
-                                             "color": self.WHITE,
-                                             "position": (self.WIDTH/2+310,self.HEIGHT/2-120),
-                                             "color2": self.GOLDEN,
-                                             "sound_hover": self.sound_buttonletters,
-                                             "sound_touch": self.sound_touchletters,
-                                             "command1":lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] + 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
-        self.increase_player1_button=Button({"screen": self.screen,"font": font2,"text": "v",
-                                             "color": self.WHITE,
-                                             "position": (self.WIDTH/2+310,self.HEIGHT/2+50),
-                                             "color2": self.GOLDEN,
-                                             "sound_hover": self.sound_buttonletters,
-                                             "sound_touch": self.sound_touchletters,
-                                             "command1":lambda: self.config_visuals.update({"value_spacecraft1": (self.config_visuals["value_spacecraft1"] - 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
-
-    def anim_visuals(self):
-        self.button(command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] + 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
-        self.button(command=lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] - 1) % len(self.config_visuals["spacecrafts"])}),command2=self.load_images)
-        self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
-        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=lambda:self.config(visuals=True),number2=29,command2=self.load_images)
+        self.decrease_player2_button=Button({"screen": self.screen,"font": font,"text": "Λ","color": self.WHITE,"position": (self.WIDTH/2+310,self.HEIGHT/2-120),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] + 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
+        self.increase_player2_button=Button({"screen": self.screen,"font": font2,"text": "v","color": self.WHITE,"position": (self.WIDTH/2+310,self.HEIGHT/2+50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda: self.config_visuals.update({"value_spacecraft2": (self.config_visuals["value_spacecraft2"] - 1) % len(self.config_visuals["spacecrafts"])}),"command2":self.config_screen})
+        self.save_visual_button=Button({"screen": self.screen,"font": self.font5,"text": "Save Config","color": self.WHITE,"position": (self.WIDTH/2+200,self.HEIGHT/2+140),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":self.save_config})
+        self.default_visual_button=Button({"screen": self.screen,"font": self.font5,"text": "Default config","color": self.WHITE,"position": (self.WIDTH/2+160,self.HEIGHT/2+160),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.config(visuals=True),"command2":self.load_images})
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
