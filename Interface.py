@@ -15,7 +15,7 @@ class interface(load_elements):
         self.buttons_mode_game()
         self.buttons_pausa()
         self.buttons_menu_options()
-        # self.buttons_visual()
+        self.buttons_visual()
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def main_menu(self):
@@ -89,14 +89,7 @@ class interface(load_elements):
         self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Visuals","color": self.WHITE,"position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',5)})
         self.sound_button=Button({"screen": self.screen,"font": self.font2_5,"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]}),"command2":self.sound_on_off})
         self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Keys","color": self.WHITE,"position": (self.WIDTH/2-80,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',6)})
-        self.visual_button=Button({"screen": self.screen,
-                                "font": self.font2_5,
-                                "text": "Language",
-                                "color": self.WHITE,
-                                "position": (self.WIDTH/2-80,self.HEIGHT/2-45),
-                                "color2": self.GOLDEN,
-                                "sound_hover": self.sound_buttonletters,
-                                "sound_touch": self.sound_touchletters,})
+        self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Language","color": self.WHITE,"position": (self.WIDTH/2-80,self.HEIGHT/2-45),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,})
     def sound_on_off(self):
         self.sound_type["value"]=not self.sound_type["value"]
         def sound(color,sound_on_off,sound):
@@ -109,7 +102,10 @@ class interface(load_elements):
             self.screen.blit(self.image, (0, 0))
             self.images_elements()
             self.anim_visuals()
-            self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
+            self.execute_buttons(self.back_visual_button)
+    def buttons_visual(self):
+        self.back_visual_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
+
     def anim_visuals(self):
         self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
