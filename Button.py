@@ -45,5 +45,6 @@ class Button:
             if callable(command):command()
     def change_item(self,config):
         self.color=config.get("color",self.color)
+        self.text=config.get("text",self.text)
         self.pressed=config.get("pressed",self.pressed)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)

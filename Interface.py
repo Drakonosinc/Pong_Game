@@ -97,7 +97,6 @@ class interface(load_elements):
                                     "sound_touch": self.sound_touchletters,
                                     "command1":self.sound_on_off})
     def anim_options(self):
-        self.button(self.sound_type["sound"],self.sound_type["color"])
         self.button(self.screen,6,self.font2_5,"Keys",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-80),3,self.GOLDEN,True)
         self.button(self.screen,None,self.font2_5,"Language",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-45),4,self.GOLDEN,True,number2=9)
     def sound_on_off(self):
