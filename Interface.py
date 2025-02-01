@@ -100,16 +100,15 @@ class interface(load_elements):
     def visuals_menu(self):
         if self.main==5:
             self.screen.blit(self.image, (0, 0))
+            self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
+            self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
+            self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
             self.images_elements()
-            self.anim_visuals()
             self.execute_buttons(self.back_visual_button)
     def buttons_visual(self):
         self.back_visual_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
-
+        
     def anim_visuals(self):
-        self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
-        self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
-        self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2-200,self.HEIGHT/2-200),1,self.SKYBLUE,command=lambda: self.config_visuals.update({"WIDTH": (self.config_visuals["WIDTH"] - 10)}),number2=9,command2=self.config_screen)
         self.button(self.screen,None,self.font2_5,">",self.GOLDEN,(self.WIDTH/2-40,self.HEIGHT/2-200),3,self.SKYBLUE,command=lambda: self.config_visuals.update({"WIDTH": (self.config_visuals["WIDTH"] + 10)}),number2=10,command2=self.config_screen)
         self.button(self.screen,None,self.font2_5,"<",self.GOLDEN,(self.WIDTH/2+20,self.HEIGHT/2-200),4,self.SKYBLUE,command=lambda: self.config_visuals.update({"HEIGHT": (self.config_visuals["HEIGHT"] - 10)}),number2=14,command2=self.config_screen)
