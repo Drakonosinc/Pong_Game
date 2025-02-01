@@ -57,9 +57,9 @@ class interface(load_elements):
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
         self.continue_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',-1)})
-        self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","color": self.WHITE,"position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
-        self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","color": self.WHITE,"position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
-        self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","color": self.WHITE,"position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
+        self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","color": self.WHITE,"position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
+        self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","color": self.WHITE,"position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
+        self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","color": self.WHITE,"position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_colors(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score - 1),"command2":lambda:self.decrease_button.change_item({"pressed":(x:=False if self.max_score<=1 else True),"detect_mouse":x})})
         self.increase_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score + 1),"command2":lambda:self.decrease_button.change_item({"pressed":True,"detect_mouse":True})})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
@@ -87,17 +87,17 @@ class interface(load_elements):
     def buttons_menu_options(self):
         self.back_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
         self.visual_buttons=Button({"screen": self.screen,"font": self.font2_5,"text": "Visuals","color": self.WHITE,"position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',5)})
-        self.visual_buttons=Button({"screen": self.screen,
+        self.sound_buttons=Button({"screen": self.screen,
                                     "font": self.font2_5,
-                                    "text": "Visuals",
-                                    "color": self.WHITE,
-                                    "position": (self.WIDTH/2-80,self.HEIGHT/2-150),
+                                    "text": self.sound_type["sound"],
+                                    "color": self.sound_type["color"],
+                                    "position": (self.WIDTH/2-80,self.HEIGHT/2-115),
                                     "color2": self.GOLDEN,
                                     "sound_hover": self.sound_buttonletters,
                                     "sound_touch": self.sound_touchletters,
-                                    "command1":lambda:setattr(self,'main',5)})
+                                    "command1":self.sound_on_off})
     def anim_options(self):
-        self.button(self.screen,None,self.font2_5,self.sound_type["sound"],self.sound_type["color"],(self.WIDTH/2-80,self.HEIGHT/2-115),1,self.GOLDEN,command=self.sound_on_off,number2=14)
+        self.button(self.sound_type["sound"],self.sound_type["color"])
         self.button(self.screen,6,self.font2_5,"Keys",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-80),3,self.GOLDEN,True)
         self.button(self.screen,None,self.font2_5,"Language",self.WHITE,(self.WIDTH/2-80,self.HEIGHT/2-45),4,self.GOLDEN,True,number2=9)
     def sound_on_off(self):
@@ -152,5 +152,5 @@ class interface(load_elements):
             self.config_keys[self.key]=event.key
             self.config_keys[self.key_name]=event.unicode.upper()
             self.utils_keys[self.key]= not self.utils_keys[self.key]
-    def check_colors(self,dic,color1,color2,**kwargs):
-        for key,button in kwargs.items():setattr(button,"color",(color1 if dic[key] else color2))
+    def check_colors(self,dic,color1,color2,item,**kwargs):
+        for key,button in kwargs.items():setattr(button,item,(color1 if dic[key] else color2))
