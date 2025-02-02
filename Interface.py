@@ -16,6 +16,7 @@ class interface(load_elements):
         self.buttons_pausa()
         self.buttons_menu_options()
         self.buttons_visual()
+        self.buttons_keys()
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def main_menu(self):
@@ -124,8 +125,10 @@ class interface(load_elements):
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
-            self.anim_keys()
-            self.button_arrow(4,((50, 350), (50, 380), (25, 365)),((50, 340), (50, 390), (10, 365)),self.WHITE,2,13)
+            self.execute_buttons(self.back_keys_button)
+    def buttons_keys(self):
+        self.back_keys_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
+
     def anim_keys(self):
         self.button(self.screen,None,font:=pygame.font.SysFont("times new roman", 80),self.config_keys["Name_key1"],self.SKYBLUE if self.utils_keys["UP_W"] else self.WHITE,(self.WIDTH/2-240,self.HEIGHT/2-170),0,self.GOLDEN,command=lambda:self.change_keys("UP_W","Name_key1"),number2=9)
         self.button(self.screen,None,font,self.config_keys["Name_key2"],self.SKYBLUE if self.utils_keys["DOWN_S"] else self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,command=lambda:self.change_keys("DOWN_S","Name_key2"),number2=10)
