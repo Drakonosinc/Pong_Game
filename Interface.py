@@ -128,7 +128,7 @@ class interface(load_elements):
             self.execute_buttons(self.back_keys_button)
     def buttons_keys(self):
         self.back_keys_button = Button({"screen": self.screen,"color": self.WHITE,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
-        self.self.up_w_button=Button({"screen": self.screen,
+        self.up_w_button=Button({"screen": self.screen,
                                         "font": (font:=pygame.font.SysFont("times new roman", 80)),
                                         "text": self.config_keys["Name_key1"],
                                         "color": self.WHITE,
@@ -136,7 +136,7 @@ class interface(load_elements):
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters,
-                                        "command1":lambda:self.change_keys("UP_W","Name_key1")})
+                                        "command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
 
     def anim_keys(self):
         self.button(self.screen,None,font,self.config_keys["Name_key2"],self.SKYBLUE if self.utils_keys["DOWN_S"] else self.WHITE,(self.WIDTH/2-217,self.HEIGHT/2-20),3,self.GOLDEN,command=lambda:self.change_keys("DOWN_S","Name_key2"),number2=10)
@@ -144,16 +144,17 @@ class interface(load_elements):
         self.button(self.screen,None,font,self.config_keys["Name_key4"] if self.config_keys["Name_key4"]!="" else "↓",self.SKYBLUE if self.utils_keys["DOWN_ARROW"] else self.WHITE,(self.WIDTH/2+200,self.HEIGHT/2-20),5,self.GOLDEN,command=lambda:self.change_keys("DOWN_ARROW","Name_key4"),number2=17)
         self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
         self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=lambda:self.config(keys=True),number2=29)
-    def change_keys(self,key,key_name):
+    def change_keys(self,key,key_name,button):
         self.key=key
         self.key_name=key_name
+        self.button_key=button
         for k in self.utils_keys.keys():self.utils_keys[k]=False if k!=self.key else not self.utils_keys[self.key]
         self.check_item(self.utils_keys,self.SKYBLUE,self.WHITE,"color",**{"UP_W":self.up_w_button,"DOWN_S":self.down_s_button,"UP_ARROW":self.up_arrow_button,"DOWN_ARROW":self.down_arrow_button})
     def event_keys(self,event):
         if self.key!=None and (self.utils_keys[self.key] and event.type==KEYDOWN):
             self.config_keys[self.key]=event.key
             self.config_keys[self.key_name]=event.unicode.upper()
+            self.check_item(self.config_keys,self.config_keys[self.key_name],self.WHITE,"text",**{self.key:self.button_key})
             self.utils_keys[self.key]= not self.utils_keys[self.key]
-            self.check_item(self.utils_keys,self.SKYBLUE,self.WHITE,"text",**{"UP_W":self.up_w_button,"DOWN_S":self.down_s_button,"UP_ARROW":self.up_arrow_button,"DOWN_ARROW":self.down_arrow_button})
     def check_item(self,dic,is_true,is_false,item,**kwargs):
         for key,button in kwargs.items():setattr(button,item,(is_true if dic[key] else is_false))
