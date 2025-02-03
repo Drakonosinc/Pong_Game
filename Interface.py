@@ -152,3 +152,17 @@ class interface(load_elements):
             self.change_keys(self.key,self.key_name)
     def check_item(self,dic,is_true,is_false,item,**kwargs):
         for key,button in kwargs.items():setattr(button,item,(is_true if dic[key] else is_false))
+    def fade_transition(self,fade_in,color=(0,0,0),limit=255):
+        overlay = pygame.Surface((self.WIDTH, self.HEIGHT))
+        overlay.fill(color)
+        alpha=0
+        while not fade_in and alpha <= limit:
+            overlay.set_alpha(alpha)
+            self.screen.blit(overlay, (0, 0))
+            pygame.display.flip()
+            self.clock.tick(20)
+            alpha += -15 if fade_in else 15
+    def change_mains(self,main=0,color=(0,0,0),limit=255,fade=True):
+        if fade:self.fade_transition(False,color,limit)
+        self.clear_buttons()
+        self.main=main
