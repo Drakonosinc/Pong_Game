@@ -25,9 +25,9 @@ class interface(load_elements):
             self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
             self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
-        self.play_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',2)})
+        self.play_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(2)})
         self.quit_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_exitbutton,"command1": self.event_quit})
-        self.options_button = Button({"screen": self.screen,"font": self.font5,"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
+        self.options_button = Button({"screen": self.screen,"font": self.font5,"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(4)})
     def Game_over(self):
         if self.main==1:
             self.filt(80)
@@ -164,5 +164,4 @@ class interface(load_elements):
             alpha += -15 if fade_in else 15
     def change_mains(self,main=0,color=(0,0,0),limit=255,fade=True):
         if fade:self.fade_transition(False,color,limit)
-        self.clear_buttons()
         self.main=main
