@@ -129,16 +129,15 @@ class interface(load_elements):
     def menu_keys(self):
         if self.main==6:
             self.screen.fill(self.BLACK)
-            self.execute_buttons(self.back_keys_button,self.up_w_button,self.down_s_button,self.up_arrow_button,self.down_arrow_button)
+            self.execute_buttons(self.back_keys_button,self.up_w_button,self.down_s_button,self.up_arrow_button,self.down_arrow_button,self.save_keys_button,self.default_keys_button)
     def buttons_keys(self):
         self.back_keys_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
         self.up_w_button=Button({"screen": self.screen,"font": (font:=pygame.font.SysFont("times new roman", 80)),"text": self.config_keys["Name_key1"],"position": (self.WIDTH/2-240,self.HEIGHT/2-170),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
         self.down_s_button=Button({"screen": self.screen,"font": font,"text": self.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
         self.up_arrow_button=Button({"screen": self.screen,"font": font,"text": self.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
         self.down_arrow_button=Button({"screen": self.screen,"font": font,"text": self.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
-    def anim_keys(self):
-        self.button(self.screen,None,self.font5,"Save Config",self.SKYBLUE,(self.WIDTH/2+200,self.HEIGHT/2+140),28,self.GOLDEN,command=self.save_config,number2=27)
-        self.button(self.screen,None,self.font5,"default config",self.SKYBLUE,(self.WIDTH/2+160,self.HEIGHT/2+160),30,self.GOLDEN,command=lambda:self.config(keys=True),number2=29)
+        self.save_keys_button=Button({"screen": self.screen,"font": self.font5,"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":self.save_config})
+        self.default_keys_button=Button({"screen": self.screen,"font": self.font5,"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.config(keys=True),"command2":self.config_screen})
     def change_keys(self,key,key_name,button=None):
         self.key=key
         self.key_name=key_name
