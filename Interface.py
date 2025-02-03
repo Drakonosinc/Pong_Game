@@ -35,8 +35,8 @@ class interface(load_elements):
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
             self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
-        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
-        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:setattr(self,'main',2)})
+        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(0)})
+        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:self.change_mains(-1)})
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
@@ -57,8 +57,8 @@ class interface(load_elements):
             self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
             self.decrease_score_button.reactivate_pressed(),self.increase_score_button.reactivate_pressed()
     def buttons_mode_game(self):
-        self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
-        self.continue_button = Button({"screen": self.screen,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',-1)})
+        self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(0)})
+        self.continue_button = Button({"screen": self.screen,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(-1)})
         self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
         self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
         self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
@@ -76,8 +76,8 @@ class interface(load_elements):
             self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
     def buttons_pausa(self):
         self.exit_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Exit","color": self.GRAY,"position": (self.WIDTH/2-40,self.HEIGHT/2-15),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":self.event_quit})
-        self.reset_pause_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',-1),"command2":self.reset})
-        self.go_main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0),"command2":self.reset})
+        self.reset_pause_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(-1),"command2":self.reset})
+        self.go_main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(0),"command2":self.reset})
     def filt(self,number):
         background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
         background.fill((0,0,0,number))
@@ -87,10 +87,10 @@ class interface(load_elements):
             self.screen.fill(self.BLACK)
             self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def buttons_menu_options(self):
-        self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',0)})
-        self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',5)})
+        self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(0)})
+        self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(5)})
         self.sound_button=Button({"screen": self.screen,"font": self.font2_5,"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]}),"command2":self.sound_on_off})
-        self.keys_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',6)})
+        self.keys_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(6)})
         self.language_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,})
     def sound_on_off(self):
         self.sound_type["value"]=not self.sound_type["value"]
@@ -108,7 +108,7 @@ class interface(load_elements):
             self.images_elements()
             self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
     def buttons_visual(self):
-        self.back_visual_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
+        self.back_visual_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(4)})
         self.decrease_width_button=Button({"screen": self.screen,"font": self.font2_5,"text": "<","position": (self.WIDTH/2-200,self.HEIGHT/2-200),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_items("WIDTH",number=-10)})
         self.increase_width_button=Button({"screen": self.screen,"font": self.font2_5,"text": ">","position": (self.WIDTH/2-40,self.HEIGHT/2-200),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_items("WIDTH",number=10)})
         self.decrease_height_button=Button({"screen": self.screen,"font": self.font2_5,"text": "<","position": (self.WIDTH/2+20,self.HEIGHT/2-200),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_items("HEIGHT",number=-10)})
@@ -131,7 +131,7 @@ class interface(load_elements):
             self.screen.fill(self.BLACK)
             self.execute_buttons(self.back_keys_button,self.up_w_button,self.down_s_button,self.up_arrow_button,self.down_arrow_button,self.save_keys_button,self.default_keys_button)
     def buttons_keys(self):
-        self.back_keys_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self,'main',4)})
+        self.back_keys_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(4)})
         self.up_w_button=Button({"screen": self.screen,"font": (font:=pygame.font.SysFont("times new roman", 80)),"text": self.config_keys["Name_key1"],"position": (self.WIDTH/2-240,self.HEIGHT/2-170),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
         self.down_s_button=Button({"screen": self.screen,"font": font,"text": self.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
         self.up_arrow_button=Button({"screen": self.screen,"font": font,"text": self.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
@@ -162,6 +162,7 @@ class interface(load_elements):
             pygame.display.flip()
             self.clock.tick(20)
             alpha += -15 if fade_in else 15
-    def change_mains(self,main=0,color=(0,0,0),limit=255,fade=True):
+    def change_mains(self,main=0,color=(0,0,0),limit=255,fade=True,recursive=False):
         if fade:self.fade_transition(False,color,limit)
         self.main=main
+        if recursive:self.change_mains(main,fade=fade)
