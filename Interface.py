@@ -155,14 +155,15 @@ class interface(load_elements):
     def fade_transition(self,fade_in,color=(0,0,0),limit=255):
         overlay = pygame.Surface((self.WIDTH, self.HEIGHT))
         overlay.fill(color)
-        alpha=0
-        while not fade_in and alpha <= limit:
+        alpha=0 if not fade_in else 255
+        while (not fade_in and alpha <= limit) or (fade_in and alpha >= limit):
             overlay.set_alpha(alpha)
             self.screen.blit(overlay, (0, 0))
             pygame.display.flip()
             self.clock.tick(20)
             alpha += -15 if fade_in else 15
-    def change_mains(self,main=0,color=(0,0,0),limit=255,fade=True,recursive=False):
-        if fade:self.fade_transition(False,color,limit)
+    def change_mains(self,main=0,color=(0,0,0),limit=255,fade_in=True,fade_out=False,recursive=False):
+        if fade_in:self.fade_transition(False,color,limit)
+        if fade_out:self.fade_transition(True,color,0)
         self.main=main
-        if recursive:self.change_mains(main,fade=fade)
+        if recursive:self.change_mains(main,fade_in=fade_in,fade_out=fade_out)
