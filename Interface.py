@@ -25,9 +25,9 @@ class interface(load_elements):
             self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
             self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
-        self.play_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(2)})
+        self.play_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":2})})
         self.quit_button = Button({"screen": self.screen,"font": self.font5,"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_exitbutton,"command1": self.event_quit})
-        self.options_button = Button({"screen": self.screen,"font": self.font5,"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(4)})
+        self.options_button = Button({"screen": self.screen,"font": self.font5,"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":4})})
     def Game_over(self):
         if self.main==1:
             self.filt(80)
@@ -35,8 +35,8 @@ class interface(load_elements):
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
             self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
-        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains(0)})
-        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:self.change_mains(-1)})
+        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
+        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
@@ -162,8 +162,8 @@ class interface(load_elements):
             pygame.display.flip()
             self.clock.tick(20)
             alpha += -15 if fade_in else 15
-    def change_mains(self,main=0,color=(0,0,0),limit=255,fade_in=True,fade_out=False,recursive=False):
-        if fade_in:self.fade_transition(False,color,limit)
-        if fade_out:self.fade_transition(True,color,0)
-        self.main=main
-        if recursive:self.change_mains(main,fade_in=fade_in,fade_out=fade_out)
+    def change_mains(self,config):
+        if fade_in:=config.get("fade_in",True):self.fade_transition(False,config.get("color",(0,0,0)),255)
+        if fade_out:=config.get("fade_out",False):self.fade_transition(True,config.get("color2",(0,0,0)),0)
+        self.main=config.get("main",None)
+        if config.get("recursive",False):self.change_mains({"main":self.main,"fade_in":fade_in,"fade_out":fade_out})
