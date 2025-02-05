@@ -1,6 +1,6 @@
 import pygame
 class Button:
-    def __init__(self,config):
+    def __init__(self,config:dict):
         self.screen=config["screen"]
         self.font=config.get("font",pygame.font.Font(None,25))
         self.text=config.get("text","")
