@@ -9,29 +9,29 @@ class Space_pong_game(interface):
         self.objects()
         self.draw_buttons()
     def load_varials(self):
-        self.running=False
-        self.game_over=False
+        self.running:bool=False
+        self.game_over:bool=False
         self.clock=pygame.time.Clock()
-        self.FPS=60
-        self.generation=0
-        self.value1=4
-        self.value2=4
-        self.score1=0
-        self.score2=0
-        self.reward=0
-        self.main=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.FPS:int=60
+        self.generation:int=0
+        self.value1:int=4
+        self.value2:int=4
+        self.score1:int=0
+        self.score2:int=0
+        self.reward:int=0
+        self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.color_inputtext1=self.WHITE
         self.color_inputtext2=self.WHITE
-        self.text_player1="player 1"
-        self.text_player2="PC"
-        self.speed=0
-        self.speed_up=True
-        self.speed_down=True
-        self.mode_game={"Training AI":False,"Player":True,"AI":False}
-        self.max_score=5
-        self.touch_ball=[True,True]
-        self.sound_type={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
-        self.utils_keys={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
+        self.text_player1:str="player 1"
+        self.text_player2:str="PC"
+        self.speed:int=0
+        self.speed_up:bool=True
+        self.speed_down:bool=True
+        self.mode_game:dict[str,bool]={"Training AI":False,"Player":True,"AI":False}
+        self.max_score:int=5
+        self.touch_ball:list=[True,True]
+        self.sound_type:dict={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
+        self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def objects(self):
         self.object1=Rect(25,150,11,90)
