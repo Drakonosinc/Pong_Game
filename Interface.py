@@ -18,6 +18,10 @@ class interface(load_elements):
         self.buttons_menu_options()
         self.buttons_visual()
         self.buttons_keys()
+    def events_buttons(self,event):
+        if self.main==2:
+            self.increase_score_button.reactivate_pressed(event)
+            self.decrease_score_button.reactivate_pressed(event)
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def main_menu(self):
