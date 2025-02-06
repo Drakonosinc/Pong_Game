@@ -128,9 +128,7 @@ class Space_pong_game(interface):
         if action[0]<0 and self.object2.bottom < self.HEIGHT:self.object2.y += 5
     def restart(self):
         if self.mode_game["Training AI"] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
-        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):
-            self.reset()
-            self.main=1
+        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):self.change_mains({"main":1,"command":self.reset})
     def player1_code(self):
         if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.value2
         if self.object1.y>=310:self.object1.y=310
