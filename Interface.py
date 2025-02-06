@@ -57,7 +57,6 @@ class interface(load_elements):
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
             self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
-            self.decrease_score_button.reactivate_pressed(),self.increase_score_button.reactivate_pressed()
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
         self.continue_button = Button({"screen": self.screen,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":-1})})
