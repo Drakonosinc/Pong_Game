@@ -69,6 +69,14 @@ class interface(load_elements):
         self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score',  max(1, self.max_score - 1))})
         self.increase_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
+        if self.mode_game["Training AI"]:self.config_ai_training(self)
+    def config_ai_training(self):
+        self.increase_generation
+        self.decrease_generation
+        self.increase_population
+        self.decrease_population
+        self.increase_try_for_ai
+        self.decrease_try_for_ai
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
