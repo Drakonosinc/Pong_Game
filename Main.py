@@ -2,7 +2,7 @@ import sys
 from Genetic_Algorithm import *
 from Space_Pong import *
 if __name__=="__main__":
-    best_model = genetic_algorithm((game:=Space_pong_game()), input_size=len(game.get_state()), output_size=2)
+    best_model = genetic_algorithm((game:=Space_pong_game()), input_size=len(game.get_state()), output_size=2, generation_value=game.config_AI["generation_value"], population_value=game.config_AI["population_value"], try_for_ai=game.config_AI["try_for_ai"])
     game.model = best_model
-    if game.mode_game["Training AI"]:save_model(best_model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
+    if game.config_AI["model_save"]:save_model(best_model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
 pygame.quit(),sys.exit()
