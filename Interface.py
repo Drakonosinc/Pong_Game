@@ -56,10 +56,11 @@ class interface(load_elements):
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
+            self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.increase_generation)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
@@ -73,8 +74,8 @@ class interface(load_elements):
     def config_ai_training(self):
         self.increase_generation = Button({"screen": self.screen,
                                         "font": self.font5,
-                                        "text": "Training AI",
-                                        "position": (self.WIDTH/2-70,self.HEIGHT/2-136),
+                                        "text": ">",
+                                        "position": (self.WIDTH-100,self.HEIGHT/2-110),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
