@@ -78,9 +78,11 @@ class interface(load_elements):
         self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai)
     def config_training_ai(self):
         self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
-                                        "sound_touch": self.sound_touchletters})
+                                        "sound_touch": self.sound_touchletters,
+                                        "command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value')})
         self.decrease_generation = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
-                                        "sound_touch": self.sound_touchletters})
+                                        "sound_touch": self.sound_touchletters,
+                                        "command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value',True,-1)})
         self.increase_population = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
         self.decrease_population = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
@@ -204,3 +206,8 @@ class interface(load_elements):
         if config.get("command",None):config["command"]()
         if config.get("run",False):setattr(self,"running",False),setattr(self, "game_over", True)
         if config.get("recursive",False):self.change_mains({"main":self.main,"fade_in":fade_in,"fade_out":fade_out})
+    def increase_decrease_variable(self,dic=None,variable="",length=None,number=1,save=True):
+        if dic!=None and length!=None:dic[variable]=max(1, dic[variable] + number)
+        elif dic!=None:dic[variable]+=number
+        else:setattr(self,variable,getattr(self,variable)+number)
+        if save:self.save_config()
