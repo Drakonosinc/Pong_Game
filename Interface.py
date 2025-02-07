@@ -77,28 +77,28 @@ class interface(load_elements):
         self.screen.blit(self.font5.render(f"try for AI\n{self.config_AI['try_for_ai']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
         self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population)
     def config_training_ai(self):
-        self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-110),"color2": self.GOLDEN,
-                                        "sound_hover": self.sound_buttonletters,
+        self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        self.decrease_generation = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-110),"color2": self.GOLDEN,
-                                        "sound_hover": self.sound_buttonletters,
+        self.decrease_generation = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        self.increase_population = Button({"screen": self.screen,
+        self.increase_population = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters})
+        self.decrease_population = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters})
+        self.increase_try_for_ai = Button({"screen": self.screen,
                                         "font": self.font5,
                                         "text": ">",
                                         "position": (self.WIDTH-100,self.HEIGHT/2-55),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        self.decrease_population = Button({"screen": self.screen,
+        self.decrease_try_for_ai = Button({"screen": self.screen,
                                         "font": self.font5,
                                         "text": "<",
                                         "position": (self.WIDTH-178,self.HEIGHT/2-55),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        # self.increase_try_for_ai 
-        # self.decrease_try_for_ai 
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
