@@ -60,7 +60,7 @@ class interface(load_elements):
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.increase_generation)
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.increase_generation,self.decrease_generation)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
@@ -79,7 +79,13 @@ class interface(load_elements):
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        # self.decrease_generation
+        self.decrease_generation= Button({"screen": self.screen,
+                                        "font": self.font5,
+                                        "text": "<",
+                                        "position": (self.WIDTH-180,self.HEIGHT/2-110),
+                                        "color2": self.GOLDEN,
+                                        "sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters})
         # self.increase_population
         # self.decrease_population
         # self.increase_try_for_ai
