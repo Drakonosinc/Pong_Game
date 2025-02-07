@@ -12,7 +12,7 @@
             "background7.jpg",
             "background8.jpg"
         ],
-        "value_background": 1,
+        "value_background": 0,
         "planets": [
             "Mars.png",
             "Mars1.png",
@@ -20,7 +20,7 @@
             "Saturn.png",
             "earth.png"
         ],
-        "value_planet": 2,
+        "value_planet": 0,
         "spacecrafts": [
             "spaceship.png",
             "spaceship2.png",
@@ -38,5 +38,11 @@
         "Name_key3": "\u2191",
         "DOWN_ARROW": 1073741905,
         "Name_key4": "\u2193"
+    },
+    "config_AI": {
+        "generation_value": 100,
+        "population_value": 20,
+        "try_for_ai": 3,
+        "model_save": false
     }
 }
