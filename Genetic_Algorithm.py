@@ -17,8 +17,8 @@ def initialize_population(size, input_size, output_size):
 def evaluate_population(population, game, num_trials=3):
     fitness_scores = []
     for model in population:
-        score = fitness_function(model, game)
-        fitness_scores.append(score)
+        score = [fitness_function(model, game) for _ in range(num_trials)]
+        fitness_scores.append(sum(score) / num_trials)
     min_score = abs(min(fitness_scores)) if min(fitness_scores) < 0 else 0
     fitness_scores = [score + min_score + 1 for score in fitness_scores]  # Asegúrate de que todos los fitness sean positivos
     return fitness_scores
@@ -57,14 +57,14 @@ def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
     return model
 
 # Algoritmo Genético Integrado:
-def genetic_algorithm(game, input_size, output_size, generations=100, population_size=20, mutation_rate=0.01, mutation_strength=0.1, elitism=2):
+def genetic_algorithm(game, input_size, output_size, generations=100, population_size=20, mutation_rate=0.01, mutation_strength=0.1, elitism=2, num_trials=3):
     # Inicializa la población
     population = initialize_population(population_size, input_size, output_size)
     best_fitness = -float('inf')
     best_model = None
     for generation in range(generations):
         game.generation = generation  # Para mostrar la generación en la interfaz (si se usa)
-        fitness_scores = evaluate_population(population, game)
+        fitness_scores = evaluate_population(population, game, num_trials)
         current_best = max(fitness_scores)
         if current_best > best_fitness:
             best_fitness = current_best
