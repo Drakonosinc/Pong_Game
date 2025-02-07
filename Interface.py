@@ -56,11 +56,11 @@ class interface(load_elements):
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
-            self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
+            self.main_training_ai()
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.increase_generation,self.decrease_generation)
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
     def buttons_mode_game(self):
         self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
@@ -70,26 +70,35 @@ class interface(load_elements):
         self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score',  max(1, self.max_score - 1))})
         self.increase_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
-        self.config_ai_training()
-    def config_ai_training(self):
-        self.increase_generation = Button({"screen": self.screen,
+        self.config_training_ai()
+    def main_training_ai(self):
+        self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
+        self.screen.blit(self.font5.render(f"Population Size\n{self.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.screen.blit(self.font5.render(f"try for AI\n{self.config_AI['try_for_ai']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
+        self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population)
+    def config_training_ai(self):
+        self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-110),"color2": self.GOLDEN,
+                                        "sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters})
+        self.decrease_generation = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-110),"color2": self.GOLDEN,
+                                        "sound_hover": self.sound_buttonletters,
+                                        "sound_touch": self.sound_touchletters})
+        self.increase_population = Button({"screen": self.screen,
                                         "font": self.font5,
                                         "text": ">",
-                                        "position": (self.WIDTH-100,self.HEIGHT/2-110),
+                                        "position": (self.WIDTH-100,self.HEIGHT/2-55),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        self.decrease_generation= Button({"screen": self.screen,
+        self.decrease_population = Button({"screen": self.screen,
                                         "font": self.font5,
                                         "text": "<",
-                                        "position": (self.WIDTH-180,self.HEIGHT/2-110),
+                                        "position": (self.WIDTH-178,self.HEIGHT/2-55),
                                         "color2": self.GOLDEN,
                                         "sound_hover": self.sound_buttonletters,
                                         "sound_touch": self.sound_touchletters})
-        # self.increase_population
-        # self.decrease_population
-        # self.increase_try_for_ai
-        # self.decrease_try_for_ai
+        # self.increase_try_for_ai 
+        # self.decrease_try_for_ai 
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
