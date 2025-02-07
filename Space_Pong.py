@@ -180,13 +180,13 @@ class Space_pong_game(interface):
         state=self.get_state()
         action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
         self.IA_actions(action)
-    def item_repeat_run(self):pass
+    def item_repeat_run(self):
+        pygame.display.flip()
+        self.clock.tick(self.FPS)
     def run(self):
         self.running=True
         while self.running and all(not mode for mode in self.mode_game.values()):
-            self.handle_keys(),self.draw()
-            pygame.display.flip()
-            self.clock.tick(self.FPS)
+            self.handle_keys(),self.draw(),self.item_repeat_run()
     def run_with_model(self):
         self.running=True
         self.reward=0
@@ -195,6 +195,5 @@ class Space_pong_game(interface):
             if self.main==-1:
                 if self.mode_game["Training AI"] or self.mode_game["AI"]:self.type_game()
                 self.move_ball(),self.restart()
-            pygame.display.flip()
-            self.clock.tick(self.FPS)
+            self.item_repeat_run()
         return self.reward
