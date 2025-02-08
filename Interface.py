@@ -40,7 +40,7 @@ class interface(load_elements):
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
             self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
-        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
+        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0,"run":True})})
         self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
     def game_mode(self):
         if self.main==2:
@@ -103,7 +103,7 @@ class interface(load_elements):
     def buttons_pausa(self):
         self.exit_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Exit","color": self.GRAY,"position": (self.WIDTH/2-40,self.HEIGHT/2-15),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":self.event_quit})
         self.reset_pause_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":-1}),"command2":self.reset})
-        self.go_main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0}),"command2":self.reset})
+        self.go_main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0,"run":True}),"command2":self.reset})
     def filt(self,number):
         background=pygame.Surface((self.WIDTH,self.HEIGHT),pygame.SRCALPHA)
         background.fill((0,0,0,number))
