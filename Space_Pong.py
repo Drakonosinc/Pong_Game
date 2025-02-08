@@ -28,7 +28,7 @@ class Space_pong_game(interface):
         self.speed:int=0
         self.speed_up:bool=True
         self.speed_down:bool=True
-        self.mode_game:dict[str,bool]={"Training AI":False,"Player":True,"AI":False}
+        self.mode_game:dict[str,bool]={"Training AI":False,"Player":False,"AI":False}
         self.max_score:int=5
         self.touch_ball:list=[True,True]
         self.sound_type:dict={"sound":"Sound ON","color":self.SKYBLUE,"value":True}
@@ -52,6 +52,7 @@ class Space_pong_game(interface):
         self.press_keys()
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
+        self.type_mode()
         self.game_over,self.running,self.exit=True,False,True
     def change_speed(self,fps,speed,number,objet,speed_down=True,speed_up=True):
         self.FPS+=fps
@@ -137,7 +138,7 @@ class Space_pong_game(interface):
         if self.object1.y<=0:self.object1.y=0
     def draw_activations(self):
         if self.mode_game["AI"]:self.model=self.model_training
-        if self.model.activations is not None:
+        if self.model!=None and (self.model.activations is not None):
             activations = self.model.activations
             num_activations = activations.shape[1]
             neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
@@ -186,11 +187,13 @@ class Space_pong_game(interface):
         self.clock.tick(self.FPS)
     def run(self):
         self.running=True
-        while self.running and all(not mode for mode in self.mode_game.values()):
+        print("hola1")
+        while self.running:
             self.handle_keys(),self.draw(),self.item_repeat_run()
     def run_with_model(self):
         self.running=True
         self.reward=0
+        print("hola2")
         while self.running and self.game_over==False:
             self.handle_keys(),self.draw()
             if self.main==-1:
