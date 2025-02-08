@@ -83,8 +83,8 @@ class Space_pong_game(interface):
             if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
             if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
         if self.main==1:
-            if self.pressed_keys[K_r]:self.main=-1
-            if self.pressed_keys[K_e]:self.main=0
+            if self.pressed_keys[K_r]:self.change_mains({"main":-1})
+            if self.pressed_keys[K_e]:self.change_mains({"main":0,"run":True})
     def images_elements(self):
         self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
@@ -187,13 +187,10 @@ class Space_pong_game(interface):
         self.clock.tick(self.FPS)
     def run(self):
         self.running=True
-        print("hola1")
-        while self.running:
-            self.handle_keys(),self.draw(),self.item_repeat_run()
+        while self.running:self.handle_keys(),self.draw(),self.item_repeat_run()
     def run_with_model(self):
         self.running=True
         self.reward=0
-        print("hola2")
         while self.running and self.game_over==False:
             self.handle_keys(),self.draw()
             if self.main==-1:
