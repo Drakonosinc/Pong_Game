@@ -85,15 +85,7 @@ class interface(load_elements):
         self.decrease_population = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
         self.increase_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
         self.decrease_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
-        self.save_model = Button({"screen": self.screen,
-                                    "font": self.font5,
-                                    "text": "OFF",
-                                    "color": self.SKYBLUE,
-                                    "position": (self.WIDTH-85,self.HEIGHT/2+29),
-                                    "color2": self.GOLDEN,
-                                    "sound_hover": self.sound_buttonletters,
-                                    "sound_touch": self.sound_touchletters,
-                                    "command1":lambda:self.on_off(self.config_AI,"model_save")})
+        self.save_model = Button({"screen": self.screen,"font": self.font5,"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+29),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
