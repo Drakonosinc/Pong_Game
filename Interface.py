@@ -74,7 +74,8 @@ class interface(load_elements):
     def main_training_ai(self):
         self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Population Size\n{self.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
-        self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config_AI['try_for_ai']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
+        self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config_AI['try_for_ai']:^{28 if self.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
+        self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
         self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai)
     def config_training_ai(self):
         self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value')})
@@ -83,6 +84,15 @@ class interface(load_elements):
         self.decrease_population = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
         self.increase_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
         self.decrease_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
+        self.on_off_save_model=Button({"screen": self.screen,
+                                    "font": self.font5,
+                                    "text": "ON",
+                                    "color": self.SKYBLUE,
+                                    "position": (self.WIDTH-100,self.HEIGHT/2+55),
+                                    "color2": self.GOLDEN,
+                                    "sound_hover": self.sound_buttonletters,
+                                    "sound_touch": self.sound_touchletters,
+                                    "command1":lambda:self.on_off_save_model.change_item({"color":self.SKYBLUE,"text":"ON"}),"command2":self.save_model})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
