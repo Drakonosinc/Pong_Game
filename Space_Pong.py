@@ -11,6 +11,7 @@ class Space_pong_game(interface):
     def load_varials(self):
         self.running:bool=False
         self.game_over:bool=False
+        self.exit:bool=False
         self.clock=pygame.time.Clock()
         self.FPS:int=60
         self.generation:int=0
@@ -51,7 +52,7 @@ class Space_pong_game(interface):
         self.press_keys()
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
-        self.running,self.game_over=False,True
+        self.game_over,self.running,self.exit=True,False,True
     def change_speed(self,fps,speed,number,objet,speed_down=True,speed_up=True):
         self.FPS+=fps
         self.speed+=speed
