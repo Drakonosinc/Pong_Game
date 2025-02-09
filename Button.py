@@ -52,8 +52,16 @@ class TextButton:
         pass
     def draw(self):
         pass
+    def pressed_button(self):
+        pass
+    def change_item(self):
+        pass
 class PolygonButton:
     def __init__(self):
         pass
     def draw(self):
+        pass
+    def pressed_button(self):
+        pass
+    def change_item(self):
         pass
