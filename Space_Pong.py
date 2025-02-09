@@ -1,5 +1,6 @@
 from Interface import *
 import numpy as np
+from Balls import *
 class Space_pong_game(interface):
     def __init__(self,model=None):
         super().__init__()
@@ -37,6 +38,7 @@ class Space_pong_game(interface):
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
+        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36) for _ in range(1)]
         self.object3=Rect(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])
