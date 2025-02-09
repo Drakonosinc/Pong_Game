@@ -31,7 +31,7 @@ class Space_pong_game(interface):
         self.mode_game:dict[str,bool]={"Training AI":False,"Player":False,"AI":False}
         self.max_score:int=5
         self.touch_ball:list=[True,True]
-        self.sound_type:dict={"sound":f"Sound {"ON" if self.config_sounds["sound_main"] else "OFF"}","color":self.SKYBLUE if self.config_sounds["sound_main"] else self.RED,"value":self.config_sounds["sound_main"]}
+        self.sound_type:dict={"sound":f"Sound {"ON" if (x:=self.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def objects(self):

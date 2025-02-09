@@ -46,6 +46,6 @@
         "model_save": false
     },
     "config_sounds": {
-        "sound_main": false
+        "sound_main": true
     }
 }
