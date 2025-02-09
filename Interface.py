@@ -110,11 +110,12 @@ class interface(load_elements):
     def options_menu(self):
         if self.main==4:
             self.screen.fill(self.BLACK)
+            self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
             self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def buttons_menu_options(self):
         self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
         self.visual_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":5})})
-        self.sound_button=Button({"screen": self.screen,"font": self.font2_5,"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]}),"command2":self.sound_on_off})
+        self.sound_button=Button({"screen": self.screen,"font": self.font2_5,"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.save_config})
         self.keys_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":6})})
         self.language_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,})
     def sound_on_off(self):
