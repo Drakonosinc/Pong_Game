@@ -5,7 +5,8 @@ class load_elements():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("Space Pong")
-        self.load_config()
+        self.config(alls=True)
+        self.save_config()
         self.define_colors()
         self.load_fonts()
         self.load_sounds()
@@ -16,9 +17,10 @@ class load_elements():
             with open(os.path.join(config_path,"config.json"), 'r') as file:config = json.load(file)
             self.config_visuals = config["config_visuals"]
             self.config_keys = config["config_keys"]
+            self.config_sounds = config["config_sounds"]
             self.config_AI = config["config_AI"]
         except:self.config(alls=True)
-    def config(self,visuals=False,keys=False,AI=False,alls=False):
+    def config(self,visuals=False,keys=False,sounds=False,AI=False,alls=False):
         if visuals or alls:self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
@@ -31,10 +33,11 @@ class load_elements():
                         "DOWN_S":K_s,"Name_key2":"S",
                         "UP_ARROW":K_UP,"Name_key3":"↑",
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
+        if sounds or alls:self.config_sounds={"sound":True,"sound_touchletters":True,"sound_exitbutton":True,"sound_buttonletters":True,"sound_back":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
-        config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI}
+        config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds}
         with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
     def load_AI(self):
         self.model_path=os.path.join(os.path.dirname(__file__), "AI/best_model.pth")

@@ -1,6 +1,5 @@
 from Load_elements import *
 from Button import *
-from Input_text import *
 class interface(load_elements):
     def menus(self):
         self.Pause()
