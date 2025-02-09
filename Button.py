@@ -47,3 +47,13 @@ class Button:
         self.text=config.get("text",self.text)
         self.pressed=config.get("pressed",self.pressed)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)
+class TextButton:
+    def __init__(self):
+        pass
+    def draw(self):
+        pass
+class PolygonButton:
+    def __init__(self):
+        pass
+    def draw(self):
+        pass
