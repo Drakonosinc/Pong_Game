@@ -5,8 +5,7 @@ class load_elements():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("Space Pong")
-        self.config(alls=True)
-        self.save_config()
+        self.load_config()
         self.define_colors()
         self.load_fonts()
         self.load_sounds()
@@ -33,7 +32,7 @@ class load_elements():
                         "DOWN_S":K_s,"Name_key2":"S",
                         "UP_ARROW":K_UP,"Name_key3":"↑",
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
-        if sounds or alls:self.config_sounds={"sound":True,"sound_touchletters":True,"sound_exitbutton":True,"sound_buttonletters":True,"sound_back":True}
+        if sounds or alls:self.config_sounds={"sound_main":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
