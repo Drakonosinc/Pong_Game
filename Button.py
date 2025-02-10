@@ -7,12 +7,6 @@ class ButtonFactory:
         self.hover_color=config.get("hover_color",(0,0,0))
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
-    def change_item(self,config:dict):
-        self.color=config.get("color",self.color)
-        self.font=config.get("font",self.font)
-        self.hover_color=config.get("hover_color",self.hover_color)
-        self.sound_hover=config.get("sound_hover",self.sound_hover)
-        self.sound_touch=config.get("sound_touch",self.sound_touch)
     def create_TextButton(self,config:dict):
         return TextButton({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_PolygonButton(self,config:dict):
@@ -70,7 +64,7 @@ class PolygonButton:
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
         self.button_states=config.get("button_states",{"detect_hover":True,"presses_touch":True})
-        self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
+        self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
         self.new_events(time=config.get("time",500))
     def new_events(self,time):
         self.EVENT_NEW = pygame.USEREVENT + 1
