@@ -11,8 +11,7 @@ class interface(load_elements):
         self.Game_over()
     def draw_buttons(self):
         self.button_factory_f5 = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
-        self.button_factory = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
-        self.buttons_main_menu()
+        self.button_factory_f2_5 = self.button_factory_f5.change_item({"font": self.font2_5})
         self.buttons_game_over()
         self.buttons_mode_game()
         self.buttons_pausa()
@@ -32,7 +31,7 @@ class interface(load_elements):
             self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
         self.play_button = self.button_factory_f5.create_TextButton({"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"command1":lambda:self.change_mains({"main":2})})
-        self.quit_button = self.button_factory_f5.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"command1": self.event_quit})
+        self.quit_button = self.button_factory_f5.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"sound_touch":self.sound_exitbutton,"command1": self.event_quit})
         self.options_button = self.button_factory_f5.create_TextButton({"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"command1":lambda:self.change_mains({"main":4})})
     def Game_over(self):
         if self.main==1:
@@ -41,8 +40,8 @@ class interface(load_elements):
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
             self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
-        self.main_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0,"run":True})})
-        self.reset_button=Button({"screen": self.screen,"font": self.font2_5,"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
+        self.main_button=self.button_factory_f2_5.create_TextButton({"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"command1":lambda:self.change_mains({"main":0,"run":True})})
+        self.reset_button=self.button_factory_f2_5.create_TextButton({"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
     def game_mode(self):
         if self.main==2:
             self.screen.fill(self.BLACK)
@@ -64,11 +63,11 @@ class interface(load_elements):
             self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
     def buttons_mode_game(self):
-        self.back_button = Button({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
-        self.continue_button = Button({"screen": self.screen,"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":-1,"run":True})})
-        self.training_ai_button = Button({"screen": self.screen,"font": self.font5,"text": "Training AI","position": (self.WIDTH/2-70,self.HEIGHT/2-136),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
-        self.player_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs One","position": (self.WIDTH/2-64,self.HEIGHT/2-110),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
-        self.ai_button = Button({"screen": self.screen,"font": self.font5,"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
+        self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
+        self.continue_button = self.button_factory_f5.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":-1,"run":True})})
+        self.training_ai_button = self.button_factory_f5.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70,self.HEIGHT/2-136),"command1":lambda:self.type_mode(True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
+        self.player_button = self.button_factory_f5.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64,self.HEIGHT/2-110),"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
+        self.ai_button = self.button_factory_f5.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score',  max(1, self.max_score - 1))})
         self.increase_score_button = Button({"screen": self.screen,"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
         self.config_training_ai()
