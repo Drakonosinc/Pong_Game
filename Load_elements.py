@@ -79,6 +79,7 @@ class load_elements():
         self.font3_5=pygame.font.SysFont("times new roman", 30)
         self.font3_8=pygame.font.SysFont("times new roman", 38)
         self.font4=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),75)
+        self.font4_5=pygame.font.SysFont("times new roman", 80)
         self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
     def load_sounds(self):
         self.sound_path = os.path.join(os.path.dirname(__file__), "sounds")
