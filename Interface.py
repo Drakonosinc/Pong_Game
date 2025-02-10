@@ -10,6 +10,7 @@ class interface(load_elements):
         self.menu_keys()
         self.Game_over()
     def draw_buttons(self):
+        self.button_factory_f5 = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.button_factory = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.buttons_main_menu()
         self.buttons_game_over()
@@ -30,9 +31,9 @@ class interface(load_elements):
             self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
             self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
-        self.play_button = self.button_factory.create_TextButton({"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"command1":lambda:self.change_mains({"main":2})})
-        self.quit_button = self.button_factory.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"command1": self.event_quit})
-        self.options_button = self.button_factory.create_TextButton({"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"command1":lambda:self.change_mains({"main":4})})
+        self.play_button = self.button_factory_f5.create_TextButton({"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"command1":lambda:self.change_mains({"main":2})})
+        self.quit_button = self.button_factory_f5.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"command1": self.event_quit})
+        self.options_button = self.button_factory_f5.create_TextButton({"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"command1":lambda:self.change_mains({"main":4})})
     def Game_over(self):
         if self.main==1:
             self.filt(80)
