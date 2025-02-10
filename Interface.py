@@ -61,7 +61,7 @@ class interface(load_elements):
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
             self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
-            self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
+            self.decrease_score_button.change_item({"presses_touch": (x:=self.max_score > 1),"detect_hover": x})
     def buttons_mode_game(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.continue_button = self.button_factory_f5.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True})})
@@ -80,13 +80,13 @@ class interface(load_elements):
         self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai,self.save_model)
         self.save_model.change_item({"color":self.SKYBLUE if self.config_AI["model_save"] else self.RED,"text":"ON" if self.config_AI["model_save"] else "OFF"})
     def config_training_ai(self):
-        self.increase_generation = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value')})
-        self.decrease_generation = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value',True,-1)})
-        self.increase_population = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value')})
-        self.decrease_population = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
-        self.increase_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
-        self.decrease_try_for_ai = Button({"screen": self.screen,"font": self.font5,"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
-        self.save_model = Button({"screen": self.screen,"font": self.font5,"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
+        self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value')})
+        self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value',True,-1)})
+        self.increase_population = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value')})
+        self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
+        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
+        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
+        self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
