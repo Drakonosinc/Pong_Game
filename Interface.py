@@ -101,7 +101,7 @@ class interface(load_elements):
             self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
             self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
     def buttons_pausa(self):
-        self.exit_button=self.button_factory_f2_5.create_TextButton({"text": "Exit","color": self.GRAY,"position": (self.WIDTH/2-40,self.HEIGHT/2-15),"color2": self.SKYBLUE,"command1":self.event_quit})
+        self.exit_button=self.button_factory_f2_5.create_TextButton({"text": "Exit","color": self.GRAY,"position": (self.WIDTH/2-40,self.HEIGHT/2-15),"color2": self.SKYBLUE,"sound_touch":None,"command1":self.event_quit})
         self.reset_pause_button=self.button_factory_f2_5.create_TextButton({"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"command1":lambda:self.change_mains({"main":-1}),"command2":self.reset})
         self.go_main_button=self.button_factory_f2_5.create_TextButton({"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"command1":lambda:self.change_mains({"main":0,"run":True}),"command2":self.reset})
     def filt(self,number):
@@ -114,11 +114,11 @@ class interface(load_elements):
             self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
             self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def buttons_menu_options(self):
-        self.back_button = self.button_factory_f5.create_PolygonButton({"screen": self.screen,"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"color2": self.GOLDEN,"type_button": 1,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":0})})
-        self.visual_button=self.button_factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":5})})
-        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.save_config})
-        self.keys_button=self.button_factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,"command1":lambda:self.change_mains({"main":6})})
-        self.language_button=self.button_factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45),"color2": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters,})
+        self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
+        self.visual_button=self.button_factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"command1":lambda:self.change_mains({"main":5})})
+        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.save_config})
+        self.keys_button=self.button_factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"command1":lambda:self.change_mains({"main":6})})
+        self.language_button=self.button_factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45)})
     def sound_on_off(self):
         self.sound_type["value"]=not self.sound_type["value"]
         def sound(color,sound_on_off,sound):
