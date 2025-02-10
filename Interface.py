@@ -12,6 +12,7 @@ class interface(load_elements):
     def draw_buttons(self):
         self.button_factory_f5 = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.button_factory_f2_5 = ButtonFactory({"screen": self.screen,"font": self.font2_5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
+        self.buttons_main_menu()
         self.buttons_game_over()
         self.buttons_mode_game()
         self.buttons_pausa()

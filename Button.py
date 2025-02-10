@@ -32,13 +32,14 @@ class TextButton:
         if event.type==self.EVENT_NEW:self.button_states["presses_touch"]=True
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
-        if self.button_states["detect_hover"]:self.mouse_collision(mouse_pos:=pygame.mouse.get_pos())
-        if self.button_states["presses_touch"]:self.pressed_button(pressed_mouse=pygame.mouse.get_pressed(),mouse_pos=mouse_pos)
+        self.mouse_collision(pygame.mouse.get_pos())
+        if self.button_states["presses_touch"]:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def mouse_collision(self,mouse_pos):
         if self.rect.collidepoint(mouse_pos):
             self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
-            if self.sound_hover:self.sound_hover.play(loops=0)
-            self.button_states["detect_hover"]=False
+            if self.button_states["detect_hover"]:
+                if self.sound_hover:self.sound_hover.play(loops=0)
+                self.button_states["detect_hover"]=False
         else:self.button_states["detect_hover"]=True
     def pressed_button(self,pressed_mouse,mouse_pos):
         if pressed_mouse[0] and self.rect.collidepoint(mouse_pos):
@@ -73,8 +74,8 @@ class PolygonButton:
         if event.type==self.EVENT_NEW:self.button_states["presses_touch"]=True
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, self.position)
-        if self.button_states["detect_hover"]:self.mouse_collision(mouse_pos:=pygame.mouse.get_pos())
-        if self.button_states["presses_touch"]:self.pressed_button(pressed_mouse=pygame.mouse.get_pressed(),mouse_pos=mouse_pos)
+        if self.button_states["detect_hover"]:self.mouse_collision(pygame.mouse.get_pos())
+        if self.button_states["presses_touch"]:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def mouse_collision(self,mouse_pos):
         if self.rect.collidepoint(mouse_pos):
             pygame.draw.polygon(self.screen, self.hover_color, self.hover_position)
@@ -89,7 +90,6 @@ class PolygonButton:
         elif not pressed_mouse[0]:self.button_states["presses_touch"] = True
     def change_item(self,config:dict):
         self.color=config.get("color",self.color)
-        self.text=config.get("text",self.text)
         self.button_states=config.get("button_states",{"detect_hover":self.button_states["detect_hover"],"presses_touch":self.button_states["presses_touch"]})
     def execute_commands(self):
         for command in self.commands:
