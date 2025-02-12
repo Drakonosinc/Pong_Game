@@ -15,6 +15,7 @@ class interface(load_elements):
         self.buttons_main_menu()
         self.buttons_game_over()
         self.buttons_mode_game()
+        self.inputs_text()
         self.buttons_pausa()
         self.buttons_menu_options()
         self.buttons_visual()
@@ -49,20 +50,22 @@ class interface(load_elements):
             self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
             self.screen.blit(self.font5.render("Enter Player Name One",True,"white"),(7,10))
             self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(416,10))
-            pygame.draw.rect(self.screen,self.color_inputtext1,(8,40,271,25))
-            pygame.draw.rect(self.screen,self.color_inputtext2,(418,40,275,25))
-            self.input_player1=pygame.draw.rect(self.screen,self.GRAY,(8,40,271,25),2)
-            self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
-            self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
-            self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
+            # pygame.draw.rect(self.screen,self.color_inputtext1,(8,40,271,25))
+            # pygame.draw.rect(self.screen,self.color_inputtext2,(418,40,275,25))
+            # self.input_player1=pygame.draw.rect(self.screen,self.GRAY,(8,40,271,25),2)
+            # self.input_player2=pygame.draw.rect(self.screen,self.GRAY,(418,40,275,25),2)
+            # self.screen.blit(self.font5.render(self.text_player1, True, self.BLACK), (self.input_player1.x+5, self.input_player1.y-2))
+            # self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
             self.main_training_ai() if self.mode_game["Training AI"] else self.options_game()
-            if self.pressed_mouse[0]:
-                self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
-                self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button)
+            # if self.pressed_mouse[0]:
+            #     self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
+            #     self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input1)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
+    def inputs_text(self):
+        self.input1=self.button_factory_f5.create_InputText({"text": "Player","position": (8,40,271,25)})
     def buttons_mode_game(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.continue_button = self.button_factory_f5.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True})})
