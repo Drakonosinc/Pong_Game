@@ -5,6 +5,7 @@ class ElementsFactory:
         self.font=config.get("font",pygame.font.Font(None,25))
         self.color=config.get("color",(255,255,255))
         self.hover_color=config.get("hover_color",(255, 199, 51))
+        self.cocolor_backlor_text=config.get("color_back",(255,255,255))
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
     def create_TextButton(self,config:dict):
@@ -12,7 +13,7 @@ class ElementsFactory:
     def create_PolygonButton(self,config:dict):
         return PolygonButton({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_InputText(self,config:dict):
-        return Input_text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return Input_text({"screen": self.screen,"font": self.font,"color": self.color,"color_back":self.color_back,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class TextButton:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -108,11 +109,13 @@ class Input_text:
         self.screen=config["screen"]
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.text = config.get("text","")
-        self.color=config.get("color",(255,255,255))
-        self.color_text=config.get("color",(255,255,255))
+        self.color=config.get("color",(0,0,0))
+        self.color_back=config.get("color_back",(255,255,255))
         self.hover_color=config.get("hover_color",(255, 199, 51))
-        self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.pressed_color=config.get("hover_color",(0,0,0))
+        self.border_color=config.get("border_color",(0,0,0))
+        self.border=config.get("border",2)
+        self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.position = config["position"]
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
@@ -127,8 +130,8 @@ class Input_text:
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
     def draw(self):
-        pygame.draw.rect(self.screen,self.color_inputtext1,self.rect)
-        input_player=pygame.draw.rect(self.screen,self.GRAY,self.rect,2)
+        pygame.draw.rect(self.screen,self.color_back,self.rect)
+        input_player=pygame.draw.rect(self.screen,self.border_color,self.rect,self.border)
         self.screen.blit(self.font.render(self.text, True, self.BLACK), (input_player.x+5, input_player.y-2))
         if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
