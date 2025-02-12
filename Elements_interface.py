@@ -121,7 +121,7 @@ class Input_text:
         self.sound_touch = config.get("sound_touch")
         self.pressed = config.get("pressed",True)
         self.detect_mouse=config.get("detect_mouse",True)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True})
+        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.rect = pygame.Rect(*self.position)
         self.new_events(time=config.get("time",500))
     def new_events(self,time):
@@ -143,13 +143,14 @@ class Input_text:
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
     def pressed_button(self,pressed_mouse,mouse_pos):
-        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos):
-            pygame.draw.rect(self.screen,self.pressed_color,self.rect)
-            if self.states["presses_touch"]:
-                if self.sound_touch:self.sound_touch.play(loops=0)
-                self.states["presses_touch"]=False
-                self.execute_commands()
-        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["presses_touch"] = True
+        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
+            self.states["active"]=True
+            if self.sound_touch:self.sound_touch.play(loops=0)
+            self.states["presses_touch"]=False
+            self.execute_commands()
+        else:self.states["presses_touch"] = True
+        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["active"]=False
+        if self.states["active"]:pygame.draw.rect(self.screen,self.pressed_color,self.rect)
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
