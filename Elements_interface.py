@@ -112,7 +112,7 @@ class Input_text:
         self.color=config.get("color",(0,0,0))
         self.color_back=config.get("color_back",(255,255,255))
         self.hover_color=config.get("hover_color",(255, 199, 51))
-        self.pressed_color=config.get("hover_color",(0,0,0))
+        self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(0,0,0))
         self.border=config.get("border",2)
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
@@ -135,6 +135,20 @@ class Input_text:
         self.screen.blit(self.font.render(self.text, True, self.color), (input_player.x+5, input_player.y-2))
         if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
+    def mouse_collision(self,mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            pygame.draw.rect(self.screen,self.hover_color,self.rect)
+            if self.states["detect_hover"]:
+                if self.sound_hover:self.sound_hover.play(loops=0)
+                self.states["detect_hover"]=False
+        else:self.states["detect_hover"]=True
+    def pressed_button(self,pressed_mouse,mouse_pos):
+        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
+            pygame.draw.rect(self.screen,self.pressed_color,self.rect)
+            if self.sound_touch:self.sound_touch.play(loops=0)
+            self.states["presses_touch"]=False
+            self.execute_commands()
+        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["presses_touch"] = True
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
