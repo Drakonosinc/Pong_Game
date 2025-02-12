@@ -18,8 +18,9 @@ class load_elements():
             self.config_keys = config["config_keys"]
             self.config_sounds = config["config_sounds"]
             self.config_AI = config["config_AI"]
+            self.config_game = config["config_game"]
         except:self.config(alls=True)
-    def config(self,visuals=False,keys=False,sounds=False,AI=False,alls=False):
+    def config(self,visuals=False,keys=False,sounds=False,AI=False,game=False,alls=False):
         if visuals or alls:self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
                             "value_background":0,
@@ -34,9 +35,10 @@ class load_elements():
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
         if sounds or alls:self.config_sounds={"sound_main":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False}
+        if game or alls:self.config_game={"mode_game":False}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
-        config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds}
+        config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds,"config_game": self.config_game}
         with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
     def load_AI(self):
         self.model_path=os.path.join(os.path.dirname(__file__), "AI/best_model.pth")
