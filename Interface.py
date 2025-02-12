@@ -71,7 +71,7 @@ class interface(load_elements):
         self.ai_button = self.button_factory_f5.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score',  max(1, self.max_score - 1))})
         self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
-        self.config_training_ai()
+        self.config_training_ai(),self.buttons_config_game()
     def main_training_ai(self):
         self.screen.blit(self.font5.render(f"Config Training\n{"AI":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
@@ -89,8 +89,12 @@ class interface(load_elements):
         self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
     def options_game(self):
-        self.screen.blit(self.font5.render(f"Configuration of\n{"Game":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
-        self.screen.blit(self.font5.render(f"Number of Balls\n{self.config_game['number_balls']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
+        self.screen.blit(self.font5.render(f"Number of Balls\n{self.config_game['number_balls']:^{28 if self.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.execute_buttons(self.increase_balls,self.decrease_balls)
+    def buttons_config_game(self):
+        self.increase_balls = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_game,'number_balls'),"command2":self.objects()})
+        self.decrease_balls = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_game,'number_balls',True,-1),"command2":self.objects()})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
