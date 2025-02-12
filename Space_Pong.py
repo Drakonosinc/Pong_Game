@@ -38,7 +38,7 @@ class Space_pong_game(interface):
     def objects(self):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
-        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36) for _ in range(1 if self.mode_game["Training AI"] else 1)]
+        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36) for _ in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
         self.object3=Rect(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.object3.x,self.object3.y])

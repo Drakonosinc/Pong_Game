@@ -93,6 +93,7 @@ class interface(load_elements):
         self.mode_game["Player"]=mode_two
         if self.model_training!=None:self.mode_game["AI"]=mode_three
         else:self.load_AI()
+        self.objects()
     def on_off(self,dic=None,variable=""):
         if dic:dic[variable]=not dic[variable]
         else:setattr(self,variable,not getattr(self,variable))
