@@ -1,16 +1,18 @@
 import pygame
-class ButtonFactory:
+class ElementsFactory:
     def __init__(self,config:dict):
         self.screen=config["screen"]
         self.font=config.get("font",pygame.font.Font(None,25))
         self.color=config.get("color",(255,255,255))
-        self.hover_color=config.get("hover_color",(0,0,0))
+        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
     def create_TextButton(self,config:dict):
         return TextButton({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_PolygonButton(self,config:dict):
         return PolygonButton({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+    def create_InputText(self,config:dict):
+        return Input_text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class TextButton:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -101,3 +103,16 @@ class PolygonButton:
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
+class Input_text:
+    def __init__(self,config:dict):
+        self.screen=config["screen"]
+        self.font = config.get("font", pygame.font.Font(None, 25))
+        self.text = config.get("text","")
+        self.color=config.get("color",(255,255,255))
+        self.hover_color=config.get("hover_color",(255, 199, 51))
+        self.pressed_color=config.get("hover_color",(0,0,0))
+        self.position = config["position"]
+        self.sound_hover = config.get("sound_hover")
+        self.sound_touch = config.get("sound_touch")
+        self.pressed = config.get("pressed",True)
+        self.detect_mouse=config.get("detect_mouse",True)

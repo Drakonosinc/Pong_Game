@@ -1,5 +1,5 @@
 from Load_elements import *
-from Button import *
+from Elements_interface import *
 class interface(load_elements):
     def menus(self):
         self.Pause()
@@ -10,8 +10,8 @@ class interface(load_elements):
         self.menu_keys()
         self.Game_over()
     def draw_buttons(self):
-        self.button_factory_f5 = ButtonFactory({"screen": self.screen,"font": self.font5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
-        self.button_factory_f2_5 = ButtonFactory({"screen": self.screen,"font": self.font2_5,"hover_color": self.GOLDEN,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
+        self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
+        self.button_factory_f2_5 = ElementsFactory({"screen": self.screen,"font": self.font2_5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.buttons_main_menu()
         self.buttons_game_over()
         self.buttons_mode_game()
