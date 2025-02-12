@@ -57,7 +57,7 @@ class interface(load_elements):
             self.screen.blit(self.font5.render(self.text_player2, True, self.BLACK), (self.input_player2.x+5, self.input_player2.y-2))
             self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
             self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
-            if self.mode_game["Training AI"]:self.main_training_ai()
+            self.main_training_ai() if self.mode_game["Training AI"] else self.options_game()
             if self.pressed_mouse[0]:
                 self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
                 self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
@@ -88,6 +88,9 @@ class interface(load_elements):
         self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
         self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
+    def options_game(self):
+        self.screen.blit(self.font5.render(f"Configuration of\n{"Game":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
+        self.screen.blit(self.font5.render(f"Number of Balls\n{self.config_game['number_balls']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
