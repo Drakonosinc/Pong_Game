@@ -109,6 +109,7 @@ class Input_text:
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.text = config.get("text","")
         self.color=config.get("color",(255,255,255))
+        self.color_text=config.get("color",(255,255,255))
         self.hover_color=config.get("hover_color",(255, 199, 51))
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.pressed_color=config.get("hover_color",(0,0,0))
@@ -125,7 +126,12 @@ class Input_text:
         pygame.time.set_timer(self.EVENT_NEW,time)
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
-    
+    def draw(self):
+        pygame.draw.rect(self.screen,self.color_inputtext1,self.rect)
+        input_player=pygame.draw.rect(self.screen,self.GRAY,self.rect,2)
+        self.screen.blit(self.font.render(self.text, True, self.BLACK), (input_player.x+5, input_player.y-2))
+        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+        if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
