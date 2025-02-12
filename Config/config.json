@@ -49,6 +49,6 @@
         "sound_main": true
     },
     "config_game": {
-        "mode_game": false
+        "number_balls": 1
     }
 }

@@ -35,7 +35,7 @@ class load_elements():
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
         if sounds or alls:self.config_sounds={"sound_main":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False}
-        if game or alls:self.config_game={"mode_game":False}
+        if game or alls:self.config_game={"number_balls":1}
     def save_config(self):
         config_path = os.path.join(os.path.dirname(__file__), "Config")
         config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds,"config_game": self.config_game}
