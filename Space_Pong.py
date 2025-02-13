@@ -62,10 +62,6 @@ class Space_pong_game(interface):
         self.speed_down=speed_down
         self.speed_up=speed_up
         if self.speed==number:setattr(self,objet,False)
-    def input_text(self,event,main,color_objet,objet,objet_text):
-        if self.main==main and color_objet==self.SKYBLUE:
-            if event.key == K_BACKSPACE:setattr(self,objet,objet_text[:-1])
-            else:setattr(self,objet,getattr(self,objet)+event.unicode)
     def event_keydown(self,event):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
