@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 class ElementsFactory:
     def __init__(self,config:dict):
         self.screen=config["screen"]
@@ -129,6 +130,10 @@ class Input_text:
         pygame.time.set_timer(self.EVENT_NEW,time)
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
+    def change_text(self,event):
+        if self.states["active"] and event.type==KEYDOWN:
+            if event.key == K_BACKSPACE:self.text=self.text[:-1]
+            else:self.text+=event.unicode
     def draw(self):
         pygame.draw.rect(self.screen,self.color_back,self.rect)
         if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())

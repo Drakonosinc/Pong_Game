@@ -24,6 +24,8 @@ class interface(load_elements):
         if self.main==2:
             self.increase_score_button.reactivate_pressed(event)
             self.decrease_score_button.reactivate_pressed(event)
+            self.input_player1.change_text(event)
+            self.input_player2.change_text(event)
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def main_menu(self):
