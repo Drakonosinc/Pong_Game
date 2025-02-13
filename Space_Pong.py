@@ -22,8 +22,6 @@ class Space_pong_game(interface):
         self.score2:int=0
         self.reward:int=0
         self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
-        self.text_player1:str="player 1"
-        self.text_player2:str="PC"
         self.speed:int=0
         self.speed_up:bool=True
         self.speed_down:bool=True
@@ -157,8 +155,8 @@ class Space_pong_game(interface):
                 activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
                 self.screen.blit(activations_text, (10, 70))
     def name_players(self):
-        self.screen.blit(self.font.render(f"{self.text_player1}", True, self.YELLOW),(45,360))
-        self.screen.blit(self.font.render(f"{self.text_player2}", True, self.YELLOW),(580,360))
+        self.screen.blit(self.font.render(f"{self.input_player1.show_player()}", True, self.YELLOW),(45,360))
+        self.screen.blit(self.font.render(f"{self.input_player2.show_player()}", True, self.YELLOW),(580,360))
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self,running=True,fps=60,speed=0,speed_up=True,speed_down=True):
