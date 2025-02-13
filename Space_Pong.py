@@ -22,8 +22,6 @@ class Space_pong_game(interface):
         self.score2:int=0
         self.reward:int=0
         self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
-        self.color_inputtext1=self.WHITE
-        self.color_inputtext2=self.WHITE
         self.text_player1:str="player 1"
         self.text_player2:str="PC"
         self.speed:int=0
@@ -69,8 +67,6 @@ class Space_pong_game(interface):
             if self.main==3 or self.main==-1:
                 if self.speed_up and event.key==K_KP_PLUS:self.change_speed(15,1,10,"speed_up",speed_up=self.speed_up)
                 if self.speed_down and event.key==K_KP_MINUS:self.change_speed(-15,-1,-1,"speed_down",speed_down=self.speed_down)
-            self.input_text(event,2,self.color_inputtext1,"text_player1",self.text_player1)
-            self.input_text(event,2,self.color_inputtext2,"text_player2",self.text_player2)
             if self.main==-1 and event.key==K_1:save_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001),self.model_path)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False

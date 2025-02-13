@@ -62,10 +62,11 @@ class interface(load_elements):
             # if self.pressed_mouse[0]:
             #     self.color_inputtext1=self.SKYBLUE if self.input_player1.collidepoint(self.mouse_pos) else self.WHITE
             #     self.color_inputtext2=self.SKYBLUE if self.input_player2.collidepoint(self.mouse_pos) else self.WHITE
-            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input1)
+            self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input_player1,self.input_player2)
             self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
     def inputs_text(self):
-        self.input1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
+        self.input_player1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
+        self.input_player2=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
     def buttons_mode_game(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.continue_button = self.button_factory_f5.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True})})

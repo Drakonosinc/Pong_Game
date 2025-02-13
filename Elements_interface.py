@@ -153,3 +153,4 @@ class Input_text:
     def execute_commands(self):
         for command in self.commands:
             if callable(command):command()
+    def show_player(self):return self.text
