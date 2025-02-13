@@ -148,8 +148,7 @@ class Input_text:
             if self.sound_touch:self.sound_touch.play(loops=0)
             self.states["presses_touch"]=False
             self.execute_commands()
-        else:self.states["presses_touch"] = True
-        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["active"]=False
+        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["active"],self.states["presses_touch"]=False,True
         if self.states["active"]:pygame.draw.rect(self.screen,self.pressed_color,self.rect)
     def execute_commands(self):
         for command in self.commands:
