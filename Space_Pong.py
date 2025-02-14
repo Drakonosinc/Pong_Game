@@ -19,6 +19,7 @@ class Space_pong_game(interface):
         self.score1:int=0
         self.score2:int=0
         self.reward:int=0
+        self.touch_ball:list=[True,True]
         self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.speed:int=0
         self.speed_up:bool=True
@@ -92,20 +93,22 @@ class Space_pong_game(interface):
         def reset(ball,reward,objet):
                 ball.rect.x=300
                 ball.rect.y=200
+                ball.move_x*=-1
                 self.reward+=reward
                 setattr(self,objet,getattr(self,objet)+1)
-        def collision(ball,reward=1,touch=True):
-            if touch:
-                self.reward+=reward
+        def collision(ball,reward=1,touch=0):
+            if self.touch_ball[touch]:
                 ball.move_x*=-1
+                self.reward+=reward
                 self.sound.play(loops=0)
-                touch=False
+                self.touch_ball[touch]=False
+            else:self.touch_ball[touch]=True
         for ball in self.balls:
             ball.move_ball(self.WIDTH,self.HEIGHT,self.sound)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
             if ball.rect.x<=0:reset(ball,1,"score2")
-            if ball.check_collision(self.object1):collision(ball,-1)
-            if ball.check_collision(self.object2):collision(ball)
+            if ball.check_collision(self.object1):collision(ball,-1,0)
+            if ball.check_collision(self.object2):collision(ball,1,1)
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
