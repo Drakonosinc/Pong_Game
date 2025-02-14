@@ -16,8 +16,6 @@ class Space_pong_game(interface):
         self.clock=pygame.time.Clock()
         self.FPS:int=60
         self.generation:int=0
-        self.value1:int=4
-        self.value2:int=4
         self.score1:int=0
         self.score2:int=0
         self.reward:int=0
@@ -27,7 +25,6 @@ class Space_pong_game(interface):
         self.speed_down:bool=True
         self.mode_game:dict[str,bool]={"Training AI":False,"Player":False,"AI":False}
         self.max_score:int=5
-        self.touch_ball:list=[True,True]
         self.sound_type:dict={"sound":f"Sound {"ON" if (x:=self.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
