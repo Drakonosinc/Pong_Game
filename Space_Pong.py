@@ -32,8 +32,8 @@ class Space_pong_game(interface):
         self.object1=Rect(25,150,11,90)
         self.object2=Rect(665,150,11,90)
         self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36) for _ in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
-    def get_state(self,ball=(0,0,0,0)):
-        return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,ball.x,ball.y])
+    def get_state(self):
+        return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.balls[0].rect.x,self.balls[0].rect.y])
     def handle_keys(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:self.event_quit()
@@ -77,8 +77,8 @@ class Space_pong_game(interface):
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
         for ball in self.balls:
-            self.rotated_ball = pygame.transform.rotate(self.planet, ball.x)
-            self.screen.blit(self.rotated_ball, (ball.x,ball.y))
+            self.rotated_ball = pygame.transform.rotate(self.planet, ball.rect.x)
+            self.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game["Training AI"]:self.draw_generation()
@@ -90,8 +90,8 @@ class Space_pong_game(interface):
         self.menus()
     def update(self):
         def reset(ball,reward,objet):
-                ball.x=300
-                ball.y=200
+                ball.rect.x=300
+                ball.rect.y=200
                 self.reward+=reward
                 setattr(self,objet,getattr(self,objet)+1)
         def collision(ball,reward=1,touch=True):
@@ -102,8 +102,8 @@ class Space_pong_game(interface):
                 touch=False
         for ball in self.balls:
             ball.move_ball(self.sound)
-            if ball.x>=self.WIDTH-25:reset(ball,-1,"score1")
-            if ball.x<=0:reset(ball,1,"score2")
+            if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
+            if ball.rect.x<=0:reset(ball,1,"score2")
             if ball.check_collision(self.object1):collision(ball,-1)
             if ball.check_collision(self.object2):collision(ball)
     def scores(self):
