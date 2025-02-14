@@ -2,8 +2,8 @@ from pygame import *
 class Ball:
     def __init__(self, x, y, width, height):
         self.rect = Rect(x, y, width, height)
-        self.move_x = 0
-        self.move_y = 0
+        self.move_x = 4
+        self.move_y = 4
     def move_ball(self,WIDTH,HEIGHT,sound=None):
         if self.rect.x>=WIDTH-25 or self.rect.x<=0:
             self.move_x*=-1
