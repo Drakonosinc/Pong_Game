@@ -75,9 +75,9 @@ class Space_pong_game(interface):
             if self.pressed_keys[K_r]:self.change_mains({"main":-1})
             if self.pressed_keys[K_e]:self.change_mains({"main":0,"run":True})
     def images_elements(self):
-        self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
         self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
+        self.rotated_ball = pygame.transform.rotate(self.planet, self.object3.x)
         self.screen.blit(self.rotated_ball, (self.object3.x,self.object3.y))
     def draw(self):
         self.screen.blit(self.image, (0, 0))
@@ -123,7 +123,7 @@ class Space_pong_game(interface):
         if self.mode_game["Training AI"] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):self.change_mains({"main":1,"command":self.reset})
     def player1_code(self):
-        if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.value2
+        if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.balls[0].move_y
         if self.object1.y>=310:self.object1.y=310
         if self.object1.y<=0:self.object1.y=0
     def draw_activations(self):
