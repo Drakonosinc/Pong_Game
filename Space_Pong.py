@@ -89,22 +89,23 @@ class Space_pong_game(interface):
         self.mode_speed()
         self.menus()
     def update(self):
-        def reset(reward,objet):
-                self.object3.x=300
-                self.object3.y=200
+        def reset(ball,reward,objet):
+                ball.x=300
+                ball.y=200
                 self.reward+=reward
                 setattr(self,objet,getattr(self,objet)+1)
-        def collision(reward=1,touch=True):
+        def collision(ball,reward=1,touch=True):
             if touch:
                 self.reward+=reward
                 ball.move_x*=-1
                 self.sound.play(loops=0)
+                touch=False
         for ball in self.balls:
             ball.move_ball(self.sound)
-            if ball.x>=self.WIDTH-25:reset(-1,"score1")
-            if ball.x<=0:reset(1,"score2")
-            if ball.check_collision(self.object1):collision(-1)
-            if ball.check_collision(self.object2):collision()
+            if ball.x>=self.WIDTH-25:reset(ball,-1,"score1")
+            if ball.x<=0:reset(ball,1,"score2")
+            if ball.check_collision(self.object1):collision(ball,-1)
+            if ball.check_collision(self.object2):collision(ball)
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
@@ -177,6 +178,6 @@ class Space_pong_game(interface):
             self.handle_keys(),self.draw()
             if self.main==-1:
                 if self.mode_game["Training AI"] or self.mode_game["AI"]:self.type_game()
-                self.move_ball(),self.restart()
+                self.update(),self.restart()
             self.item_repeat_run()
         return self.reward
