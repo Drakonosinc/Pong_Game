@@ -88,7 +88,9 @@ class Space_pong_game(interface):
         self.name_players()
         self.mode_speed()
         self.menus()
-    def update(self):pass
+    def update(self):
+        for ball in self.balls:
+            ball.move_ball(self.sound)
     def move_ball(self):
         if self.object3.x>=self.WIDTH-25 or self.object3.x<=0:
             self.value1*=-1
