@@ -101,7 +101,7 @@ class Space_pong_game(interface):
                 self.sound.play(loops=0)
                 touch=False
         for ball in self.balls:
-            ball.move_ball(self.sound)
+            ball.move_ball(self.WIDTH,self.HEIGHT,self.sound)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
             if ball.rect.x<=0:reset(ball,1,"score2")
             if ball.check_collision(self.object1):collision(ball,-1)
