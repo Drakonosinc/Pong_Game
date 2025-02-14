@@ -90,21 +90,22 @@ class Space_pong_game(interface):
         self.mode_speed()
         self.menus()
     def update(self):
+        def repeat(ball,reward):
+            ball.move_x*=-1
+            self.reward+=reward
+            self.sound.play(loops=0)
         def reset(ball,reward,objet):
                 ball.rect.x=300
                 ball.rect.y=200
-                ball.move_x*=-1
-                self.reward+=reward
+                repeat(ball,reward)
                 setattr(self,objet,getattr(self,objet)+1)
         def collision(ball,reward=1,touch=0):
             if self.touch_ball[touch]:
-                ball.move_x*=-1
-                self.reward+=reward
-                self.sound.play(loops=0)
+                repeat(ball,reward)
                 self.touch_ball[touch]=False
             else:self.touch_ball[touch]=True
         for ball in self.balls:
-            ball.move_ball(self.WIDTH,self.HEIGHT,self.sound)
+            ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
             if ball.rect.x<=0:reset(ball,1,"score2")
             if ball.check_collision(self.object1):collision(ball,-1,0)
