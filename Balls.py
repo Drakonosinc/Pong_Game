@@ -9,8 +9,8 @@ class Ball:
             self.move_x*=-1
             if sound is not None:sound.play(loops=1)
         if self.rect.y>=HEIGHT-25 or self.rect.y<=0:self.move_y*=-1
-        self.rect.x+=self.value1
-        self.rect.y+=self.value2
+        self.rect.x+=self.move_x
+        self.rect.y+=self.move_y
     def check_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
     def reset(self, x, y):
