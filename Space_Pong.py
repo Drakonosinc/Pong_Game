@@ -97,9 +97,10 @@ class Space_pong_game(interface):
                 repeat(ball,reward)
                 setattr(obj,score,getattr(obj,score)+1)
         def collision(player,obj,reward=1):
-            if player.check_collision(obj) and player.active:
-                repeat(obj,reward)
-                player.active=False
+            if player.check_collision(obj):
+                if player.active:
+                    repeat(obj,reward)
+                    player.active=False
             else:player.active=True
         for ball in self.balls:
             ball.move_ball(self.WIDTH,self.HEIGHT)
