@@ -5,5 +5,9 @@ class Player:
         self.active=True
         self.score=0
         self.reward=0
+    def reset(self,x, y, width, height):
+        self.rect = Rect(x, y, width, height)
+        self.active = True
+        self.score = 0
     def check_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
