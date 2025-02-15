@@ -11,5 +11,3 @@ class Ball:
         self.rect.y+=self.move_y
     def check_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
-    def check_collision(self, other_rect):
-        return self.rect.colliderect(other_rect)
