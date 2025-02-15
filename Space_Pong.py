@@ -109,14 +109,14 @@ class Space_pong_game(interface):
             collision(self.player_one.rect,ball,-1,)
             collision(self.player_two.rect,ball,1,)
     def scores(self):
-        self.screen.blit(self.font.render(f"Score {self.self.player_one.score}", True, self.YELLOW),(45,380))
+        self.screen.blit(self.font.render(f"Score {self.player_one.score}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
     def IA_actions(self,action):
         if action[0]>0 and self.player_two.top > 0:self.player_two.y -= 5
         if action[0]<0 and self.player_two.bottom < self.HEIGHT:self.player_two.y += 5
     def restart(self):
-        if self.mode_game["Training AI"] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
-        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):self.change_mains({"main":1,"command":self.reset})
+        if self.mode_game["Training AI"] and (self.player_one.score==self.max_score or self.player_two.score==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
+        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.player_one.score==self.max_score or self.player_two.score==self.max_score):self.change_mains({"main":1,"command":self.reset})
     def player1_code(self):
         if self.player_one.rect.top > 0 or self.player_one.rect.bottom < self.HEIGHT:self.player_one.rect.y+=self.balls[0].move_y
         if self.player_one.rect.y>=310:self.player_one.rect.y=310
