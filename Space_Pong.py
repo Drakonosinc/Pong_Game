@@ -98,10 +98,10 @@ class Space_pong_game(interface):
                 setattr(self,objet,getattr(self,objet)+1)
         def collision(player,obj,reward=1):
             if player.check_collision(obj):
-                if self.touch_ball:
+                if self.player.active:
                     repeat(obj,reward)
-                    self.touch_ball=False
-            else:self.touch_ball=True
+                    self.player.active=False
+            else:self.player.active=True
         for ball in self.balls:
             ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
