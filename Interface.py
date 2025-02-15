@@ -40,7 +40,6 @@ class interface(load_elements):
     def Game_over(self):
         if self.main==1:
             self.filt(80)
-            pygame.draw.rect(self.screen,"black",(0,0,700,400),15)
             self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
             self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
