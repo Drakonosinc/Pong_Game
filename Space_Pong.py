@@ -1,6 +1,7 @@
 from Interface import *
 import numpy as np
 from Balls import *
+from Players import *
 class Space_pong_game(interface):
     def __init__(self,model=None):
         super().__init__()
@@ -16,10 +17,6 @@ class Space_pong_game(interface):
         self.clock=pygame.time.Clock()
         self.FPS:int=60
         self.generation:int=0
-        self.score1:int=0
-        self.score2:int=0
-        self.reward:int=0
-        self.touch_ball:list=[True,True]
         self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
         self.speed:int=0
         self.speed_up:bool=True
@@ -30,8 +27,8 @@ class Space_pong_game(interface):
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def objects(self):
-        self.object1=Rect(25,150,11,90)
-        self.object2=Rect(665,150,11,90)
+        self.object1=Player(25,150,11,90)
+        self.object2=Player(665,150,11,90)
         self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,3+i,3+i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
     def get_state(self):
         return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.balls[0].rect.x,self.balls[0].rect.y])
@@ -66,17 +63,17 @@ class Space_pong_game(interface):
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
-            if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.top > 0:self.object1.y -= 5
-            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.bottom < self.HEIGHT:self.object1.y += 5
+            if self.pressed_keys[self.config_keys["UP_W"]] and self.object1.rect.top > 0:self.object1.rect.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.object1.rect.bottom < self.HEIGHT:self.object1.rect.y += 5
         if self.main==-1 and self.mode_game["Player"]:
-            if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.top > 0:self.object2.y -= 5
-            if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.bottom < self.HEIGHT:self.object2.y += 5
+            if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.object2.rect.top > 0:self.object2.rect.y -= 5
+            if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.object2.rect.bottom < self.HEIGHT:self.object2.rect.y += 5
         if self.main==1:
             if self.pressed_keys[K_r]:self.change_mains({"main":-1})
             if self.pressed_keys[K_e]:self.change_mains({"main":0,"run":True})
     def images_elements(self):
-        self.screen.blit(self.spacecraft, (-77,self.object1.y-140))
-        self.screen.blit(self.spacecraft2, (578,self.object2.y-140))
+        self.screen.blit(self.spacecraft, (-77,self.object1.rect.y-140))
+        self.screen.blit(self.spacecraft2, (578,self.object2.rect.y-140))
         for ball in self.balls:
             self.rotated_ball = pygame.transform.rotate(self.planet, ball.rect.x)
             self.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
@@ -109,8 +106,8 @@ class Space_pong_game(interface):
             ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
             if ball.rect.x<=0:reset(ball,1,"score2")
-            collision(ball,self.object1,-1,0)
-            collision(ball,self.object2,1,1)
+            collision(ball,self.object1.rect,-1,0)
+            collision(ball,self.object2.rect,1,1)
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
@@ -121,9 +118,9 @@ class Space_pong_game(interface):
         if self.mode_game["Training AI"] and (self.score1==self.max_score or self.score2==self.max_score):self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.score1==self.max_score or self.score2==self.max_score):self.change_mains({"main":1,"command":self.reset})
     def player1_code(self):
-        if self.object1.top > 0 or self.object1.bottom < self.HEIGHT:self.object1.y+=self.balls[0].move_y
-        if self.object1.y>=310:self.object1.y=310
-        if self.object1.y<=0:self.object1.y=0
+        if self.object1.rect.top > 0 or self.object1.rect.bottom < self.HEIGHT:self.object1.rect.y+=self.balls[0].move_y
+        if self.object1.rect.y>=310:self.object1.rect.y=310
+        if self.object1.rect.y<=0:self.object1.rect.y=0
     def draw_activations(self):
         if self.mode_game["AI"]:self.model=self.model_training
         if self.model!=None and (self.model.activations is not None):
