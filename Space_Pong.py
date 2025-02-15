@@ -27,11 +27,11 @@ class Space_pong_game(interface):
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def objects(self):
-        self.object1=Player(25,150,11,90)
-        self.object2=Player(665,150,11,90)
+        self.player_one=Player(25,150,11,90)
+        self.player_two=Player(665,150,11,90)
         self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,3+i,3+i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
     def get_state(self):
-        return np.array([self.object1.x, self.object1.y, self.object2.x, self.object2.y,self.balls[0].rect.x,self.balls[0].rect.y])
+        return np.array([self.player_one.rect.x, self.player_one.rect.y, self.player_two.rect.x, self.player_two.rect.y,self.balls[0].rect.x,self.balls[0].rect.y])
     def handle_keys(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:self.event_quit()
@@ -153,8 +153,6 @@ class Space_pong_game(interface):
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self,running=True,fps=60,speed=0,speed_up=True,speed_down=True):
-        self.objects()
-        self.score1,self.score2=0,0
         self.FPS=fps
         self.speed=speed
         self.speed_up=speed_up
