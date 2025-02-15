@@ -91,11 +91,11 @@ class Space_pong_game(interface):
             ball.move_x*=-1
             self.player_two.reward+=reward
             self.sound.play(loops=0)
-        def reset(ball,reward,objet):
+        def reset(ball,reward,obj,score):
                 ball.rect.x=300
                 ball.rect.y=200
                 repeat(ball,reward)
-                setattr(self,objet,getattr(self,objet)+1)
+                setattr(obj,score,getattr(obj,score)+1)
         def collision(player,obj,reward=1):
             if player.check_collision(obj):
                 if self.player.active:
@@ -104,13 +104,13 @@ class Space_pong_game(interface):
             else:self.player.active=True
         for ball in self.balls:
             ball.move_ball(self.WIDTH,self.HEIGHT)
-            if ball.rect.x>=self.WIDTH-25:reset(ball,-1,"score1")
-            if ball.rect.x<=0:reset(ball,1,"score2")
+            if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one,"score")
+            if ball.rect.x<=0:reset(ball,1,self.player_two,"score")
             collision(self.player_one.rect,ball,-1,)
             collision(self.player_two.rect,ball,1,)
     def scores(self):
-        self.screen.blit(self.font.render(f"Score {self.score1}", True, self.YELLOW),(45,380))
-        self.screen.blit(self.font.render(f"Score {self.score2}", True, self.YELLOW),(580,380))
+        self.screen.blit(self.font.render(f"Score {self.self.player_one.score}", True, self.YELLOW),(45,380))
+        self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
     def IA_actions(self,action):
         if action[0]>0 and self.player_two.top > 0:self.player_two.y -= 5
         if action[0]<0 and self.player_two.bottom < self.HEIGHT:self.player_two.y += 5
