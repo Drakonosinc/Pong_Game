@@ -106,8 +106,8 @@ class Space_pong_game(interface):
             ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one,"score")
             if ball.rect.x<=0:reset(ball,1,self.player_two,"score")
-            collision(self.player_one.rect,ball,-1,)
-            collision(self.player_two.rect,ball,1,)
+            collision(self.player_one,ball,-1,)
+            collision(self.player_two,ball,1,)
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.player_one.score}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
