@@ -26,13 +26,12 @@ class Space_pong_game(interface):
         self.sound_type:dict={"sound":f"Sound {"ON" if (x:=self.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
-        print("hola")
-        
     def objects(self):
         self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i,i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
         self.player_one=Player(25,150,11,90)
         self.player_one.active.extend([True] * len(self.balls))
         self.player_two=Player(665,150,11,90)
+        self.player_two.active.extend([True] * len(self.balls))
     def get_state(self):
         return np.array([self.player_one.rect.x, self.player_one.rect.y, self.player_two.rect.x, self.player_two.rect.y,self.balls[0].rect.x,self.balls[0].rect.y])
     def handle_keys(self):
@@ -99,18 +98,18 @@ class Space_pong_game(interface):
                 ball.rect.y=200
                 repeat(ball,reward)
                 setattr(obj,score,getattr(obj,score)+1)
-        def collision(player,ball,reward=1):
+        def collision(player,ball,i,reward=1):
             if player.check_collision(ball):
-                if player.active:
+                if player.active[i]:
                     repeat(ball,reward)
-                    player.active=False
-            else:player.active=True
+                    player.active[i]=False
+            else:player.active[i]=True
         for i, ball in enumerate(self.balls):
             ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one,"score")
             if ball.rect.x<=0:reset(ball,1,self.player_two,"score")
-            collision(self.player_one,ball,-1)
-            collision(self.player_two,ball,1)
+            collision(self.player_one,ball,i,-1)
+            collision(self.player_two,ball,i,1)
     def scores(self):
         self.screen.blit(self.font.render(f"Score {self.player_one.score}", True, self.YELLOW),(45,380))
         self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
