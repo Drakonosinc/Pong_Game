@@ -29,7 +29,7 @@ class Space_pong_game(interface):
     def objects(self):
         self.player_one=Player(25,150,11,90)
         self.player_two=Player(665,150,11,90)
-        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,3+i,3+i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
+        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i,i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
     def get_state(self):
         return np.array([self.player_one.rect.x, self.player_one.rect.y, self.player_two.rect.x, self.player_two.rect.y,self.balls[0].rect.x,self.balls[0].rect.y])
     def handle_keys(self):
