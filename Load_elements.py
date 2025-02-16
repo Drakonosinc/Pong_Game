@@ -19,7 +19,7 @@ class load_elements():
             self.config_sounds = config["config_sounds"]
             self.config_AI = config["config_AI"]
             self.config_game = config["config_game"]
-        except:self.config(alls=True)
+        except:self.config(alls=True),self.save_config()
     def config(self,visuals=False,keys=False,sounds=False,AI=False,game=False,alls=False):
         if visuals or alls:self.config_visuals={"WIDTH":700,"HEIGHT":400,
                             "image_background":["background1.jpg","background2.jpg","background3.jpg","background4.jpg","background5.jpg","background6.jpg","background7.jpg","background8.jpg"],
