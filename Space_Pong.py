@@ -102,7 +102,7 @@ class Space_pong_game(interface):
                     repeat(obj,reward)
                     player.active=False
             else:player.active=True
-        for ball in self.balls:
+        for i, ball in enumerate(self.balls):
             ball.move_ball(self.WIDTH,self.HEIGHT)
             if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one,"score")
             if ball.rect.x<=0:reset(ball,1,self.player_two,"score")
