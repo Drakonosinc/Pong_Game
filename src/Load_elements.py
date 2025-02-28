@@ -5,6 +5,7 @@ class load_elements():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("Space Pong")
+        self.base_dir = os.path.dirname(os.path.dirname(__file__))
         self.load_config()
         self.define_colors()
         self.load_fonts()
@@ -12,7 +13,7 @@ class load_elements():
         self.config_screen()
     def load_config(self):
         try:
-            config_path = os.path.join(os.path.dirname(__file__), "Config")
+            config_path = os.path.join(self.base_dir, "Config")
             with open(os.path.join(config_path,"config.json"), 'r') as file:config = json.load(file)
             self.config_visuals = config["config_visuals"]
             self.config_keys = config["config_keys"]
@@ -37,11 +38,11 @@ class load_elements():
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False}
         if game or alls:self.config_game={"number_balls":1}
     def save_config(self):
-        config_path = os.path.join(os.path.dirname(__file__), "Config")
+        config_path = os.path.join(self.base_dir, "Config")
         config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds,"config_game": self.config_game}
         with open(os.path.join(config_path,"config.json"), 'w') as file:json.dump(config, file, indent=4)
     def load_AI(self):
-        self.model_path=os.path.join(os.path.dirname(__file__), "AI/best_model.pth")
+        self.model_path=os.path.join(self.base_dir, "AI/best_model.pth")
         self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
     def config_screen(self):
         self.WIDTH=self.config_visuals["WIDTH"]
