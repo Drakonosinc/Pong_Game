@@ -62,7 +62,7 @@ class load_elements():
         self.background=self.GRAY
     def load_images(self):
         self.angle=90
-        self.image_path = os.path.join(os.path.dirname(__file__), "images")
+        self.image_path = os.path.join(self.base_dir, "images")
         self.image=pygame.image.load(os.path.join(self.image_path,self.config_visuals["image_background"][self.config_visuals["value_background"]])).convert()
         self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
         self.planet=pygame.image.load(os.path.join(self.image_path,self.config_visuals["planets"][self.config_visuals["value_planet"]])).convert_alpha()
@@ -74,7 +74,7 @@ class load_elements():
         self.spacecraft2=pygame.transform.scale(self.spacecraft2,(350,200))
         self.spacecraft2=pygame.transform.rotate(self.spacecraft2,self.angle*3)
     def load_fonts(self):
-        self.font_path = os.path.join(os.path.dirname(__file__), "fonts")
+        self.font_path = os.path.join(self.base_dir, "fonts")
         self.font=pygame.font.Font(None,25)
         self.font2=pygame.font.Font(None,35)
         self.font2_5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),30)
@@ -85,7 +85,7 @@ class load_elements():
         self.font4_5=pygame.font.SysFont("times new roman", 80)
         self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
     def load_sounds(self):
-        self.sound_path = os.path.join(os.path.dirname(__file__), "sounds")
+        self.sound_path = os.path.join(self.base_dir, "sounds")
         self.sound=pygame.mixer.Sound(os.path.join(self.sound_path,"pong.wav"))
         self.sound_touchletters=pygame.mixer.Sound(os.path.join(self.sound_path,"touchletters.wav"))
         self.sound_exitbutton=pygame.mixer.Sound(os.path.join(self.sound_path,"exitbutton.wav"))
