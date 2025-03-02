@@ -1,7 +1,6 @@
 from Interface import *
 import numpy as np
-from Entities.Balls import *
-from Entities.Players import *
+from Entities import *
 class Space_pong_game(interface):
     def __init__(self,model=None):
         super().__init__()
