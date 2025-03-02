@@ -1,2 +1,2 @@
-from Players import *
-from Balls import *
+from .Players import *
+from .Balls import *

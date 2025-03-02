@@ -1,2 +1,2 @@
-from Genetic_Algorithm import *
-from Neural_Network import *
+from .Genetic_Algorithm import *
+from .Neural_Network import *
