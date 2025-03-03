@@ -17,7 +17,7 @@ class load_elements():
         self.model_path=os.path.join(self.base_dir, "AI/best_model.pth")
         self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
     def config_screen(self):
-        self.WIDTH=self.config_visuals["WIDTH"]
+        self.WIDTH=self.config.config_visuals["WIDTH"]
         self.HEIGHT=self.config_visuals["HEIGHT"]
         self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
         self.load_images()
