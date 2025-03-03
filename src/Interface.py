@@ -70,27 +70,27 @@ class interface(load_elements):
         self.config_training_ai(),self.buttons_config_game()
     def main_training_ai(self):
         self.screen.blit(self.font5.render(f"Config Training\n{"AI":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
-        self.screen.blit(self.font5.render(f"Generation Size\n{self.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
-        self.screen.blit(self.font5.render(f"Population Size\n{self.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
-        self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config_AI['try_for_ai']:^{28 if self.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
+        self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
+        self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
         self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
         self.execute_buttons(self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai,self.save_model)
-        self.save_model.change_item({"color":self.SKYBLUE if self.config_AI["model_save"] else self.RED,"text":"ON" if self.config_AI["model_save"] else "OFF"})
+        self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
     def config_training_ai(self):
-        self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value')})
-        self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'generation_value',True,-1)})
-        self.increase_population = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value')})
-        self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
-        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
-        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
-        self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.config.save_config})
+        self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value')})
+        self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1)})
+        self.increase_population = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value')})
+        self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value',True,-1)})
+        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai')})
+        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1)})
+        self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config.config_AI,"model_save"),"command2":self.config.save_config})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
-        self.screen.blit(self.font5.render(f"Number of Balls\n{self.config_game['number_balls']:^{28 if self.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.screen.blit(self.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
         self.execute_buttons(self.increase_balls,self.decrease_balls)
     def buttons_config_game(self):
-        self.increase_balls = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_game,'number_balls'),"command2":self.objects()})
-        self.decrease_balls = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config_game,'number_balls',True,-1),"command2":self.objects()})
+        self.increase_balls = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls'),"command2":self.objects()})
+        self.decrease_balls = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls',True,-1),"command2":self.objects()})
     def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
         self.mode_game["Training AI"]=mode_one
         self.mode_game["Player"]=mode_two
@@ -120,7 +120,7 @@ class interface(load_elements):
     def buttons_menu_options(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.visual_button=self.button_factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"command1":lambda:self.change_mains({"main":5})})
-        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.config.save_config})
+        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.config.save_config})
         self.keys_button=self.button_factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"command1":lambda:self.change_mains({"main":6})})
         self.language_button=self.button_factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45)})
     def sound_on_off(self):
@@ -155,7 +155,7 @@ class interface(load_elements):
         self.save_visual_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
         self.default_visual_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:self.config.config(visuals=True),"command2":self.config_screen})
     def change_items(self,item,background=None,number=0):
-        self.config_visuals[item]=((self.config_visuals[item] + number) % len(self.config_visuals[background])) if background!=None else (self.config_visuals[item] + number)
+        self.config.config_visuals[item]=((self.config.config_visuals[item] + number) % len(self.config.config_visuals[background])) if background!=None else (self.config.config_visuals[item] + number)
         self.config_screen()
     def menu_keys(self):
         if self.main==6:
@@ -163,10 +163,10 @@ class interface(load_elements):
             self.execute_buttons(self.back_keys_button,self.up_w_button,self.down_s_button,self.up_arrow_button,self.down_arrow_button,self.save_keys_button,self.default_keys_button)
     def buttons_keys(self):
         self.back_keys_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":4})})
-        self.up_w_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key1"],"position": (self.WIDTH/2-240,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
-        self.down_s_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
-        self.up_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
-        self.down_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
+        self.up_w_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key1"],"position": (self.WIDTH/2-240,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
+        self.down_s_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
+        self.up_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
+        self.down_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
         self.save_keys_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
         self.default_keys_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:(self.config.config(keys=True),self.change_mains({"main":6,"command":self.buttons_keys}))})
     def change_keys(self,key,key_name,button=None):
@@ -177,9 +177,9 @@ class interface(load_elements):
         self.check_item(self.utils_keys,self.SKYBLUE,self.WHITE,"color",**{"UP_W":self.up_w_button,"DOWN_S":self.down_s_button,"UP_ARROW":self.up_arrow_button,"DOWN_ARROW":self.down_arrow_button})
     def event_keys(self,event):
         if self.key!=None and (self.utils_keys[self.key] and event.type==KEYDOWN):
-            self.config_keys[self.key]=event.key
-            self.config_keys[self.key_name]=event.unicode.upper()
-            self.check_item(self.config_keys,self.config_keys[self.key_name],self.WHITE,"text",**{self.key:self.button_key})
+            self.config.config_keys[self.key]=event.key
+            self.config.config_keys[self.key_name]=event.unicode.upper()
+            self.check_item(self.config.config_keys,self.config.config_keys[self.key_name],self.WHITE,"text",**{self.key:self.button_key})
             self.change_keys(self.key,self.key_name)
     def check_item(self,dic,is_true,is_false,item,**kwargs):
         for key,button in kwargs.items():setattr(button,item,(is_true if dic[key] else is_false))
