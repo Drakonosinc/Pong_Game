@@ -83,7 +83,7 @@ class interface(load_elements):
         self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config_AI,'population_value',True,-1)})
         self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai')})
         self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config_AI,'try_for_ai',True,-1)})
-        self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.save_config})
+        self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config_AI,"model_save"),"command2":self.config.save_config})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Number of Balls\n{self.config_game['number_balls']:^{28 if self.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
@@ -120,7 +120,7 @@ class interface(load_elements):
     def buttons_menu_options(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.visual_button=self.button_factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"command1":lambda:self.change_mains({"main":5})})
-        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.save_config})
+        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.config.save_config})
         self.keys_button=self.button_factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"command1":lambda:self.change_mains({"main":6})})
         self.language_button=self.button_factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45)})
     def sound_on_off(self):
@@ -152,7 +152,7 @@ class interface(load_elements):
         self.increase_player1_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_8,"text": "v","position": (self.WIDTH/2-330,self.HEIGHT/2+50),"command1":lambda:self.change_items("value_spacecraft1","spacecrafts",1)})
         self.decrease_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_5,"text": "Λ","position": (self.WIDTH/2+310,self.HEIGHT/2-120),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",-1)})
         self.increase_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_8,"text": "v","position": (self.WIDTH/2+310,self.HEIGHT/2+50),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",1)})
-        self.save_visual_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.save_config})
+        self.save_visual_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
         self.default_visual_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:self.config(visuals=True),"command2":self.config_screen})
     def change_items(self,item,background=None,number=0):
         self.config_visuals[item]=((self.config_visuals[item] + number) % len(self.config_visuals[background])) if background!=None else (self.config_visuals[item] + number)
