@@ -27,7 +27,7 @@ class Space_pong_game(interface):
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
     def objects(self):
-        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i) for i in range(1 if self.mode_game["Training AI"] else self.config_game["number_balls"])]
+        self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i) for i in range(1 if self.mode_game["Training AI"] else self.config.config_game["number_balls"])]
         self.player_one=Player(25,150,11,90,[True] * len(self.balls))
         self.player_two=Player(665,150,11,90,[True] * len(self.balls))
     def get_state(self):
@@ -63,8 +63,8 @@ class Space_pong_game(interface):
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
-            if self.pressed_keys[self.config_keys["UP_W"]] and self.player_one.rect.top > 0:self.player_one.rect.y -= 5
-            if self.pressed_keys[self.config_keys["DOWN_S"]] and self.player_one.rect.bottom < self.HEIGHT:self.player_one.rect.y += 5
+            if self.pressed_keys[self.config.config_keys["UP_W"]] and self.player_one.rect.top > 0:self.player_one.rect.y -= 5
+            if self.pressed_keys[self.config.config_keys["DOWN_S"]] and self.player_one.rect.bottom < self.HEIGHT:self.player_one.rect.y += 5
         if self.main==-1 and self.mode_game["Player"]:
             if self.pressed_keys[self.config_keys["UP_ARROW"]] and self.player_two.rect.top > 0:self.player_two.rect.y -= 5
             if self.pressed_keys[self.config_keys["DOWN_ARROW"]] and self.player_two.rect.bottom < self.HEIGHT:self.player_two.rect.y += 5
