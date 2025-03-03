@@ -153,7 +153,7 @@ class interface(load_elements):
         self.decrease_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_5,"text": "Λ","position": (self.WIDTH/2+310,self.HEIGHT/2-120),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",-1)})
         self.increase_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_8,"text": "v","position": (self.WIDTH/2+310,self.HEIGHT/2+50),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",1)})
         self.save_visual_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
-        self.default_visual_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:self.config(visuals=True),"command2":self.config_screen})
+        self.default_visual_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:self.config.config(visuals=True),"command2":self.config_screen})
     def change_items(self,item,background=None,number=0):
         self.config_visuals[item]=((self.config_visuals[item] + number) % len(self.config_visuals[background])) if background!=None else (self.config_visuals[item] + number)
         self.config_screen()
@@ -168,7 +168,7 @@ class interface(load_elements):
         self.up_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
         self.down_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
         self.save_keys_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
-        self.default_keys_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:(self.config(keys=True),self.change_mains({"main":6,"command":self.buttons_keys}))})
+        self.default_keys_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:(self.config.config(keys=True),self.change_mains({"main":6,"command":self.buttons_keys}))})
     def change_keys(self,key,key_name,button=None):
         self.key=key
         self.key_name=key_name
