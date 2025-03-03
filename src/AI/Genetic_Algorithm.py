@@ -1,5 +1,5 @@
 import random,copy
-from Neural_Network import *
+from .Neural_Network import *
 # Función de fitness
 def fitness_function(model, game):
     game.model = model  # Asigna el modelo al juego antes de ejecutarlo
