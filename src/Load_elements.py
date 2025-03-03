@@ -63,5 +63,5 @@ class load_elements():
         self.sound_exitbutton=pygame.mixer.Sound(os.path.join(self.sound_path,"exitbutton.wav"))
         self.sound_buttonletters=pygame.mixer.Sound(os.path.join(self.sound_path,"buttonletters.mp3"))
         self.sound_back=pygame.mixer.Sound(os.path.join(self.sound_path,"pong_back.mp3"))
-        self.sound_back.play(loops=-1) if self.config_sounds["sound_main"] else None
+        self.sound_back.play(loops=-1) if self.config.config_sounds["sound_main"] else None
         self.sound_back.set_volume(0.2)
