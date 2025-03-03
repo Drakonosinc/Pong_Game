@@ -1,4 +1,4 @@
-import pygame,os,json
+import pygame,os
 from pygame.locals import *
 from Config_Loader import *
 from AI.Genetic_Algorithm import *
