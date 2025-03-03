@@ -167,7 +167,7 @@ class interface(load_elements):
         self.down_s_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
         self.up_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
         self.down_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
-        self.save_keys_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.save_config})
+        self.save_keys_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
         self.default_keys_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:(self.config(keys=True),self.change_mains({"main":6,"command":self.buttons_keys}))})
     def change_keys(self,key,key_name,button=None):
         self.key=key
@@ -204,4 +204,4 @@ class interface(load_elements):
         if dic!=None and length!=None:dic[variable]=max(1, dic[variable] + number)
         elif dic!=None:dic[variable]+=number
         else:setattr(self,variable,getattr(self,variable)+number)
-        if save:self.save_config()
+        if save:self.config.save_config()
