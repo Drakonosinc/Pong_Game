@@ -6,7 +6,6 @@ class load_elements():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("Space Pong")
-        self.base_dir = os.path.dirname(os.path.dirname(__file__))
         self.config=Config()
         self.config.load_config()
         self.define_colors()
@@ -14,7 +13,7 @@ class load_elements():
         self.load_sounds()
         self.config_screen()
     def load_AI(self):
-        self.model_path=os.path.join(self.base_dir, "AI/best_model.pth")
+        self.model_path=os.path.join(self.config.base_dir, "AI/best_model.pth")
         self.model_training = load_model(self.model_path, 6, 2) if os.path.exists(self.model_path) else None
     def config_screen(self):
         self.WIDTH=self.config.config_visuals["WIDTH"]
@@ -34,7 +33,7 @@ class load_elements():
         self.background=self.GRAY
     def load_images(self):
         self.angle=90
-        self.image_path = os.path.join(self.base_dir, "images")
+        self.image_path = os.path.join(self.config.base_dir, "images")
         self.image=pygame.image.load(os.path.join(self.image_path,self.config.config_visuals["image_background"][self.config.config_visuals["value_background"]])).convert()
         self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
         self.planet=pygame.image.load(os.path.join(self.image_path,self.config.config_visuals["planets"][self.config.config_visuals["value_planet"]])).convert_alpha()
@@ -46,7 +45,7 @@ class load_elements():
         self.spacecraft2=pygame.transform.scale(self.spacecraft2,(350,200))
         self.spacecraft2=pygame.transform.rotate(self.spacecraft2,self.angle*3)
     def load_fonts(self):
-        self.font_path = os.path.join(self.base_dir, "fonts")
+        self.font_path = os.path.join(self.config.base_dir, "fonts")
         self.font=pygame.font.Font(None,25)
         self.font2=pygame.font.Font(None,35)
         self.font2_5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),30)
@@ -57,7 +56,7 @@ class load_elements():
         self.font4_5=pygame.font.SysFont("times new roman", 80)
         self.font5=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),20)
     def load_sounds(self):
-        self.sound_path = os.path.join(self.base_dir, "sounds")
+        self.sound_path = os.path.join(self.config.base_dir, "sounds")
         self.sound=pygame.mixer.Sound(os.path.join(self.sound_path,"pong.wav"))
         self.sound_touchletters=pygame.mixer.Sound(os.path.join(self.sound_path,"touchletters.wav"))
         self.sound_exitbutton=pygame.mixer.Sound(os.path.join(self.sound_path,"exitbutton.wav"))
