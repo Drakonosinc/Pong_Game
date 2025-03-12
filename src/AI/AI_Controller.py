@@ -10,3 +10,4 @@ class AIHandler:
         state=self.get_state()
         action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
         self.IA_actions(action)
+    
