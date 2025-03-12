@@ -5,7 +5,7 @@ from AI.Ai_Controller import *
 class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
-        self.model
+        self.model=None
         self.ai_handler = AIHandler(self)
         self.load_AI()
         self.load_varials()
