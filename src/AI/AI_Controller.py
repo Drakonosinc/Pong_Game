@@ -1,4 +1,6 @@
 import torch
-class AIController():
-    def __init__(self):
-        pass
+import numpy as np
+class AIHandler:
+    def __init__(self, game,model):
+        self.game = game
+        self.model = model
