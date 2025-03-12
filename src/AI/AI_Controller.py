@@ -9,5 +9,7 @@ class AIHandler:
     def action_ai(self,model):
         state=self.get_state()
         action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
-        self.IA_actions(action)
-    
+        self.AI_actions(action)
+    def AI_actions(self,action):
+        if action[0]>0 and self.player_two.rect.top > 0:self.player_two.rect.y -= 5
+        if action[0]<0 and self.player_two.rect.bottom < self.HEIGHT:self.player_two.rect.y += 5
