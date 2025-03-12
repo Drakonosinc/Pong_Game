@@ -162,11 +162,7 @@ class Space_pong_game(interface):
         self.running=running
     def type_game(self):
         if self.mode_game["Training AI"]:self.player1_code()
-        self.action_ai(self.model if self.mode_game["Training AI"] else self.model_training)
-    def action_ai(self,model):
-        state=self.get_state()
-        action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
-        self.IA_actions(action)
+        self.ai_handler.actions_AI(self.model if self.mode_game["Training AI"] else self.model_training)
     def item_repeat_run(self):
         pygame.display.flip()
         self.clock.tick(self.FPS)
