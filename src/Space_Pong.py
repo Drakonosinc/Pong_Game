@@ -149,8 +149,8 @@ class Space_pong_game(interface):
     def mode_speed(self):
         self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self,running=True,fps=60,speed=0,speed_up=True,speed_down=True):
-        self.player_one.reset(25,150,11,90)
-        self.player_two.reset(665,150,11,90)
+        self.player_one.reset(25,150,11,90,[True] * len(self.balls))
+        self.player_two.reset(665,150,11,90,[True] * len(self.balls))
         for ball in self.balls:ball.reset(self.WIDTH//2-28,self.HEIGHT//2-29,36,36)
         self.FPS=fps
         self.speed=speed
