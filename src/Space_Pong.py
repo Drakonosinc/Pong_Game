@@ -89,11 +89,10 @@ class Space_pong_game(interface):
             ball.move_x*=-1
             self.player_two.reward+=reward
             self.sound.play(loops=0)
-        def reset(ball,reward,obj,score):
-                ball.rect.x=300
-                ball.rect.y=200
+        def reset(ball,reward,obj):
+                ball.rect = Rect(*ball.reset_position)
                 repeat(ball,reward)
-                setattr(obj,score,getattr(obj,score)+1)
+                setattr(obj,"score",getattr(obj,"score")+1)
         def collision(player,ball,i,reward=1):
             if player.check_collision(ball):
                 if player.active[i]:
@@ -102,8 +101,8 @@ class Space_pong_game(interface):
             else:player.active[i]=True
         for i, ball in enumerate(self.balls):
             ball.move_ball(self.WIDTH,self.HEIGHT)
-            if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one,"score")
-            if ball.rect.x<=0:reset(ball,1,self.player_two,"score")
+            if ball.rect.x>=self.WIDTH-25:reset(ball,-1,self.player_one)
+            if ball.rect.x<=0:reset(ball,1,self.player_two)
             collision(self.player_one,ball,i,-1)
             collision(self.player_two,ball,i,1)
     def scores(self):
