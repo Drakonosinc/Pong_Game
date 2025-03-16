@@ -1,5 +1,4 @@
 from Interface import *
-import numpy as np
 from Entities import *
 from AI.Ai_Controller import *
 class Space_pong_game(interface):
