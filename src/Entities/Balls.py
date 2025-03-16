@@ -10,7 +10,7 @@ class Ball:
         if self.rect.y>=HEIGHT-25 or self.rect.y<=0:self.move_y*=-1
         self.rect.x+=self.move_x
         self.rect.y+=self.move_y
-    def reset(self,x, y, width, height):
+    def reset(self):
         self.rect = Rect(*self.reset_position)
         self.move_x *= -1
     def check_collision(self, other_rect):
