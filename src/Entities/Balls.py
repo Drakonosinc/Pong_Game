@@ -18,4 +18,3 @@ class Ball:
     def handle_collision(self, player, reward):
         self.move_x *= -1
         player.reward += reward
-        return True

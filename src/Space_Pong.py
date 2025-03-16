@@ -86,8 +86,7 @@ class Space_pong_game(interface):
         self.menus()
     def update(self):
         def repeat(ball,reward):
-            ball.move_x*=-1
-            self.player_two.reward+=reward
+            ball.handle_collision(self.player_two,reward)
             self.sound.play(loops=0)
         def reset(ball,reward,obj):
                 ball.rect = Rect(*ball.reset_position)

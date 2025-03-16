@@ -14,4 +14,3 @@ class Player:
         return self.rect.colliderect(other_rect)
     def update_score(self, reward):
         self.score += reward
-        return True
