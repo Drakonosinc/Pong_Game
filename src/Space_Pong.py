@@ -1,4 +1,4 @@
-from Interface import *
+from Interface.Interface import *
 from Entities import *
 from AI.Ai_Controller import *
 class Space_pong_game(interface):
