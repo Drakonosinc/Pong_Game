@@ -1,6 +1,6 @@
 import sys
 from AI import *
-from Space_Pong import *
+from Game.Space_Pong import *
 if __name__=="__main__":
     while True:
         (game:=Space_pong_game()).run()
