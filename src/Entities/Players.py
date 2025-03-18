@@ -12,5 +12,4 @@ class Player:
         self.score = 0
     def check_collision(self, other_rect):
         return self.rect.colliderect(other_rect)
-    def update_score(self, score):
-        self.score += score
+    def update_score(self, score):self.score += score
