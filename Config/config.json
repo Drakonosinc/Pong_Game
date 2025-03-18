@@ -46,9 +46,9 @@
         "model_save": false
     },
     "config_sounds": {
-        "sound_main": false
+        "sound_main": true
     },
     "config_game": {
-        "number_balls": 3
+        "number_balls": 1
     }
 }
