@@ -31,10 +31,12 @@ class load_elements():
         self.RED=(255,0,0)
         self.GOLDEN=(255,199,51)
         self.background=self.GRAY
+    def image_direct_path(self,image,value):
+        return self.config.config_visuals[image][self.config.config_visuals[value]]
     def load_images(self):
         self.angle=90
         self.image_path = os.path.join(self.config.base_dir, "images")
-        self.image=pygame.image.load(os.path.join(self.image_path,self.config.config_visuals["image_background"][self.config.config_visuals["value_background"]])).convert()
+        self.image=pygame.image.load(os.path.join(self.image_path,self.image_direct_path("image_background","value_background"))).convert()
         self.image=pygame.transform.scale(self.image,(self.WIDTH,self.HEIGHT))
         self.planet=pygame.image.load(os.path.join(self.image_path,self.config.config_visuals["planets"][self.config.config_visuals["value_planet"]])).convert_alpha()
         self.planet=pygame.transform.scale(self.planet,(40,40))
