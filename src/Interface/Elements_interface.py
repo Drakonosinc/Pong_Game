@@ -83,7 +83,7 @@ class PolygonButton:
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
         self.pressed = config.get("pressed",True)
-        self.button_states=config.get("button_states",{"detect_hover":True,"presses_touch":True})
+        self.button_states=config.get("button_states",{"detect_hover":True,"presses_touch":True,"click_time": None})
         self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
         self.new_events(time=config.get("time",500))
     def new_events(self,time):
