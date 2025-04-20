@@ -17,3 +17,10 @@ class ReplayMemory:
     def __len__(self) -> int:
         return len(self.memory)
 
+class SnakeEnv:
+    """Wrapper del juego Snake para interfaz Gym-like."""
+    def __init__(self):
+        self.game = Snake_Game()
+        self.handler = AIHandler(self.game)
+        self.prev_reward = 0
+
