@@ -41,14 +41,22 @@
     },
     "config_AI": {
         "generation_value": 100,
-        "population_value": 25,
-        "try_for_ai": 2,
-        "model_save": true
+        "population_value": 20,
+        "try_for_ai": 3,
+        "model_save": false,
+        "type_training": [
+            "genetic",
+            "q-learning"
+        ],
+        "type_model": [
+            "DQN",
+            "CNN"
+        ]
     },
     "config_sounds": {
         "sound_main": true
     },
     "config_game": {
-        "number_balls": 3
+        "number_balls": 1
     }
 }
