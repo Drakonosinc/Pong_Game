@@ -87,3 +87,15 @@ class DQNAgent:
         rewards = torch.tensor(rewards, dtype=torch.float32).unsqueeze(1)
         next_states = torch.tensor(next_states, dtype=torch.float32)
         dones = torch.tensor(dones, dtype=torch.float32).unsqueeze(1)
+        current_q = self.policy_net(states).gather(1, actions)
+        next_q = self.target_net(next_states).max(1)[0].detach().unsqueeze(1)
+        expected_q = rewards + (1 - dones) * self.gamma * next_q
+        loss = nn.MSELoss()(current_q, expected_q)
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
+        self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
+        self.steps_done += 1
+        if self.steps_done % self.target_update == 0:
+            self.target_net.load_state_dict(self.policy_net.state_dict())
+
