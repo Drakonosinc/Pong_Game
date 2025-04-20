@@ -50,3 +50,21 @@ class SnakeEnv:
             pass
         return state, reward, done
 
+class DQNAgent:
+    def __init__(self,state_size: int,action_size: int,lr: float = 1e-3,gamma: float = 0.99,epsilon_start: float = 1.0
+                ,epsilon_end: float = 0.01,epsilon_decay: float = 0.995,memory_size: int = 10000,batch_size: int = 64,target_update: int = 100):
+        self.state_size = state_size
+        self.action_size = action_size
+        self.gamma = gamma
+        self.epsilon = epsilon_start
+        self.epsilon_min = epsilon_end
+        self.epsilon_decay = epsilon_decay
+        self.batch_size = batch_size
+        self.steps_done = 0
+        self.target_update = target_update
+        self.policy_net = SimpleNN(state_size, action_size)
+        self.target_net = SimpleNN(state_size, action_size)
+        self.target_net.load_state_dict(self.policy_net.state_dict())
+        self.target_net.eval()
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
+        self.memory = ReplayMemory(memory_size)
