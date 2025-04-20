@@ -107,3 +107,11 @@ def train_dqn(episodes: int = 500):
         state = env.reset()
         total_reward = 0
         done = False
+        while not done:
+            action = agent.select_action(state)
+            next_state, reward, done = env.step(action)
+            agent.store_transition(state, action, reward, next_state, done)
+            agent.optimize_model()
+            state = next_state
+            total_reward += reward
+        print(f"Episodio {episode}/{episodes} - Recompensa total: {total_reward:.2f} - Epsilon: {agent.epsilon:.3f}")
