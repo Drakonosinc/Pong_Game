@@ -36,6 +36,7 @@ class Space_pong_game(interface):
             self.event_keydown(event)
             self.events_buttons(event)
             if self.main==6:self.event_keys(event)
+            if self.main==2:self.scroll.events(event)
         self.pressed_keys=pygame.key.get_pressed()
         self.pressed_mouse=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
