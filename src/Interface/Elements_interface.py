@@ -175,34 +175,16 @@ class Input_text:
             if callable(command):command()
     def show_player(self):return self.text
 class ScrollBar:
-    def __init__(self,config:dict):
-        self.screen=config["screen"]
-        self.color = config.get("color", (255, 255, 255))
-        self.color_bar = config.get("color_bar", (255, 199, 51))
-        self.hover_color = config.get("hover_color", (255, 199, 51))
-        self.position = config["position"]
-        self.position_bar = config["position_bar",self.position]
-        self.commands = [config.get(f"command{i}") for i in range(1,4)]
+    def __init__(self, config: dict):
+        self.screen = config["screen"]
+        position = config["position"]
+        self.rect = pygame.Rect(*position)
+        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
-        self.pressed = config.get("pressed",True)
-        self.detect_mouse=config.get("detect_mouse",True)
-        self.pressed_keep = config.get("pressed_keep",True)
-        self.button_states=config.get("button_states",{"detect_hover":True,"presses_touch":True,"pressed_keep":True})
-        self.holding = False
-        self.rect = pygame.Rect(*self.position)
-        self.rect_bar = pygame.Rect(*self.position_bar,self.position.width,self.position.height*4)
-    def events(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            if self.rect.collidepoint(pygame.mouse.get_pos()):self.holding = True
-        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:self.holding = False
-    def draw(self):
-        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
-        if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-        if self.pressed_keep:self.pressed_keep_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-    def mouse_collision(self,mouse_pos):pass
-    def pressed_button(self,pressed_mouse,mouse_pos):pass
-    def pressed_keep_button(self,pressed_mouse,mouse_pos):pass
-    def execute_commands(self):
-        for command in self.commands:
-            if callable(command):command()
+        self.thumb_height = config.get("thumb_height", max(20, int(position[3] * config.get("thumb_ratio", 0.2))))
+        self.thumb_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.thumb_height)
+        self.color = config.get("color", (200, 200, 200))
+        self.color_thumb = config.get("color_bar", (255, 199, 51))
+        self.elements = config.get("elements", [])
+        self.initial_positions = [(el.position[0], el.position[1]) for el in self.elements]
