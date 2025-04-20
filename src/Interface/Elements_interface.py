@@ -217,3 +217,6 @@ class ScrollBar:
             el.position = (x0, new_y)
             el.rect.y = new_y
         if callable(self.callback):self.callback(proportion)
+    def draw(self):
+        pygame.draw.rect(self.screen, self.color, self.rect)
+        pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
