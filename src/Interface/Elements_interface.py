@@ -38,10 +38,10 @@ class Text:
     def mouse_collision(self,mouse_pos):
         if self.rect.collidepoint(mouse_pos):
             self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
-            if self.button_states["detect_hover"]:
+            if self.states["detect_hover"]:
                 if self.sound_hover:self.sound_hover.play(loops=0)
-                self.button_states["detect_hover"]=False
-        else:self.button_states["detect_hover"]=True
+                self.states["detect_hover"]=False
+        else:self.states["detect_hover"]=True
 class TextButton:
     def __init__(self,config:dict):
         self.screen = config["screen"]
