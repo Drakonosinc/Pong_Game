@@ -67,16 +67,17 @@ class interface(load_elements):
         self.ai_button = self.button_factory_f5.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
         self.decrease_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score',  max(1, self.max_score - 1))})
         self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
-        self.config_training_ai(),self.buttons_config_game()
+        self.config_training_ai(),self.buttons_config_game(),self.text_training_ai()
     def main_training_ai(self):
-        self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False}).draw()
         self.text_G=self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
         self.text_P=self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
         self.text_A=self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
         self.text_S=self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
-        self.execute_buttons(*self.buttons_in_config_AI,self.scroll)
+        self.execute_buttons(*self.buttons_in_config_AI,self.scroll,self.text_C)
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
-        self.scroll.update_elements([*self.buttons_in_config_AI])
+        self.scroll.update_elements([*self.buttons_in_config_AI,self.text_C])
+    def text_training_ai(self):
+        self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False})
     def config_training_ai(self):
         self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value')})
         self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1)})
