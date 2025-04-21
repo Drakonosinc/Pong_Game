@@ -74,10 +74,10 @@ class interface(load_elements):
         self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
     def text_training_ai(self):
         self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False})
-        self.text_G=self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
-        self.text_P=self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
-        self.text_A=self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
-        self.text_S=self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
+        self.text_G=self.button_factory_f5.create_Text({"text":(f"Generation Size\n{self.config.config_AI['generation_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-81),"detect_mouse":False})
+        self.text_P=self.button_factory_f5.create_Text({"text":(f"Population Size\n{self.config.config_AI['population_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-26),"detect_mouse":False})
+        self.text_A=self.button_factory_f5.create_Text({"text":(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"),"position":(self.WIDTH/2+120,self.HEIGHT/2+29),"detect_mouse":False})
+        self.text_S=self.button_factory_f5.create_Text({"text":(f"Save model"),"position":(self.WIDTH/2+120,self.HEIGHT/2+84),"detect_mouse":False})
         self.text_in_training_ai=[self.text_C,self.text_G,self.text_P,self.text_A,self.text_S]
     def config_training_ai(self):
         self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value')})
