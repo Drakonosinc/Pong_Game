@@ -32,6 +32,16 @@ class Text:
         self.detect_mouse=config.get("detect_mouse",True)
         self.states=config.get("states",{"detect_hover":True})
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
+    def draw(self):
+        self.screen.blit(self.font.render(self.text, True,self.color), self.position)
+        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+    def mouse_collision(self,mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
+            if self.button_states["detect_hover"]:
+                if self.sound_hover:self.sound_hover.play(loops=0)
+                self.button_states["detect_hover"]=False
+        else:self.button_states["detect_hover"]=True
 class TextButton:
     def __init__(self,config:dict):
         self.screen = config["screen"]
