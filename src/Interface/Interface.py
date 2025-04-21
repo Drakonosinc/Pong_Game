@@ -76,7 +76,7 @@ class interface(load_elements):
         self.text_S=self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
         self.execute_buttons(*self.buttons_in_config_AI,self.scroll)
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
-        self.scroll.update_elements([*self.buttons_in_config_AI])
+        self.scroll.update_elements([*self.buttons_in_config_AI,self.text_C,self.text_G,self.text_P,self.text_A,self.text_S])
     def config_training_ai(self):
         self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value')})
         self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1)})
