@@ -69,13 +69,14 @@ class interface(load_elements):
         self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
         self.config_training_ai(),self.buttons_config_game()
     def main_training_ai(self):
-        self.screen.blit(self.font5.render(f"Config Training\n{"AI":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
-        self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
-        self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
-        self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
-        self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
+        self.text_C=self.screen.blit(self.font5.render(f"Config Training\n{"AI":^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
+        self.text_G=self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
+        self.text_P=self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
+        self.text_A=self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
+        self.text_S=self.screen.blit(self.font5.render(f"Save model", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+84))
         self.execute_buttons(*self.buttons_in_config_AI,self.scroll)
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
+        self.scroll.update_elements([*self.buttons_in_config_AI])
     def config_training_ai(self):
         self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value')})
         self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1)})
@@ -85,7 +86,7 @@ class interface(load_elements):
         self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1)})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config.config_AI,"model_save"),"command2":self.config.save_config})
         self.buttons_in_config_AI=[self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai,self.save_model]
-        self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20,"elements": [*self.buttons_in_config_AI]})
+        self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
