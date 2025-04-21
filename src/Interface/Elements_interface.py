@@ -9,6 +9,8 @@ class ElementsFactory:
         self.color_back=config.get("color_back",(255,255,255))
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
+    def create_Text(self,config:dict):
+        return Text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_TextButton(self,config:dict):
         return TextButton({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_PolygonButton(self,config:dict):
@@ -25,6 +27,11 @@ class Text:
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
+        self.sound_hover = config.get("sound_hover")
+        self.sound_touch = config.get("sound_touch")
+        self.detect_mouse=config.get("detect_mouse",True)
+        self.states=config.get("states",{"detect_hover":True})
+        self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
 class TextButton:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -39,7 +46,6 @@ class TextButton:
         self.pressed = config.get("pressed",True)
         self.detect_mouse=config.get("detect_mouse",True)
         self.button_states=config.get("button_states",{"detect_hover":True,"presses_touch":True,"click_time": None})
-        self.holding = False
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
         self.new_events(time=config.get("time",500))
     def events(self, event):

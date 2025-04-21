@@ -69,7 +69,7 @@ class interface(load_elements):
         self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.max_score + 1)})
         self.config_training_ai(),self.buttons_config_game()
     def main_training_ai(self):
-        self.text_C=self.button_factory_f5({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136)})
+        self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136)})
         self.text_G=self.screen.blit(self.font5.render(f"Generation Size\n{self.config.config_AI['generation_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
         self.text_P=self.screen.blit(self.font5.render(f"Population Size\n{self.config.config_AI['population_value']:^26}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-26))
         self.text_A=self.screen.blit(self.font5.render(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2+29))
