@@ -45,13 +45,7 @@ class Text:
 class TextButton(Text):
     def __init__(self,config:dict):
         super().__init__(config)
-        self.font = config.get("font", pygame.font.Font(None, 25))
-        self.text = config["text"]
-        self.color = config.get("color", (255, 255, 255))
-        self.hover_color = config.get("hover_color", (255, 199, 51))
-        self.position = config["position"]
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
-        self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
         self.pressed = config.get("pressed",True)
         self.detect_mouse=config.get("detect_mouse",True)
