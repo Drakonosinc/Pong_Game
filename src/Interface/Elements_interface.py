@@ -108,9 +108,6 @@ class PolygonButton(ElementBehavior):
         self.color=config.get("color",self.color)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)
         self.pressed=config.get("pressed",self.pressed)
-    def execute_commands(self):
-        for command in self.commands:
-            if callable(command):command()
 class Input_text:
     def __init__(self,config:dict):
         self.screen=config["screen"]
