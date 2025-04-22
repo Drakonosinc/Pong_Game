@@ -60,13 +60,6 @@ class TextButton(Text):
     def draw(self):
         super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-    def mouse_collision(self,mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
-            if self.states["detect_hover"]:
-                if self.sound_hover:self.sound_hover.play(loops=0)
-                self.states["detect_hover"]=False
-        else:self.states["detect_hover"]=True
     def pressed_button(self,pressed_mouse,mouse_pos):
         current_time = pygame.time.get_ticks()
         if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
