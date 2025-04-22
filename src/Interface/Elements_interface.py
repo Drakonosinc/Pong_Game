@@ -104,17 +104,6 @@ class PolygonButton(ElementBehavior):
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
-    def pressed_button(self,pressed_mouse,mouse_pos):
-        current_time = pygame.time.get_ticks()
-        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
-            self.states["presses_touch"]=False
-            self.states["click_time"] = current_time
-        if self.states["click_time"] is not None:
-            if current_time - self.states["click_time"] >= 200:
-                if self.sound_touch:self.sound_touch.play(loops=0)
-                self.states["click_time"] = None
-                self.states["presses_touch"] = True
-                self.execute_commands()
     def change_item(self,config:dict):
         self.color=config.get("color",self.color)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)
