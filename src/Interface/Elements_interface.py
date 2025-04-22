@@ -88,8 +88,6 @@ class PolygonButton(ElementBehavior):
         self.hover_position = config.get("hover_position",self.position)
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
-        self.sound_hover = config.get("sound_hover")
-        self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
         self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
     def draw(self):
@@ -117,8 +115,6 @@ class Input_text(ElementBehavior):
         self.color_back=config.get("color_back",(255,255,255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
-        self.sound_hover = config.get("sound_hover")
-        self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
         self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(127,127,127))
