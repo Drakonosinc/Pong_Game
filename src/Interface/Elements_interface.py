@@ -145,9 +145,6 @@ class Input_text(Text,ElementBehavior):
             self.execute_commands()
         if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):self.states["active"],self.states["presses_touch"]=False,True
         if self.states["active"]:pygame.draw.rect(self.screen,self.pressed_color,self.rect)
-    def execute_commands(self):
-        for command in self.commands:
-            if callable(command):command()
     def show_player(self):return self.text
 class ScrollBar:
     def __init__(self, config: dict):
