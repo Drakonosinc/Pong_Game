@@ -30,6 +30,17 @@ class ElementBehavior:
         pygame.time.set_timer(self.EVENT_NEW,time)
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
+    def pressed_button(self,pressed_mouse,mouse_pos):
+        current_time = pygame.time.get_ticks()
+        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
+            self.states["presses_touch"]=False
+            self.states["click_time"] = current_time
+        if self.states["click_time"] is not None:
+            if current_time - self.states["click_time"] >= 200:
+                if self.sound_touch:self.sound_touch.play(loops=0)
+                self.states["click_time"] = None
+                self.states["presses_touch"] = True
+                self.execute_commands()
 class Text:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -61,17 +72,6 @@ class TextButton(Text,ElementBehavior):
     def draw(self):
         super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-    def pressed_button(self,pressed_mouse,mouse_pos):
-        current_time = pygame.time.get_ticks()
-        if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
-            self.states["presses_touch"]=False
-            self.states["click_time"] = current_time
-        if self.states["click_time"] is not None:
-            if current_time - self.states["click_time"] >= 200:
-                if self.sound_touch:self.sound_touch.play(loops=0)
-                self.states["click_time"] = None
-                self.states["presses_touch"] = True
-                self.execute_commands()
     def change_item(self,config:dict):
         self.color=config.get("color",self.color)
         self.text=config.get("text",self.text)
