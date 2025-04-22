@@ -22,9 +22,10 @@ class ElementsFactory:
 class ElementBehavior:
     def __init__(self, config: dict):
         self.pressed = config.get("pressed",True)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None})
+        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False})
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.new_events(time=config.get("time",500))
+        super().__init__(config)
     def events(self, event):pass
     def new_events(self,time):
         self.EVENT_NEW = pygame.USEREVENT + 1
@@ -58,6 +59,7 @@ class Text:
         self.detect_mouse=config.get("detect_mouse",True)
         self.states=config.get("states",{"detect_hover":True})
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
+        super().__init__(config)
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
         if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
@@ -69,9 +71,7 @@ class Text:
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
 class TextButton(Text,ElementBehavior):
-    def __init__(self,config:dict):
-        Text.__init__(self, config)
-        ElementBehavior.__init__(self, config)
+    def __init__(self,config:dict):super().__init__(config)
     def draw(self):
         super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
@@ -117,7 +117,6 @@ class Input_text(Text,ElementBehavior):
         self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(127,127,127))
         self.border=config.get("border",2)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.rect = pygame.Rect(*self.position)
     def change_text(self,event):
         if self.states["active"] and event.type==KEYDOWN:
