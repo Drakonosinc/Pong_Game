@@ -108,23 +108,17 @@ class PolygonButton(ElementBehavior):
         self.color=config.get("color",self.color)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)
         self.pressed=config.get("pressed",self.pressed)
-class Input_text:
+class Input_text(Text):
     def __init__(self,config:dict):
-        self.screen=config["screen"]
-        self.font = config.get("font", pygame.font.Font(None, 25))
+        super().__init__(config)
         self.text = config.get("text","")
         self.color=config.get("color",(0,0,0))
         self.color_back=config.get("color_back",(255,255,255))
-        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(127,127,127))
         self.border=config.get("border",2)
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
-        self.position = config["position"]
-        self.sound_hover = config.get("sound_hover")
-        self.sound_touch = config.get("sound_touch")
         self.pressed = config.get("pressed",True)
-        self.detect_mouse=config.get("detect_mouse",True)
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.rect = pygame.Rect(*self.position)
         self.new_events(time=config.get("time",500))
