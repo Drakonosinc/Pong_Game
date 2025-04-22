@@ -42,9 +42,9 @@ class Text:
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
-class TextButton:
+class TextButton(Text):
     def __init__(self,config:dict):
-        self.screen = config["screen"]
+        super().__init__(config)
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.text = config["text"]
         self.color = config.get("color", (255, 255, 255))
