@@ -10,7 +10,7 @@ class ElementsFactory:
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
     def create_Text(self,config:dict):
-        return Text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return Text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,**config})
     def create_TextButton(self,config:dict):
         return TextButton({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_PolygonButton(self,config:dict):
@@ -21,6 +21,8 @@ class ElementsFactory:
         return ScrollBar({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class ElementBehavior:
     def __init__(self, config: dict):
+        self.sound_hover = config.get("sound_hover")
+        self.sound_touch = config.get("sound_touch")
         self.pressed = config.get("pressed",True)
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False})
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
@@ -53,8 +55,6 @@ class Text:
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
-        self.sound_hover = config.get("sound_hover")
-        self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
         self.states=config.get("states",{"detect_hover":True})
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
