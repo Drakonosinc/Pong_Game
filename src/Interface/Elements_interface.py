@@ -120,11 +120,6 @@ class Input_text(Text,ElementBehavior):
         self.border=config.get("border",2)
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.rect = pygame.Rect(*self.position)
-    def new_events(self,time):
-        self.EVENT_NEW = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.EVENT_NEW,time)
-    def reactivate_pressed(self,event):
-        if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
     def change_text(self,event):
         if self.states["active"] and event.type==KEYDOWN:
             if event.key == K_BACKSPACE:self.text=self.text[:-1]
