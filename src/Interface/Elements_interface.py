@@ -58,8 +58,7 @@ class TextButton(Text):
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
     def draw(self):
-        self.screen.blit(self.font.render(self.text, True,self.color), self.position)
-        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+        super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def mouse_collision(self,mouse_pos):
         if self.rect.collidepoint(mouse_pos):
