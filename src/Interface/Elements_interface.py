@@ -22,6 +22,7 @@ class ElementsFactory:
 class ElementBehavior:
     def __init__(self, config: dict):
         self.pressed = config.get("pressed",True)
+        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None})
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.new_events(time=config.get("time",500))
     def events(self, event):pass
@@ -71,7 +72,6 @@ class TextButton(Text,ElementBehavior):
     def __init__(self,config:dict):
         Text.__init__(self, config)
         ElementBehavior.__init__(self, config)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None})
     def draw(self):
         super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
@@ -91,7 +91,6 @@ class PolygonButton(ElementBehavior):
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None})
         self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, self.position)
