@@ -21,12 +21,15 @@ class ElementsFactory:
         return ScrollBar({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class ElementBehavior:
     def __init__(self, config: dict):
+        self.pressed = config.get("pressed",True)
         self.commands = [config.get(f"command{i}") for i in range(1,4)]
         self.new_events(time=config.get("time",500))
     def events(self, event):pass
     def new_events(self,time):
         self.EVENT_NEW = pygame.USEREVENT + 1
         pygame.time.set_timer(self.EVENT_NEW,time)
+    def reactivate_pressed(self,event):
+        if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
 class Text:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -54,10 +57,7 @@ class TextButton(Text,ElementBehavior):
     def __init__(self,config:dict):
         Text.__init__(self, config)
         ElementBehavior.__init__(self, config)
-        self.pressed = config.get("pressed",True)
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None})
-    def reactivate_pressed(self,event):
-        if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
     def draw(self):
         super().draw()
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
