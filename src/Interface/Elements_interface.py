@@ -34,9 +34,11 @@ class ElementBehavior:
         pygame.time.set_timer(self.EVENT_NEW,time)
     def reactivate_pressed(self,event):
         if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
+    def get_rect(self):raise NotImplementedError
+    def draw_hover_effect(self):raise NotImplementedError
     def mouse_collision(self,mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            pygame.draw.rect(self.screen,self.hover_color,self.rect)
+        if self.get_rect().collidepoint(mouse_pos):
+            self.draw_hover_effect()
             if self.states["detect_hover"]:
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
@@ -59,16 +61,17 @@ class Text:
     def __init__(self,config:dict):
         self.screen = config["screen"]
         self.font = config.get("font", pygame.font.Font(None, 25))
-        self.Behavior = ElementBehavior.mouse_collision(config)
+        self.Behavior = ElementBehavior.mouse_collision
         self.text = config["text"]
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
+        self.detect_mouse=config.get("detect_mouse",True)
         self.states=config.get("states",{"detect_hover":True})
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
-        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+        if self.detect_mouse:self.Behavior(pygame.mouse.get_pos())
     def mouse_collision(self,mouse_pos):
         if self.rect.collidepoint(mouse_pos):
             self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
