@@ -95,7 +95,7 @@ class PolygonButton(ElementBehavior):
         self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, self.position)
-        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def draw_hover_effect(self):return pygame.draw.polygon(self.screen, self.hover_color, self.hover_position)
     def change_item(self,config:dict):
@@ -123,17 +123,11 @@ class Input_text(ElementBehavior):
             else:self.text+=event.unicode
     def draw(self):
         pygame.draw.rect(self.screen,self.color_back,self.rect)
-        if self.detect_mouse:self.mouse_collision(pygame.mouse.get_pos())
+        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
         input_player=pygame.draw.rect(self.screen,self.border_color,self.rect,self.border)
         self.screen.blit(self.font.render(self.text, True, self.color), (input_player.x+5, input_player.y-2))
-    def mouse_collision(self,mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            pygame.draw.rect(self.screen,self.hover_color,self.rect)
-            if self.states["detect_hover"]:
-                if self.sound_hover:self.sound_hover.play(loops=0)
-                self.states["detect_hover"]=False
-        else:self.states["detect_hover"]=True
+    def draw_hover_effect(self):return pygame.draw.rect(self.screen,self.hover_color,self.rect)
     def pressed_button(self,pressed_mouse,mouse_pos):
         if pressed_mouse[0] and self.rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
             self.states["active"]=True
