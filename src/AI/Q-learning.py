@@ -4,7 +4,7 @@ import torch.optim as optim
 import random
 import numpy as np
 from collections import deque
-from Game.Space_Pong import Snake_Game
+from Game.Space_Pong import SpacePong
 from AI.Ai_Controller import AIHandler
 from AI.Neural_Network import SimpleNN
 class ReplayMemory:
@@ -20,7 +20,7 @@ class ReplayMemory:
 class SnakeEnv:
     """Wrapper del juego Snake para interfaz Gym-like."""
     def __init__(self):
-        self.game = Snake_Game()
+        self.game = SpacePong()
         self.handler = AIHandler(self.game)
         self.prev_reward = 0
 
