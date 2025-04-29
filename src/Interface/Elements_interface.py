@@ -73,6 +73,7 @@ class Text:
         if self.Behavior.detect_mouse:self.Behavior.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect)
     def draw_hover_effect(self):return self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
     def change_item(self,config:dict):
+        self.position = config.get("position",self.position)
         self.color=config.get("color",self.color)
         self.text=config.get("text",self.text)
 class TextButton(Text,ElementBehavior):
