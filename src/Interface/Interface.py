@@ -73,19 +73,24 @@ class interface(load_elements):
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
         self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
     def text_training_ai(self):
-        self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False})
-        self.text_G=self.button_factory_f5.create_Text({"text":(f"Generation Size\n{self.config.config_AI['generation_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-81),"detect_mouse":False})
-        self.text_P=self.button_factory_f5.create_Text({"text":(f"Population Size\n{self.config.config_AI['population_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-26),"detect_mouse":False})
-        self.text_A=self.button_factory_f5.create_Text({"text":(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"),"position":(self.WIDTH/2+120,self.HEIGHT/2+29),"detect_mouse":False})
-        self.text_S=self.button_factory_f5.create_Text({"text":(f"Save model"),"position":(self.WIDTH/2+120,self.HEIGHT/2+84),"detect_mouse":False})
-        self.text_in_training_ai=[self.text_C,self.text_G,self.text_P,self.text_A,self.text_S]
+        if not hasattr(self, "text_in_training_ai"):
+            self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False})
+            self.text_G=self.button_factory_f5.create_Text({"text":(f"Generation Size\n{self.config.config_AI['generation_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-81),"detect_mouse":False})
+            self.text_P=self.button_factory_f5.create_Text({"text":(f"Population Size\n{self.config.config_AI['population_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-26),"detect_mouse":False})
+            self.text_A=self.button_factory_f5.create_Text({"text":(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"),"position":(self.WIDTH/2+120,self.HEIGHT/2+29),"detect_mouse":False})
+            self.text_S=self.button_factory_f5.create_Text({"text":(f"Save model"),"position":(self.WIDTH/2+120,self.HEIGHT/2+84),"detect_mouse":False})
+            self.text_in_training_ai=[self.text_C,self.text_G,self.text_P,self.text_A,self.text_S]
+        else:
+            self.text_G.change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
+            self.text_P.change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
+            self.text_A.change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"})
     def config_training_ai(self):
-        self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value'),"command2":self.text_training_ai,"command3":self.config_training_ai})
-        self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1),"command2":self.text_training_ai,"command3":self.config_training_ai})
-        self.increase_population = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value'),"command2":self.text_training_ai,"command3":self.config_training_ai})
-        self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value',True,-1),"command2":self.text_training_ai,"command3":self.config_training_ai})
-        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai'),"command2":self.text_training_ai,"command3":self.config_training_ai})
-        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1),"command2":self.text_training_ai,"command3":self.config_training_ai})
+        self.increase_generation = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value'),"command2":self.text_training_ai})
+        self.decrease_generation = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'generation_value',True,-1),"command2":self.text_training_ai})
+        self.increase_population = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value'),"command2":self.text_training_ai})
+        self.decrease_population = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'population_value',True,-1),"command2":self.text_training_ai})
+        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai'),"command2":self.text_training_ai})
+        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1),"command2":self.text_training_ai})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config.config_AI,"model_save"),"command2":self.config.save_config})
         self.buttons_in_config_AI=[self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai,self.save_model]
         self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
