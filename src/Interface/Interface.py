@@ -2,8 +2,8 @@ from Loaders.Load_elements import *
 from .Elements_interface import *
 class interface(load_elements):
     def menus(self):
+        if self.main==0:self.main_menu()
         self.Pause()
-        self.main_menu()
         self.game_mode()
         self.options_menu()
         self.visuals_menu()
@@ -29,10 +29,9 @@ class interface(load_elements):
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def main_menu(self):
-        if self.main==0:
-            self.screen.fill(self.BLACK)
-            self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
-            self.execute_buttons(self.play_button,self.quit_button,self.options_button)
+        self.screen.fill(self.BLACK)
+        self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
+        self.execute_buttons(self.play_button,self.quit_button,self.options_button)
     def buttons_main_menu(self):
         self.play_button = self.button_factory_f5.create_TextButton({"text": "Press To Start","position": (self.WIDTH//2-200,self.HEIGHT//2-80),"command1":lambda:self.change_mains({"main":2})})
         self.quit_button = self.button_factory_f5.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"sound_touch":None,"command1": self.event_quit})
