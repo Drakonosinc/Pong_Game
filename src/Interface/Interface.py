@@ -3,7 +3,7 @@ from .Elements_interface import *
 class interface(load_elements):
     def menus(self):
         if self.main==0:self.main_menu()
-        if self.main==1:self.Game_over()
+        elif self.main==1:self.Game_over()
         self.Pause()
         self.game_mode()
         self.options_menu()
