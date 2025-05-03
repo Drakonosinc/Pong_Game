@@ -3,12 +3,12 @@ from .Elements_interface import *
 class interface(load_elements):
     def menus(self):
         if self.main==0:self.main_menu()
+        if self.main==1:self.Game_over()
         self.Pause()
         self.game_mode()
         self.options_menu()
         self.visuals_menu()
         self.menu_keys()
-        self.Game_over()
     def draw_buttons(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.button_factory_f2_5 = ElementsFactory({"screen": self.screen,"font": self.font2_5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
@@ -37,10 +37,9 @@ class interface(load_elements):
         self.quit_button = self.button_factory_f5.create_TextButton({"text": "Press To Exit","position": (self.WIDTH//2-200,self.HEIGHT//2-50),"sound_touch":None,"command1": self.event_quit})
         self.options_button = self.button_factory_f5.create_TextButton({"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"command1":lambda:self.change_mains({"main":4})})
     def Game_over(self):
-        if self.main==1:
-            self.filt(80)
-            self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
-            self.execute_buttons(self.main_button,self.reset_button)
+        self.filt(80)
+        self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
+        self.execute_buttons(self.main_button,self.reset_button)
     def buttons_game_over(self):
         self.main_button=self.button_factory_f2_5.create_TextButton({"text": "Main Menu Press E","color": self.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"command1":lambda:self.change_mains({"main":0,"run":True})})
         self.reset_button=self.button_factory_f2_5.create_TextButton({"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
