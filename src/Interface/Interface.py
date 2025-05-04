@@ -6,7 +6,7 @@ class interface(load_elements):
         elif self.main==1:self.Game_over()
         elif self.main==2:self.game_mode()
         elif self.main==3:self.Pause()
-        self.options_menu()
+        elif self.main==4:self.options_menu()
         self.visuals_menu()
         self.menu_keys()
     def draw_buttons(self):
@@ -119,10 +119,9 @@ class interface(load_elements):
         background.fill((0,0,0,number))
         self.screen.blit(background,(0,0))
     def options_menu(self):
-        if self.main==4:
-            self.screen.fill(self.BLACK)
-            self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
-            self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
+        self.screen.fill(self.BLACK)
+        self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
+        self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def buttons_menu_options(self):
         self.back_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
         self.visual_button=self.button_factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80,self.HEIGHT/2-150),"command1":lambda:self.change_mains({"main":5})})
