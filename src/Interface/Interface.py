@@ -7,7 +7,7 @@ class interface(load_elements):
         elif self.main==2:self.game_mode()
         elif self.main==3:self.Pause()
         elif self.main==4:self.options_menu()
-        self.visuals_menu()
+        elif self.main==5:self.visuals_menu()
         self.menu_keys()
     def draw_buttons(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
@@ -136,13 +136,12 @@ class interface(load_elements):
             sound.play(loops=-1) if color==self.SKYBLUE else sound.stop()
         sound(*(self.SKYBLUE,"Sound ON",self.sound_back) if self.sound_type["value"] else (self.RED,"Sound off",self.sound_back))
     def visuals_menu(self):
-        if self.main==5:
-            self.screen.blit(self.image, (0, 0))
-            self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
-            self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
-            self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
-            self.images_elements()
-            self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
+        self.screen.blit(self.image, (0, 0))
+        self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
+        self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
+        self.images_elements()
+        self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
     def buttons_visual(self):
         self.back_visual_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":4})})
         self.decrease_width_button=self.button_factory_f2_5.create_TextButton({"text": "<","position": (self.WIDTH/2-200,self.HEIGHT/2-200),"command1":lambda:self.change_items("WIDTH",number=-10)})
