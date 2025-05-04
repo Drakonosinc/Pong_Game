@@ -5,7 +5,7 @@ class interface(load_elements):
         if self.main==0:self.main_menu()
         elif self.main==1:self.Game_over()
         elif self.main==2:self.game_mode()
-        self.Pause()
+        elif self.main==3:self.Pause()
         self.options_menu()
         self.visuals_menu()
         self.menu_keys()
@@ -107,10 +107,9 @@ class interface(load_elements):
         if dic:dic[variable]=not dic[variable]
         else:setattr(self,variable,not getattr(self,variable))
     def Pause(self):
-        if self.main==3:
-            self.filt(180)
-            self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
-            self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
+        self.filt(180)
+        self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
+        self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
     def buttons_pausa(self):
         self.exit_button=self.button_factory_f2_5.create_TextButton({"text": "Exit","color": self.GRAY,"position": (self.WIDTH/2-40,self.HEIGHT/2-15),"color2": self.SKYBLUE,"sound_touch":None,"command1":self.event_quit})
         self.reset_pause_button=self.button_factory_f2_5.create_TextButton({"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"command1":lambda:self.change_mains({"main":-1}),"command2":self.reset})
