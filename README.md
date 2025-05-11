@@ -3,10 +3,10 @@
 
 ## License
 
-Este proyecto está licenciado bajo la [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
+This project is licensed under the [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Author
 
-Desarrollado por [Drakonosinc](https://github.com/Drakonosinc)
+Developed by [Drakonosinc](https://github.com/Drakonosinc)
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Drakonosinc/Pong_Game)
