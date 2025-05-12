@@ -187,4 +187,5 @@ class ScrollBar:
                 self.content_height = bottom - top
             else:self.content_height = self.rect.height
 class Combo_Box:
-    def __init__(self, config: dict):pass
+    def __init__(self, config: dict):
+        self.screen = config["screen"]
