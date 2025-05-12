@@ -189,3 +189,4 @@ class ScrollBar:
 class Combo_Box:
     def __init__(self, config: dict):
         self.screen = config["screen"]
+        self.position = config["position"]
