@@ -190,3 +190,4 @@ class Combo_Box(ElementBehavior):
     def __init__(self, config: dict):
         self.screen = config["screen"]
         self.position = config["position"]
+        self.color = config.get("color", (255, 255, 255))
