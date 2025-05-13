@@ -188,6 +188,7 @@ class ScrollBar:
             else:self.content_height = self.rect.height
 class Combo_Box(ElementBehavior):
     def __init__(self, config: dict):
+        ElementBehavior.__init__(self, config)
         self.screen = config["screen"]
         self.position = config["position"]
         self.color = config.get("color", (255, 255, 255))
