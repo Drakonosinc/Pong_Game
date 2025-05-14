@@ -194,4 +194,5 @@ class Combo_Box(ElementBehavior):
         self.color = config.get("color", (255, 255, 255))
         self.rect = pygame.Rect(*self.position)
     def draw(self):pass
+    def draw_hover_effect(self):pass
     def charge_elements(self, elements: list):pass
