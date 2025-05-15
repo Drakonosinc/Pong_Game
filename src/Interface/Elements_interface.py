@@ -197,5 +197,5 @@ class Combo_Box(ElementBehavior):
     def draw_hover_effect(self):pass
     def pressed_button(self,pressed_mouse,mouse_pos):
         super().pressed_button(pressed_mouse,mouse_pos)
-        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):
+        if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):pass
     def charge_elements(self, elements: list):pass
