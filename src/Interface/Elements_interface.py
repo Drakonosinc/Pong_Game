@@ -195,5 +195,6 @@ class Combo_Box(ElementBehavior):
         self.rect = pygame.Rect(*self.position)
     def draw(self):pass
     def draw_hover_effect(self):pass
-    def pressed_button(self,pressed_mouse,mouse_pos):pass
+    def pressed_button(self,pressed_mouse,mouse_pos):
+        super().pressed_button(pressed_mouse,mouse_pos)
     def charge_elements(self, elements: list):pass
