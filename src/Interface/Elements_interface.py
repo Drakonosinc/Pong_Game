@@ -200,4 +200,6 @@ class Combo_Box(ElementBehavior):
         super().pressed_button(pressed_mouse,mouse_pos)
         if pressed_mouse[0] and not self.rect.collidepoint(mouse_pos):pass
         if self.states["active"]:pass
-    def charge_elements(self, elements: list):pass
+    def charge_elements(self, elements: list):
+        if self.elements is None:
+            self.elements = elements
