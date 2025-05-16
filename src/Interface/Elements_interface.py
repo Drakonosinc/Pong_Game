@@ -191,11 +191,11 @@ class Combo_Box(ElementBehavior):
         ElementBehavior.__init__(self, config)
         self.screen = config["screen"]
         self.position = config["position"]
+        self.dropdown = config.get("size", (100, 200))
         self.color = config.get("color", (255, 255, 255))
         self.elements = None
-        self.dropdown = config.get("size", (100, 200))
-        self.rect_dropdown = pygame.Rect(*self.dropdown)
         self.rect = pygame.Rect(*self.position)
+        self.rect_dropdown = pygame.Rect(,*self.dropdown)
     def draw(self):pass
     def draw_hover_effect(self):pass
     def pressed_button(self,pressed_mouse,mouse_pos):
