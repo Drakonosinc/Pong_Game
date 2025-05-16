@@ -197,7 +197,9 @@ class Combo_Box(ElementBehavior):
         self.elements = None
         self.rect = pygame.Rect(*self.position)
         self.rect_dropdown = pygame.Rect(*self.position,*self.dropdown)
-    def icon_dropdown(self):pass
+    def icon_dropdown(self):
+        match self.type_dropdown:
+            
     def draw(self):
         if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
