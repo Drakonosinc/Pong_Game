@@ -202,6 +202,7 @@ class Combo_Box(ElementBehavior):
         match self.type_dropdown:
             case "down":return "V"
             case "up":return "Λ"
+            case "right":return ">"
     def draw(self):
         if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(pygame.mouse.get_pressed(),pygame.mouse.get_pos())
