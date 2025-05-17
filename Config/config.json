@@ -43,7 +43,7 @@
         "generation_value": 100,
         "population_value": 20,
         "try_for_ai": 3,
-        "model_save": true,
+        "model_save": false,
         "type_training": [
             "genetic",
             "q-learning"
@@ -57,6 +57,7 @@
         "sound_main": true
     },
     "config_game": {
-        "number_balls": 1
+        "number_balls": 1,
+        "max_score": 5
     }
 }
