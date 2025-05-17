@@ -49,10 +49,10 @@ class interface(load_elements):
         self.screen.blit(self.font5.render("Enter Player Name One",True,"white"),(7,10))
         self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(416,10))
         self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
-        self.screen.blit(font_modegame.render(f"{self.config_game["max_score"]}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
+        self.screen.blit(font_modegame.render(f"{self.config.config_game["max_score"]}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
         self.main_training_ai() if self.mode_game["Training AI"] else self.options_game()
         self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input_player1,self.input_player2)
-        self.decrease_score_button.change_item({"pressed": (x:=self.config_game["max_score"] > 1),"detect_mouse": x})
+        self.decrease_score_button.change_item({"pressed": (x:=self.config.config_game["max_score"] > 1),"detect_mouse": x})
     def inputs_text(self):
         self.input_player1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
         self.input_player2=self.button_factory_f5.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
@@ -62,8 +62,8 @@ class interface(load_elements):
         self.training_ai_button = self.button_factory_f5.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70,self.HEIGHT/2-136),"command1":lambda:self.type_mode(True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
         self.player_button = self.button_factory_f5.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64,self.HEIGHT/2-110),"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
         self.ai_button = self.button_factory_f5.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
-        self.decrease_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score',  max(1, self.config_game["max_score"] - 1))})
-        self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.config_game["max_score"] + 1)})
+        self.decrease_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score',  max(1, self.config.config_game["max_score"] - 1))})
+        self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:setattr(self, 'max_score', self.config.config_game["max_score"] + 1)})
         self.config_training_ai(),self.buttons_config_game(),self.text_training_ai()
     def main_training_ai(self):
         self.execute_buttons(*self.buttons_in_config_AI,self.scroll,*self.text_in_training_ai)
