@@ -27,7 +27,7 @@ class Config():
                         "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
         if sounds or alls:self.config_sounds={"sound_main":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False,"type_training":["genetic","q-learning"],"type_model":["DQN","CNN"]}
-        if game or alls:self.config_game={"number_balls":1}
+        if game or alls:self.config_game={"number_balls":1,"max_score":5}
     def save_config(self):
         config_path = os.path.join(self.base_dir, "Config")
         config = {"config_visuals": self.config_visuals,"config_keys": self.config_keys,"config_AI": self.config_AI, "config_sounds": self.config_sounds,"config_game": self.config_game}
