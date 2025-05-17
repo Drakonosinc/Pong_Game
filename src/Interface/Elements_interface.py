@@ -193,6 +193,7 @@ class Combo_Box(ElementBehavior):
         self.position = config["position"]
         self.dropdown = config.get("size", (100, 200))
         self.type_dropdown = config.get("type_dropdown", "down")
+        self.icon=self.icon_dropdown()
         self.color = config.get("color", (255, 255, 255))
         self.elements = None
         self.rect = pygame.Rect(*self.position)
