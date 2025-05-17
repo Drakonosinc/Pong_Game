@@ -22,7 +22,6 @@ class Space_pong_game(interface):
         self.speed_up:bool=True
         self.speed_down:bool=True
         self.mode_game:dict[str,bool]={"Training AI":False,"Player":False,"AI":False}
-        self.max_score:int=5
         self.sound_type:dict={"sound":f"Sound {"ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
         self.key=None
