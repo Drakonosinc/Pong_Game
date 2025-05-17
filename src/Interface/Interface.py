@@ -49,7 +49,7 @@ class interface(load_elements):
         self.screen.blit(self.font5.render("Enter Player Name One",True,"white"),(7,10))
         self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(416,10))
         self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
-        self.screen.blit(font_modegame.render(f"{self.max_score}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
+        self.screen.blit(font_modegame.render(f"{self.config_game["max_score"]}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
         self.main_training_ai() if self.mode_game["Training AI"] else self.options_game()
         self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input_player1,self.input_player2)
         self.decrease_score_button.change_item({"pressed": (x:=self.max_score > 1),"detect_mouse": x})
