@@ -67,7 +67,6 @@ class Text:
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
-        self.states=config.get("states",{"detect_hover":True})
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
