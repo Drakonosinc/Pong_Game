@@ -140,6 +140,7 @@ class Input_text(ElementBehavior):
     def show_player(self):return self.text
 class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
+        super().__init__(config)
         self.screen = config["screen"]
         position = config["position"]
         self.rect = pygame.Rect(*position)
