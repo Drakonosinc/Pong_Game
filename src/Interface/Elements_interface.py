@@ -56,8 +56,10 @@ class ElementBehavior:
                 self.states["presses_touch"] = True
                 self.execute_commands()
     def execute_commands(self):
-        for command in self.commands:
-            if callable(command):command()
+        try:
+            for command in self.commands:
+                if callable(command):command()
+        except TypeError:return None
 class Text:
     def __init__(self,config:dict):
         self.screen = config["screen"]
@@ -177,6 +179,7 @@ class ScrollBar(ElementBehavior):
         pygame.draw.rect(self.screen, self.color, self.rect)
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
         if self.detect_mouse:self.mouse_collision(self.thumb_rect,pygame.mouse.get_pos())
+        
     def draw_hover_effect(self):return pygame.draw.rect(self.screen, self.hover_color, self.thumb_rect)
     def update_elements(self, elements: list):
         if self.elements is None:
