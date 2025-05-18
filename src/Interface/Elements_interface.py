@@ -177,7 +177,7 @@ class ScrollBar(ElementBehavior):
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect)
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
-    def draw_hover_effect(self):return None
+    def draw_hover_effect(self):return pygame.draw.rect(self.screen, self.hover_color, self.rect)
     def update_elements(self, elements: list):
         if self.elements is None:
             self.elements = elements
