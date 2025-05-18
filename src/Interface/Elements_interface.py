@@ -144,11 +144,11 @@ class ScrollBar(ElementBehavior):
         self.screen = config["screen"]
         position = config["position"]
         self.rect = pygame.Rect(*position)
-        self.hover_color=config.get("hover_color",(135, 206, 235))
+        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.thumb_height = config.get("thumb_height", max(20, int(position[3] * config.get("thumb_ratio", 0.2))))
         self.thumb_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.thumb_height)
         self.color = config.get("color", (200, 200, 200))
-        self.color_thumb = config.get("color_bar", (255, 199, 51))
+        self.color_thumb = config.get("color_bar", (135, 206, 235))
         self.commands = config.get("command1")
         self.elements = None
         self.dragging = False
@@ -177,7 +177,7 @@ class ScrollBar(ElementBehavior):
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect)
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
-        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
+        if self.detect_mouse:self.mouse_collision(self.thumb_rect,pygame.mouse.get_pos())
     def draw_hover_effect(self):return pygame.draw.rect(self.screen, self.hover_color, self.thumb_rect)
     def update_elements(self, elements: list):
         if self.elements is None:
