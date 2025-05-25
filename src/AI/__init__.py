@@ -1,1 +1,1 @@
-from .Neural_Network import *
+from .Neural_Network_Pytorch import *
