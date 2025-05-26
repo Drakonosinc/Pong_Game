@@ -1,6 +1,7 @@
 from Interface.Interface import *
 from Entities import *
-from AI.Ai_Controller import *
+from AI import *
+from Type_Training import *
 class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
