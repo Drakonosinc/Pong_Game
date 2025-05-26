@@ -5,7 +5,7 @@ import random
 import numpy as np
 from collections import deque
 from Game.Space_Pong import SpacePong
-from AI.Ai_Controller import AIHandler
+from AI import AIHandler
 from Type_Model import SimpleNN
 class ReplayMemory:
     def __init__(self, capacity: int):
