@@ -1,5 +1,5 @@
 import sys
-from AI.Genetic_Algorithm import *
+from Type_Training import *
 from Game.Space_Pong import *
 if __name__=="__main__":
     while True:
