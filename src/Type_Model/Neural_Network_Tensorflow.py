@@ -7,7 +7,7 @@ class SimpleNN(Model):
         self.fc1 = layers.Dense(128, activation='relu', input_shape=(input_size,))
         self.fc2 = layers.Dense(output_size)
         self.activations = None
-    def call(self, x):
+    def forward(self, x):
         x = self.fc1(x)
         self.activations = self.fc1.output
         if hasattr(x, 'numpy'):
