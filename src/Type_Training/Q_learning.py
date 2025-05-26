@@ -36,7 +36,7 @@ class SpacePongEnv:
 
     def step(self, action: int) -> tuple:
         # Ejecuta la acción y retorna (next_state, reward, done)
-        dir_map = ['UP', 'DOWN', 'LEFT', 'RIGHT']
+        dir_map = ['UP', 'DOWN']
         self.game.player.direction = dir_map[action]
         self.game.player.move()
         self.game.collision()
@@ -115,6 +115,6 @@ def train_dqn(episodes: int = 500):
             state = next_state
             total_reward += reward
         print(f"Episodio {episode}/{episodes} - Recompensa total: {total_reward:.2f} - Epsilon: {agent.epsilon:.3f}")
-    torch.save(agent.policy_net.state_dict(), 'qlearning_snake.pth')
+    torch.save(agent.policy_net.state_dict(), 'qlearning_.pth')
     return agent
 if __name__ == "__main__":train_dqn()
