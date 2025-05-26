@@ -6,7 +6,7 @@ import numpy as np
 from collections import deque
 from Game.Space_Pong import SpacePong
 from AI.Ai_Controller import AIHandler
-from AI.Neural_Network import SimpleNN
+from Type_Model import SimpleNN
 class ReplayMemory:
     def __init__(self, capacity: int):
         self.memory = deque(maxlen=capacity)
