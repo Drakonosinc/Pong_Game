@@ -203,7 +203,7 @@ class ComboBox(ElementBehavior):
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
         self.color = config.get("color", (255, 255, 255))
         self.elements = None
-        self.rect = pygame.Rect(*self.position,*self.font.size(self.type_dropdown))
+        self.rect = pygame.Rect(*self.position,*self.font.size(self.text+self.type_dropdown))
         self.rect_dropdown = pygame.Rect(*self.position,*self.dropdown)
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
