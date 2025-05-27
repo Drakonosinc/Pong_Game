@@ -199,7 +199,7 @@ class ComboBox(ElementBehavior):
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.text = config.get("text","")
         self.position = config["position"]
-        self.dropdown = config.get("size", (self.font.size(self.text).x, 200))
+        self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
         self.color = config.get("color", (255, 255, 255))
         self.elements = None
