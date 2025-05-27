@@ -224,3 +224,5 @@ class ComboBox(ElementBehavior):
     def charge_elements(self, elements: list):
         if self.elements is None:
             self.elements = elements
+            for i in range(len(self.elements)):
+                self.elements[i].position = None
