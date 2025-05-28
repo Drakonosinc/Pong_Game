@@ -202,6 +202,7 @@ class ComboBox(ElementBehavior):
         self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
         self.color = config.get("color", (255, 255, 255))
+        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.elements = None
         self.rect = pygame.Rect(*self.position,*self.font.size(self.text+self.type_dropdown))
         self.rect_dropdown = pygame.Rect(*self.position,*self.font.size(self.type_dropdown))
@@ -217,7 +218,7 @@ class ComboBox(ElementBehavior):
         if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect1)
         if self.detect_mouse:self.mouse_collision(self.rect_dropdown,pygame.mouse.get_pos(),self.draw_hover_effect2)
         if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-    def draw_hover_effect1(self):pass
+    def draw_hover_effect1(self):return self.screen.blit(self.font.render(f"{self.text} {self.type_dropdown}", True,self.color), (self.position))
     def draw_hover_effect2(self):pass
     def draw_pressed_effect(self):pass
     def charge_elements(self, elements: list):
