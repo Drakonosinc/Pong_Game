@@ -207,7 +207,7 @@ class ComboBox(ElementBehavior):
         self.elements = None
         self.rect = pygame.Rect(*self.position,*self.font.size(self.text))
         self.rect_dropdown = pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown))
-        self.rect = {"main": self.rect, "dropdown": self.rect_dropdown}
+        self.rect = {"base": self.rect, "dropdown": self.rect_dropdown}
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
@@ -217,9 +217,9 @@ class ComboBox(ElementBehavior):
     def events(self, event):pass
     def draw(self):
         self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.color), (self.position))
-        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect1)
+        if self.detect_mouse:self.mouse_collision(self.rect["base"],pygame.mouse.get_pos(),self.draw_hover_effect1)
         if self.detect_mouse:self.mouse_collision(self.rect_dropdown,pygame.mouse.get_pos(),self.draw_hover_effect2)
-        if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),pygame.mouse.get_pos())
+        if self.pressed:self.pressed_button(self.rect["base"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def draw_hover_effect1(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_hover_effect2(self):return self.screen.blit(self.font.render(f"{self.type_dropdown}",True,self.hover_dropdown), (self.position[0]+self.font.size(self.text)[0], self.position[1]))
     def draw_pressed_effect(self):pass
