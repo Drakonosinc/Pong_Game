@@ -207,7 +207,7 @@ class ComboBox(ElementBehavior):
         self.elements = None
         self.rect = pygame.Rect(*self.position,*self.font.size(self.text))
         self.rect_dropdown = pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown))
-        self.rect = {}
+        self.rect = {"main": self.rect, "dropdown": self.rect_dropdown}
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
