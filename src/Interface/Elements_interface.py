@@ -176,7 +176,7 @@ class ScrollBar(ElementBehavior):
             new_y = y0 - offset
             el.position = (x0, new_y)
             if isinstance(el.rect, dict):
-                
+                for i in el.rect:el.rect[i].y = new_y
             else:el.rect.y = new_y
         if callable(self.commands):self.commands(proportion)
     def draw(self):
