@@ -194,7 +194,9 @@ class ScrollBar(ElementBehavior):
             else:self.content_height = self.rect.height
     def return_rect(self):
         for el in self.elements:
-            
+            if isinstance(el.rect, dict):
+                return max(el.rect.bottom for el in self.elements.values() if isinstance(el.rect, dict))
+            else:return max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
 class ComboBox(ElementBehavior):
     def __init__(self, config: dict):
         ElementBehavior.__init__(self, config)
