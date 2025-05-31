@@ -189,7 +189,7 @@ class ScrollBar(ElementBehavior):
             self.initial_positions = [(el.position[0], el.position[1]) for el in self.elements]
             if self.elements:
                 top = min(y for _, y in self.initial_positions)
-                bottom = max(el.rect.bottom for el in self.elements)
+                bottom = max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
                 self.content_height = bottom - top
             else:self.content_height = self.rect.height
 class ComboBox(ElementBehavior):
