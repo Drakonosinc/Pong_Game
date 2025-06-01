@@ -224,8 +224,9 @@ class ComboBox(ElementBehavior):
     def events(self, event):pass
     def draw(self):
         self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.color), (self.position))
-        if self.detect_mouse:self.mouse_collision(self.rect["base"],pygame.mouse.get_pos(),self.draw_hover_effect1)
-        if self.detect_mouse:self.mouse_collision(self.rect["dropdown"],pygame.mouse.get_pos(),self.draw_hover_effect2)
+        if self.detect_mouse:
+            self.mouse_collision(self.rect["base"],pygame.mouse.get_pos(),self.draw_hover_effect1)
+            self.mouse_collision(self.rect["dropdown"],pygame.mouse.get_pos(),self.draw_hover_effect2)
         if self.pressed:self.pressed_button(self.rect["base"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect1)
         if self.pressed:self.pressed_button(self.rect["dropdown"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect2)
     def draw_hover_effect1(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
