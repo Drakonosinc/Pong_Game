@@ -1,6 +1,7 @@
 from Loaders.Load_elements import *
 from .Elements_interface import *
-class interface(load_elements):
+from .Menus.Base_Menu import BaseMenu
+class interface(load_elements,BaseMenu):
     def menus(self):
         if self.main==0:self.main_menu()
         elif self.main==1:self.Game_over()
