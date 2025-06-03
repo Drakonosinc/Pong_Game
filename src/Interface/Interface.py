@@ -102,9 +102,6 @@ class interface(load_elements):
         self.mode_game["Player"]=mode_two
         if self.model_training!=None:self.mode_game["AI"]=mode_three
         else:self.load_AI()
-    def on_off(self,dic=None,variable=""):
-        if dic:dic[variable]=not dic[variable]
-        else:setattr(self,variable,not getattr(self,variable))
     def Pause(self):
         self.filt(180)
         self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
