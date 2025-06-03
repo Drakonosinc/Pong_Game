@@ -26,8 +26,6 @@ class interface(load_elements):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def execute_buttons(self,*args):
-        for button in args:button.draw()
     def main_menu(self):
         self.screen.fill(self.BLACK)
         self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
