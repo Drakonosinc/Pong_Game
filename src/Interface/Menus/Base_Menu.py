@@ -1,6 +1,6 @@
 import pygame
 class BaseMenu:
-    def __init__(interface=None):
+    def __init__(self, interface=None):
         self.interface = interface
         if interface:
             self.screen = interface.screen
@@ -21,7 +21,7 @@ class BaseMenu:
             overlay.set_alpha(alpha)
             self.screen.blit(overlay, (0, 0))
             pygame.display.flip()
-            self.clock.tick(20)
+            self.interface.clock.tick(20)
             alpha += -15 if fade_in else 15
     def change_mains(self,config):
         if fade_in:=config.get("fade_in",True):self.fade_transition(False,config.get("color",(0,0,0)),255)
