@@ -3,6 +3,7 @@ from .Elements_interface import *
 from .Menus.Base_Menu import BaseMenu
 class interface(load_elements,BaseMenu):
     def menus(self):
+        BaseMenu.__init__(self)
         if self.main==0:self.main_menu()
         elif self.main==1:self.Game_over()
         elif self.main==2:self.game_mode()
