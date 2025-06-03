@@ -176,5 +176,3 @@ class interface(load_elements):
             self.config.config_keys[self.key_name]=event.unicode.upper()
             self.check_item(self.config.config_keys,self.config.config_keys[self.key_name],self.WHITE,"text",**{self.key:self.button_key})
             self.change_keys(self.key,self.key_name)
-    def check_item(self,dic,is_true,is_false,item,**kwargs):
-        for key,button in kwargs.items():setattr(button,item,(is_true if dic[key] else is_false))

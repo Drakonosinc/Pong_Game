@@ -32,3 +32,5 @@ class BaseMenu:
     def on_off(self,dic=None,variable=""):
         if dic:dic[variable]=not dic[variable]
         else:setattr(self,variable,not getattr(self,variable))
+    def check_item(self,dic,is_true,is_false,item,**kwargs):
+        for key,button in kwargs.items():setattr(button,item,(is_true if dic[key] else is_false))
