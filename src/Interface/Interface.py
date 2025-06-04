@@ -39,9 +39,6 @@ class interface(load_elements,BaseMenu):
     def Game_over(self):
         self.filt(80)
         self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
-    def buttons_game_over(self):
-        
-        self.reset_button=self.button_factory_f2_5.create_TextButton({"text": "Reset Press R","color": self.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"command1": self.reset,"command2":lambda:self.change_mains({"main":-1})})
     def game_mode(self):
         self.screen.fill(self.BLACK)
         self.screen.blit((font_modegame:=pygame.font.Font(os.path.join(self.font_path,"8bitOperatorPlusSC-Bold.ttf"),22)).render("Game Mode",True,"white"),(self.WIDTH/2-70,self.HEIGHT/2-162))
