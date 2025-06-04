@@ -14,3 +14,4 @@ class MainMenu(BaseMenu):
     def render(self):
         self.screen.fill(self.interface.BLACK)
         self.screen.blit(self.interface.font4.render("Space Pong", True, self.interface.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
+        self.execute_buttons(self.buttons['play'],self.buttons['quit'],self.buttons['options'])

@@ -1,6 +1,6 @@
 from Loaders.Load_elements import *
 from .Elements_interface import *
-from .Menus.Base_Menu import BaseMenu
+from .Menus import *
 class interface(load_elements,BaseMenu):
     def menus(self):
         BaseMenu.__init__(self,self)
