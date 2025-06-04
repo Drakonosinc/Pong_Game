@@ -4,8 +4,7 @@ from .Menus.Base_Menu import BaseMenu
 class interface(load_elements,BaseMenu):
     def menus(self):
         BaseMenu.__init__(self,self)
-        if self.main==0:self.main_menu()
-        elif self.main==1:self.Game_over()
+        if self.main==1:self.Game_over()
         elif self.main==2:self.game_mode()
         elif self.main==3:self.Pause()
         elif self.main==4:self.options_menu()
@@ -15,7 +14,6 @@ class interface(load_elements,BaseMenu):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.button_factory_f2_5 = ElementsFactory({"screen": self.screen,"font": self.font2_5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
     def draw_buttons(self):
-        self.buttons_main_menu()
         self.buttons_game_over()
         self.buttons_mode_game()
         self.inputs_text()
