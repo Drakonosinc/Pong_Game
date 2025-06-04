@@ -33,9 +33,6 @@ class interface(load_elements,BaseMenu):
         self.screen.fill(self.BLACK)
         self.screen.blit(self.font4.render("Space Pong", True, self.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
         self.execute_buttons(self.play_button,self.quit_button,self.options_button)
-    def buttons_main_menu(self):
-        
-        .create_TextButton({"text": "Options","position": (self.WIDTH-110,self.HEIGHT-40),"command1":lambda:self.change_mains({"main":4})})
     def Game_over(self):
         self.filt(80)
         self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
