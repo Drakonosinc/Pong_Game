@@ -12,3 +12,4 @@ class MainMenu(BaseMenu):
         self.interface.quit_button = self.buttons['quit']
         self.interface.options_button = self.buttons['options']
     def render(self):
+        self.screen.fill(self.interface.BLACK)
