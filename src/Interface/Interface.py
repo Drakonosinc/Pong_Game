@@ -3,7 +3,8 @@ from .Elements_interface import *
 from .Menus import *
 class interface(load_elements,BaseMenu):
     def __init__(self):
-        super().__init__()
+        load_elements.__init__(self)
+        BaseMenu.__init__(self,self)
         self.initialize_menus()
     def initialize_menus(self):
         self.main_menu = MainMenu(self)
@@ -22,6 +23,8 @@ class interface(load_elements,BaseMenu):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
         self.button_factory_f2_5 = ElementsFactory({"screen": self.screen,"font": self.font2_5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
     def draw_buttons(self):
+        self.setup_button_factories()
+        self.main_menu.setup_buttons()
         self.buttons_game_over()
         self.buttons_mode_game()
         self.inputs_text()
