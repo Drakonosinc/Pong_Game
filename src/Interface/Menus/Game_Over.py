@@ -7,4 +7,8 @@ class GameOver(BaseMenu):
         factory = self.interface.button_factory_f2_5
         self.buttons['main'] = factory.create_TextButton({"text": "Main Menu Press E","color": self.interface.BLACK,"position": (self.WIDTH/2-166,self.HEIGHT/2-110),"command1":lambda:self.change_mains({"main":0,"run":True})})
         self.buttons['reset'] = factory.create_TextButton({"text": "Reset Press R","color": self.interface.BLACK,"position": (self.WIDTH/2-130,self.HEIGHT/2-80),"command1": self.interface.reset,"command2":lambda:self.change_mains({"main":-1})})
-    def render(self):pass
+        self.interface.main_button = self.buttons['main']
+        self.interface.reset_button = self.buttons['reset']
+    def render(self):
+        self.filt(80)
+        

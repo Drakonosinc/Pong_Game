@@ -37,7 +37,7 @@ class interface(load_elements,BaseMenu):
         self.input_player2.change_text(event)
         self.scroll.events(event)
     def Game_over(self):
-        self.filt(80)
+        
         self.screen.blit(self.font3.render("GAME OVER",True,"black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
     def game_mode(self):
         self.screen.fill(self.BLACK)
