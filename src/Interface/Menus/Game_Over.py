@@ -11,4 +11,5 @@ class GameOver(BaseMenu):
         self.interface.reset_button = self.buttons['reset']
     def render(self):
         self.filt(80)
-        
+        self.screen.blit(self.interface.font3.render("GAME OVER", True, "black"),(self.WIDTH/2-178,self.HEIGHT/2-180))
+        self.execute_buttons(self.buttons['main'],self.buttons['reset'])
