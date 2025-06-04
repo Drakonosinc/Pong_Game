@@ -13,3 +13,4 @@ class MainMenu(BaseMenu):
         self.interface.options_button = self.buttons['options']
     def render(self):
         self.screen.fill(self.interface.BLACK)
+        self.screen.blit(self.interface.font4.render("Space Pong", True, self.interface.WHITE),(self.WIDTH//2-245,self.HEIGHT//2-180))
