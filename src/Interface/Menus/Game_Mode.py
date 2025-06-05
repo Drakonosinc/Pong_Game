@@ -6,6 +6,7 @@ class GameMode(BaseMenu):
     def setup_buttons(self):
         self._setup_navigation_buttons()
         self._setup_mode_buttons()
+        self._setup_score_buttons()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
@@ -42,4 +43,6 @@ class GameMode(BaseMenu):
         self.buttons['increase_score'] = factory.create_PolygonButton({"color": self.interface.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.interface.WHITE,"command1": lambda: self.increase_decrease_variable(self.config.config_game, "max_score")})
         self.interface.decrease_score_button = self.buttons['decrease_score']
         self.interface.increase_score_button = self.buttons['increase_score']
+    def _setup_input_fields(self):
+        factory = self.interface.button_factory_f5
     def render(self):pass
