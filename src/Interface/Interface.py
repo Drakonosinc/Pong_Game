@@ -52,9 +52,6 @@ class interface(load_elements,BaseMenu):
     def inputs_text(self):
         self.input_player1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
         self.input_player2=self.button_factory_f5.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
-    def buttons_mode_game(self):
-        self.increase_score_button = self.button_factory_f5.create_PolygonButton({"color": self.BLACK,"position": ((380, 185), (380, 205), (400, 195)),"color2": self.WHITE,"command1":lambda:self.increase_decrease_variable(self.config.config_game,"max_score")})
-        self.config_training_ai(),self.buttons_config_game(),self.text_training_ai()
     def main_training_ai(self):
         self.execute_buttons(*self.buttons_in_config_AI,self.scroll,*self.text_in_training_ai)
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
