@@ -55,6 +55,7 @@ class GameMode(BaseMenu):
         self.config_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI, 'generation_value'),"command2": self._update_training_ai_texts})
         self.config_buttons['decrease_generation'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI, 'generation_value', True, -1),"command2": self._update_training_ai_texts})
         self.config_buttons['increase_population'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI, 'population_value'),"command2": self._update_training_ai_texts})
+        self.config_buttons['decrease_population'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI, 'population_value', True, -1),"command2": self._update_training_ai_texts})
     def _setup_training_ai_texts(self):pass
     def _setup_scroll_bar(self):pass
     def render(self):pass
