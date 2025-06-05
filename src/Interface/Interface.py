@@ -93,11 +93,6 @@ class interface(load_elements,BaseMenu):
     def buttons_config_game(self):
         self.increase_balls = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls'),"command2":self.objects()})
         self.decrease_balls = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls',True,-1),"command2":self.objects()})
-    def type_mode(self,mode_one=False,mode_two=False,mode_three=False):
-        self.mode_game["Training AI"]=mode_one
-        self.mode_game["Player"]=mode_two
-        if self.model_training!=None:self.mode_game["AI"]=mode_three
-        else:self.load_AI()
     def Pause(self):
         self.filt(180)
         self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
