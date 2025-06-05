@@ -3,6 +3,9 @@ class GameMode(BaseMenu):
     def __init__(self, interface):
         super().__init__(interface)
         self.buttons = {}
+        self.inputs = {}
+        self.config_buttons = {}
+        self.training_ai_elements = {}
     def setup_buttons(self):
         self._setup_navigation_buttons()
         self._setup_mode_buttons()
@@ -49,6 +52,14 @@ class GameMode(BaseMenu):
         self._setup_scroll_bar()
     def _setup_training_ai_buttons(self):
         factory = self.interface.button_factory_f5
+        self.config_buttons['increase_generation'] = factory.create_TextButton({
+            "text": ">",
+            "position": (self.WIDTH-100, self.HEIGHT/2-55),
+            "command1": lambda: self.increase_decrease_variable(
+                self.config.config_AI, 'generation_value'
+            ),
+            "command2": self._update_training_ai_texts
+        })
     def _setup_training_ai_texts(self):pass
     def _setup_scroll_bar(self):pass
     def render(self):pass
