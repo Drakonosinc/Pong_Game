@@ -15,4 +15,7 @@ class GameMode(BaseMenu):
     def _setup_mode_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['training_ai'] = factory.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70, self.HEIGHT/2-136),"command1": lambda: self._set_game_mode(training_ai=True),"command2": lambda: self._update_mode_buttons("Training AI")})
+        self.buttons['player'] = factory.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64, self.HEIGHT/2-110),"command1": lambda: self._set_game_mode(player=True),"command2": lambda: self._update_mode_buttons("Player")})
+        
+        
     def render(self):pass
