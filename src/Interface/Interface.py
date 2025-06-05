@@ -53,8 +53,6 @@ class interface(load_elements,BaseMenu):
         self.input_player1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
         self.input_player2=self.button_factory_f5.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
     def buttons_mode_game(self):
-        
-        self.continue_button = self.button_factory_f5.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.objects})})
         self.training_ai_button = self.button_factory_f5.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70,self.HEIGHT/2-136),"command1":lambda:self.type_mode(True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Training AI":self.training_ai_button,"Player":self.player_button,"AI":self.ai_button})})
         self.player_button = self.button_factory_f5.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64,self.HEIGHT/2-110),"command1":lambda:self.type_mode(mode_two=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"Player":self.player_button,"Training AI":self.training_ai_button,"AI":self.ai_button})})
         self.ai_button = self.button_factory_f5.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58,self.HEIGHT/2-84),"command1":lambda:self.type_mode(mode_three=True),"command2":lambda:self.check_item(self.mode_game,self.SKYBLUE,self.WHITE,"color",**{"AI":self.ai_button,"Player":self.player_button,"Training AI":self.training_ai_button})})
