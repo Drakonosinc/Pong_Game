@@ -45,4 +45,6 @@ class GameMode(BaseMenu):
         self.interface.increase_score_button = self.buttons['increase_score']
     def _setup_input_fields(self):
         factory = self.interface.button_factory_f5
+        self.inputs['player1'] = factory.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
+        
     def render(self):pass

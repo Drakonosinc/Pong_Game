@@ -50,7 +50,7 @@ class interface(load_elements,BaseMenu):
         self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input_player1,self.input_player2)
         self.decrease_score_button.change_item({"pressed": (x:=self.config.config_game["max_score"] > 1),"detect_mouse": x})
     def inputs_text(self):
-        self.input_player1=self.button_factory_f5.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
+        
         self.input_player2=self.button_factory_f5.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
     def main_training_ai(self):
         self.execute_buttons(*self.buttons_in_config_AI,self.scroll,*self.text_in_training_ai)
