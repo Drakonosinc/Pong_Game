@@ -7,6 +7,8 @@ class GameMode(BaseMenu):
         self._setup_navigation_buttons()
         self._setup_mode_buttons()
         self._setup_score_buttons()
+        self._setup_input_fields()
+        self._setup_training_ai_elements()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
@@ -27,16 +29,8 @@ class GameMode(BaseMenu):
         if ai and self.interface.model_training is not None:self.interface.mode_game["AI"] = ai
         elif ai:self.interface.load_AI()
     def _update_mode_buttons(self, selected_mode):
-        mode_buttons = {
-            "Training AI": self.buttons['training_ai'],
-            "Player": self.buttons['player'],
-            "AI": self.buttons['ai']}
-        self.check_item(
-            self.interface.mode_game,
-            self.interface.SKYBLUE,
-            self.interface.WHITE,
-            "color",
-            **mode_buttons)
+        mode_buttons = {"Training AI": self.buttons['training_ai'],"Player": self.buttons['player'],"AI": self.buttons['ai']}
+        self.check_item(self.interface.mode_game,self.interface.SKYBLUE,self.interface.WHITE,"color",**mode_buttons)
     def _setup_score_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['decrease_score'] = factory.create_PolygonButton({"color": self.interface.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.interface.WHITE,"command1": lambda: self.increase_decrease_variable(self.config.config_game, "max_score", True, -1)})
@@ -49,4 +43,11 @@ class GameMode(BaseMenu):
         self.inputs['player2'] = factory.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
         self.interface.input_player1 = self.inputs['player1']
         self.interface.input_player2 = self.inputs['player2']
+    def _setup_training_ai_elements(self):
+        self._setup_training_ai_buttons()
+        self._setup_training_ai_texts()
+        self._setup_scroll_bar()
+    def _setup_training_ai_buttons(self):pass
+    def _setup_training_ai_texts(self):pass
+    def _setup_scroll_bar(self):pass
     def render(self):pass
