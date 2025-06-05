@@ -38,5 +38,6 @@ class GameMode(BaseMenu):
             **mode_buttons)
     def _setup_score_buttons(self):
         factory = self.interface.button_factory_f5
+        self.buttons['decrease_score'] = factory.create_PolygonButton({"color": self.interface.BLACK,"position": ((320, 185), (320, 205), (300, 195)),"color2": self.interface.WHITE,"command1": lambda: self.increase_decrease_variable(self.config.config_game, "max_score", True, -1)})
         
     def render(self):pass
