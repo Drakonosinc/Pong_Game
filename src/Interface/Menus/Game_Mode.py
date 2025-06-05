@@ -36,4 +36,5 @@ class GameMode(BaseMenu):
             self.interface.WHITE,
             "color",
             **mode_buttons)
+    
     def render(self):pass
