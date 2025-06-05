@@ -50,7 +50,6 @@ class interface(load_elements,BaseMenu):
         self.execute_buttons(self.back_button,self.continue_button,self.training_ai_button,self.player_button,self.ai_button,self.decrease_score_button,self.increase_score_button,self.input_player1,self.input_player2)
         self.decrease_score_button.change_item({"pressed": (x:=self.config.config_game["max_score"] > 1),"detect_mouse": x})
     def main_training_ai(self):
-        self.execute_buttons(*self.buttons_in_config_AI,self.scroll,*self.text_in_training_ai)
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
         self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
     def text_training_ai(self):
@@ -60,7 +59,6 @@ class interface(load_elements,BaseMenu):
             self.text_P=self.button_factory_f5.create_Text({"text":(f"Population Size\n{self.config.config_AI['population_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-26),"detect_mouse":False})
             self.text_A=self.button_factory_f5.create_Text({"text":(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"),"position":(self.WIDTH/2+120,self.HEIGHT/2+29),"detect_mouse":False})
             self.text_S=self.button_factory_f5.create_Text({"text":(f"Save model"),"position":(self.WIDTH/2+120,self.HEIGHT/2+84),"detect_mouse":False})
-            self.text_in_training_ai=[self.text_C,self.text_G,self.text_P,self.text_A,self.text_S]
         else:
             self.text_G.change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
             self.text_P.change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
@@ -70,7 +68,6 @@ class interface(load_elements,BaseMenu):
         self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1),"command2":self.text_training_ai})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config.config_AI,"model_save"),"command2":self.config.save_config})
         self.box_type_model = self.button_factory_f5.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120,self.HEIGHT/2+139)})
-        self.buttons_in_config_AI=[self.increase_generation,self.decrease_generation,self.increase_population,self.decrease_population,self.increase_try_for_ai,self.decrease_try_for_ai,self.save_model,self.box_type_model]
         self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
