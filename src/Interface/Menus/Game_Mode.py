@@ -25,4 +25,10 @@ class GameMode(BaseMenu):
         self.interface.mode_game["Player"] = player
         if ai and self.interface.model_training is not None:self.interface.mode_game["AI"] = ai
         elif ai:self.interface.load_AI()
+    def _update_mode_buttons(self, selected_mode):
+        mode_buttons = {
+            "Training AI": self.buttons['training_ai'],
+            "Player": self.buttons['player'],
+            "AI": self.buttons['ai']}
+        
     def render(self):pass
