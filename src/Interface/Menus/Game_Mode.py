@@ -36,5 +36,7 @@ class GameMode(BaseMenu):
             self.interface.WHITE,
             "color",
             **mode_buttons)
-    
+    def _setup_score_buttons(self):
+        factory = self.interface.button_factory_f5
+        
     def render(self):pass
