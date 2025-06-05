@@ -30,5 +30,10 @@ class GameMode(BaseMenu):
             "Training AI": self.buttons['training_ai'],
             "Player": self.buttons['player'],
             "AI": self.buttons['ai']}
-        
+        self.check_item(
+            self.interface.mode_game,
+            self.interface.SKYBLUE,
+            self.interface.WHITE,
+            "color",
+            **mode_buttons)
     def render(self):pass
