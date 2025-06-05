@@ -47,7 +47,8 @@ class GameMode(BaseMenu):
         self._setup_training_ai_buttons()
         self._setup_training_ai_texts()
         self._setup_scroll_bar()
-    def _setup_training_ai_buttons(self):pass
+    def _setup_training_ai_buttons(self):
+        factory = self.interface.button_factory_f5
     def _setup_training_ai_texts(self):pass
     def _setup_scroll_bar(self):pass
     def render(self):pass
