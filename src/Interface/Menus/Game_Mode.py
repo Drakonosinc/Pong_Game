@@ -46,5 +46,6 @@ class GameMode(BaseMenu):
     def _setup_input_fields(self):
         factory = self.interface.button_factory_f5
         self.inputs['player1'] = factory.create_InputText({"text": "Player","color":(0,0,0),"position": (8,40,271,25)})
+        self.inputs['player2'] = factory.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
         
     def render(self):pass
