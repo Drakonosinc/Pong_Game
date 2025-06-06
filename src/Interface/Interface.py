@@ -51,13 +51,11 @@ class interface(load_elements,BaseMenu):
         self.decrease_score_button.change_item({"pressed": (x:=self.config.config_game["max_score"] > 1),"detect_mouse": x})
     def main_training_ai(self):
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
-        self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
         self.execute_buttons(self.increase_balls,self.decrease_balls)
     def buttons_config_game(self):
-        self.increase_balls = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls'),"command2":self.objects()})
         self.decrease_balls = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2-55),"command1":lambda:self.increase_decrease_variable(self.config.config_game,'number_balls',True,-1),"command2":self.objects()})
     def Pause(self):
         self.filt(180)
