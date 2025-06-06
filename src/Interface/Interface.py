@@ -54,9 +54,6 @@ class interface(load_elements,BaseMenu):
         self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
     def text_training_ai(self):
         if not hasattr(self, "text_in_training_ai"):
-            self.text_C=self.button_factory_f5.create_Text({"text":(f"Config Training\n{"AI":^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-136),"detect_mouse":False})
-            self.text_G=self.button_factory_f5.create_Text({"text":(f"Generation Size\n{self.config.config_AI['generation_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-81),"detect_mouse":False})
-            self.text_P=self.button_factory_f5.create_Text({"text":(f"Population Size\n{self.config.config_AI['population_value']:^26}"),"position":(self.WIDTH/2+120,self.HEIGHT/2-26),"detect_mouse":False})
             self.text_A=self.button_factory_f5.create_Text({"text":(f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"),"position":(self.WIDTH/2+120,self.HEIGHT/2+29),"detect_mouse":False})
             self.text_S=self.button_factory_f5.create_Text({"text":(f"Save model"),"position":(self.WIDTH/2+120,self.HEIGHT/2+84),"detect_mouse":False})
         else:

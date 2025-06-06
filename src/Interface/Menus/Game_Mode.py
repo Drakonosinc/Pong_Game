@@ -12,6 +12,7 @@ class GameMode(BaseMenu):
         self._setup_score_buttons()
         self._setup_input_fields()
         self._setup_training_ai_elements()
+        self._setup_config_game_buttons()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
