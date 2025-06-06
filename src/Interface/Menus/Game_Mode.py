@@ -76,4 +76,6 @@ class GameMode(BaseMenu):
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
         factory = self.interface.button_factory_f5
+        self.config_buttons['increase_balls'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls'),"command2": self.interface.objects()})
+        
     def render(self):pass
