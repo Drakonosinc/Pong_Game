@@ -88,3 +88,5 @@ class GameMode(BaseMenu):
     def render(self):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
+        self._render_main_texts(font_modegame)
+    def _render_main_texts(self, font_modegame):pass
