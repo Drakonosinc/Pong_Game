@@ -82,5 +82,6 @@ class GameMode(BaseMenu):
         self.interface.decrease_balls = self.config_buttons['decrease_balls']
     def _update_training_ai_texts(self):
         if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
+        if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
         
     def render(self):pass
