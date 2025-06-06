@@ -1,3 +1,4 @@
+import os, pygame
 from .Base_Menu import BaseMenu
 class GameMode(BaseMenu):
     def __init__(self, interface):
@@ -86,3 +87,4 @@ class GameMode(BaseMenu):
         if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai'] < 10 else 26}}"})
     def render(self):
         self.screen.fill(self.interface.BLACK)
+        font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
