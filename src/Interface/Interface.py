@@ -64,8 +64,6 @@ class interface(load_elements,BaseMenu):
             self.text_P.change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
             self.text_A.change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"})
     def config_training_ai(self):
-        self.increase_try_for_ai = self.button_factory_f5.create_TextButton({"text": ">","position": (self.WIDTH-100,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai'),"command2":self.text_training_ai})
-        self.decrease_try_for_ai = self.button_factory_f5.create_TextButton({"text": "<","position": (self.WIDTH-178,self.HEIGHT/2+55),"command1":lambda:self.increase_decrease_variable(self.config.config_AI,'try_for_ai',True,-1),"command2":self.text_training_ai})
         self.save_model = self.button_factory_f5.create_TextButton({"text": "OFF","color": self.SKYBLUE,"position": (self.WIDTH-85,self.HEIGHT/2+84),"command1":lambda:self.on_off(self.config.config_AI,"model_save"),"command2":self.config.save_config})
         self.box_type_model = self.button_factory_f5.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120,self.HEIGHT/2+139)})
         self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
