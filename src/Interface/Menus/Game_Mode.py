@@ -80,4 +80,7 @@ class GameMode(BaseMenu):
         self.config_buttons['decrease_balls'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls', True, -1),"command2": self.interface.objects()})
         self.interface.increase_balls = self.config_buttons['increase_balls']
         self.interface.decrease_balls = self.config_buttons['decrease_balls']
+    def _update_training_ai_texts(self):
+        if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
+        
     def render(self):pass
