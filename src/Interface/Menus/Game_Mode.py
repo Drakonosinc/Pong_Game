@@ -71,4 +71,6 @@ class GameMode(BaseMenu):
         self.interface.text_in_training_ai = list(self.training_ai_elements.values())
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
+        self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
+        
     def render(self):pass
