@@ -84,5 +84,5 @@ class GameMode(BaseMenu):
         if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
         if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
         if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai'] < 10 else 26}}"})
-        
-    def render(self):pass
+    def render(self):
+        self.screen.fill(self.interface.BLACK)
