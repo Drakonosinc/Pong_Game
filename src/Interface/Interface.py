@@ -63,8 +63,6 @@ class interface(load_elements,BaseMenu):
             self.text_G.change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
             self.text_P.change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
             self.text_A.change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"})
-    def config_training_ai(self):
-        self.scroll=self.button_factory_f5.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
