@@ -63,5 +63,7 @@ class GameMode(BaseMenu):
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
+        self.training_ai_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
+        
     def _setup_scroll_bar(self):pass
     def render(self):pass
