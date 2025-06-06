@@ -52,10 +52,6 @@ class interface(load_elements,BaseMenu):
     def main_training_ai(self):
         self.save_model.change_item({"color":self.SKYBLUE if self.config.config_AI["model_save"] else self.RED,"text":"ON" if self.config.config_AI["model_save"] else "OFF"})
         self.scroll.update_elements([*self.buttons_in_config_AI,*self.text_in_training_ai])
-    def text_training_ai(self):
-            self.text_G.change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
-            self.text_P.change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
-            self.text_A.change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}"})
     def options_game(self):
         self.screen.blit(self.font5.render(f"Configuration of\n{"Gameplay":^23}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-136))
         self.screen.blit(self.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120,self.HEIGHT/2-81))
