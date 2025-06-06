@@ -67,6 +67,7 @@ class GameMode(BaseMenu):
         self.training_ai_elements['text_G'] = factory.create_Text({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
         self.training_ai_elements['text_P'] = factory.create_Text({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
         self.training_ai_elements['text_A'] = factory.create_Text({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai']<10 else 26}}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
+        self.training_ai_elements['text_S'] = factory.create_Text({"text": "Save model","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
         
     def _setup_scroll_bar(self):pass
     def render(self):pass
