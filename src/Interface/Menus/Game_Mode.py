@@ -118,7 +118,7 @@ class GameMode(BaseMenu):
         if self.interface.mode_game["Training AI"]:self._execute_training_ai_buttons()
         else:self._execute_game_config_buttons()
     def _execute_training_ai_buttons(self):
-        training_buttons = [self.config_buttons['increase_generation'],self.config_buttons['decrease_generation'],self.config_buttons['increase_population'],self.config_buttons['decrease_population'],self.config_buttons['increase_try_for_ai'],self.config_buttons['decrease_try_for_ai'],self.config_buttons['save_model'],self.config_buttons['scroll']]
+        training_buttons = [self.config_buttons['increase_generation'],self.config_buttons['decrease_generation'],self.config_buttons['increase_population'],self.config_buttons['decrease_population'],self.config_buttons['increase_try_for_ai'],self.config_buttons['decrease_try_for_ai'],self.config_buttons['save_model'],self.config_buttons['scroll'],self.config_buttons['box_type_model']]
         for button in training_buttons:button.draw()
     def _execute_game_config_buttons(self):
         config_buttons = [self.config_buttons['increase_balls'],self.config_buttons['decrease_balls']]
