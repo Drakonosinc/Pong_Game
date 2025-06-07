@@ -93,5 +93,6 @@ class GameMode(BaseMenu):
         else:self._render_game_options()
         self._render_main_buttons()
         self._update_score_button_state()
-    def _render_main_texts(self, font_modegame):pass
+    def _render_main_texts(self, font_modegame):
+        self.screen.blit(font_modegame.render("Game Mode", True, "white"), (self.WIDTH/2-70, self.HEIGHT/2-162))
     def _render_training_ai(self):pass
