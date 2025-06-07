@@ -91,5 +91,7 @@ class GameMode(BaseMenu):
         self._render_main_texts(font_modegame)
         if self.interface.mode_game["Training AI"]:self._render_training_ai()
         else:self._render_game_options()
+        self._render_main_buttons()
+        self._update_score_button_state()
     def _render_main_texts(self, font_modegame):pass
     def _render_training_ai(self):pass
