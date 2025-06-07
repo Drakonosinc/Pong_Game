@@ -85,6 +85,8 @@ class GameMode(BaseMenu):
         if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
         if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
         if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai'] < 10 else 26}}"})
+    def _update_score_button_state(self):
+        self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
     def render(self):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
