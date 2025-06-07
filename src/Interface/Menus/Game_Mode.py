@@ -120,4 +120,4 @@ class GameMode(BaseMenu):
         for button in training_buttons:button.draw()
     def _execute_game_config_buttons(self):
         config_buttons = [self.config_buttons['increase_balls'],self.config_buttons['decrease_balls']]
-        
+        for button in config_buttons:button.draw()
