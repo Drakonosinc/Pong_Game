@@ -97,4 +97,5 @@ class GameMode(BaseMenu):
         self.screen.blit(font_modegame.render("Game Mode", True, "white"), (self.WIDTH/2-70, self.HEIGHT/2-162))
         self.screen.blit(self.interface.font5.render("Enter Player Name One", True, "white"), (7, 10))
         self.screen.blit(self.interface.font5.render("Enter Player Name Two", True, "white"), (416, 10))
+        self.screen.blit(font_modegame.render("Max Score", True, "white"), (self.WIDTH/2-68, self.HEIGHT/2-50))
     def _render_training_ai(self):pass
