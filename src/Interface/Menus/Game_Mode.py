@@ -88,6 +88,8 @@ class GameMode(BaseMenu):
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
+    def update_training_ai_save_model(self):
+        self.config_buttons['save_model'].change_item({"color": self.interface.SKYBLUE if self.config.config_AI["model_save"] else self.interface.RED,"text": "ON" if self.config.config_AI["model_save"] else "OFF"})
     def render(self):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
