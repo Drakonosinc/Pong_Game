@@ -110,3 +110,6 @@ class GameMode(BaseMenu):
     def _render_game_options(self):
         self.screen.blit(self.interface.font5.render(f"Configuration of\n{'Gameplay':^23}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-136))
         self.screen.blit(self.interface.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-81))
+    def execute_buttons(self):
+        common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
+        
