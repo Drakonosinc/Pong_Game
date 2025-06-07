@@ -113,4 +113,5 @@ class GameMode(BaseMenu):
     def execute_buttons(self):
         common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
         for button in common_buttons:button.draw()
-        
+        if self.interface.mode_game["Training AI"]:self._execute_training_ai_buttons()
+        else:self._execute_game_config_buttons()
