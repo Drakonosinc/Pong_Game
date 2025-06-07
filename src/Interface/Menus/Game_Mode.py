@@ -96,7 +96,7 @@ class GameMode(BaseMenu):
         self._render_main_texts(font_modegame)
         if self.interface.mode_game["Training AI"]:self._render_training_ai()
         else:self._render_game_options()
-        self._render_main_buttons()
+        self.execute_buttons()
         self._update_score_button_state()
     def _render_main_texts(self, font_modegame):
         self.screen.blit(font_modegame.render("Game Mode", True, "white"), (self.WIDTH/2-70, self.HEIGHT/2-162))
@@ -107,3 +107,5 @@ class GameMode(BaseMenu):
     def _render_training_ai(self):
         for text_element in self.training_ai_elements.values():text_element.draw()
         self.update_training_ai_save_model()
+    def _render_game_options(self):
+        self.screen.blit(self.interface.font5.render(f"Configuration of\n{'Gameplay':^23}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-136))
