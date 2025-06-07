@@ -89,4 +89,6 @@ class GameMode(BaseMenu):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
         self._render_main_texts(font_modegame)
+        if self.interface.mode_game["Training AI"]:self._render_training_ai()
+        else:self._render_game_options()
     def _render_main_texts(self, font_modegame):pass
