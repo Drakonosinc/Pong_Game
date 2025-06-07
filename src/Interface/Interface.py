@@ -39,7 +39,6 @@ class interface(load_elements,BaseMenu):
         self.input_player2.change_text(event)
         self.scroll.events(event)
     def game_mode(self):
-        self.screen.blit(self.font5.render("Enter Player Name Two",True,"white"),(416,10))
         self.screen.blit(font_modegame.render("Max Score",True,"white"),(self.WIDTH/2-68,self.HEIGHT/2-50))
         self.screen.blit(font_modegame.render(f"{self.config.config_game["max_score"]}",True,"white"),(self.WIDTH/2-8,self.HEIGHT/2-20))
         self.main_training_ai() if self.mode_game["Training AI"] else self.options_game()
