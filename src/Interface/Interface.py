@@ -41,7 +41,6 @@ class interface(load_elements,BaseMenu):
         self.scroll.events(event)
     def options_menu(self):
         self.screen.fill(self.BLACK)
-        self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def visuals_menu(self):
         self.screen.blit(self.image, (0, 0))
         self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
