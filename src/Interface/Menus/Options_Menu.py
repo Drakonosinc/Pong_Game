@@ -17,3 +17,4 @@ class OptionsMenu(BaseMenu):
         self.interface.sound_button = self.buttons['sound']
         self.interface.keys_button = self.buttons['keys']
         self.interface.language_button = self.buttons['language']
+    
