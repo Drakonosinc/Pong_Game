@@ -18,10 +18,10 @@ class OptionsMenu(BaseMenu):
         self.interface.keys_button = self.buttons['keys']
         self.interface.language_button = self.buttons['language']
     def _toggle_sound(self):
-        self.sound_type["value"]=not self.sound_type["value"]
+        self.interface.sound_type["value"]=not self.interface.sound_type["value"]
         def sound(color,sound_on_off,sound):
-            self.sound_type["color"]=color
-            self.sound_type["sound"]=sound_on_off
-            sound.play(loops=-1) if color==self.SKYBLUE else sound.stop()
-        sound(*(self.SKYBLUE,"Sound ON",self.sound_back) if self.sound_type["value"] else (self.RED,"Sound off",self.sound_back))
+            self.interface.sound_type["color"]=color
+            self.interface.sound_type["sound"]=sound_on_off
+            sound.play(loops=-1) if color==self.interface.SKYBLUE else sound.stop()
+        sound(*(self.interface.SKYBLUE,"Sound ON",self.interface.sound_back) if self.interface.sound_type["value"] else (self.interface.RED,"Sound off",self.interface.sound_back))
     
