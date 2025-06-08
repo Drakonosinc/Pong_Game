@@ -41,7 +41,6 @@ class interface(load_elements,BaseMenu):
         self.scroll.events(event)
     def options_menu(self):
         self.screen.fill(self.BLACK)
-        self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
         self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def visuals_menu(self):
         self.screen.blit(self.image, (0, 0))
