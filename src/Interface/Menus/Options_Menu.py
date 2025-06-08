@@ -26,3 +26,6 @@ class OptionsMenu(BaseMenu):
         sound(*(self.interface.SKYBLUE,"Sound ON",self.interface.sound_back) if self.interface.sound_type["value"] else (self.interface.RED,"Sound off",self.interface.sound_back))
     def update_sound_button(self):
         self.buttons['sound'].change_item({"color": self.interface.sound_type["color"],"text": self.interface.sound_type["sound"]})
+    def execute_buttons(self):
+        for button in self.buttons.values():button.draw()
+    
