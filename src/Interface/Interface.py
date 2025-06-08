@@ -45,7 +45,6 @@ class interface(load_elements,BaseMenu):
         self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
         self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
     def buttons_pausa(self):
-        self.reset_pause_button=self.button_factory_f2_5.create_TextButton({"text": "Reset","color": self.GRAY,"position": (self.WIDTH/2-55,self.HEIGHT/2-85),"color2": self.SKYBLUE,"command1":lambda:self.change_mains({"main":-1}),"command2":self.reset})
         self.go_main_button=self.button_factory_f2_5.create_TextButton({"text": "Menu","color": self.GRAY,"position": (self.WIDTH/2-45,self.HEIGHT/2-50),"color2": self.SKYBLUE,"command1":lambda:self.change_mains({"main":0,"run":True}),"command2":self.reset})
     def options_menu(self):
         self.screen.fill(self.BLACK)
