@@ -11,4 +11,6 @@ class Pause(BaseMenu):
         self.interface.exit_button = self.buttons['exit']
         self.interface.reset_pause_button = self.buttons['reset']
         self.interface.go_main_button = self.buttons['menu']
+    def execute_buttons(self):
+        for button in self.buttons.values():button.draw()
     def render(self):pass
