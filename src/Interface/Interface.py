@@ -43,13 +43,6 @@ class interface(load_elements,BaseMenu):
         self.screen.fill(self.BLACK)
         self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
         self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
-    def sound_on_off(self):
-        self.sound_type["value"]=not self.sound_type["value"]
-        def sound(color,sound_on_off,sound):
-            self.sound_type["color"]=color
-            self.sound_type["sound"]=sound_on_off
-            sound.play(loops=-1) if color==self.SKYBLUE else sound.stop()
-        sound(*(self.SKYBLUE,"Sound ON",self.sound_back) if self.sound_type["value"] else (self.RED,"Sound off",self.sound_back))
     def visuals_menu(self):
         self.screen.blit(self.image, (0, 0))
         self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
