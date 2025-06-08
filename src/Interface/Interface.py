@@ -17,8 +17,7 @@ class interface(load_elements,BaseMenu):
             1: self.game_over_menu.render,
             2: self.game_mode_menu.render,
             3: self.pause_menu.render,}
-        if self.main==3:self.Pause()
-        elif self.main==4:self.options_menu()
+        if self.main==4:self.options_menu()
         elif self.main==5:self.visuals_menu()
         elif self.main==6:self.menu_keys()
         if self.main in menu_routes:menu_routes[self.main]()
