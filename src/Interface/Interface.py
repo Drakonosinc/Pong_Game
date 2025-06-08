@@ -44,7 +44,6 @@ class interface(load_elements,BaseMenu):
         self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
         self.execute_buttons(self.back_button,self.visual_button,self.sound_button,self.keys_button,self.language_button)
     def buttons_menu_options(self):
-        self.sound_button=self.button_factory_f2_5.create_TextButton({"text": self.sound_type["sound"],"color": self.sound_type["color"],"position": (self.WIDTH/2-80,self.HEIGHT/2-115),"command1":lambda:self.on_off(self.config.config_sounds,"sound_main"),"command2":self.sound_on_off,"command3":self.config.save_config})
         self.keys_button=self.button_factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80,self.HEIGHT/2-80),"command1":lambda:self.change_mains({"main":6})})
         self.language_button=self.button_factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80,self.HEIGHT/2-45)})
     def sound_on_off(self):
