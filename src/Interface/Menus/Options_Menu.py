@@ -28,4 +28,7 @@ class OptionsMenu(BaseMenu):
         self.buttons['sound'].change_item({"color": self.interface.sound_type["color"],"text": self.interface.sound_type["sound"]})
     def execute_buttons(self):
         for button in self.buttons.values():button.draw()
-    
+    def render(self):
+        self.screen.fill(self.interface.BLACK)
+        self.update_sound_button()
+        self.execute_buttons()
