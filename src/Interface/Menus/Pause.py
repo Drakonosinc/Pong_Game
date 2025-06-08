@@ -13,4 +13,5 @@ class Pause(BaseMenu):
         self.interface.go_main_button = self.buttons['menu']
     def execute_buttons(self):
         for button in self.buttons.values():button.draw()
-    def render(self):pass
+    def render(self):
+        self.filt(180)
