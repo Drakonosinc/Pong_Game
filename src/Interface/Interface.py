@@ -43,7 +43,6 @@ class interface(load_elements,BaseMenu):
     def Pause(self):
         self.filt(180)
         self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
-        self.execute_buttons(self.exit_button,self.reset_pause_button,self.go_main_button)
     def options_menu(self):
         self.screen.fill(self.BLACK)
         self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
