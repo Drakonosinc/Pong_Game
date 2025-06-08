@@ -40,8 +40,6 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def Pause(self):
-        self.screen.blit(self.font3.render("Pause",True,"gray"),(self.WIDTH/2-105,self.HEIGHT/2-150))
     def options_menu(self):
         self.screen.fill(self.BLACK)
         self.sound_button.change_item({"color":self.sound_type["color"],"text":self.sound_type["sound"]})
