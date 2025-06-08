@@ -14,4 +14,6 @@ class OptionsMenu(BaseMenu):
         self.buttons['language'] = factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80, self.HEIGHT/2-45)})
         self.interface.back_button = self.buttons['back']
         self.interface.visual_button = self.buttons['visual']
-        
+        self.interface.sound_button = self.buttons['sound']
+        self.interface.keys_button = self.buttons['keys']
+        self.interface.language_button = self.buttons['language']
