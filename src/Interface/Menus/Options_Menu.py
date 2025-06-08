@@ -11,4 +11,5 @@ class OptionsMenu(BaseMenu):
         self.buttons['visual'] = factory_f2_5.create_TextButton({"text": "Visuals","position": (self.WIDTH/2-80, self.HEIGHT/2-150),"command1": lambda: self.change_mains({"main": 5})})
         self.buttons['sound'] = factory_f2_5.create_TextButton({"text": self.interface.sound_type["sound"],"color": self.interface.sound_type["color"],"position": (self.WIDTH/2-80, self.HEIGHT/2-115),"command1": lambda: self.on_off(self.config.config_sounds, "sound_main"),"command2": self._toggle_sound,"command3": self.config.save_config})
         self.buttons['keys'] = factory_f2_5.create_TextButton({"text": "Keys","position": (self.WIDTH/2-80, self.HEIGHT/2-80),"command1": lambda: self.change_mains({"main": 6})})
+        self.buttons['language'] = factory_f2_5.create_TextButton({"text": "Language","position": (self.WIDTH/2-80, self.HEIGHT/2-45)})
         
