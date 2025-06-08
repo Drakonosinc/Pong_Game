@@ -15,3 +15,5 @@ class Pause(BaseMenu):
         for button in self.buttons.values():button.draw()
     def render(self):
         self.filt(180)
+        self.screen.blit(self.interface.font3.render("Pause", True, "gray"),(self.WIDTH/2-105, self.HEIGHT/2-150))
+        self.execute_buttons()
