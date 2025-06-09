@@ -24,3 +24,9 @@ class VisualsMenu(BaseMenu):
         self.buttons['default_visual'] = factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160, self.HEIGHT/2+160),"command1": lambda: self.config.config(visuals=True),"command2": self.interface.config_screen})
     def render(self):
         self.screen.blit(self.interface.image, (0, 0))
+        self.screen.blit(self.interface.font2_5.render("WIDTH", True, self.interface.SKYBLUE),(self.WIDTH/2-163, self.HEIGHT/2-200))
+        self.screen.blit(self.interface.font2_5.render("HEIGHT", True, self.interface.SKYBLUE),(self.WIDTH/2+60, self.HEIGHT/2-200))
+        self.screen.blit(self.interface.font2_5.render("IMAGE", True, self.interface.SKYBLUE),(self.WIDTH/2-52, self.HEIGHT/2+160))
+        self.interface.images_elements()
+        self.execute_buttons(*self.buttons.values())
+    
