@@ -49,7 +49,6 @@ class interface(load_elements,BaseMenu):
         self.images_elements()
         self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
     def buttons_visual(self):
-        self.decrease_height_button=self.button_factory_f2_5.create_TextButton({"text": "<","position": (self.WIDTH/2+20,self.HEIGHT/2-200),"command1":lambda:self.change_items("HEIGHT",number=-10)})
         self.increase_height_button=self.button_factory_f2_5.create_TextButton({"text": ">","position": (self.WIDTH/2+200,self.HEIGHT/2-200),"command1":lambda:self.change_items("HEIGHT",number=10)})
         self.decrease_planet_button=self.button_factory_f2_5.create_TextButton({"text": "<","position": (self.WIDTH/2-40,self.HEIGHT/2-22),"command1":lambda:self.change_items("value_planet","planets",-1)})
         self.increase_planet_button=self.button_factory_f2_5.create_TextButton({"text": ">","position": (self.WIDTH/2+20,self.HEIGHT/2-22),"command1":lambda:self.change_items("value_planet","planets",1)})
