@@ -16,4 +16,5 @@ class VisualsMenu(BaseMenu):
         self.buttons['increase_planet'] = factory_f2_5.create_TextButton({"text": ">","position": (self.WIDTH/2+20, self.HEIGHT/2-22),"command1": lambda: self._change_items("value_planet", "planets", 1)})
         self.buttons['decrease_back'] = factory_f2_5.create_TextButton({"text": "<","position": (self.WIDTH/2-80, self.HEIGHT/2+160),"command1": lambda: self._change_items("value_background", "image_background", -1)})
         self.buttons['increase_back'] = factory_f2_5.create_TextButton({"text": ">","position": (self.WIDTH/2+65, self.HEIGHT/2+160),"command1": lambda: self._change_items("value_background", "image_background", 1)})
+        self.buttons['decrease_player1'] = factory_f2_5.create_TextButton({"font": self.interface.font3_5,"text": "Λ","position": (self.WIDTH/2-330, self.HEIGHT/2-120),"command1": lambda: self._change_items("value_spacecraft1", "spacecrafts", -1)})
         
