@@ -33,7 +33,7 @@ class interface(load_elements,BaseMenu):
         self.game_mode_menu.setup_buttons()
         self.pause_menu.setup_buttons()
         self.options_menu.setup_buttons()
-        self.buttons_visual()
+        self.visuals_menu.setup_buttons()
         self.buttons_keys()
     def events_buttons(self,event):
         self.increase_score_button.reactivate_pressed(event)
