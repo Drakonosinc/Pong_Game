@@ -48,11 +48,6 @@ class interface(load_elements,BaseMenu):
         self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))
         self.images_elements()
         self.execute_buttons(self.back_visual_button,self.decrease_width_button,self.increase_width_button,self.decrease_height_button,self.increase_height_button,self.decrease_planet_button,self.increase_planet_button,self.decrease_back_button,self.increase_back_button,self.decrease_player1_button,self.increase_player1_button,self.decrease_player2_button,self.increase_player2_button,self.save_visual_button,self.default_visual_button)
-    def buttons_visual(self):
-        self.decrease_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_5,"text": "Λ","position": (self.WIDTH/2+310,self.HEIGHT/2-120),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",-1)})
-        self.increase_player2_button=self.button_factory_f2_5.create_TextButton({"font": self.font3_8,"text": "v","position": (self.WIDTH/2+310,self.HEIGHT/2+50),"command1":lambda:self.change_items("value_spacecraft2","spacecrafts",1)})
-        self.save_visual_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
-        self.default_visual_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:self.config.config(visuals=True),"command2":self.config_screen})
     def change_items(self,item,background=None,number=0):
         self.config.config_visuals[item]=((self.config.config_visuals[item] + number) % len(self.config.config_visuals[background])) if background!=None else (self.config.config_visuals[item] + number)
         self.config_screen()
