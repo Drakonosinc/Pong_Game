@@ -42,7 +42,6 @@ class interface(load_elements,BaseMenu):
         self.input_player2.change_text(event)
         self.scroll.events(event)
     def visuals_menu(self):
-        self.screen.blit(self.image, (0, 0))
         self.screen.blit(self.font2_5.render("WIDTH",True,self.SKYBLUE),(self.WIDTH/2-163,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("HEIGHT",True,self.SKYBLUE),(self.WIDTH/2+60,self.HEIGHT/2-200))
         self.screen.blit(self.font2_5.render("IMAGE",True,self.SKYBLUE),(self.WIDTH/2-52,self.HEIGHT/2+160))

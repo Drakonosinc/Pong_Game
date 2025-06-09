@@ -22,4 +22,5 @@ class VisualsMenu(BaseMenu):
         self.buttons['increase_player2'] = factory_f2_5.create_TextButton({"font": self.interface.font3_8,"text": "v","position": (self.WIDTH/2+310, self.HEIGHT/2+50),"command1": lambda: self._change_items("value_spacecraft2", "spacecrafts", 1)})
         self.buttons['save_visual'] = factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200, self.HEIGHT/2+140),"command1": self.config.save_config})
         self.buttons['default_visual'] = factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160, self.HEIGHT/2+160),"command1": lambda: self.config.config(visuals=True),"command2": self.interface.config_screen})
-        
+    def render(self):
+        self.screen.blit(self.interface.image, (0, 0))
