@@ -42,6 +42,3 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def event_keys(self,event):
-            self.config.config_keys[self.key]=event.key
-            self.config.config_keys[self.key_name]=event.unicode.upper()
