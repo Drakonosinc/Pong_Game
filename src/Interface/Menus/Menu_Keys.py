@@ -16,6 +16,7 @@ class KeysMenu(BaseMenu):
         self.buttons['up_arrow'] = factory_f5.create_TextButton({"font": self.interface.font4_5,"text": self.config.config_keys["Name_key3"],"position": (self.WIDTH/2+200, self.HEIGHT/2-170),"command1": lambda: self._change_keys("UP_ARROW", "Name_key3", self.buttons['up_arrow'])})
         self.buttons['down_arrow'] = factory_f5.create_TextButton({"font": self.interface.font4_5,"text": self.config.config_keys["Name_key4"],"position": (self.WIDTH/2+200, self.HEIGHT/2-20),"command1": lambda: self._change_keys("DOWN_ARROW", "Name_key4", self.buttons['down_arrow'])})
         self.buttons['save'] = factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200, self.HEIGHT/2+140),"command1": self.config.save_config})
+        self.buttons['default'] = factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160, self.HEIGHT/2+160),"command1": lambda: (self.config.config(keys=True),self.change_mains({"main": 6, "command": self.setup_buttons}))})
         
     
     
