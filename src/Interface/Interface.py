@@ -13,6 +13,7 @@ class interface(load_elements,BaseMenu):
         self.pause_menu = Pause(self)
         self.options_menu = OptionsMenu(self)
         self.visuals_menu = VisualsMenu(self)
+        self.keys_menu = KeysMenu(self)
     def menus(self):
         menu_routes = {
             0: self.main_menu.render,
@@ -20,7 +21,8 @@ class interface(load_elements,BaseMenu):
             2: self.game_mode_menu.render,
             3: self.pause_menu.render,
             4: self.options_menu.render,
-            5: self.visuals_menu.render,}
+            5: self.visuals_menu.render,
+            6: self.keys_menu.render}
         if self.main in menu_routes:menu_routes[self.main]()
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
@@ -33,6 +35,7 @@ class interface(load_elements,BaseMenu):
         self.pause_menu.setup_buttons()
         self.options_menu.setup_buttons()
         self.visuals_menu.setup_buttons()
+        self.keys_menu.setup_buttons()
     def events_buttons(self,event):
         self.increase_score_button.reactivate_pressed(event)
         self.decrease_score_button.reactivate_pressed(event)

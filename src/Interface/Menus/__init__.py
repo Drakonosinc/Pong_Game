@@ -5,4 +5,4 @@ from .Game_Mode import GameMode
 from .Pause import Pause
 from .Options_Menu import OptionsMenu
 from .Visuals_Menu import VisualsMenu
-from .Menu_Keys import MenuKeys
+from .Menu_Keys import KeysMenu
