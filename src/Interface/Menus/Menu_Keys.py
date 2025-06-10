@@ -26,4 +26,6 @@ class KeysMenu(BaseMenu):
         self.button_key = button
         for k in self.interface.utils_keys.keys():self.interface.utils_keys[k] = False if k != self.key else not self.interface.utils_keys[self.key]
         self.check_item(self.interface.utils_keys,self.interface.SKYBLUE,self.interface.WHITE,"color",UP_W=self.buttons['up_w'],DOWN_S=self.buttons['down_s'],UP_ARROW=self.buttons['up_arrow'],DOWN_ARROW=self.buttons['down_arrow'])
-    
+    def event_keys(self,event):
+        if (self.key is not None and self.interface.utils_keys[self.key] and event.type == KEYDOWN):
+            

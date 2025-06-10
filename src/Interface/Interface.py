@@ -42,12 +42,6 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def change_keys(self,key,key_name,button=None):
-        self.key=key
-        self.key_name=key_name
-        self.button_key=button
-        for k in self.utils_keys.keys():self.utils_keys[k]=False if k!=self.key else not self.utils_keys[self.key]
-        self.check_item(self.utils_keys,self.SKYBLUE,self.WHITE,"color",**{"UP_W":self.up_w_button,"DOWN_S":self.down_s_button,"UP_ARROW":self.up_arrow_button,"DOWN_ARROW":self.down_arrow_button})
     def event_keys(self,event):
         if self.key!=None and (self.utils_keys[self.key] and event.type==KEYDOWN):
             self.config.config_keys[self.key]=event.key
