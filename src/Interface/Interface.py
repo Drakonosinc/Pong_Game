@@ -45,5 +45,3 @@ class interface(load_elements,BaseMenu):
     def event_keys(self,event):
             self.config.config_keys[self.key]=event.key
             self.config.config_keys[self.key_name]=event.unicode.upper()
-            self.check_item(self.config.config_keys,self.config.config_keys[self.key_name],self.WHITE,"text",**{self.key:self.button_key})
-            self.change_keys(self.key,self.key_name)
