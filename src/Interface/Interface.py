@@ -21,7 +21,6 @@ class interface(load_elements,BaseMenu):
             3: self.pause_menu.render,
             4: self.options_menu.render,
             5: self.visuals_menu.render,}
-        if self.main==6:self.menu_keys()
         if self.main in menu_routes:menu_routes[self.main]()
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
@@ -34,7 +33,6 @@ class interface(load_elements,BaseMenu):
         self.pause_menu.setup_buttons()
         self.options_menu.setup_buttons()
         self.visuals_menu.setup_buttons()
-        self.buttons_keys()
     def events_buttons(self,event):
         self.increase_score_button.reactivate_pressed(event)
         self.decrease_score_button.reactivate_pressed(event)
