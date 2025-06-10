@@ -8,3 +8,19 @@ class KeysMenu(BaseMenu):
         self.key = None
         self.key_name = None
         self.button_key = None
+    def setup_buttons(self):
+        factory_f5 = self.interface.button_factory_f5
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
