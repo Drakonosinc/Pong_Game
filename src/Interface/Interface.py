@@ -39,14 +39,6 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def buttons_keys(self):
-        self.back_keys_button = self.button_factory_f5.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":4})})
-        self.up_w_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key1"],"position": (self.WIDTH/2-240,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_W","Name_key1",self.up_w_button)})
-        self.down_s_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key2"],"position": (self.WIDTH/2-217,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_S","Name_key2",self.down_s_button)})
-        self.up_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key3"],"position": (self.WIDTH/2+200,self.HEIGHT/2-170),"command1":lambda:self.change_keys("UP_ARROW","Name_key3",self.up_arrow_button)})
-        self.down_arrow_button=self.button_factory_f5.create_TextButton({"font": self.font4_5,"text": self.config.config_keys["Name_key4"],"position": (self.WIDTH/2+200,self.HEIGHT/2-20),"command1":lambda:self.change_keys("DOWN_ARROW","Name_key4",self.down_arrow_button)})
-        self.save_keys_button=self.button_factory_f5.create_TextButton({"text": "Save Config","position": (self.WIDTH/2+200,self.HEIGHT/2+140),"command1":self.config.save_config})
-        self.default_keys_button=self.button_factory_f5.create_TextButton({"text": "Default config","position": (self.WIDTH/2+160,self.HEIGHT/2+160),"command1":lambda:(self.config.config(keys=True),self.change_mains({"main":6,"command":self.buttons_keys}))})
     def change_keys(self,key,key_name,button=None):
         self.key=key
         self.key_name=key_name
