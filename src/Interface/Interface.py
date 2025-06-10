@@ -41,9 +41,6 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-    def change_items(self,item,background=None,number=0):
-        self.config.config_visuals[item]=((self.config.config_visuals[item] + number) % len(self.config.config_visuals[background])) if background!=None else (self.config.config_visuals[item] + number)
-        self.config_screen()
     def menu_keys(self):
         self.screen.fill(self.BLACK)
         self.execute_buttons(self.back_keys_button,self.up_w_button,self.down_s_button,self.up_arrow_button,self.down_arrow_button,self.save_keys_button,self.default_keys_button)
