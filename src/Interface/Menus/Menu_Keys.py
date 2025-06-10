@@ -28,4 +28,5 @@ class KeysMenu(BaseMenu):
         self.check_item(self.interface.utils_keys,self.interface.SKYBLUE,self.interface.WHITE,"color",UP_W=self.buttons['up_w'],DOWN_S=self.buttons['down_s'],UP_ARROW=self.buttons['up_arrow'],DOWN_ARROW=self.buttons['down_arrow'])
     def event_keys(self,event):
         if (self.key is not None and self.interface.utils_keys[self.key] and event.type == KEYDOWN):
-            
+            self.config.config_keys[self.key] = event.key
+            self.config.config_keys[self.key_name] = event.unicode.upper()
