@@ -213,10 +213,11 @@ class ComboBox(ElementBehavior):
         self.hover_color=config.get("hover_color",(255, 199, 51))
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.elements = None
+        self.is_dropdown_open = False
         rect_base = pygame.Rect(*self.position,*self.font.size(self.text))
         rect_dropdown = pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown))
         self.rect = {"base": rect_base, "dropdown": rect_dropdown}
-        self.is_dropdown_open = False
+        self.dropdown_rect = pygame.Rect(0, 0, 0, 0)
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
