@@ -257,3 +257,6 @@ class ComboBox(ElementBehavior):
                 "command1": lambda idx=i: self.select_option(idx)
             })
             self.option_buttons.append(button)
+        if options and not self.text:
+            self.text = options[0]
+            self.selected_index = 0
