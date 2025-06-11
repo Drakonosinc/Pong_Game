@@ -242,4 +242,7 @@ class ComboBox(ElementBehavior):
     def charge_elements(self, options: list[str]):
         self.options = options
         self.option_buttons = []
-        
+        for i, option in enumerate(options):
+            x = self.position[0]
+            y = self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)
+            
