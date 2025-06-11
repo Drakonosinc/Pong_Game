@@ -260,3 +260,8 @@ class ComboBox(ElementBehavior):
         if options and not self.text:
             self.text = options[0]
             self.selected_index = 0
+    def select_option(self, index):
+        if 0 <= index < len(self.options):
+            self.text = self.options[index]
+            self.selected_index = index
+            self.is_dropdown_open = False
