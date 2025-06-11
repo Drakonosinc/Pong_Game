@@ -245,4 +245,15 @@ class ComboBox(ElementBehavior):
         for i, option in enumerate(options):
             x = self.position[0]
             y = self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)
-            
+            position = (x, y)
+            button = TextButton({
+                "screen": self.screen,
+                "font": self.font,
+                "color": self.color,
+                "hover_color": self.hover_color,
+                "position": position,
+                "text": option,
+                "pressed": True,
+                "command1": lambda idx=i: self.select_option(idx)
+            })
+        
