@@ -1,4 +1,3 @@
-import pygame
 from pygame.locals import KEYDOWN
 from .Base_Menu import BaseMenu
 class KeysMenu(BaseMenu):

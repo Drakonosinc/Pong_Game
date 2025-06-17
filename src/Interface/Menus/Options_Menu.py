@@ -1,4 +1,3 @@
-
 from .Base_Menu import BaseMenu
 class OptionsMenu(BaseMenu):
     def __init__(self, interface):
