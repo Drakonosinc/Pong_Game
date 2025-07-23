@@ -45,8 +45,10 @@ class ElementBehavior:
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
-    def filter_mouse_collision(self,list_rects: list, mouse_pos, draws: list):
-        pass
+    def filter_mouse_collision(self,rects: dict, mouse_pos, draws: list):
+        for rect, draw in zip(rects, draws):
+            if rects[rect].collidepoint(mouse_pos):
+                self.mouse_collision(rects[rect], mouse_pos, draw)
     def rects_collision(self,dict_rects:dict):pass
     def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None):
         current_time = pygame.time.get_ticks()
@@ -231,10 +233,7 @@ class ComboBox(ElementBehavior):
     def events(self, event):pass
     def draw(self):
         self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.color), (self.position))
-        if self.detect_mouse:
-            self.mouse_collision(self.rect["base"])
-            self.mouse_collision(self.rect["dropdown"])
-            self.filter_mouse_collision(self.rect,pygame.mouse.get_pos(),[self.draw_hover_effect1,self.draw_hover_effect2])
+        if self.detect_mouse:self.filter_mouse_collision(self.rect,pygame.mouse.get_pos(),[self.draw_hover_effect1,self.draw_hover_effect2])
         if self.pressed:
             self.pressed_button(self.rect["base"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect1)
             self.pressed_button(self.rect["dropdown"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect2)
