@@ -248,7 +248,6 @@ class ComboBox(TextButton):
                 "hover_color": self.hover_color,
                 "position": position,
                 "text": option,
-                "pressed": True,
                 "command1": lambda idx=i: self.select_option(idx)
             })
             self.option_buttons.append(button)
