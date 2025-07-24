@@ -219,7 +219,9 @@ class ComboBox(TextButton):
             "color": self.color,
             "hover_color": self.hover_dropdown,
             "position": (self.position[0]+self.font.size(self.text)[0], int(self.position[1])),
-            "text": self.type_dropdown})
+            "text": self.type_dropdown,
+            "sound_hover": self.sound_hover,
+            "sound_touch": self.sound_touch})
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
