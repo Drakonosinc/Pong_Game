@@ -208,8 +208,6 @@ class ComboBox(TextButton):
         TextButton.__init__(self, config)
         self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
-        self.color = config.get("color", (255, 255, 255))
-        self.hover_color=config.get("hover_color",(255, 199, 51))
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.is_dropdown_open = False
         self.selected_index = None
