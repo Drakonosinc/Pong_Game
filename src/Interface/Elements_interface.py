@@ -212,14 +212,13 @@ class ComboBox(TextButton):
         self.is_dropdown_open = False
         self.selected_index = None
         self.options = []
-        self.rect = pygame.Rect(*self.position,*self.font.size(self.text))
         self.dropdown_rect = pygame.Rect(0, 0, 0, 0)
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
             "color": self.color,
             "hover_color": self.hover_dropdown,
-            "position": pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown)),
+            "position": (self.position[0]+self.font.size(self.text)[0], int(self.position[1])),
             "text": self.type_dropdown})
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
