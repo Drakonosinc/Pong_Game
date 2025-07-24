@@ -208,7 +208,6 @@ class ComboBox(TextButton):
         TextButton.__init__(self, config)
         self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
-        self.button_dropdown = TextButton({})
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.is_dropdown_open = False
         self.selected_index = None
@@ -217,6 +216,12 @@ class ComboBox(TextButton):
         rect_dropdown = pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown))
         self.rect = {"base": rect_base, "dropdown": rect_dropdown}
         self.dropdown_rect = pygame.Rect(0, 0, 0, 0)
+        self.button_dropdown = TextButton({"screen": self.screen,
+                "font": self.font,
+                "color": self.color,
+                "hover_color": self.hover_dropdown,
+                "position": rect_dropdown,
+                "text": self.type_dropdown})
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
