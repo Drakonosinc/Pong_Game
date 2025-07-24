@@ -216,12 +216,13 @@ class ComboBox(TextButton):
         rect_dropdown = pygame.Rect(self.position[0]+self.font.size(self.text)[0], self.position[1],*self.font.size(self.type_dropdown))
         self.rect = {"base": rect_base, "dropdown": rect_dropdown}
         self.dropdown_rect = pygame.Rect(0, 0, 0, 0)
-        self.button_dropdown = TextButton({"screen": self.screen,
-                "font": self.font,
-                "color": self.color,
-                "hover_color": self.hover_dropdown,
-                "position": rect_dropdown,
-                "text": self.type_dropdown})
+        self.button_dropdown = TextButton({
+            "screen": self.screen,
+            "font": self.font,
+            "color": self.color,
+            "hover_color": self.hover_dropdown,
+            "position": rect_dropdown,
+            "text": self.type_dropdown})
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
@@ -230,11 +231,12 @@ class ComboBox(TextButton):
             case "left":return " <"
     def events(self, event):pass
     def draw(self):
-        self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.color), (self.position))
-        if self.detect_mouse:self.filter_mouse_collision(self.rect,pygame.mouse.get_pos(),[self.draw_hover_effect1,self.draw_hover_effect2])
-        if self.pressed:
-            self.pressed_button(self.rect["base"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect1)
-            self.pressed_button(self.rect["dropdown"],pygame.mouse.get_pressed(),pygame.mouse.get_pos(),self.draw_pressed_effect2)
+        super().draw()
+        self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
+        if self.detect_mouse:pass
+            
+        if self.pressed:pass
+            
     def draw_hover_effect1(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_hover_effect2(self):return self.screen.blit(self.font.render(f"{self.type_dropdown}",True,self.hover_dropdown), (self.position[0]+self.font.size(self.text)[0], self.position[1]))
     def draw_pressed_effect1(self):pass
