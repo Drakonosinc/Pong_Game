@@ -203,11 +203,9 @@ class ScrollBar(ElementBehavior):
             if isinstance(el.rect, dict):
                 return max(el.rect.bottom for el in self.elements.values() if isinstance(el.rect, dict))
             else:return max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
-class ComboBox(ElementBehavior):
+class ComboBox(TextButton):
     def __init__(self, config: dict):
-        ElementBehavior.__init__(self, config)
-        self.screen = config["screen"]
-        self.font = config.get("font", pygame.font.Font(None, 25))
+        TextButton.__init__(self, config)
         self.text = config.get("text","")
         self.position = config["position"]
         self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
