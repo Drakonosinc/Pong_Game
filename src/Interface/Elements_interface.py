@@ -230,12 +230,10 @@ class ComboBox(TextButton):
     def draw(self):
         super().draw()
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
-        if self.detect_mouse:pass
-            
+        self.button_dropdown.draw()
+        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect)
         if self.pressed:pass
-            
-    def draw_hover_effect1(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
-    def draw_hover_effect2(self):return self.screen.blit(self.font.render(f"{self.type_dropdown}",True,self.hover_dropdown), (self.position[0]+self.font.size(self.text)[0], self.position[1]))
+    def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_pressed_effect(self):pass
     def charge_elements(self, options: list[str]):
         self.options = options
