@@ -45,10 +45,11 @@ class ElementBehavior:
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
-    def filter_mouse_collision(self,rects: dict, mouse_pos, draws: list):
+    def filter_rects_collision(self,rects: dict, mouse_pos, draws: list, option: bool=False):
         for rect, draw in zip(rects, draws):
             if rects[rect].collidepoint(mouse_pos):
-                self.mouse_collision(rects[rect], mouse_pos, draw)
+                if option is True: self.pressed_button(rects[rect], pygame.mouse.get_pressed(), mouse_pos, draw)
+                else:self.mouse_collision(rects[rect], mouse_pos, draw)
             if all(not rects[rect].collidepoint(mouse_pos) for rect in rects):self.states["detect_hover"] = True
     def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None):
         current_time = pygame.time.get_ticks()
