@@ -49,6 +49,7 @@ class ElementBehavior:
         for rect, draw in zip(rects, draws):
             if rects[rect].collidepoint(mouse_pos):
                 self.mouse_collision(rects[rect], mouse_pos, draw)
+            if all(not rects[rect].collidepoint(mouse_pos) for rect in rects):self.states["detect_hover"] = True
     def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None):
         current_time = pygame.time.get_ticks()
         if pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
