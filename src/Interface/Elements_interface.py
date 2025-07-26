@@ -80,7 +80,7 @@ class Text:
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
-        self.rect = config.get("rect",pygame.Rect(*self.position, *self.font.size(self.text)))
+        self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
         if self.Behavior.detect_mouse:self.Behavior.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect)
@@ -225,7 +225,7 @@ class ComboBox(TextButton):
             "sound_hover": self.sound_hover,
             "sound_touch": self.sound_touch})
         self.rect = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
-                      "dropdown": pygame.Rect(self.button_dropdown.position[0], self.button_dropdown.position[1], *self.dropdown)}
+                    "dropdown": self.button_dropdown}
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
