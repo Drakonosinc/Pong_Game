@@ -224,6 +224,8 @@ class ComboBox(TextButton):
             "text": self.type_dropdown,
             "sound_hover": self.sound_hover,
             "sound_touch": self.sound_touch})
+        self.rect = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
+                      "dropdown": pygame.Rect(self.button_dropdown.position[0], self.button_dropdown.position[1], *self.dropdown)}
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
@@ -232,10 +234,9 @@ class ComboBox(TextButton):
             case "left":return " <"
     def events(self, event):pass
     def draw(self):
-        super().draw()
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
-        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect)
+        if self.detect_mouse:self.mouse_collision(self.rect["button"],pygame.mouse.get_pos(),self.draw_hover_effect)
         if self.pressed:pass
     def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_pressed_effect(self):pass
