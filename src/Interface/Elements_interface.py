@@ -129,7 +129,6 @@ class Input_text(ElementBehavior):
         self.color_back=config.get("color_back",(255,255,255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
-        self.detect_mouse=config.get("detect_mouse",True)
         self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(127,127,127))
         self.border=config.get("border",2)
