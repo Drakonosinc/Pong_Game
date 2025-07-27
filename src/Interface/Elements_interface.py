@@ -23,6 +23,7 @@ class ElementsFactory:
         return ComboBox({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class ElementBehavior:
     def __init__(self, config: dict):
+        self.screen = config["screen"]
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
@@ -103,7 +104,6 @@ class TextButton(Text,ElementBehavior):
 class PolygonButton(ElementBehavior):
     def __init__(self,config:dict):
         super().__init__(config)
-        self.screen = config["screen"]
         self.position = config["position"]
         self.hover_position = config.get("hover_position",self.position)
         self.color = config.get("color", (255, 255, 255))
