@@ -24,6 +24,7 @@ class ElementsFactory:
 class ElementBehavior:
     def __init__(self, config: dict):
         self.screen = config["screen"]
+        self.position = config["position"]
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse=config.get("detect_mouse",True)
