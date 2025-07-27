@@ -127,7 +127,6 @@ class Input_text(ElementBehavior):
         self.color=config.get("color",(0,0,0))
         self.color_back=config.get("color_back",(255,255,255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
-        self.position = config["position"]
         self.pressed_color=config.get("pressed_color",(135,206,235))
         self.border_color=config.get("border_color",(127,127,127))
         self.border=config.get("border",2)
@@ -148,10 +147,9 @@ class Input_text(ElementBehavior):
 class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
         super().__init__(config)
-        position = config["position"]
-        self.rect = pygame.Rect(*position)
+        self.rect = pygame.Rect(*self.position)
         self.hover_color=config.get("hover_color",(255, 199, 51))
-        self.thumb_height = config.get("thumb_height", max(20, int(position[3] * config.get("thumb_ratio", 0.2))))
+        self.thumb_height = config.get("thumb_height", max(20, int(self.position[3] * config.get("thumb_ratio", 0.2))))
         self.thumb_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.thumb_height)
         self.color = config.get("color", (200, 200, 200))
         self.color_thumb = config.get("color_bar", (135, 206, 235))
