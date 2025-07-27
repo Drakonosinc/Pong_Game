@@ -122,7 +122,6 @@ class PolygonButton(ElementBehavior):
 class Input_text(ElementBehavior):
     def __init__(self,config:dict):
         super().__init__(config)
-        self.screen = config["screen"]
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.text = config.get("text","")
         self.color=config.get("color",(0,0,0))
@@ -149,7 +148,6 @@ class Input_text(ElementBehavior):
 class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
         super().__init__(config)
-        self.screen = config["screen"]
         position = config["position"]
         self.rect = pygame.Rect(*position)
         self.hover_color=config.get("hover_color",(255, 199, 51))
