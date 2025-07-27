@@ -105,7 +105,6 @@ class TextButton(Text,ElementBehavior):
 class PolygonButton(ElementBehavior):
     def __init__(self,config:dict):
         super().__init__(config)
-        self.position = config["position"]
         self.hover_position = config.get("hover_position",self.position)
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
