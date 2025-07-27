@@ -211,7 +211,7 @@ class ScrollBar(ElementBehavior):
             else:return max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
 class ComboBox(TextButton):
     def __init__(self, config: dict):
-        TextButton.__init__(self, config)
+        super().__init__(config)
         self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
