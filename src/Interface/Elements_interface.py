@@ -76,7 +76,7 @@ class Text:
         self.screen = config["screen"]
         self.font = config.get("font", pygame.font.Font(None, 25))
         self.Behavior = ElementBehavior(config)
-        self.text = config["text"]
+        self.text = config.get("text","")
         self.color = config.get("color", (255, 255, 255))
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.position = config["position"]
