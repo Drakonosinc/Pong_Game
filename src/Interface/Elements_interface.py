@@ -212,6 +212,7 @@ class ComboBox(TextButton):
         self.is_dropdown_open = False
         self.selected_index = None
         self.options = []
+        self.option_buttons = []
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
@@ -242,10 +243,9 @@ class ComboBox(TextButton):
     def draw_rect_dropdown(self):
         self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
-        # for button in self.option_buttons:button.draw()
+        for button in self.option_buttons:button.draw()
     def charge_elements(self, options: list[str]):
         self.options = options
-        self.option_buttons = []
         for i, option in enumerate(options):
             x = self.position[0]
             y = self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)
