@@ -234,9 +234,9 @@ class ComboBox(TextButton):
     def get_rect_dropdown(self):
         match self.type_dropdown:
             case " V":return pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), *self.dropdown)
-            case "up":return " Λ"
-            case "right":return " >"
-            case "left":return " <"
+            case " Λ":return None
+            case " >":return None
+            case " <":return None
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
