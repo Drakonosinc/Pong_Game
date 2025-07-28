@@ -212,7 +212,7 @@ class ComboBox(TextButton):
         self.is_dropdown_open = False
         self.selected_index = None
         self.options = []
-        self.dropdown_rect = pygame.Rect(0, 0, 0, 0)
+        self.dropdown_rect = self.onefunciontion
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
@@ -239,7 +239,7 @@ class ComboBox(TextButton):
         if self.pressed:self.pressed_button(self.rect["button"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_rect_dropdown(self):
-        self.dropdown_rect = pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), *self.dropdown)
+        pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), *self.dropdown)
         pygame.draw.rect(self.screen, self.hover_color, self.dropdown_rect)
         # for button in self.option_buttons:button.draw()
     def charge_elements(self, options: list[str]):
