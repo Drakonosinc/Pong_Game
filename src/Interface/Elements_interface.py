@@ -206,13 +206,12 @@ class ScrollBar(ElementBehavior):
 class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
-        self.dropdown = config.get("size", (self.font.size(self.text)[0], 200))
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
+        self.dropdown = config.get("size", (self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 200))
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.is_dropdown_open = False
         self.selected_index = None
         self.options = []
-        self.dropdown_rect = self.get_rect_dropdown()
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
@@ -241,6 +240,7 @@ class ComboBox(TextButton):
         if self.pressed:self.pressed_button(self.rect["button"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_rect_dropdown(self):
+        self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_color, self.dropdown_rect)
         # for button in self.option_buttons:button.draw()
     def charge_elements(self, options: list[str]):
