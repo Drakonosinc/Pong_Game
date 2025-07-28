@@ -230,7 +230,6 @@ class ComboBox(TextButton):
             case "up":return " Λ"
             case "right":return " >"
             case "left":return " <"
-    def events(self, event):pass
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
