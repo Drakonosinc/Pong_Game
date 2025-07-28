@@ -212,7 +212,7 @@ class ComboBox(TextButton):
         self.is_dropdown_open = False
         self.selected_index = None
         self.options = []
-        self.dropdown_rect = self.onefunciontion
+        self.dropdown_rect = self.get_rect_dropdown()
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
@@ -231,6 +231,7 @@ class ComboBox(TextButton):
             case "up":return " Λ"
             case "right":return " >"
             case "left":return " <"
+    
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
