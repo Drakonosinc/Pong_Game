@@ -212,6 +212,7 @@ class ComboBox(TextButton):
         self.replace_text = config.get("replace_text", False)
         self.is_dropdown_open = False
         self.selected_index = None
+        self.anim_height_dropdown = 0
         self.options = []
         self.option_buttons = []
         self.button_dropdown = TextButton({
@@ -249,7 +250,8 @@ class ComboBox(TextButton):
     def draw_rect_dropdown(self):
         self.button_dropdown.change_item({"color": self.hover_dropdown})
         self.dropdown_rect = self.get_rect_dropdown()
-        pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
+        pygame.draw.rect(self.screen, self.hover_dropdown, (*self.dropdown_rect[:-1],self.anim_height_dropdown))
+        self.anim_height_dropdown += 1 if self.anim_height_dropdown<=self.dropdown[1] else 0
         for button in self.option_buttons:button.draw()
     def charge_elements(self, options: list[str]):
         self.options = options
