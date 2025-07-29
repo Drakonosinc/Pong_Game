@@ -264,9 +264,9 @@ class ComboBox(TextButton):
                 "hover_color": self.hover_color,
                 "position": position,
                 "text": option,
-                "command1": lambda idx=i: self.select_option(idx)})
+                "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
             self.option_buttons.append(button)
-        if options and not self.text:
+        if (options and not self.text) and self.replace_text:
             self.text = options[0]
             self.selected_index = 0
     def select_option(self, index):
