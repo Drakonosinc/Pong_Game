@@ -270,7 +270,6 @@ class ComboBox(TextButton):
                 "position": position,
                 "text": option,
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
-            self.option_buttons.append(button)
             if y>self.dropdown[1]:
                 self.scroll = ScrollBar({
                     "screen": self.screen,
@@ -280,6 +279,7 @@ class ComboBox(TextButton):
                     "color_bar": (135, 206, 235),
                     "hover_color": (255, 199, 51),
                     "command1": lambda proportion: self.scroll_elements(proportion)})
+            self.option_buttons.append(button,self.scroll if hasattr(self, 'scroll') else None)
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
             self.selected_index = 0
