@@ -277,6 +277,7 @@ class ComboBox(TextButton):
                     "position": (self.dropdown_rect.x + self.dropdown_rect.width - 10, self.dropdown_rect.y),
                     "thumb_height": 20,
                     "color": (200, 200, 200),
+                    "color_bar": (135, 206, 235),
                     })
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
