@@ -272,7 +272,7 @@ class ComboBox(TextButton):
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
             self.option_buttons.append(button)
             if y>self.dropdown[1]:
-                pass
+                self.scroll = ScrollBar()
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
             self.selected_index = 0
