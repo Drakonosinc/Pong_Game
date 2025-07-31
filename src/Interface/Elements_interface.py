@@ -278,6 +278,7 @@ class ComboBox(TextButton):
                     "thumb_height": 20,
                     "color": (200, 200, 200),
                     "color_bar": (135, 206, 235),
+                    "hover_color": (255, 199, 51),
                     })
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
