@@ -279,7 +279,7 @@ class ComboBox(TextButton):
                     "color": (200, 200, 200),
                     "color_bar": (135, 206, 235),
                     "hover_color": (255, 199, 51),
-                    })
+                    "command1": lambda proportion: self.scroll_elements(proportion)})
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
             self.selected_index = 0
