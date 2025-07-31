@@ -274,6 +274,7 @@ class ComboBox(TextButton):
             if y>self.dropdown[1]:
                 self.scroll = ScrollBar({
                     "screen": self.screen,
+                    "position": (self.dropdown_rect.x + self.dropdown_rect.width - 10, self.dropdown_rect.y),
                     })
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
