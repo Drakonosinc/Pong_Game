@@ -273,7 +273,7 @@ class ComboBox(TextButton):
             if y>self.dropdown[1]:
                 self.scroll = ScrollBar({
                     "screen": self.screen,
-                    "position": (self.dropdown[0]+20, self.position[1] + self.font.get_height()),
+                    "position": (self.dropdown[0]+20, self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
                     "thumb_height": 20,
                     "color": (200, 200, 200),
                     "color_bar": (135, 206, 235),
