@@ -226,7 +226,7 @@ class ComboBox(TextButton):
             "sound_touch": self.sound_touch,
             "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open)})
         self.rect = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
-                    "dropdown": self.button_dropdown}
+                    "dropdown": self.button_dropdown, "others": self.option_buttons}
     def icon_dropdown(self,type_dropdown):
         match type_dropdown:
             case "down":return " V"
