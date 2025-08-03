@@ -149,7 +149,7 @@ class ScrollBar(ElementBehavior):
         rect = pygame.Rect(*self.position)
         self.hover_color=config.get("hover_color",(255, 199, 51))
         self.thumb_height = config.get("thumb_height", max(20, int(self.position[3] * config.get("thumb_ratio", 0.2))))
-        self.thumb_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.thumb_height)
+        self.thumb_rect = pygame.Rect(rect.x, rect.y, rect.width, self.thumb_height)
         self.color = config.get("color", (200, 200, 200))
         self.color_thumb = config.get("color_bar", (135, 206, 235))
         self.commands = config.get("command1")
