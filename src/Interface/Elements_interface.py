@@ -203,6 +203,7 @@ class ScrollBar(ElementBehavior):
         for el in self.elements:
             if isinstance(el.rect, dict):return max(el.rect.bottom for el in self.elements.values() if isinstance(el.rect, dict))
             else:return max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
+    
 class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
@@ -271,7 +272,7 @@ class ComboBox(TextButton):
                 "text": option,
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
             self.option_buttons.append(button)
-        if y>self.dropdown[1]:
+        if self.option_buttons[-1].rect[1]>self.dropdown[1]:
             self.scroll = ScrollBar({
                 "screen": self.screen,
                 "position": (self.dropdown[0]+20, self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
