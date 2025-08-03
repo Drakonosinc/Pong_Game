@@ -273,7 +273,7 @@ class ComboBox(TextButton):
                 "text": option,
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
             self.option_buttons.append(button)
-        if self.option_buttons[-1].rect[1]>self.dropdown[1]:
+        if self.option_buttons[-1].rect[3]>self.dropdown[1]:
             self.scroll = ScrollBar({
                 "screen": self.screen,
                 "position": (self.dropdown[0]+20, self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
