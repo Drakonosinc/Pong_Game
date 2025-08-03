@@ -146,7 +146,7 @@ class Input_text(ElementBehavior):
 class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
         super().__init__(config)
-        self.rect = pygame.Rect(*self.position)
+        rect = pygame.Rect(*self.position)
         self.hover_color=config.get("hover_color",(255, 199, 51))
         self.thumb_height = config.get("thumb_height", max(20, int(self.position[3] * config.get("thumb_ratio", 0.2))))
         self.thumb_rect = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.thumb_height)
@@ -156,6 +156,7 @@ class ScrollBar(ElementBehavior):
         self.elements = None
         self.dragging = False
         self.drag_offset = 0
+        self.rect = {"rect": rect, "thumb": self.thumb_rect} 
     def events(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.thumb_rect.collidepoint(event.pos):
@@ -185,7 +186,7 @@ class ScrollBar(ElementBehavior):
             else:el.rect.y = new_y
         if callable(self.commands):self.commands(proportion)
     def draw(self):
-        pygame.draw.rect(self.screen, self.color, self.rect)
+        pygame.draw.rect(self.screen, self.color, self.rect["rect"])
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
         if self.detect_mouse:self.mouse_collision(self.thumb_rect,pygame.mouse.get_pos())
         if self.pressed:self.pressed_button(self.thumb_rect,pygame.mouse.get_pressed(),pygame.mouse.get_pos())
