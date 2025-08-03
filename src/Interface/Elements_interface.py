@@ -203,7 +203,8 @@ class ScrollBar(ElementBehavior):
         for el in self.elements:
             if isinstance(el.rect, dict):return max(el.rect.bottom for el in self.elements.values() if isinstance(el.rect, dict))
             else:return max(el.rect.bottom for el in self.elements if not isinstance(el.rect, dict))
-    
+    def change_item(self,config:dict):
+        self.position = config.get("position", self.position)
 class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
