@@ -260,8 +260,9 @@ class ComboBox(TextButton):
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         for i,button in enumerate(self.option_buttons):
             button.change_item({"position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))})
-            # button.rect.y = button.position[1]
+            button.rect.y = button.position[1]
             button.draw()
+        self.scroll.draw() if hasattr(self, 'scroll') else None
     def charge_elements(self, options: list[str]):
         self.options = options
         for i, option in enumerate(options):
@@ -283,7 +284,7 @@ class ComboBox(TextButton):
                 "color_bar": (135, 206, 235),
                 "hover_color": (255, 199, 51),
                 "command1": lambda proportion: self.scroll_elements(proportion)})
-        self.option_buttons.append(self.scroll) if hasattr(self, 'scroll') else None
+        # self.option_buttons.append(self.scroll) if hasattr(self, 'scroll') else None
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
             self.selected_index = 0
