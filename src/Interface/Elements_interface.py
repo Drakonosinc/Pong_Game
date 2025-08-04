@@ -262,7 +262,7 @@ class ComboBox(TextButton):
             button.change_item({"position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))})
             button.rect.y = button.position[1]
             button.draw()
-        self.scroll.draw() if hasattr(self, 'scroll') else None
+        if hasattr(self, 'scroll'):self.scroll.draw()
     def charge_elements(self, options: list[str]):
         self.options = options
         for i, option in enumerate(options):
@@ -284,6 +284,7 @@ class ComboBox(TextButton):
                 "color_bar": (135, 206, 235),
                 "hover_color": (255, 199, 51),
                 "command1": lambda proportion: self.scroll_elements(proportion)})
+            self.rect["rect"] = self.scroll.rect
         # self.option_buttons.append(self.scroll) if hasattr(self, 'scroll') else None
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
