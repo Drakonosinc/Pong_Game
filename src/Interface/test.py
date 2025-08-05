@@ -171,10 +171,8 @@ class ScrollBar(ElementBehavior):
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
-        if self.detect_mouse:
-            self.mouse_collision(self.thumb_rect, pygame.mouse.get_pos())
-        if self.pressed:
-            self.pressed_button(self.thumb_rect, pygame.mouse.get_pressed(), pygame.mouse.get_pos())
+        if self.detect_mouse:self.mouse_collision(self.thumb_rect, pygame.mouse.get_pos())
+        if self.pressed:self.pressed_button(self.thumb_rect, pygame.mouse.get_pressed(), pygame.mouse.get_pos())
     def draw_hover_effect(self):
         return pygame.draw.rect(self.screen, self.hover_color, self.thumb_rect)
     def update_elements(self, elements: list):
@@ -189,22 +187,17 @@ class ScrollBar(ElementBehavior):
                 self.content_height = self.rect.height
     def return_rect(self):
         def get_bottom(val):
-            if isinstance(val, pygame.Rect):
-                return val.bottom
-            elif isinstance(val, dict):
-                return max(get_bottom(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
-            elif hasattr(val, 'rect'):
-                return get_bottom(val.rect)
+            if isinstance(val, pygame.Rect):return val.bottom
+            elif isinstance(val, dict):return max(get_bottom(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
+            elif hasattr(val, 'rect'):return get_bottom(val.rect)
             return 0
         max_bottom = 0
         if self.elements:
             for el in self.elements:
                 rect = getattr(el, 'rect', None)
                 if isinstance(rect, dict):
-                    for v in rect.values():
-                        max_bottom = max(max_bottom, get_bottom(v))
-                else:
-                    max_bottom = max(max_bottom, get_bottom(rect))
+                    for v in rect.values():max_bottom = max(max_bottom, get_bottom(v))
+                else:max_bottom = max(max_bottom, get_bottom(rect))
         return max_bottom
     def change_item(self,config:dict):
         self.position = config.get("position", self.position)
