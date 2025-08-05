@@ -168,33 +168,6 @@ class ScrollBar(ElementBehavior):
             new_y = max(self.rect["rect"].top, min(new_y, self.rect["rect"].bottom - self.thumb_height))
             self.thumb_rect.y = new_y
             self.scroll_elements()
-    def scroll_elements(self):
-        max_scroll = self.content_height
-        if max_scroll == 0:
-            proportion = 0.0
-        else:
-            proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_height)
-        offset = int(proportion * max_scroll)
-        for el, (x0, y0) in zip(self.elements, self.initial_positions):
-            new_y = y0 - offset
-            el.position = (x0, new_y)
-            # Recursively update y for all rects in a dict
-            def update_rect_y(item, new_y):
-                if isinstance(item, pygame.Rect):
-                    item.y = new_y
-                elif isinstance(item, dict):
-                    for v in item.values():
-                        update_rect_y(v, new_y)
-                elif hasattr(item, 'rect') and hasattr(item, 'position'):
-                    update_rect_y(item.rect, new_y)
-                    item.position = (item.position[0], new_y)
-            if isinstance(el.rect, dict):
-                for key in el.rect:
-                    update_rect_y(el.rect[key], new_y)
-            else:
-                update_rect_y(el.rect, new_y)
-        if callable(self.commands):
-            self.commands(proportion)
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)

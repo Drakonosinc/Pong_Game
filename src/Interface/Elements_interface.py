@@ -176,14 +176,16 @@ class ScrollBar(ElementBehavior):
         for el, (x0, y0) in zip(self.elements, self.initial_positions):
             new_y = y0 - offset
             el.position = (x0, new_y)
+            def update_rect_y(item, new_y):
+                if isinstance(item, pygame.Rect):item.y = new_y
+                elif isinstance(item, dict):
+                    for v in item.values():update_rect_y(v, new_y)
+                elif hasattr(item, 'rect') and hasattr(item, 'position'):
+                    update_rect_y(item.rect, new_y)
+                    item.position = (item.position[0], new_y)
             if isinstance(el.rect, dict):
-                for key in el.rect:
-                    item = el.rect[key]
-                    if hasattr(item, 'y'):item.y = new_y
-                    elif hasattr(item, 'rect') and hasattr(item, 'position'):
-                        item.rect.y = new_y
-                        item.position = (item.position[0], new_y)
-            else:el.rect.y = new_y
+                for key in el.rect:update_rect_y(el.rect[key], new_y)
+            else:update_rect_y(el.rect, new_y)
         if callable(self.commands):self.commands(proportion)
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
