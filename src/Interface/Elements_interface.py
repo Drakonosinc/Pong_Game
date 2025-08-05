@@ -269,8 +269,8 @@ class ComboBox(TextButton):
         self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         for i,button in enumerate(self.option_buttons):
-            # button.change_item({"position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))})
-            # button.rect.y = button.position[1]
+            button.change_item({"position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))})
+            button.rect.y = button.position[1]
             button.draw()
         if hasattr(self, 'scroll'):self.scroll.draw()
     def charge_elements(self, options: list[str]):
