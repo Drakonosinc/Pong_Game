@@ -216,8 +216,6 @@ class ScrollBar(ElementBehavior):
                     for v in rect.values():max_bottom = max(max_bottom, get_bottom(v))
                 else:max_bottom = max(max_bottom, get_bottom(rect))
         return max_bottom
-    def change_item(self,config:dict):
-        self.position = config.get("position", self.position)
 class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
