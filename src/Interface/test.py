@@ -185,20 +185,6 @@ class ScrollBar(ElementBehavior):
                 self.content_height = bottom - top
             else:
                 self.content_height = self.rect.height
-    def return_rect(self):
-        def get_bottom(val):
-            if isinstance(val, pygame.Rect):return val.bottom
-            elif isinstance(val, dict):return max(get_bottom(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
-            elif hasattr(val, 'rect'):return get_bottom(val.rect)
-            return 0
-        max_bottom = 0
-        if self.elements:
-            for el in self.elements:
-                rect = getattr(el, 'rect', None)
-                if isinstance(rect, dict):
-                    for v in rect.values():max_bottom = max(max_bottom, get_bottom(v))
-                else:max_bottom = max(max_bottom, get_bottom(rect))
-        return max_bottom
     def change_item(self,config:dict):
         self.position = config.get("position", self.position)
 class ComboBox(TextButton):
