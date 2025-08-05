@@ -195,7 +195,6 @@ class ScrollBar(ElementBehavior):
                 update_rect_y(el.rect, new_y)
         if callable(self.commands):
             self.commands(proportion)
-
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
@@ -203,10 +202,8 @@ class ScrollBar(ElementBehavior):
             self.mouse_collision(self.thumb_rect, pygame.mouse.get_pos())
         if self.pressed:
             self.pressed_button(self.thumb_rect, pygame.mouse.get_pressed(), pygame.mouse.get_pos())
-
     def draw_hover_effect(self):
         return pygame.draw.rect(self.screen, self.hover_color, self.thumb_rect)
-
     def update_elements(self, elements: list):
         if self.elements is None:
             self.elements = elements
@@ -217,9 +214,7 @@ class ScrollBar(ElementBehavior):
                 self.content_height = bottom - top
             else:
                 self.content_height = self.rect.height
-
     def return_rect(self):
-        # Busca el valor máximo de bottom en todos los rects, manejando diccionarios anidados
         def get_bottom(val):
             if isinstance(val, pygame.Rect):
                 return val.bottom
@@ -228,7 +223,6 @@ class ScrollBar(ElementBehavior):
             elif hasattr(val, 'rect'):
                 return get_bottom(val.rect)
             return 0
-
         max_bottom = 0
         if self.elements:
             for el in self.elements:
