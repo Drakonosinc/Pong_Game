@@ -292,8 +292,7 @@ class ComboBox(TextButton):
                 "thumb_height": 20,
                 "color": (200, 200, 200),
                 "color_bar": (135, 206, 235),
-                "hover_color": (255, 199, 51),
-                "command1": lambda proportion: self.scroll_elements(proportion)})
+                "hover_color": (255, 199, 51)})
             self.rect["rect"] = self.scroll.rect
             self.scroll.update_elements(self.option_buttons)
         if (options and not self.text) and self.replace_text:
