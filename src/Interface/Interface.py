@@ -42,4 +42,4 @@ class interface(load_elements,BaseMenu):
         self.input_player1.change_text(event)
         self.input_player2.change_text(event)
         self.scroll.events(event)
-        self.interface.box_type_models.events(event)
+        self.box_type_models.events(event)
