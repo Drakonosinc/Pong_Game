@@ -152,7 +152,6 @@ class ScrollBar(ElementBehavior):
         self.thumb_rect = pygame.Rect(rect.x, rect.y, rect.width, self.thumb_height)
         self.color = config.get("color", (200, 200, 200))
         self.color_thumb = config.get("color_bar", (135, 206, 235))
-        self.commands = config.get("command1")
         self.elements = None
         self.dragging = False
         self.drag_offset = 0
