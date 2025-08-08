@@ -249,6 +249,7 @@ class ComboBox(TextButton):
             case "right":return " >"
             case "left":return " <"
     def get_rect_dropdown(self):
+        def anim_height():pass
         match self.type_dropdown:
             case " V":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<=self.dropdown[1] else 0
