@@ -252,7 +252,7 @@ class ComboBox(TextButton):
         def anim_height():pass
         match self.type_dropdown:
             case " V":
-                self.anim_height_dropdown += 1 if self.anim_height_dropdown<=self.dropdown[1] else 0
+                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[1] else 0
                 return pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), self.dropdown[0], self.anim_height_dropdown)
             case " Λ":return None
             case " >":return None
@@ -272,7 +272,8 @@ class ComboBox(TextButton):
         self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
-        for button in self.option_buttons:button.draw()
+        for button in self.option_buttons:
+            if button.rect[1]<=self.dropdown_rect[3]:button.draw()
         if hasattr(self, 'scroll'):self.scroll.draw()
     def charge_elements(self, options: list[str]):
         self.options = options
