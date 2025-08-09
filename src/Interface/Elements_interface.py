@@ -277,7 +277,7 @@ class ComboBox(TextButton):
         if hasattr(self, 'scroll'):self.scroll.draw()
     def charge_elements(self, options: dict):
         self.options = options
-        for i, option in enumerate(options):
+        for i, (option,action) in enumerate(options.items()):
             button = TextButton({
                 "screen": self.screen,
                 "font": self.font,
