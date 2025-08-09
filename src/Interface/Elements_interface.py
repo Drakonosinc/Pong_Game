@@ -276,7 +276,7 @@ class ComboBox(TextButton):
             if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):self.scroll.draw()
     def charge_elements(self, options: dict, adapt_dropdown: bool = True, scroll: bool = True):
-        self.options = options
+        self.options = options.keys()
         for i, (option,action) in enumerate(options.items()):
             button = TextButton({
                 "screen": self.screen,
