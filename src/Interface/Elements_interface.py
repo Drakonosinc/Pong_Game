@@ -280,12 +280,15 @@ class ComboBox(TextButton):
         for i, (option,action) in enumerate(options.items()):
             button = TextButton({
                 "screen": self.screen,
+                "sound_hover": self.sound_hover,
+                "sound_touch": self.sound_touch,
                 "font": self.font,
                 "color": self.color,
                 "hover_color": self.hover_color,
                 "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "text": option,
-                "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None})
+                "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
+                "command2": action if callable(action) else None,})
             self.option_buttons.append(button)
             self.rect[f"option_{i}"] = button
         if self.option_buttons[-1].rect[1]>self.dropdown[1]:self._create_scroll()
