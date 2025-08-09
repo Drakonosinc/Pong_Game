@@ -222,7 +222,7 @@ class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
         self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
-        self.dropdown = config.get("size", (self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 200))
+        self.dropdown = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 200])
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.replace_text = config.get("replace_text", False)
         self.anim_height_dropdown = 0
@@ -275,7 +275,7 @@ class ComboBox(TextButton):
         for button in self.option_buttons:
             if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):self.scroll.draw()
-    def charge_elements(self, options: dict):
+    def charge_elements(self, options: dict, adapt_dropdown: bool = True):
         self.options = options
         for i, (option,action) in enumerate(options.items()):
             button = TextButton({
@@ -291,6 +291,9 @@ class ComboBox(TextButton):
                 "command2": action if callable(action) else None})
             self.option_buttons.append(button)
             self.rect[f"option_{i}"] = button
+        if adapt_dropdown:
+            self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
+            print(len(self.option_buttons) * (self.font.get_height() + 5))
         if self.option_buttons[-1].rect[1]>self.dropdown[1]:self._create_scroll()
         if (options and not self.text) and self.replace_text:
             self.text = options[0]
