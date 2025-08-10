@@ -237,7 +237,7 @@ class ComboBox(TextButton):
             "hover_color": self.hover_color,
             "sound_hover": self.sound_hover,
             "sound_touch": self.sound_touch})
-        self.button_dropdown = self.factory.TextButton({
+        self.button_dropdown = self.factory.create_TextButton({
             "position": (self.position[0]+self.font.size(self.text)[0], int(self.position[1])),
             "text": self.type_dropdown,
             "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open)})
