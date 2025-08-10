@@ -292,7 +292,7 @@ class ComboBox(TextButton):
             self.text = options[0]
             self.selected_index = 0
     def _create_scroll(self):
-        self.scroll = ScrollBar({
+        self.scroll = self.factory.create_ScrollBar({
             "screen": self.screen,
             "sound_hover": self.sound_hover,
             "position": (self.position[0] + self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
