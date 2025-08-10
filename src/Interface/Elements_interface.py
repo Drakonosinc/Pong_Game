@@ -279,7 +279,7 @@ class ComboBox(TextButton):
     def charge_elements(self, options: dict, adapt_dropdown: bool = True, scroll: bool = True):
         self.options = options.keys()
         for i, (option,action) in enumerate(options.items()):
-            button = TextButton({
+            button = self.factory.create_TextButton({
                 "screen": self.screen,
                 "sound_hover": self.sound_hover,
                 "sound_touch": self.sound_touch,
