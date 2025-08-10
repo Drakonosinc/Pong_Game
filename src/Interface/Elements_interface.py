@@ -280,14 +280,8 @@ class ComboBox(TextButton):
         self.options = options.keys()
         for i, (option,action) in enumerate(options.items()):
             button = self.factory.create_TextButton({
-                "screen": self.screen,
-                "sound_hover": self.sound_hover,
-                "sound_touch": self.sound_touch,
-                "font": self.font,
-                "color": self.color,
-                "hover_color": self.hover_color,
-                "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "text": option,
+                "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self.option_buttons.append(button)
