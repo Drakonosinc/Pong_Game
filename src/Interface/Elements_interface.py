@@ -230,6 +230,8 @@ class ComboBox(TextButton):
         self.selected_index = None
         self.options = []
         self.option_buttons = []
+        self.factory = ElementsFactory({
+            })
         self.button_dropdown = TextButton({
             "screen": self.screen,
             "font": self.font,
