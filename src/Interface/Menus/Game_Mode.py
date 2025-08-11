@@ -65,8 +65,8 @@ class GameMode(BaseMenu):
         self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:print("hola1"), "Tensorflow":lambda:print("hola2")})
         self.interface.box_type_model = self.config_buttons['box_type_model']
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
-    def _update_model_ai(self):
-        mode_buttons = {"Pytorch": None,"Tensorflow": None}
+    def _update_model_ai(self,button):
+        mode_buttons = {"Pytorch": self.config_buttons['box_type_model'].return_buttons(button),"Tensorflow": self.config_buttons['box_type_model'].return_buttons(button)}
         # self.check_item(self.interface.mode_game,self.interface.SKYBLUE,self.interface.WHITE,"color",**mode_buttons)
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
