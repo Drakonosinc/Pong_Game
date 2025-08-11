@@ -62,7 +62,7 @@ class GameMode(BaseMenu):
         self.config_buttons['decrease_try_for_ai'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI, 'try_for_ai', True, -1),"command2": self._update_training_ai_texts})
         self.config_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
         self.config_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
-        self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:print("hola1"), "Tensorflow":lambda:print("hola2")})
+        self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self.interface.box_type_model = self.config_buttons['box_type_model']
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
