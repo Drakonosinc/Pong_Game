@@ -305,3 +305,4 @@ class ComboBox(TextButton):
             self.is_dropdown_open = False
     def events(self, event):
         if hasattr(self, 'scroll'):self.scroll.events(event)
+    def return_buttons(self):pass
