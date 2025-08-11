@@ -65,6 +65,9 @@ class GameMode(BaseMenu):
         self.config_buttons['box_type_model'].charge_elements({"Model 1":lambda:print("hola1"), "Model 2":lambda:print("hola2")})
         self.interface.box_type_model = self.config_buttons['box_type_model']
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
+    def _update_model_ai(self):pass
+        # mode_buttons = {"Training AI": self.buttons['training_ai'],"Player": self.buttons['player'],"AI": self.buttons['ai']}
+        # self.check_item(self.interface.mode_game,self.interface.SKYBLUE,self.interface.WHITE,"color",**mode_buttons)
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
         self.training_ai_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
