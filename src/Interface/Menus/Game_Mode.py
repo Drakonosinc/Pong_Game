@@ -64,6 +64,7 @@ class GameMode(BaseMenu):
         self.config_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
         self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self.interface.box_type_model = self.config_buttons['box_type_model']
+        print(self.config_buttons['box_type_model'].return_buttons("Pytorch"))
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
         model_ai = {"Pytorch": self.config_buttons['box_type_model'].return_buttons(button),"Tensorflow": self.config_buttons['box_type_model'].return_buttons(button)}
