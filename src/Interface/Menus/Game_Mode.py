@@ -67,8 +67,9 @@ class GameMode(BaseMenu):
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
         model_ai = {"Pytorch": self.config_buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.config_buttons['box_type_model'].return_buttons("Tensorflow")}
-        self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
+        self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
+        self.config.save_config()
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
         self.training_ai_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
