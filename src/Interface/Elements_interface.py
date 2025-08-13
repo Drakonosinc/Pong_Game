@@ -27,10 +27,10 @@ class ElementBehavior:
         self.position = config["position"]
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
-        self.detect_mouse=config.get("detect_mouse",True)
+        self.detect_mouse = config.get("detect_mouse",True)
         self.pressed = config.get("pressed",True)
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False})
-        self.commands = [config.get(f"command{i}") for i in range(1,4)]
+        self.commands = [config.get(f"command{i}") for i in range(1,config.get("number_commands", 4))]
         self.new_events(time=config.get("time",500))
     def events(self, event):pass
     def new_events(self,time):
@@ -306,5 +306,4 @@ class ComboBox(TextButton):
             self.is_dropdown_open = False
     def events(self, event):
         if hasattr(self, 'scroll'):self.scroll.events(event)
-    def return_buttons(self, button:str):
-        return self.option_buttons[button]
+    def return_buttons(self, button:str):return self.option_buttons[button]
