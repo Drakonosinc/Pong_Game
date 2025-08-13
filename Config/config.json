@@ -49,8 +49,8 @@
             "q-learning": false
         },
         "type_model": {
-            "Pytorch": true,
-            "Tensorflow": false
+            "Pytorch": false,
+            "Tensorflow": true
         }
     },
     "config_sounds": {
