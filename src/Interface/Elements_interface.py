@@ -285,10 +285,11 @@ class ComboBox(TextButton):
                 "command2": action if callable(action) else None})
             self.option_buttons[option] = button
             self.rect[f"option_{i}"] = button
+            self.options.append(option)
         if adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
         if scroll:self._create_scroll()
         if (options and not self.text) and self.replace_text:
-            self.text = options[0]
+            self.text = self.options[0]
             self.selected_index = 0
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
