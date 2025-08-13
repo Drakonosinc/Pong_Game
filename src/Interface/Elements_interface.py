@@ -288,7 +288,7 @@ class ComboBox(TextButton):
             self.options.append(option)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
         if adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
-        if scroll:self._create_scroll()
+        # if scroll:self._create_scroll()
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
