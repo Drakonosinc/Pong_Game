@@ -288,13 +288,13 @@ class ComboBox(TextButton):
             self.options.append(option)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
         if adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
-        # if scroll:self._create_scroll()
+        if scroll:self._create_scroll()
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
-            "position": (self.position[0] + self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
+            "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
             "thumb_height": 20,
             "color_bar": (135, 206, 235)})
         self.rect["rect"] = self.scroll.rect
