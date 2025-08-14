@@ -300,7 +300,7 @@ class ComboBox(TextButton):
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
             "thumb_height": 20,
             "color_bar": (135, 206, 235)})
-        self.rect["rect"] = self.scroll.rect
+        self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
     def select_option(self, index):
         if 0 <= index < len(self.options):
