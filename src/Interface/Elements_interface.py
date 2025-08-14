@@ -294,6 +294,7 @@ class ComboBox(TextButton):
             self.selected_index = 0
     def charge_buttons(self,buttons: list, scroll: bool = True):
         for i, button in enumerate(buttons):
+            button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             self.rect[f"option_{i}"] = button
         if scroll:self._create_scroll()
     def _create_scroll(self):
