@@ -292,6 +292,8 @@ class ComboBox(TextButton):
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
+    def charge_buttons(self,buttons: list):
+        pass
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
