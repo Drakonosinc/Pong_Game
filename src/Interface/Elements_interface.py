@@ -293,7 +293,8 @@ class ComboBox(TextButton):
             self.text = self.options[0]
             self.selected_index = 0
     def charge_buttons(self,buttons: list, scroll: bool = True):
-        for i, button in enumerate(buttons):pass
+        for i, button in enumerate(buttons):
+            self.rect[f"option_{i}"] = button
         if scroll:self._create_scroll()
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
