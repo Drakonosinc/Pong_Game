@@ -296,6 +296,8 @@ class ComboBox(TextButton):
         for i, button in enumerate(buttons):
             if not self.option_buttons:
                 button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
+            else:
+                button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             self.option_buttons[button.text] = button
             self.rect[f"option_{i}"] = button
             if len(self.options[i]) >= len(button.text):self.dropdown[0] = self.font.size(button.text)[0] + 5
