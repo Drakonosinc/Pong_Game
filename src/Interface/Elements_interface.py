@@ -283,8 +283,7 @@ class ComboBox(TextButton):
                 "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
-            self._repeat_charge()
-            
+            self._repeat_charge(i,option,button)
             self.options.append(option)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
         if adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
