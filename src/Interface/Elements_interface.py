@@ -279,7 +279,7 @@ class ComboBox(TextButton):
         if hasattr(self, 'scroll'):
             self.scroll.rect["rect"].height = self.dropdown_rect.height
             self.scroll.draw()
-    def charge_elements(self, options: dict, adapt_dropdown: bool = True, scroll: bool = True):
+    def charge_elements(self, options: dict, scroll: bool = True):
         for i, (option,action) in enumerate(options.items()):
             button = self.factory.create_TextButton({
                 "text": option,
@@ -289,7 +289,7 @@ class ComboBox(TextButton):
             self._repeat_charge(f"elements_{i}",option,button)
             self.options.append(option)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
-        if adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
+        if self.adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
         if scroll:self._create_scroll()
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
