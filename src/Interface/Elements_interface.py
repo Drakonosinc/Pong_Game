@@ -226,6 +226,7 @@ class ComboBox(TextButton):
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.replace_text = config.get("replace_text", False)
         self.adapt_dropdown = config.get("adapt_dropdown", True)
+        self.draw_scroll = config.get("draw_scroll", True)
         self.anim_height_dropdown = 0
         self.is_dropdown_open = False
         self.selected_index = None
