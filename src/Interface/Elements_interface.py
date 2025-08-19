@@ -275,7 +275,8 @@ class ComboBox(TextButton):
         self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
-        
+        if self.adapt_dropdown:self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
+        if self.draw_scroll:self._create_scroll()
         for button in self.option_buttons.values():
             button.draw()
             # if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
@@ -313,6 +314,7 @@ class ComboBox(TextButton):
             "color_bar": (135, 206, 235)})
         self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
+        self.draw_scroll = False
     def select_option(self, index):
         if 0 <= index < len(self.options):
             self.text = self.options[index]
