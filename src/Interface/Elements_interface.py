@@ -275,8 +275,7 @@ class ComboBox(TextButton):
         self.dropdown_rect = self.get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
-        for i,button in enumerate(self.option_buttons.values()):
-            if len(self.options[i]) >= len(button.text):self.dropdown[0] = self.font.size(button.text)[0] + 5
+        for button in self.option_buttons.values():
             button.draw()
             # if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):
@@ -290,6 +289,7 @@ class ComboBox(TextButton):
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}",option,button)
+            if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
         if self.adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
         if self.draw_scroll:self._create_scroll()
         if (options and not self.text) and self.replace_text:
@@ -300,6 +300,7 @@ class ComboBox(TextButton):
             if not self.option_buttons:button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             self._repeat_charge(f"buttons_{i}",button.text,button)
+            if len(buttons[i].text) >= len(button.text):self.dropdown[0] = self.font.size(button.text)[0] + 5
         if self.adapt_dropdown:self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
         if self.draw_scroll:self._create_scroll()
     def _repeat_charge(self,i,option,button):
