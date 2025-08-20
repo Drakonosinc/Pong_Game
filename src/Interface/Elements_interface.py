@@ -290,7 +290,7 @@ class ComboBox(TextButton):
                 "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
-            self._repeat_charge(f"elements_{i}",option,button)
+            self._repeat_charge(f"elements_{i}",option,button,i)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
@@ -299,9 +299,9 @@ class ComboBox(TextButton):
         for i, button in enumerate(buttons):
             if not self.option_buttons:button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
-            self._repeat_charge(f"buttons_{i}",button.text,button)
+            self._repeat_charge(f"buttons_{i}",button.text,button,i)
             if len(buttons[i].text) >= len(self.options[i]):self.dropdown[0] = self.font.size(button.text)[0] + 5
-    def _repeat_charge(self,rect,option,button):
+    def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
         self.rect[rect] = button
         self.options.append(option)
