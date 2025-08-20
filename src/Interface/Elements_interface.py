@@ -292,7 +292,6 @@ class ComboBox(TextButton):
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}",option,button)
             if len(self.options[i]) >= len(option):self.dropdown[0] = self.font.size(option)[0] + 5
-        
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
@@ -302,7 +301,6 @@ class ComboBox(TextButton):
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             self._repeat_charge(f"buttons_{i}",button.text,button)
             if len(buttons[i].text) >= len(button.text):self.dropdown[0] = self.font.size(button.text)[0] + 5
-        
     def _repeat_charge(self,i,option,button):
         self.option_buttons[option] = button
         self.rect[i] = button
