@@ -290,7 +290,7 @@ class ComboBox(TextButton):
                 "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
-            self._repeat_charge(f"elements_{i}", option, button, i, option)
+            self._repeat_charge(f"elements_{i}", option, button, i)
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
@@ -298,12 +298,12 @@ class ComboBox(TextButton):
         for i, button in enumerate(buttons):
             if not self.option_buttons:button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
-            self._repeat_charge(f"buttons_{i}",button.text,button,i,buttons[i].text)
-    def _repeat_charge(self,rect,option,button,i,check):
+            self._repeat_charge(f"buttons_{i}",button.text,button,i)
+    def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
         self.rect[rect] = button
         self.options.append(option)
-        if len(check) >= len(self.options[i]):self.dropdown[0] = self.font.size(button.text)[0] + 5
+        if len(option) >= len(self.options[i]):self.dropdown[0] = self.font.size(button.text)[0] + 5
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
