@@ -290,7 +290,7 @@ class ComboBox(TextButton):
                 "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
-            self._repeat_charge(f"elements_{i}",option,button,i,self.options[i])
+            self._repeat_charge(f"elements_{i}", option, button, i, option)
         if (options and not self.text) and self.replace_text:
             self.text = self.options[0]
             self.selected_index = 0
