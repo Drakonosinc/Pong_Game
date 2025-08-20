@@ -300,7 +300,7 @@ class ComboBox(TextButton):
             if not self.option_buttons:button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             self._repeat_charge(f"buttons_{i}",button.text,button)
-            if len(buttons[i].text) >= len(button.text):self.dropdown[0] = self.font.size(button.text)[0] + 5
+            if len(buttons[i].text) >= len(self.options[i]):self.dropdown[0] = self.font.size(button.text)[0] + 5
     def _repeat_charge(self,i,option,button):
         self.option_buttons[option] = button
         self.rect[i] = button
