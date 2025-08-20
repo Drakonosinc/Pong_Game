@@ -301,9 +301,9 @@ class ComboBox(TextButton):
             else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             self._repeat_charge(f"buttons_{i}",button.text,button)
             if len(buttons[i].text) >= len(self.options[i]):self.dropdown[0] = self.font.size(button.text)[0] + 5
-    def _repeat_charge(self,i,option,button):
+    def _repeat_charge(self,rect,option,button):
         self.option_buttons[option] = button
-        self.rect[i] = button
+        self.rect[rect] = button
         self.options.append(option)
     def _create_scroll(self):
         self.scroll = self.factory.create_ScrollBar({
