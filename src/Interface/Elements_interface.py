@@ -287,7 +287,7 @@ class ComboBox(TextButton):
         for i, (option,action) in enumerate(options.items()):
             button = self.factory.create_TextButton({
                 "text": option,
-                "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)),
+                "position": (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)) if not self.option_buttons else (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5),
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}", option, button, i)
