@@ -221,7 +221,7 @@ class ScrollBar(ElementBehavior):
 class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
-        self.type_dropdown = self.icon_dropdown(config.get("type_dropdown", "down"))
+        self.type_dropdown = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
         self.dropdown = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 200])
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.replace_text = config.get("replace_text", False)
