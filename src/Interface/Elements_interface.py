@@ -296,8 +296,7 @@ class ComboBox(TextButton):
             self.selected_index = 0
     def charge_buttons(self,buttons: list):
         for i, button in enumerate(buttons):
-            if not self.option_buttons:button.position = (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
-            else:button.position = (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
+            button.position = self._check_buttons_position(i)
             self._repeat_charge(f"buttons_{i}",button.text,button,i)
     def _check_buttons_position(self,i):
         if not self.option_buttons:return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
