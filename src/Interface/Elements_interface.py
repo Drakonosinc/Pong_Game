@@ -278,8 +278,7 @@ class ComboBox(TextButton):
         if self.adapt_dropdown:self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
         if self.draw_scroll:self._create_scroll()
         for button in self.option_buttons.values():
-            button.draw()
-            # if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
+            if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):
             self.scroll.rect["rect"].height = self.dropdown_rect.height
             self.scroll.draw()
