@@ -229,7 +229,6 @@ class ComboBox(TextButton):
         self.draw_scroll = config.get("draw_scroll", True)
         self.anim_height_dropdown = 0
         self.is_dropdown_open = False
-        self.selected_index = None
         self.options = []
         self.option_buttons = {}
         self.factory = ElementsFactory({
