@@ -290,9 +290,7 @@ class ComboBox(TextButton):
                 "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}", option, button, i)
-        if (options and not self.text) and self.replace_text:
-            self.text = self.options[0]
-            self.selected_index = 0
+        if (options and not self.text) and self.replace_text:self.text = self.options[0]
     def charge_buttons(self, buttons: list):
         for i, button in enumerate(buttons):
             button.position = self._check_buttons_position(i)
