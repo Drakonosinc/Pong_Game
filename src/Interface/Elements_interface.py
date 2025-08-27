@@ -273,7 +273,7 @@ class ComboBox(TextButton):
     def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
     def draw_rect_dropdown(self):
         self.button_dropdown.change_item({"color": self.hover_dropdown})
-        self.dropdown_rect = self.get_rect_dropdown()
+        self.dropdown_rect = self._get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
         if self.adapt_dropdown and self.option_buttons:self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
