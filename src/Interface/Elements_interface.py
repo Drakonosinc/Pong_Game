@@ -301,8 +301,10 @@ class ComboBox(TextButton):
     def _check_buttons_position(self,i):
         if not self.option_buttons:
             if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
+            if self.type_dropdown == " ^":return None
         else:
             if self.type_dropdown == " V":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
+            if self.type_dropdown == " ^":return None
     def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
         self.rect[rect] = button
