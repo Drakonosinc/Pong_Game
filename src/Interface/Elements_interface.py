@@ -281,7 +281,12 @@ class ComboBox(TextButton):
         for button in self.option_buttons.values():
             if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):self._draw_scroll()
-    
+    def _draw_scroll(self):
+        if self.type_dropdown == " V":self.scroll.rect["rect"].height = self.dropdown_rect.height
+        elif self.type_dropdown == " ^":
+            self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
+            self.scroll.rect["rect"].height = self.dropdown_rect.height
+        self.scroll.draw()
     def charge_elements(self, options: dict):
         for i, (option,action) in enumerate(options.items()):
             button = self.factory.create_TextButton({
