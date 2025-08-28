@@ -299,7 +299,8 @@ class ComboBox(TextButton):
                 elif isinstance(button.rect, dict) and "button" in button.rect:button.rect["button"].topleft = button.position
             self._repeat_charge(f"buttons_{i}",button.text,button,i)
     def _check_buttons_position(self,i):
-        if not self.option_buttons:return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
+        if not self.option_buttons:
+            if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
         else:return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
     def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
