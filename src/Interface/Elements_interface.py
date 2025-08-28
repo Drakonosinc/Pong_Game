@@ -284,7 +284,7 @@ class ComboBox(TextButton):
     def _draw_scroll(self):
         if self.type_dropdown == " V":self.scroll.rect["rect"].height = self.dropdown_rect.height
         elif self.type_dropdown == " ^":
-            self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
+            if self.dropdown_rect.height != self.dropdown[1]:self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
             self.scroll.rect["rect"].height = self.dropdown_rect.height
         self.scroll.draw()
     def charge_elements(self, options: dict):
