@@ -282,7 +282,9 @@ class ComboBox(TextButton):
             if button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top:button.draw()
         if hasattr(self, 'scroll'):
             if self.type_dropdown == " V":self.scroll.rect["rect"].height = self.dropdown_rect.height
-            elif self.type_dropdown == " ^":self.scroll.rect["rect"].y = self.dropdown_rect.y
+            elif self.type_dropdown == " ^":
+                self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
+                self.scroll.rect["rect"].height = self.dropdown_rect.height
             self.scroll.draw()
     def charge_elements(self, options: dict):
         for i, (option,action) in enumerate(options.items()):
@@ -302,10 +304,10 @@ class ComboBox(TextButton):
     def _check_buttons_position(self,i):
         if not self.option_buttons:
             if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
-            elif self.type_dropdown == " ^":return None
+            elif self.type_dropdown == " ^":return (self.position[0], self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5))
         else:
             if self.type_dropdown == " V":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
-            elif self.type_dropdown == " ^":return None
+            elif self.type_dropdown == " ^":return (self.position[0], self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5))
     def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
         self.rect[rect] = button
