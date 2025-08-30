@@ -72,7 +72,7 @@ class GameMode(BaseMenu):
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
-    def _update_model_ai(self,button):
+    def _update_type_training(self,button):
         type_training = {"Genetic": self.config_buttons['box_type_training'].return_buttons("Genetic"),"Q-Learning": self.config_buttons['box_type_training'].return_buttons("Q-Learning")}
         for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
