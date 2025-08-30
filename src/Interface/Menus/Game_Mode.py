@@ -63,7 +63,7 @@ class GameMode(BaseMenu):
         self.config_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
         self.config_buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
         self.config_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
-        self.config_buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-Learning":lambda:self._update_type_training("Q-Learning")})
+        self.config_buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_type_training("Genetic")
         self._update_model_ai("Pytorch")
@@ -74,7 +74,7 @@ class GameMode(BaseMenu):
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
     def _update_type_training(self,button):
-        type_training = {"Genetic": self.config_buttons['box_type_training'].return_buttons("Genetic"),"Q-Learning": self.config_buttons['box_type_training'].return_buttons("Q-Learning")}
+        type_training = {"Genetic": self.config_buttons['box_type_training'].return_buttons("Genetic"),"Q-learning": self.config_buttons['box_type_training'].return_buttons("Q-learning")}
         for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
         self.config.save_config()
