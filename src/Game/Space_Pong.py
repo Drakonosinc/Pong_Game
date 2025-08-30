@@ -41,7 +41,7 @@ class Space_pong_game(interface):
         self.press_keys()
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
-        self.type_mode()
+        self.type_game()
         self.game_over,self.running,self.exit=True,False,True
     def change_speed(self,fps,speed,number,objet,speed_down=True,speed_up=True):
         self.FPS+=fps
