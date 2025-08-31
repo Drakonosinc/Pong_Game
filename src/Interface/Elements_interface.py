@@ -262,7 +262,9 @@ class ComboBox(TextButton):
             case " >":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
                 return None
-            case " <":return None
+            case " <":
+                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
+                return None
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
