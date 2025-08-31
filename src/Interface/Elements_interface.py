@@ -292,7 +292,7 @@ class ComboBox(TextButton):
             button = self.factory.create_TextButton({
                 "text": option,
                 "position": self._check_buttons_position(i),
-                "command1": lambda idx=i: self.select_option(idx) if self.replace_text else None,
+                "command1": lambda idx=i: self._select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}", option, button, i)
     def charge_buttons(self, buttons: list):
@@ -322,7 +322,7 @@ class ComboBox(TextButton):
         self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
         self.draw_scroll = False
-    def select_option(self, index):
+    def _select_option(self, index):
         if 0 <= index < len(self.options):
             self.text = self.options[index]
             self.is_dropdown_open = False
