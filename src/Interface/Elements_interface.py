@@ -222,7 +222,7 @@ class ComboBox(TextButton):
     def __init__(self, config: dict):
         super().__init__(config)
         self.type_dropdown = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
-        self.dropdown = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 200])
+        self.dropdown = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
         self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
         self.replace_text = config.get("replace_text", False)
         self.adapt_dropdown = config.get("adapt_dropdown", True)
@@ -261,7 +261,7 @@ class ComboBox(TextButton):
                 return pygame.Rect(self.position[0], self.position[1] - self.anim_height_dropdown, self.dropdown[0], self.anim_height_dropdown)
             case " >":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
-                return pygame.Rect(self.position[0] + self.font.size(self.text)[0], self.position[1], self.anim_height_dropdown, self.anim_height_dropdown)
+                return pygame.Rect(self.position[0] + (self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0]), self.position[1], self.anim_height_dropdown, self.anim_height_dropdown)
             case " <":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
                 return None
