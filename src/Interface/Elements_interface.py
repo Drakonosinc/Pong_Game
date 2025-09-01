@@ -261,7 +261,7 @@ class ComboBox(TextButton):
                 return pygame.Rect(self.position[0], self.position[1] - self.anim_height_dropdown, self.dropdown[0], self.anim_height_dropdown)
             case " >":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
-                return None
+                return pygame.Rect(self.position[0] + self.font.size(self.text)[0], self.position[1], self.anim_height_dropdown, self.dropdown[1])
             case " <":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
                 return None
