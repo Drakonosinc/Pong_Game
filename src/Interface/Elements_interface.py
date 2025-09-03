@@ -282,11 +282,11 @@ class ComboBox(TextButton):
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
         self._adapt_size_dropdown()
         if self.draw_scroll and self.option_buttons:self._create_scroll()
-        for button in self.option_buttons.values():
-            if (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top) and (self.type_dropdown in (" V", " ^")):button.draw()
-            else:button.draw()
+        for button in self.option_buttons.values():self._draw_option_buttons(button)
         if hasattr(self, 'scroll'):self._draw_scroll()
-    def _draw_option_buttons(self):pass
+    def _draw_option_buttons(self,button):
+        if (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top) and (self.type_dropdown in (" V", " ^")):button.draw()
+        else:button.draw()
     def _adapt_size_dropdown(self):
         if self.adapt_dropdown and self.option_buttons and self.type_dropdown in (" V", " ^"):self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
         elif self.adapt_dropdown and self.option_buttons:
