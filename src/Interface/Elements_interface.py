@@ -286,6 +286,7 @@ class ComboBox(TextButton):
             if (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top) and (self.type_dropdown in (" V", " ^")):button.draw()
             else:button.draw()
         if hasattr(self, 'scroll'):self._draw_scroll()
+    def _draw_option_buttons(self):pass
     def _adapt_size_dropdown(self):
         if self.adapt_dropdown and self.option_buttons and self.type_dropdown in (" V", " ^"):self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
         elif self.adapt_dropdown and self.option_buttons:
