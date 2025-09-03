@@ -289,6 +289,7 @@ class ComboBox(TextButton):
         elif (button.rect.right<=self.dropdown_rect.right and button.rect.left>=self.dropdown_rect.left) and (self.type_dropdown in (" <", " >")):button.draw()
     def _adapt_size_dropdown(self):
         if self.type_dropdown in (" V", " ^"):self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
+        elif self.type_dropdown == " >":pass
         elif self.type_dropdown == " <":self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[0]].rect.right-self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left) + 10, (self.font.get_height() + 5), False
     def _draw_scroll(self):
         if self.type_dropdown == " V":self.scroll.rect["rect"].height = self.dropdown_rect.height
