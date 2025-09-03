@@ -66,6 +66,8 @@ class GameMode(BaseMenu):
         # self.config_buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         # self._update_type_training("Genetic")
+        self.b = factory.create_TextButton({"text": "test","position": (0,0)})
+        self.config_buttons['box_type_model'].charge_buttons([self.b])
         self._update_model_ai("Pytorch")
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
