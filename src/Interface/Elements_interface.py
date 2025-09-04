@@ -322,7 +322,7 @@ class ComboBox(TextButton):
         else:
             if self.type_dropdown == " V":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
             elif self.type_dropdown == " ^":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.top - self.font.get_height())
-            elif self.type_dropdown == " >":return (0,0)
+            elif self.type_dropdown == " >":return (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.right + (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
             elif self.type_dropdown == " <":return (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left - (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
     def _repeat_charge(self,rect,option,button,i):
         self.option_buttons[option] = button
