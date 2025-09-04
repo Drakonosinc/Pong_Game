@@ -261,7 +261,7 @@ class ComboBox(TextButton):
                 return pygame.Rect(self.position[0], self.position[1] - self.anim_height_dropdown, self.dropdown[0], self.anim_height_dropdown)
             case " >":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
-                return pygame.Rect(self.position[0] + (self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0]), self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
+                return pygame.Rect(self.position[0] + (self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]), self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
             case " <":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
                 return pygame.Rect(self.position[0] - self.anim_height_dropdown, self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
@@ -317,7 +317,7 @@ class ComboBox(TextButton):
         if not self.option_buttons:
             if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             elif self.type_dropdown == " ^":return (self.position[0], self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5))
-            elif self.type_dropdown == " >":return (self.position[0] + (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
+            elif self.type_dropdown == " >":return (self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5), self.position[1] + (self.font.get_height()/2))
             elif self.type_dropdown == " <":return (self.position[0] - (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
         else:
             if self.type_dropdown == " V":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
