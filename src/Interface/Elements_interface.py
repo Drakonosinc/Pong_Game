@@ -286,7 +286,8 @@ class ComboBox(TextButton):
         if hasattr(self, 'scroll'):self._draw_scroll()
     def _draw_option_buttons(self,button):
         if (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top) and (self.type_dropdown in (" V", " ^")):button.draw()
-        elif (button.rect.right<=self.dropdown_rect.right and button.rect.left>=self.dropdown_rect.left) and (self.type_dropdown in (" <", " >")):button.draw()
+        # elif (button.rect.right<=self.dropdown_rect.right and button.rect.left>=self.dropdown_rect.left) and (self.type_dropdown in (" <", " >")):button.draw()
+        else:button.draw()
     def _adapt_size_dropdown(self):
         if self.type_dropdown in (" V", " ^"):self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
         elif self.type_dropdown == " >":pass
@@ -316,7 +317,7 @@ class ComboBox(TextButton):
         if not self.option_buttons:
             if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             elif self.type_dropdown == " ^":return (self.position[0], self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5))
-            elif self.type_dropdown == " >":return (0,0)
+            elif self.type_dropdown == " >":return (self.position[0] + (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
             elif self.type_dropdown == " <":return (self.position[0] - (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
         else:
             if self.type_dropdown == " V":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.bottom + 5)
