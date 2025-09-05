@@ -312,7 +312,7 @@ class ComboBox(TextButton):
                 if isinstance(button.rect, pygame.Rect):button.rect.topleft = button.position
                 elif isinstance(button.rect, dict) and "button" in button.rect:button.rect["button"].topleft = button.position
             self._repeat_charge(f"buttons_{i}",button.text,button,i)
-    def _check_buttons_position(self,i, text = None):
+    def _check_buttons_position(self,i, text: str = None) -> tuple[int, int]:
         if not self.option_buttons:
             if self.type_dropdown == " V":return (self.position[0], self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5))
             elif self.type_dropdown == " ^":return (self.position[0], self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5))
