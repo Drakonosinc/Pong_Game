@@ -221,16 +221,16 @@ class ScrollBar(ElementBehavior):
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
         super().__init__(config)
-        self.type_dropdown = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
-        self.dropdown = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
-        self.hover_dropdown=config.get("hover_dropdown",(135,206,235))
-        self.replace_text = config.get("replace_text", False)
-        self.adapt_dropdown = config.get("adapt_dropdown", True)
-        self.draw_scroll = config.get("draw_scroll", True)
-        self.anim_height_dropdown = 0
-        self.is_dropdown_open = False
-        self.options = []
-        self.option_buttons = {}
+        self.type_dropdown: str = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
+        self.dropdown: list[int] = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
+        self.hover_dropdown: tuple[int, int, int] = config.get("hover_dropdown",(135,206,235))
+        self.replace_text: bool = config.get("replace_text", False)
+        self.adapt_dropdown: bool = config.get("adapt_dropdown", True)
+        self.draw_scroll: bool = config.get("draw_scroll", True)
+        self.anim_height_dropdown: int = 0
+        self.is_dropdown_open: bool = False
+        self.options: list[str] = []
+        self.option_buttons: dict = {}
         self.factory = ElementsFactory({
             "screen": self.screen,
             "font": self.font,
@@ -242,9 +242,9 @@ class ComboBox(TextButton):
             "position": (self.position[0]+self.font.size(self.text)[0], int(self.position[1])),
             "text": self.type_dropdown,
             "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open)})
-        self.rect = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
+        self.rect: dict[str, object] = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
                     "dropdown": self.button_dropdown}
-    def icon_dropdown(self,type_dropdown):
+    def icon_dropdown(self,type_dropdown: str) -> str:
         match type_dropdown:
             case "down":return " V"
             case "up":return " ^"
