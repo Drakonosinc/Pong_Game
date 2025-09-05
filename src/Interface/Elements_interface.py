@@ -250,7 +250,7 @@ class ComboBox(TextButton):
             case "up":return " ^"
             case "right":return " >"
             case "left":return " <"
-    def _get_rect_dropdown(self):
+    def _get_rect_dropdown(self)  -> pygame.Rect:
         def anim_height():pass
         match self.type_dropdown:
             case " V":
@@ -265,7 +265,7 @@ class ComboBox(TextButton):
             case " <":
                 self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
                 return pygame.Rect(self.position[0] - self.anim_height_dropdown, self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
-    def draw(self):
+    def draw(self) -> None:
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
         if self.is_dropdown_open:self.draw_rect_dropdown()
@@ -274,8 +274,8 @@ class ComboBox(TextButton):
             self.button_dropdown.change_item({"color": self.color})
         if self.detect_mouse:self.mouse_collision(self.rect["button"],pygame.mouse.get_pos(),self.draw_hover_effect)
         if self.pressed:self.pressed_button(self.rect["button"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
-    def draw_hover_effect(self):return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
-    def draw_rect_dropdown(self):
+    def draw_hover_effect(self) -> pygame.Rect:return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
+    def draw_rect_dropdown(self) -> None:
         self.button_dropdown.change_item({"color": self.hover_dropdown})
         self.dropdown_rect = self._get_rect_dropdown()
         pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
@@ -284,14 +284,14 @@ class ComboBox(TextButton):
         if self.draw_scroll and self.option_buttons and self.type_dropdown in (" V", " ^"):self._create_scroll()
         for button in self.option_buttons.values():self._draw_option_buttons(button)
         if hasattr(self, 'scroll'):self._draw_scroll()
-    def _draw_option_buttons(self,button):
+    def _draw_option_buttons(self,button: object) -> None:
         if (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top) and (self.type_dropdown in (" V", " ^")):button.draw()
         elif (button.rect.right<=self.dropdown_rect.right and button.rect.left>=self.dropdown_rect.left) and (self.type_dropdown in (" <", " >")):button.draw()
-    def _adapt_size_dropdown(self):
+    def _adapt_size_dropdown(self) -> None:
         if self.type_dropdown in (" V", " ^"):self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
         elif self.type_dropdown == " >":self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.right - self.option_buttons[list(self.option_buttons.keys())[0]].rect.left) + 10, (self.font.get_height() + 5), False
         elif self.type_dropdown == " <":self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[0]].rect.right - self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left) + 10, (self.font.get_height() + 5), False
-    def _draw_scroll(self):
+    def _draw_scroll(self) -> None:
         if self.type_dropdown == " V":self.scroll.rect["rect"].height = self.dropdown_rect.height
         elif self.type_dropdown == " ^":
             if self.dropdown_rect.height != self.dropdown[1]:self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
@@ -323,12 +323,12 @@ class ComboBox(TextButton):
             elif self.type_dropdown == " ^":return (self.position[0], self.option_buttons[list(self.option_buttons.keys())[-1]].rect.top - self.font.get_height())
             elif self.type_dropdown == " >":return (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.right + 5, self.position[1] + (self.font.get_height()/2))
             elif self.type_dropdown == " <":return (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left - (self.font.size(text)[0] + 5), self.position[1] + (self.font.get_height()/2))
-    def _repeat_charge(self,rect,option,button,i):
-        self.option_buttons[option] = button
-        self.rect[rect] = button
-        self.options.append(option)
-        if len(option) >= len(self.options[i]) and (self.type_dropdown in (" V", " ^")):self.dropdown[0] = self.font.size(button.text)[0] + 5
-    def _create_scroll(self):
+    def _repeat_charge(self,key,text,button,i) -> None:
+        self.option_buttons[text] = button
+        self.rect[key] = button
+        self.options.append(text)
+        if len(text) >= len(self.options[i]) and (self.type_dropdown in (" V", " ^")):self.dropdown[0] = self.font.size(button.text)[0] + 5
+    def _create_scroll(self) -> None:
         self.scroll = self.factory.create_ScrollBar({
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
             "thumb_height": 20,
