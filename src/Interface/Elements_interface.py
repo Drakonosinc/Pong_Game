@@ -297,7 +297,7 @@ class ComboBox(TextButton):
             if self.dropdown_rect.height != self.dropdown[1]:self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
             self.scroll.rect["rect"].height = self.dropdown_rect.height
         self.scroll.draw()
-    def charge_elements(self, options: dict):
+    def charge_elements(self, options: dict) -> None:
         for i, (option,action) in enumerate(options.items()):
             button = self.factory.create_TextButton({
                 "text": option,
@@ -305,7 +305,7 @@ class ComboBox(TextButton):
                 "command1": lambda idx=i: self._select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}", option, button, i)
-    def charge_buttons(self, buttons: list):
+    def charge_buttons(self, buttons: list) -> None:
         for i, button in enumerate(buttons):
             button.position = self._check_buttons_position(i, button.text)
             if hasattr(button, 'rect'):
