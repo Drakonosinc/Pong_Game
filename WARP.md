@@ -34,8 +34,9 @@ The application starts from `src/Main.py`, which creates a `Space_pong_game` ins
 
 **Training System** (`src/Type_Training/`)
 - `Genetic_Algorithm.py`: Complete genetic algorithm implementation
-- Population-based evolution with crossover, mutation, and elitism
-- Configurable generations, population size, and mutation rates
+- `Q_learning.py`: Deep Q-Network (DQN) implementation with experience replay
+- Population-based evolution (Genetic) vs. experience replay (Q-learning)
+- Configurable parameters for both training methods
 
 **Interface System** (`src/Interface/`)
 - Modular menu system with multiple screens (main, game over, options, etc.)
@@ -56,10 +57,18 @@ python src/Main.py
 ```
 
 ### Training AI Models
-The AI training is integrated into the game flow. Start the game and select "Training AI" mode from the menu. Training parameters are configured in `Config/config.json`:
+The AI training is integrated into the game flow. Start the game and select "Training AI" mode from the menu. Choose between Genetic Algorithm or Q-learning in `Config/config.json` by setting the appropriate `type_training` flag.
+
+**Genetic Algorithm Parameters:**
 - `generation_value`: Number of generations (default: 100)
 - `population_value`: Population size (default: 20) 
 - `try_for_ai`: Trials per model evaluation (default: 3)
+
+**Q-learning Parameters:**
+- `episodes`: Number of training episodes (default: 500)
+- `learning_rate`: Learning rate for neural network (default: 0.001)
+- `gamma`: Discount factor for future rewards (default: 0.99)
+- `epsilon_start/end/decay`: Exploration parameters for epsilon-greedy policy
 
 ### Saving/Loading Models
 Models are automatically saved after training if `model_save` is enabled in config. Manual save during gameplay with the `1` key. Models are stored as `AI/best_model.pth`.
@@ -85,11 +94,18 @@ Models are automatically saved after training if `model_save` is enabled in conf
 All major settings are externalized in `Config/config.json`. Changes to screen size, AI parameters, key bindings, and visual elements can be made without code modifications.
 
 ### AI Training Architecture
-The genetic algorithm creates a population of neural networks, evaluates them through gameplay, then evolves the population through:
+
+**Genetic Algorithm** creates a population of neural networks, evaluates them through gameplay, then evolves the population through:
 1. **Selection**: Top performers chosen as parents
 2. **Crossover**: Parameter mixing between parent networks  
 3. **Mutation**: Random noise added to network weights
 4. **Elitism**: Best models preserved across generations
+
+**Q-learning (DQN)** uses reinforcement learning with experience replay:
+1. **Exploration**: Epsilon-greedy action selection balances exploration vs. exploitation
+2. **Experience Replay**: Transitions stored in replay buffer for batch learning
+3. **Target Network**: Separate target network provides stable Q-value targets
+4. **Deep Q-Network**: Neural network learns Q-values for state-action pairs
 
 ### Dependencies
 - pygame (game engine)

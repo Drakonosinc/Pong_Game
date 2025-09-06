@@ -81,38 +81,53 @@ class DQNAgent:
         if self.steps_done % self.target_update == 0:
             self.target_net.load_state_dict(self.policy_net.state_dict())
 
-def q_learning_episode(game, model, agent):
-    """Run a single episode for Q-learning training"""
+def q_learning_episode(game, agent):
+    """Run a single episode for Q-learning training using the existing game loop"""
+    # Set the current model for the game to use
+    game.model = agent.policy_net
+    
+    # Reset game state
     game.reset(running=True)
     game.player_two.reward = 0
     
+    # Get initial state
     state = game.ai_handler.get_state()
     total_reward = 0
-    steps = 0
-    max_steps = 1000  # Prevent infinite episodes
+    episode_transitions = []  # Store transitions for this episode
     
-    while steps < max_steps:
-        # Select action using epsilon-greedy
+    # Run the episode using the game's existing loop structure
+    while game.running and not game.game_over:
+        # Select action using epsilon-greedy policy
         action = agent.select_action(state)
         
-        # Convert action to game movement
-        if action == 0:  # UP
-            if game.player_two.rect.top > 0:
+        # Store current state
+        current_state = state.copy()
+        
+        # Execute action by modifying AI behavior temporarily
+        old_ai_action = None
+        if hasattr(game, '_q_learning_action'):
+            old_ai_action = game._q_learning_action
+        game._q_learning_action = action
+        
+        # Run one step of the game with visual updates
+        game.handle_keys()
+        game.draw()
+        
+        if game.main == -1:  # Game is active
+            # Apply Q-learning action to player_two
+            if action == 0 and game.player_two.rect.top > 0:  # UP
                 game.player_two.rect.y -= 5
-        elif action == 1:  # DOWN
-            if game.player_two.rect.bottom < game.HEIGHT:
+            elif action == 1 and game.player_two.rect.bottom < game.HEIGHT:  # DOWN
                 game.player_two.rect.y += 5
+            
+            # Player one AI (simple ball following)
+            game.player1_code()
+            
+            # Update game physics
+            game.update()
+            game.restart()
         
-        # Simple AI for player one (follows ball)
-        if game.player_one.rect.top > 0 or game.player_one.rect.bottom < game.HEIGHT:
-            game.player_one.rect.y += game.balls[0].move_y
-        if game.player_one.rect.y >= 310:
-            game.player_one.rect.y = 310
-        if game.player_one.rect.y <= 0:
-            game.player_one.rect.y = 0
-        
-        # Update game state
-        game.update()
+        game.item_repeat_run()
         
         # Get next state and reward
         next_state = game.ai_handler.get_state()
@@ -121,19 +136,27 @@ def q_learning_episode(game, model, agent):
         
         # Check if episode is done
         done = (game.player_one.score >= game.config.config_game["max_score"] or 
-                game.player_two.score >= game.config.config_game["max_score"])
+                game.player_two.score >= game.config.config_game["max_score"]) or not game.running
         
         # Store transition
-        agent.store_transition(state, action, reward, next_state, done)
+        episode_transitions.append((current_state, action, reward, next_state, done))
         
-        # Optimize model
-        agent.optimize_model()
-        
+        # Update state
         state = next_state
-        steps += 1
         
         if done:
             break
+    
+    # Add all transitions to memory and optimize
+    for transition in episode_transitions:
+        agent.store_transition(*transition)
+        agent.optimize_model()
+    
+    # Restore original AI action if needed
+    if old_ai_action is not None:
+        game._q_learning_action = old_ai_action
+    elif hasattr(game, '_q_learning_action'):
+        delattr(game, '_q_learning_action')
     
     return total_reward
 
