@@ -8,6 +8,7 @@ if __name__=="__main__":
         match game.mode_game:
             case {"Training AI": True}:
                 if game.config.config_AI["type_training"]["Genetic"]:best_model = genetic_algorithm(game, input_size=len(game.ai_handler.get_state()), output_size=2, generations=game.config.config_AI["generation_value"], population_size=game.config.config_AI["population_value"], num_trials=game.config.config_AI["try_for_ai"])
+                if game.config.config_AI["type_training"["Q-learning"]]:pass
                 game.model = best_model
                 if game.config.config_AI["model_save"]:save_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
             case {"Player": True} | {"AI": True}:game.run_with_model()
