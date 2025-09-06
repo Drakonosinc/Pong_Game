@@ -81,123 +81,118 @@ class DQNAgent:
         if self.steps_done % self.target_update == 0:
             self.target_net.load_state_dict(self.policy_net.state_dict())
 
-def q_learning_episode(game, agent):
-    """Run a single episode for Q-learning training using the existing game loop"""
-    # Set the current model for the game to use
-    game.model = agent.policy_net
+class QLearningTrainer:
+    """Q-learning trainer that integrates with the existing game architecture"""
+    def __init__(self, game, input_size, output_size, episodes=500, lr=1e-3, 
+                 gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995):
+        self.game = game
+        self.episodes = episodes
+        self.current_episode = 0
+        self.best_reward = float('-inf')
+        self.best_model = None
+        self.rewards_history = []
+        
+        # Create DQN agent
+        self.agent = DQNAgent(
+            state_size=input_size, 
+            action_size=output_size, 
+            lr=lr, 
+            gamma=gamma,
+            epsilon_start=epsilon_start, 
+            epsilon_end=epsilon_end, 
+            epsilon_decay=epsilon_decay
+        )
+        
+        print(f"Q-Learning trainer initialized for {episodes} episodes")
     
-    # Reset game state
-    game.reset(running=True)
-    game.player_two.reward = 0
+    def get_action(self, state):
+        """Get action from Q-learning agent"""
+        return self.agent.select_action(state)
     
-    # Get initial state
-    state = game.ai_handler.get_state()
-    total_reward = 0
-    episode_transitions = []  # Store transitions for this episode
+    def store_experience(self, state, action, reward, next_state, done):
+        """Store experience and optimize model"""
+        self.agent.store_transition(state, action, reward, next_state, done)
+        self.agent.optimize_model()
     
-    # Run the episode using the game's existing loop structure
-    while game.running and not game.game_over:
-        # Select action using epsilon-greedy policy
-        action = agent.select_action(state)
+    def episode_complete(self, total_reward):
+        """Called when an episode is complete"""
+        self.rewards_history.append(total_reward)
         
-        # Store current state
-        current_state = state.copy()
+        # Track best model
+        if total_reward > self.best_reward:
+            self.best_reward = total_reward
+            self.best_model = copy.deepcopy(self.agent.policy_net)
         
-        # Execute action by modifying AI behavior temporarily
-        old_ai_action = None
-        if hasattr(game, '_q_learning_action'):
-            old_ai_action = game._q_learning_action
-        game._q_learning_action = action
+        # Print progress
+        if self.current_episode % 10 == 0:
+            avg_reward = np.mean(self.rewards_history[-10:]) if len(self.rewards_history) >= 10 else np.mean(self.rewards_history)
+            print(f"Episode {self.current_episode}/{self.episodes}: Avg Reward = {avg_reward:.2f}, Epsilon = {self.agent.epsilon:.3f}")
         
-        # Run one step of the game with visual updates
-        game.handle_keys()
-        game.draw()
+        self.current_episode += 1
         
-        if game.main == -1:  # Game is active
-            # Apply Q-learning action to player_two
-            if action == 0 and game.player_two.rect.top > 0:  # UP
-                game.player_two.rect.y -= 5
-            elif action == 1 and game.player_two.rect.bottom < game.HEIGHT:  # DOWN
-                game.player_two.rect.y += 5
-            
-            # Player one AI (simple ball following)
-            game.player1_code()
-            
-            # Update game physics
-            game.update()
-            game.restart()
+        # Check if training is complete
+        if self.current_episode >= self.episodes:
+            print(f"Q-Learning training completed. Best reward: {self.best_reward:.2f}")
+            return True
         
-        game.item_repeat_run()
-        
-        # Get next state and reward
-        next_state = game.ai_handler.get_state()
-        reward = game.player_two.reward - total_reward
-        total_reward = game.player_two.reward
-        
-        # Check if episode is done
-        done = (game.player_one.score >= game.config.config_game["max_score"] or 
-                game.player_two.score >= game.config.config_game["max_score"]) or not game.running
-        
-        # Store transition
-        episode_transitions.append((current_state, action, reward, next_state, done))
-        
-        # Update state
-        state = next_state
-        
-        if done:
-            break
+        return False
     
-    # Add all transitions to memory and optimize
-    for transition in episode_transitions:
-        agent.store_transition(*transition)
-        agent.optimize_model()
+    def get_best_model(self):
+        """Get the best model found during training"""
+        return self.best_model if self.best_model is not None else self.agent.policy_net
+
+# Global trainer instance
+_qlearning_trainer = None
+
+def q_learning_step(game, state, action):
+    """Execute one step of Q-learning training"""
+    global _qlearning_trainer
+    if _qlearning_trainer is None:
+        return
     
-    # Restore original AI action if needed
-    if old_ai_action is not None:
-        game._q_learning_action = old_ai_action
-    elif hasattr(game, '_q_learning_action'):
-        delattr(game, '_q_learning_action')
-    
-    return total_reward
+    # Apply Q-learning action to player_two
+    if action == 0 and game.player_two.rect.top > 0:  # UP
+        game.player_two.rect.y -= 5
+    elif action == 1 and game.player_two.rect.bottom < game.HEIGHT:  # DOWN
+        game.player_two.rect.y += 5
 
 def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3, 
                         gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995):
     """Main Q-learning training function that integrates with the game like genetic algorithm"""
-    print(f"Starting Q-Learning training with {episodes} episodes...")
+    global _qlearning_trainer
     
-    # Create DQN agent
-    agent = DQNAgent(
-        state_size=input_size, 
-        action_size=output_size, 
-        lr=lr, 
-        gamma=gamma,
-        epsilon_start=epsilon_start, 
-        epsilon_end=epsilon_end, 
-        epsilon_decay=epsilon_decay
+    # Create trainer instance
+    _qlearning_trainer = QLearningTrainer(
+        game, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay
     )
     
-    best_reward = float('-inf')
-    best_model = None
-    rewards_history = []
+    # Initialize Q-learning state tracking
+    game._qlearning_state = None
+    game._qlearning_prev_reward = 0
     
-    for episode in range(episodes):
-        game.generation = episode  # For display purposes
+    # Run training episodes using the existing run_with_model structure
+    while _qlearning_trainer.current_episode < episodes:
+        game.generation = _qlearning_trainer.current_episode
         
-        # Run episode
-        episode_reward = q_learning_episode(game, agent.policy_net, agent)
-        rewards_history.append(episode_reward)
+        # Run one episode using the existing game loop
+        total_reward = game.run_with_model()
         
-        # Track best model
-        if episode_reward > best_reward:
-            best_reward = episode_reward
-            best_model = copy.deepcopy(agent.policy_net)
+        # Episode complete
+        training_complete = _qlearning_trainer.episode_complete(total_reward)
         
-        # Print progress every 10 episodes
-        if episode % 10 == 0:
-            avg_reward = np.mean(rewards_history[-10:]) if len(rewards_history) >= 10 else np.mean(rewards_history)
-            print(f"Episode {episode}/{episodes}: Avg Reward = {avg_reward:.2f}, Epsilon = {agent.epsilon:.3f}")
+        if training_complete or game.exit:
+            break
     
-    print(f"Q-Learning training completed. Best reward: {best_reward:.2f}")
+    # Get best model
+    best_model = _qlearning_trainer.get_best_model()
+    
+    # Cleanup
+    if hasattr(game, '_qlearning_state'):
+        delattr(game, '_qlearning_state')
+    if hasattr(game, '_qlearning_prev_reward'):
+        delattr(game, '_qlearning_prev_reward')
+    
+    _qlearning_trainer = None
     
     # Set the best model to the game
     game.model = best_model
