@@ -130,7 +130,10 @@ class Space_pong_game(interface):
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.screen, color, neuron_positions[i], 5)
     def draw_generation(self):
-        self.screen.blit(self.font2.render(f"Generation: {self.generation}", True, self.YELLOW), (10, 10))
+        if self.config.config_AI["type_training"]["Q-learning"]:
+            self.screen.blit(self.font2.render(f"Episode: {self.generation}", True, self.YELLOW), (10, 10))
+        else:
+            self.screen.blit(self.font2.render(f"Generation: {self.generation}", True, self.YELLOW), (10, 10))
     def draw_model_data(self):
         if self.mode_game["AI"]:self.model=self.model_training
         if self.model is not None:
