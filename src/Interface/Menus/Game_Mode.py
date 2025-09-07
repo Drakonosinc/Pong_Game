@@ -25,9 +25,13 @@ class GameMode(BaseMenu):
         self.buttons['training_ai'] = factory.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70, self.HEIGHT/2-136),"command1": lambda: self._set_game_mode(training_ai=True),"command2": lambda: self._update_mode_buttons()})
         self.buttons['player'] = factory.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64, self.HEIGHT/2-110),"command1": lambda: self._set_game_mode(player=True),"command2": lambda: self._update_mode_buttons()})
         self.buttons['ai'] = factory.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58, self.HEIGHT/2-84),"command1": lambda: self._set_game_mode(ai=True),"command2": lambda: self._update_mode_buttons()})
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
+        self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
+        self._update_type_training("Genetic")
         self.interface.training_ai_button = self.buttons['training_ai']
         self.interface.player_button = self.buttons['player']
         self.interface.ai_button = self.buttons['ai']
+        self.interface.box_type_training = self.buttons['box_type_training']
     def _set_game_mode(self, training_ai=False, player=False, ai=False):
         self.interface.mode_game["Training AI"] = training_ai
         self.interface.mode_game["Player"] = player
@@ -61,11 +65,8 @@ class GameMode(BaseMenu):
         self.config_buttons['increase_try_for_ai'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai'),"command2": self._update_training_ai_texts})
         self.config_buttons['decrease_try_for_ai'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai', True, -1),"command2": self._update_training_ai_texts})
         self.config_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI["genetic"], "model_save"),"command2": self.config.save_config})
-        self.config_buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
         self.config_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
-        self.config_buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
-        self._update_type_training("Genetic")
         self._update_model_ai("Pytorch")
         for key, button in self.config_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
@@ -89,8 +90,8 @@ class GameMode(BaseMenu):
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
-        buttons_list = list(self.config_buttons.values())[:-2]
-        self.config_buttons["scroll"].update_elements([*self.training_ai_elements.values(), *buttons_list, self.config_buttons['box_type_model']])
+        buttons_list = list(self.config_buttons.values())[:-1]
+        self.config_buttons["scroll"].update_elements([*self.training_ai_elements.values(), *buttons_list])
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
         factory = self.interface.button_factory_f5
