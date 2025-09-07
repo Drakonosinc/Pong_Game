@@ -40,10 +40,6 @@
         "Name_key4": "\u2193"
     },
     "config_AI": {
-        "generation_value": 100,
-        "population_value": 20,
-        "try_for_ai": 3,
-        "model_save": true,
         "type_training": {
             "Genetic": true,
             "Q-learning": false
@@ -52,6 +48,11 @@
             "Pytorch": true,
             "Tensorflow": false
         },
+        "genetic":{
+            "generation_value": 100,
+            "population_value": 20,
+            "try_for_ai": 3,
+            "model_save": true},
         "q_learning": {
             "episodes": 500,
             "learning_rate": 0.001,
@@ -61,7 +62,8 @@
             "epsilon_decay": 0.995,
             "memory_size": 10000,
             "batch_size": 32,
-            "target_update": 100
+            "target_update": 100,
+            "model_save": true
         }
     },
     "config_sounds": {
