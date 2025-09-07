@@ -99,14 +99,14 @@ class GameMode(BaseMenu):
         self.interface.increase_balls = self.config_buttons['increase_balls']
         self.interface.decrease_balls = self.config_buttons['decrease_balls']
     def _update_training_ai_texts(self):
-        if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI['generation_value']:^26}"})
-        if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI['population_value']:^26}"})
-        if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI['try_for_ai']:^{28 if self.config.config_AI['try_for_ai'] < 10 else 26}}"})
+        if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}"})
+        if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
+        if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
     def update_training_ai_save_model(self):
-        self.config_buttons['save_model'].change_item({"color": self.interface.SKYBLUE if self.config.config_AI["model_save"] else self.interface.RED,"text": "ON" if self.config.config_AI["model_save"] else "OFF"})
+        self.config_buttons['save_model'].change_item({"color": self.interface.SKYBLUE if self.config.config_AI["genetic"]["model_save"] else self.interface.RED,"text": "ON" if self.config.config_AI["genetic"]["model_save"] else "OFF"})
     def render(self):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
