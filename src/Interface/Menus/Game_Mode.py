@@ -12,6 +12,7 @@ class GameMode(BaseMenu):
         self._setup_mode_buttons()
         self._setup_score_buttons()
         self._setup_input_fields()
+        self._setup_type_training_buttons()
         self._setup_training_ai_elements()
         self._setup_config_game_buttons()
     def _setup_navigation_buttons(self):
@@ -25,13 +26,9 @@ class GameMode(BaseMenu):
         self.buttons['training_ai'] = factory.create_TextButton({"text": "Training AI","position": (self.WIDTH/2-70, self.HEIGHT/2-136),"command1": lambda: self._set_game_mode(training_ai=True),"command2": lambda: self._update_mode_buttons()})
         self.buttons['player'] = factory.create_TextButton({"text": "One Vs One","position": (self.WIDTH/2-64, self.HEIGHT/2-110),"command1": lambda: self._set_game_mode(player=True),"command2": lambda: self._update_mode_buttons()})
         self.buttons['ai'] = factory.create_TextButton({"text": "One Vs Ai","position": (self.WIDTH/2-58, self.HEIGHT/2-84),"command1": lambda: self._set_game_mode(ai=True),"command2": lambda: self._update_mode_buttons()})
-        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
-        self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
-        self._update_type_training("Genetic")
         self.interface.training_ai_button = self.buttons['training_ai']
         self.interface.player_button = self.buttons['player']
         self.interface.ai_button = self.buttons['ai']
-        self.interface.box_type_training = self.buttons['box_type_training']
     def _set_game_mode(self, training_ai=False, player=False, ai=False):
         self.interface.mode_game["Training AI"] = training_ai
         self.interface.mode_game["Player"] = player
@@ -56,6 +53,12 @@ class GameMode(BaseMenu):
         self._setup_training_ai_buttons()
         self._setup_training_ai_texts()
         self._setup_scroll_bar()
+    def _setup_type_training_buttons(self):
+        factory = self.interface.button_factory_f5
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
+        self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
+        self._update_type_training("Genetic")
+        self.interface.box_type_training = self.buttons['box_type_training']
     def _setup_training_ai_buttons(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value'),"command2": self._update_training_ai_texts})
@@ -75,7 +78,7 @@ class GameMode(BaseMenu):
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
     def _update_type_training(self,button):
-        type_training = {"Genetic": self.config_buttons['box_type_training'].return_buttons("Genetic"),"Q-learning": self.config_buttons['box_type_training'].return_buttons("Q-learning")}
+        type_training = {"Genetic": self.buttons['box_type_training'].return_buttons("Genetic"),"Q-learning": self.buttons['box_type_training'].return_buttons("Q-learning")}
         for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
         self.config.save_config()
@@ -112,7 +115,7 @@ class GameMode(BaseMenu):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
         self._render_main_texts(font_modegame)
-        if self.interface.mode_game["Training AI"]:self._render_training_ai()
+        if self.interface.config.config_AI["type_training"]["Genetic"] and self.interface.mode_game["Training AI"]:self._render_training_ai()
         else:self._render_game_options()
         self.execute_buttons()
         self._update_score_button_state()
@@ -129,12 +132,12 @@ class GameMode(BaseMenu):
         self.screen.blit(self.interface.font5.render(f"Configuration of\n{'Gameplay':^23}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-136))
         self.screen.blit(self.interface.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-81))
     def execute_buttons(self):
-        common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
+        common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['box_type_training'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
         for button in common_buttons:button.draw()
-        if self.interface.mode_game["Training AI"]:self._execute_training_ai_buttons()
+        if self.interface.config.config_AI["type_training"]["Genetic"] and self.interface.mode_game["Training AI"]:self._execute_training_ai_buttons()
         else:self._execute_game_config_buttons()
     def _execute_training_ai_buttons(self):
-        training_buttons = [self.config_buttons['increase_generation'],self.config_buttons['decrease_generation'],self.config_buttons['increase_population'],self.config_buttons['decrease_population'],self.config_buttons['increase_try_for_ai'],self.config_buttons['decrease_try_for_ai'],self.config_buttons['save_model'],self.config_buttons['scroll'],self.config_buttons["box_type_training"],self.config_buttons['box_type_model']]
+        training_buttons = [self.config_buttons['increase_generation'],self.config_buttons['decrease_generation'],self.config_buttons['increase_population'],self.config_buttons['decrease_population'],self.config_buttons['increase_try_for_ai'],self.config_buttons['decrease_try_for_ai'],self.config_buttons['save_model'],self.config_buttons['scroll'],self.config_buttons['box_type_model']]
         for button in training_buttons:button.draw()
     def _execute_game_config_buttons(self):
         config_buttons = [self.config_buttons['increase_balls'],self.config_buttons['decrease_balls']]
