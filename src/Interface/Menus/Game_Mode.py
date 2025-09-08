@@ -6,14 +6,14 @@ class GameMode(BaseMenu):
         self.buttons = {}
         self.inputs = {}
         self.config_buttons = {}
-        self.training_ai_elements = {}
+        self.training_genetic_elements = {}
     def setup_buttons(self):
         self._setup_navigation_buttons()
         self._setup_mode_buttons()
         self._setup_score_buttons()
         self._setup_input_fields()
         self._setup_type_training_buttons()
-        self._setup_training_ai_elements()
+        self._setup_training_genetic_elements()
         self._setup_config_game_buttons()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
@@ -49,7 +49,7 @@ class GameMode(BaseMenu):
         self.inputs['player2'] = factory.create_InputText({"text": "PC","color":(0,0,0),"position": (418,40,275,25)})
         self.interface.input_player1 = self.inputs['player1']
         self.interface.input_player2 = self.inputs['player2']
-    def _setup_training_ai_elements(self):
+    def _setup_training_genetic_elements(self):
         self._setup_training_ai_buttons()
         self._setup_training_ai_texts()
         self._setup_scroll_bar()
@@ -84,17 +84,17 @@ class GameMode(BaseMenu):
         self.config.save_config()
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
-        self.training_ai_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
-        self.training_ai_elements['text_G'] = factory.create_Text({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
-        self.training_ai_elements['text_P'] = factory.create_Text({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
-        self.training_ai_elements['text_A'] = factory.create_Text({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai']<10 else 26}}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
-        self.training_ai_elements['text_S'] = factory.create_Text({"text": "Save model","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
-        self.interface.text_in_training_ai = list(self.training_ai_elements.values())
+        self.training_genetic_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
+        self.training_genetic_elements['text_G'] = factory.create_Text({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
+        self.training_genetic_elements['text_P'] = factory.create_Text({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
+        self.training_genetic_elements['text_A'] = factory.create_Text({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai']<10 else 26}}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
+        self.training_genetic_elements['text_S'] = factory.create_Text({"text": "Save model","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
+        self.interface.text_in_training_ai = list(self.training_genetic_elements.values())
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
         buttons_list = list(self.config_buttons.values())[:-1]
-        self.config_buttons["scroll"].update_elements([*self.training_ai_elements.values(), *buttons_list])
+        self.config_buttons["scroll"].update_elements([*self.training_genetic_elements.values(), *buttons_list])
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
         factory = self.interface.button_factory_f5
@@ -103,9 +103,9 @@ class GameMode(BaseMenu):
         self.interface.increase_balls = self.config_buttons['increase_balls']
         self.interface.decrease_balls = self.config_buttons['decrease_balls']
     def _update_training_ai_texts(self):
-        if 'text_G' in self.training_ai_elements:self.training_ai_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}"})
-        if 'text_P' in self.training_ai_elements:self.training_ai_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
-        if 'text_A' in self.training_ai_elements:self.training_ai_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
+        if 'text_G' in self.training_genetic_elements:self.training_genetic_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}"})
+        if 'text_P' in self.training_genetic_elements:self.training_genetic_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
+        if 'text_A' in self.training_genetic_elements:self.training_genetic_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
@@ -115,7 +115,8 @@ class GameMode(BaseMenu):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
         self._render_main_texts(font_modegame)
-        if self.interface.config.config_AI["type_training"]["Genetic"] and self.interface.mode_game["Training AI"]:self._render_training_ai()
+        if self.interface.mode_game["Training AI"]:
+            if self.interface.config.config_AI["type_training"]["Genetic"]:self._render_training_genetic()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:self._render_game_options()
         self.execute_buttons()
         self._update_score_button_state()
@@ -125,8 +126,8 @@ class GameMode(BaseMenu):
         self.screen.blit(self.interface.font5.render("Enter Player Name Two", True, "white"), (416, 10))
         self.screen.blit(font_modegame.render("Max Score", True, "white"), (self.WIDTH/2-68, self.HEIGHT/2-50))
         self.screen.blit(font_modegame.render(f"{self.config.config_game['max_score']}", True, "white"), (self.WIDTH/2-8, self.HEIGHT/2-20))
-    def _render_training_ai(self):
-        for text_element in self.training_ai_elements.values():text_element.draw()
+    def _render_training_genetic(self):
+        for text_element in self.training_genetic_elements.values():text_element.draw()
         self.update_training_ai_save_model()
     def _render_game_options(self):
         self.screen.blit(self.interface.font5.render(f"Configuration of\n{'Gameplay':^23}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-136))
