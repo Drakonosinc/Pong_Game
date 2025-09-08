@@ -59,6 +59,11 @@ class GameMode(BaseMenu):
         self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self._update_type_training("Genetic")
         self.interface.box_type_training = self.buttons['box_type_training']
+    def _update_type_training(self,button):
+        type_training = {"Genetic": self.buttons['box_type_training'].return_buttons("Genetic"),"Q-learning": self.buttons['box_type_training'].return_buttons("Q-learning")}
+        for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
+        self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
+        self.config.save_config()
     def _setup_training_ai_buttons(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value'),"command2": self._update_training_ai_texts})
@@ -76,11 +81,6 @@ class GameMode(BaseMenu):
         model_ai = {"Pytorch": self.config_buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.config_buttons['box_type_model'].return_buttons("Tensorflow")}
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
-        self.config.save_config()
-    def _update_type_training(self,button):
-        type_training = {"Genetic": self.buttons['box_type_training'].return_buttons("Genetic"),"Q-learning": self.buttons['box_type_training'].return_buttons("Q-learning")}
-        for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
-        self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
         self.config.save_config()
     def _setup_training_ai_texts(self):
         factory = self.interface.button_factory_f5
