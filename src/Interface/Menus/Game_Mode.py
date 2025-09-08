@@ -116,7 +116,7 @@ class GameMode(BaseMenu):
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
         self._render_main_texts(font_modegame)
         if self.interface.config.config_AI["type_training"]["Genetic"] and self.interface.mode_game["Training AI"]:self._render_training_ai()
-        else:self._render_game_options()
+        elif self.interface.mode_game in ("Player", "AI"):self._render_game_options()
         self.execute_buttons()
         self._update_score_button_state()
     def _render_main_texts(self, font_modegame):
