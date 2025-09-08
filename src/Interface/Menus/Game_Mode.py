@@ -5,7 +5,7 @@ class GameMode(BaseMenu):
         super().__init__(interface)
         self.buttons = {}
         self.inputs = {}
-        self.config_buttons = {}
+        self.config_genetic_buttons = {}
         self.training_genetic_elements = {}
         self.training_qlearning_elements = {}
     def setup_buttons(self):
@@ -72,19 +72,19 @@ class GameMode(BaseMenu):
         self.config.save_config()
     def _setup_training_genetic_buttons(self):
         factory = self.interface.button_factory_f5
-        self.config_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value'),"command2": self._update_training_ai_texts})
-        self.config_buttons['decrease_generation'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value', True, -1),"command2": self._update_training_ai_texts})
-        self.config_buttons['increase_population'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'population_value'),"command2": self._update_training_ai_texts})
-        self.config_buttons['decrease_population'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'population_value', True, -1),"command2": self._update_training_ai_texts})
-        self.config_buttons['increase_try_for_ai'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai'),"command2": self._update_training_ai_texts})
-        self.config_buttons['decrease_try_for_ai'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai', True, -1),"command2": self._update_training_ai_texts})
-        self.config_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI["genetic"], "model_save"),"command2": self.config.save_config})
-        self.config_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
-        self.config_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
+        self.config_genetic_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value'),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['decrease_generation'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value', True, -1),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['increase_population'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'population_value'),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['decrease_population'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'population_value', True, -1),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['increase_try_for_ai'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai'),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['decrease_try_for_ai'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai', True, -1),"command2": self._update_training_ai_texts})
+        self.config_genetic_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI["genetic"], "model_save"),"command2": self.config.save_config})
+        self.config_genetic_buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
+        self.config_genetic_buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
-        for key, button in self.config_buttons.items():setattr(self.interface, key, button)
+        for key, button in self.config_genetic_buttons.items():setattr(self.interface, key, button)
     def _update_model_ai(self,button):
-        model_ai = {"Pytorch": self.config_buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.config_buttons['box_type_model'].return_buttons("Tensorflow")}
+        model_ai = {"Pytorch": self.config_genetic_buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.config_genetic_buttons['box_type_model'].return_buttons("Tensorflow")}
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
@@ -103,7 +103,7 @@ class GameMode(BaseMenu):
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
-        buttons_list = list(self.config_buttons.values())[:-1]
+        buttons_list = list(self.config_genetic_buttons.values())
         self.config_buttons["scroll"].update_elements([*self.training_genetic_elements.values(), *buttons_list])
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
@@ -120,7 +120,7 @@ class GameMode(BaseMenu):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
     def update_training_ai_save_model(self):
-        self.config_buttons['save_model'].change_item({"color": self.interface.SKYBLUE if self.config.config_AI["genetic"]["model_save"] else self.interface.RED,"text": "ON" if self.config.config_AI["genetic"]["model_save"] else "OFF"})
+        self.config_genetic_buttons['save_model'].change_item({"color": self.interface.SKYBLUE if self.config.config_AI["genetic"]["model_save"] else self.interface.RED,"text": "ON" if self.config.config_AI["genetic"]["model_save"] else "OFF"})
     def render(self):
         self.screen.fill(self.interface.BLACK)
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
@@ -146,11 +146,12 @@ class GameMode(BaseMenu):
         common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
         if self.interface.mode_game["Training AI"]: common_buttons.append(self.buttons['box_type_training'])
         for button in common_buttons:button.draw()
-        if self.interface.config.config_AI["type_training"]["Genetic"] and self.interface.mode_game["Training AI"]:self._execute_training_ai_buttons()
+        if self.interface.mode_game["Training AI"]:
+            if self.interface.config.config_AI["type_training"]["Genetic"]:self._execute_training_ai_buttons()
+            self.config_buttons["scroll"].draw()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:self._execute_game_config_buttons()
     def _execute_training_ai_buttons(self):
-        training_buttons = [self.config_buttons['increase_generation'],self.config_buttons['decrease_generation'],self.config_buttons['increase_population'],self.config_buttons['decrease_population'],self.config_buttons['increase_try_for_ai'],self.config_buttons['decrease_try_for_ai'],self.config_buttons['save_model'],self.config_buttons['scroll'],self.config_buttons['box_type_model']]
-        for button in training_buttons:button.draw()
+        for button in self.config_genetic_buttons:button.draw()
     def _execute_game_config_buttons(self):
         config_buttons = [self.config_buttons['increase_balls'],self.config_buttons['decrease_balls']]
         for button in config_buttons:button.draw()
