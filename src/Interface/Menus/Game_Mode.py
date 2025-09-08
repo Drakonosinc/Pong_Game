@@ -7,6 +7,7 @@ class GameMode(BaseMenu):
         self.inputs = {}
         self.config_buttons = {}
         self.training_genetic_elements = {}
+        self.training_qlearning_elements = {}
     def setup_buttons(self):
         self._setup_navigation_buttons()
         self._setup_mode_buttons()
@@ -50,8 +51,8 @@ class GameMode(BaseMenu):
         self.interface.input_player1 = self.inputs['player1']
         self.interface.input_player2 = self.inputs['player2']
     def _setup_training_genetic_elements(self):
-        self._setup_training_ai_buttons()
-        self._setup_training_ai_texts()
+        self._setup_training_genetic_buttons()
+        self._setup_training_genetic_texts()
         self._setup_scroll_bar()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
@@ -64,7 +65,7 @@ class GameMode(BaseMenu):
         for b in self.config.config_AI["type_training"].keys():self.config.config_AI["type_training"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
         self.config.save_config()
-    def _setup_training_ai_buttons(self):
+    def _setup_training_genetic_buttons(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['increase_generation'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value'),"command2": self._update_training_ai_texts})
         self.config_buttons['decrease_generation'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'generation_value', True, -1),"command2": self._update_training_ai_texts})
@@ -82,7 +83,7 @@ class GameMode(BaseMenu):
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
-    def _setup_training_ai_texts(self):
+    def _setup_training_genetic_texts(self):
         factory = self.interface.button_factory_f5
         self.training_genetic_elements['text_C'] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
         self.training_genetic_elements['text_G'] = factory.create_Text({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
