@@ -99,8 +99,10 @@ class GameMode(BaseMenu):
         self.interface.text_in_training_ai = list(self.training_genetic_elements.values())
     def _setup_training_qlearning_buttons(self):
         factory = self.interface.button_factory_f5
+        self.training_qlearning_elements["episodes_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes'),"command2": self.interface.objects()})
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
+        self.training_qlearning_elements
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
