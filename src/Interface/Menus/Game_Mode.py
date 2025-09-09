@@ -5,6 +5,7 @@ class GameMode(BaseMenu):
         super().__init__(interface)
         self.buttons = {}
         self.inputs = {}
+        self.config_buttons = {}
         self.config_genetic_buttons = {}
         self.training_genetic_elements = {}
         self.training_qlearning_elements = {}
