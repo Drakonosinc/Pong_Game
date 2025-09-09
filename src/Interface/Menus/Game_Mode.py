@@ -99,7 +99,8 @@ class GameMode(BaseMenu):
         self.interface.text_in_training_ai = list(self.training_genetic_elements.values())
     def _setup_training_qlearning_buttons(self):
         factory = self.interface.button_factory_f5
-        self.training_qlearning_elements["episodes_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes'),"command2": self.interface.objects()})
+        self.training_qlearning_elements["episodes_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes'),"command2": self._update_training_qlearning_texts})
+        self.training_qlearning_elements["episodes_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes', True, -1),"command2": self._update_training_qlearning_texts})
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
         self.training_qlearning_elements
@@ -119,6 +120,7 @@ class GameMode(BaseMenu):
         if 'text_G' in self.training_genetic_elements:self.training_genetic_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}"})
         if 'text_P' in self.training_genetic_elements:self.training_genetic_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
         if 'text_A' in self.training_genetic_elements:self.training_genetic_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
+    def _update_training_qlearning_texts(self):pass
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
