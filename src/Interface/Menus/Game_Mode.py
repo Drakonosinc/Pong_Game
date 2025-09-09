@@ -101,6 +101,7 @@ class GameMode(BaseMenu):
         factory = self.interface.button_factory_f5
         self.training_qlearning_elements["episodes_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes'),"command2": self._update_training_qlearning_texts})
         self.training_qlearning_elements["episodes_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes', True, -1),"command2": self._update_training_qlearning_texts})
+        self.training_qlearning_elements["learning_rate_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'learning_rate', False, 0.01),"command2": self._update_training_qlearning_texts})
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
         self.training_qlearning_elements
