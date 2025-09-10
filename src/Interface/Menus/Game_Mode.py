@@ -105,8 +105,8 @@ class GameMode(BaseMenu):
         self.training_qlearning_elements["learning_rate_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'learning_rate', True, 0.01),"command2": self._update_training_qlearning_texts})
         self.training_qlearning_elements["gamma_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'gamma', False, 0.01),"command2": self._update_training_qlearning_texts})
         self.training_qlearning_elements["gamma_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'gamma', True, 0.01),"command2": self._update_training_qlearning_texts})
-        self.training_qlearning_elements["epsilon_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+110),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'epsilon_start', False, 0.01),"command2": self._update_training_qlearning_texts})
-        self.training_qlearning_elements["epsilon_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+110),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'epsilon_start', True, 0.01),"command2": self._update_training_qlearning_texts})
+        self.training_qlearning_elements["epsilon_start_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+110),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'epsilon_start', False, 0.01),"command2": self._update_training_qlearning_texts})
+        
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
         self.training_qlearning_elements
