@@ -169,7 +169,7 @@ class GameMode(BaseMenu):
             self.config_buttons["scroll"].draw()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:self._execute_game_config_buttons()
     def _execute_training_ai_buttons(self):
-        for button in self.config_genetic_buttons:button.draw()
+        for button in self.config_genetic_buttons.values():button.draw()
     def _execute_game_config_buttons(self):
         config_buttons = [self.config_buttons['increase_balls'],self.config_buttons['decrease_balls']]
         for button in config_buttons:button.draw()
