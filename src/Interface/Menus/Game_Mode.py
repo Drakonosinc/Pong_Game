@@ -114,7 +114,7 @@ class GameMode(BaseMenu):
         self.config_qlearning_buttons["epsilon_decay_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+220),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'epsilon_decay', True, 0.01),"command2": self._update_training_qlearning_texts})
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
-        self.training_qlearning_elements
+        self.training_qlearning_elements["text_C"] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
