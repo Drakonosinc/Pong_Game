@@ -120,6 +120,7 @@ class GameMode(BaseMenu):
         self.training_qlearning_elements["text_LR"] = factory.create_Text({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
         self.training_qlearning_elements["text_G"] = factory.create_Text({"text": f"Gamma\n{self.config.config_AI['q_learning']['gamma']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
         self.training_qlearning_elements["text_ES"] = factory.create_Text({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
+        self.training_qlearning_elements["text_EE"] = factory.create_Text({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+139),"detect_mouse": False})
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
