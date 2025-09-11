@@ -162,6 +162,9 @@ class GameMode(BaseMenu):
     def _render_training_genetic(self):
         for text_element in self.training_genetic_elements.values():text_element.draw()
         self.update_training_ai_save_model()
+    def _render_training_qlearning(self):
+        for text_element in self.training_qlearning_elements.values():text_element.draw()
+        self.update_training_ai_save_model()
     def _render_game_options(self):
         self.screen.blit(self.interface.font5.render(f"Configuration of\n{'Gameplay':^23}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-136))
         self.screen.blit(self.interface.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-81))
