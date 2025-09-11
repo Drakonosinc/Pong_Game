@@ -150,6 +150,7 @@ class GameMode(BaseMenu):
         self._render_main_texts(font_modegame)
         if self.interface.mode_game["Training AI"]:
             if self.interface.config.config_AI["type_training"]["Genetic"]:self._render_training_genetic()
+            elif self.interface.config.config_AI["type_training"]["Q-learning"]:self._render_training_qlearning()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:self._render_game_options()
         self.execute_buttons()
         self._update_score_button_state()
