@@ -56,11 +56,9 @@ class GameMode(BaseMenu):
     def _setup_training_genetic_elements(self):
         self._setup_training_genetic_buttons()
         self._setup_training_genetic_texts()
-        self._setup_scroll_bar()
     def _setup_training_qlearning_elements(self):
         self._setup_training_qlearning_buttons()
         self._setup_training_qlearning_texts()
-        self._setup_scroll_bar()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
