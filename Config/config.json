@@ -41,8 +41,8 @@
     },
     "config_AI": {
         "type_training": {
-            "Genetic": true,
-            "Q-learning": false
+            "Genetic": false,
+            "Q-learning": true
         },
         "type_model": {
             "Pytorch": true,
