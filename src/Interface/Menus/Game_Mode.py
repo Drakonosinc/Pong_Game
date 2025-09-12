@@ -63,7 +63,7 @@ class GameMode(BaseMenu):
         self._setup_scroll_bar()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
-        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136),"command_dropdown":lambda: self._setup_scroll_bar()})
         self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self._update_type_training("Genetic")
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
@@ -125,8 +125,9 @@ class GameMode(BaseMenu):
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
-        buttons_list = list(self.config_genetic_buttons.values(),self.training_genetic_elements.values() if self.interface.config.config_AI["type_training"]["Genetic"] else self.config_qlearning_buttons.values(),self.training_qlearning_elements.values())
-        self.config_buttons["scroll"].update_elements([*buttons_list])
+        buttons_list = list(self.config_genetic_buttons.values() if self.interface.config.config_AI["type_training"]["Genetic"] else self.config_qlearning_buttons.values())
+        text_list = list(self.training_genetic_elements.values() if self.interface.config.config_AI["type_training"]["Genetic"] else self.training_qlearning_elements.values())
+        self.config_buttons["scroll"].update_elements([*text_list, *buttons_list])
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
         factory = self.interface.button_factory_f5
