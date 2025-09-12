@@ -77,7 +77,7 @@ class GameMode(BaseMenu):
         self.check_item(self.config.config_AI["type_training"],self.interface.RED,self.interface.WHITE,"color",**type_training)
         self.config.save_config()
     def _update_model_ai(self,button):
-        model_ai = {"Pytorch": self.config_genetic_buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.config_genetic_buttons['box_type_model'].return_buttons("Tensorflow")}
+        model_ai = {"Pytorch": self.buttons['box_type_model'].return_buttons("Pytorch"),"Tensorflow": self.buttons['box_type_model'].return_buttons("Tensorflow")}
         for b in self.config.config_AI["type_model"].keys():self.config.config_AI["type_model"][b] = False if b != button else True
         self.check_item(self.config.config_AI["type_model"],self.interface.RED,self.interface.WHITE,"color",**model_ai)
         self.config.save_config()
