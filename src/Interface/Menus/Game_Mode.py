@@ -125,7 +125,7 @@ class GameMode(BaseMenu):
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
-        buttons_list = list(self.config_genetic_buttons.values())
+        buttons_list = list(self.config_genetic_buttons.values() if self.interface.config.config_AI["type_training"]["Genetic"] else self.config_qlearning_buttons.values())
         self.config_buttons["scroll"].update_elements([*self.training_genetic_elements.values(), *buttons_list])
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
