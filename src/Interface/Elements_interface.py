@@ -227,6 +227,7 @@ class ComboBox(TextButton):
         self.replace_text: bool = config.get("replace_text", False)
         self.adapt_dropdown: bool = config.get("adapt_dropdown", True)
         self.draw_scroll: bool = config.get("draw_scroll", True)
+        self.command_dropdown = config.get("command_dropdown", None)
         self.anim_height_dropdown: int = 0
         self.is_dropdown_open: bool = False
         self.options: list[str] = []
@@ -241,7 +242,8 @@ class ComboBox(TextButton):
         self.button_dropdown = self.factory.create_TextButton({
             "position": (self.position[0]+self.font.size(self.text)[0], int(self.position[1])),
             "text": self.type_dropdown,
-            "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open)})
+            "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open)
+            "command2": self.command_dropdown if callable(self.command_dropdown) else None})
         self.rect: dict[str, object] = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
                     "dropdown": self.button_dropdown}
     def icon_dropdown(self,type_dropdown: str) -> str:
