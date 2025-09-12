@@ -63,7 +63,7 @@ class GameMode(BaseMenu):
         self._setup_scroll_bar()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
-        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136),"command_dropdown":lambda: self._setup_scroll_bar()})
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
         self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
         self._update_type_training("Genetic")
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
