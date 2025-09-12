@@ -18,6 +18,7 @@ class GameMode(BaseMenu):
         self._setup_type_training_buttons()
         self._setup_training_genetic_elements()
         self._setup_training_qlearning_elements()
+        self._setup_scroll_bar()
         self._setup_config_game_buttons()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
@@ -62,7 +63,7 @@ class GameMode(BaseMenu):
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
-        self.buttons['box_type_training'].charge_elements({"Genetic":lambda:self._update_type_training("Genetic"),"Q-learning":lambda:self._update_type_training("Q-learning")})
+        self.buttons['box_type_training'].charge_elements({"Genetic":lambda:(self._update_type_training("Genetic"),self._setup_scroll_bar()),"Q-learning":lambda:(self._update_type_training("Q-learning"),self._setup_scroll_bar())})
         self._update_type_training("Genetic")
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
@@ -173,8 +174,8 @@ class GameMode(BaseMenu):
         if self.interface.mode_game["Training AI"]: common_buttons.append(self.buttons['box_type_training'])
         for button in common_buttons:button.draw()
         if self.interface.mode_game["Training AI"]:
-            if self.interface.config.config_AI["type_training"]["Genetic"]:self._execute_training_genetic_buttons(), self._setup_scroll_bar()
-            elif self.interface.config.config_AI["type_training"]["Q-learning"]:self._execute_training_qlearning_buttons(), self._setup_scroll_bar()
+            if self.interface.config.config_AI["type_training"]["Genetic"]:self._execute_training_genetic_buttons()
+            elif self.interface.config.config_AI["type_training"]["Q-learning"]:self._execute_training_qlearning_buttons()
             self.config_buttons["scroll"].draw()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:self._execute_game_config_buttons()
     def _execute_training_genetic_buttons(self):
