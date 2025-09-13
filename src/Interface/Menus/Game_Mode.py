@@ -103,7 +103,7 @@ class GameMode(BaseMenu):
         self.config_qlearning_buttons["episodes_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes'),"command2": self._update_training_qlearning_texts})
         self.config_qlearning_buttons["episodes_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'episodes', True, -1),"command2": self._update_training_qlearning_texts})
         self.config_qlearning_buttons["learning_rate_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'learning_rate', False, 0.001),"command2": self._update_training_qlearning_texts})
-        self.config_qlearning_buttons["learning_rate_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'learning_rate', 0.01, -0.001),"command2": self._update_training_qlearning_texts})
+        self.config_qlearning_buttons["learning_rate_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'learning_rate', 0.001, -0.001),"command2": self._update_training_qlearning_texts})
         self.config_qlearning_buttons["gamma_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'gamma', False, 0.01),"command2": self._update_training_qlearning_texts})
         self.config_qlearning_buttons["gamma_decrease"] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'gamma', 0.01, -0.01),"command2": self._update_training_qlearning_texts})
         self.config_qlearning_buttons["epsilon_start_increase"] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+110),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["q_learning"], 'epsilon_start', False, 0.01),"command2": self._update_training_qlearning_texts})
@@ -115,12 +115,12 @@ class GameMode(BaseMenu):
     def _setup_training_qlearning_texts(self):
         factory = self.interface.button_factory_f5
         self.training_qlearning_elements["text_C"] = factory.create_Text({"text": f"Config Training\n{'AI':^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-136),"detect_mouse": False})
-        self.training_qlearning_elements["text_E"] = factory.create_Text({"text": f"Episodes\n{self.config.config_AI['q_learning']['episodes']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
-        self.training_qlearning_elements["text_LR"] = factory.create_Text({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
-        self.training_qlearning_elements["text_G"] = factory.create_Text({"text": f"Gamma\n{self.config.config_AI['q_learning']['gamma']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
-        self.training_qlearning_elements["text_ES"] = factory.create_Text({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
-        self.training_qlearning_elements["text_EE"] = factory.create_Text({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+139),"detect_mouse": False})
-        self.training_qlearning_elements["text_ED"] = factory.create_Text({"text": f"Epsilon Decay\n{self.config.config_AI['q_learning']['epsilon_decay']:^26.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+194),"detect_mouse": False})
+        self.training_qlearning_elements["text_E"] = factory.create_Text({"text": f"Episodes Size\n{self.config.config_AI['q_learning']['episodes']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
+        self.training_qlearning_elements["text_LR"] = factory.create_Text({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^25.3f}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
+        self.training_qlearning_elements["text_G"] = factory.create_Text({"text": f"Gamma Size\n{self.config.config_AI['q_learning']['gamma']:^25.2f}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
+        self.training_qlearning_elements["text_ES"] = factory.create_Text({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^25.3f}","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
+        self.training_qlearning_elements["text_EE"] = factory.create_Text({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^25.3f}","position": (self.WIDTH/2+120, self.HEIGHT/2+139),"detect_mouse": False})
+        self.training_qlearning_elements["text_ED"] = factory.create_Text({"text": f"Epsilon Decay\n{self.config.config_AI['q_learning']['epsilon_decay']:^25.3f}","position": (self.WIDTH/2+120, self.HEIGHT/2+194),"detect_mouse": False})
     def _setup_scroll_bar(self):
         factory = self.interface.button_factory_f5
         self.config_buttons['scroll'] = factory.create_ScrollBar({"position": (self.WIDTH-30, 100, 20, self.HEIGHT-200),"thumb_height": 20})
@@ -139,12 +139,12 @@ class GameMode(BaseMenu):
         if 'text_P' in self.training_genetic_elements:self.training_genetic_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
         if 'text_A' in self.training_genetic_elements:self.training_genetic_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
     def _update_training_qlearning_texts(self):
-        if "text_E" in self.training_qlearning_elements:self.training_qlearning_elements["text_E"].change_item({"text": f"Episodes\n{self.config.config_AI['q_learning']['episodes']:^26}"})
-        if "text_LR" in self.training_qlearning_elements:self.training_qlearning_elements["text_LR"].change_item({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^26.2f}"})
-        if "text_G" in self.training_qlearning_elements:self.training_qlearning_elements["text_G"].change_item({"text": f"Gamma\n{self.config.config_AI['q_learning']['gamma']:^26.2f}"})
-        if "text_ES" in self.training_qlearning_elements:self.training_qlearning_elements["text_ES"].change_item({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^26.2f}"})
-        if "text_EE" in self.training_qlearning_elements:self.training_qlearning_elements["text_EE"].change_item({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^26.2f}"})
-        if "text_ED" in self.training_qlearning_elements:self.training_qlearning_elements["text_ED"].change_item({"text": f"Epsilon Decay\n{self.config.config_AI['q_learning']['epsilon_decay']:^26.2f}"})
+        if "text_E" in self.training_qlearning_elements:self.training_qlearning_elements["text_E"].change_item({"text": f"Episodes Size\n{self.config.config_AI['q_learning']['episodes']:^26}"})
+        if "text_LR" in self.training_qlearning_elements:self.training_qlearning_elements["text_LR"].change_item({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^25.3f}"})
+        if "text_G" in self.training_qlearning_elements:self.training_qlearning_elements["text_G"].change_item({"text": f"Gamma Size\n{self.config.config_AI['q_learning']['gamma']:^25.2f}"})
+        if "text_ES" in self.training_qlearning_elements:self.training_qlearning_elements["text_ES"].change_item({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^25.3f}"})
+        if "text_EE" in self.training_qlearning_elements:self.training_qlearning_elements["text_EE"].change_item({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^25.3f}"})
+        if "text_ED" in self.training_qlearning_elements:self.training_qlearning_elements["text_ED"].change_item({"text": f"Epsilon Decay\n{self.config.config_AI['q_learning']['epsilon_decay']:^25.3f}"})
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
