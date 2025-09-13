@@ -143,6 +143,7 @@ class GameMode(BaseMenu):
         if "text_LR" in self.training_qlearning_elements:self.training_qlearning_elements["text_LR"].change_item({"text": f"Learning Rate\n{self.config.config_AI['q_learning']['learning_rate']:^26.2f}"})
         if "text_G" in self.training_qlearning_elements:self.training_qlearning_elements["text_G"].change_item({"text": f"Gamma\n{self.config.config_AI['q_learning']['gamma']:^26.2f}"})
         if "text_ES" in self.training_qlearning_elements:self.training_qlearning_elements["text_ES"].change_item({"text": f"Epsilon Start\n{self.config.config_AI['q_learning']['epsilon_start']:^26.2f}"})
+        if "text_EE" in self.training_qlearning_elements:self.training_qlearning_elements["text_EE"].change_item({"text": f"Epsilon End\n{self.config.config_AI['q_learning']['epsilon_end']:^26.2f}"})
         
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
