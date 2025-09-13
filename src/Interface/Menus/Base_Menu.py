@@ -32,8 +32,8 @@ class BaseMenu:
             setattr(self.interface, "running", False)
             setattr(self.interface, "game_over", True)
         if config.get("recursive", False):self.change_mains({"main": self.interface.main,"fade_in": fade_in,"fade_out": fade_out})
-    def increase_decrease_variable(self, dic = None , variable = "", length: bool = False, number: int | float = 1, save: bool = True):
-        if dic!=None and length:dic[variable]=max(1, dic[variable] + number)
+    def increase_decrease_variable(self, dic = None , variable = "", length: int | float = None, number: int | float = 1, save: bool = True):
+        if dic!=None and length!=None:dic[variable]=max(length, dic[variable] + number)
         elif dic!=None:dic[variable]+=number
         else:setattr(self.interface, variable, getattr(self.interface, variable) + number)
         if save:self.config.save_config()
