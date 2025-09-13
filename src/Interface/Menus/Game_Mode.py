@@ -138,7 +138,9 @@ class GameMode(BaseMenu):
         if 'text_G' in self.training_genetic_elements:self.training_genetic_elements['text_G'].change_item({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}"})
         if 'text_P' in self.training_genetic_elements:self.training_genetic_elements['text_P'].change_item({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}"})
         if 'text_A' in self.training_genetic_elements:self.training_genetic_elements['text_A'].change_item({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai'] < 10 else 26}}"})
-    def _update_training_qlearning_texts(self):pass
+    def _update_training_qlearning_texts(self):
+        if "text_E" in self.training_qlearning_elements:self.training_qlearning_elements["text_E"].change_item({"text": f"Episodes\n{self.config.config_AI['q_learning']['episodes']:^26}"})
+        
     def _update_score_button_state(self):
         can_decrease = self.config.config_game["max_score"] > 1
         self.buttons['decrease_score'].change_item({"pressed": can_decrease,"detect_mouse": can_decrease})
