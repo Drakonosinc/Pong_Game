@@ -68,6 +68,8 @@ class GameMode(BaseMenu):
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
+        self.buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI["genetic"], "model_save"),"command2": self.config.save_config})
+        self.interface.save_model_button = self.buttons['save_model']
         self.interface.box_type_training = self.buttons['box_type_training']
         self.interface.box_type_model = self.buttons['box_type_model']
     def _update_type_training(self,button):
@@ -88,7 +90,6 @@ class GameMode(BaseMenu):
         self.config_genetic_buttons['decrease_population'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'population_value', 1, -1),"command2": self._update_training_genetic_texts})
         self.config_genetic_buttons['increase_try_for_ai'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai'),"command2": self._update_training_genetic_texts})
         self.config_genetic_buttons['decrease_try_for_ai'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2+55),"command1": lambda: self.increase_decrease_variable(self.config.config_AI["genetic"], 'try_for_ai', 1, -1),"command2": self._update_training_genetic_texts})
-        self.config_genetic_buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI["genetic"], "model_save"),"command2": self.config.save_config})
         for key, button in self.config_genetic_buttons.items():setattr(self.interface, key, button)
     def _setup_training_genetic_texts(self):
         factory = self.interface.button_factory_f5
