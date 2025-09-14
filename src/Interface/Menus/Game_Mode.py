@@ -62,11 +62,12 @@ class GameMode(BaseMenu):
         self._setup_training_qlearning_texts()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
-        self.buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (5, self.HEIGHT/2-136),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
-        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-156)})
+        self.buttons['text_S'] = factory.create_Text({"text": "Save model","position": (5, self.HEIGHT/2-136),"detect_mouse": False})
+        self.buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (50, self.HEIGHT/2-136),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-106)})
         self.buttons['box_type_training'].charge_elements({"Genetic":lambda:(self._update_type_training("Genetic"),self._setup_scroll_bar()),"Q-learning":lambda:(self._update_type_training("Q-learning"),self._setup_scroll_bar())})
         self._update_type_training("Genetic")
-        self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (5, self.HEIGHT/2-176)})
+        self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (5, self.HEIGHT/2-76)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
         self.interface.save_model_button = self.buttons['save_model']
@@ -97,7 +98,6 @@ class GameMode(BaseMenu):
         self.training_genetic_elements['text_G'] = factory.create_Text({"text": f"Generation Size\n{self.config.config_AI["genetic"]['generation_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-81),"detect_mouse": False})
         self.training_genetic_elements['text_P'] = factory.create_Text({"text": f"Population Size\n{self.config.config_AI["genetic"]['population_value']:^26}","position": (self.WIDTH/2+120, self.HEIGHT/2-26),"detect_mouse": False})
         self.training_genetic_elements['text_A'] = factory.create_Text({"text": f"Attempts By AI\n{self.config.config_AI["genetic"]['try_for_ai']:^{28 if self.config.config_AI["genetic"]['try_for_ai']<10 else 26}}","position": (self.WIDTH/2+120, self.HEIGHT/2+29),"detect_mouse": False})
-        self.training_genetic_elements['text_S'] = factory.create_Text({"text": "Save model","position": (self.WIDTH/2+120, self.HEIGHT/2+84),"detect_mouse": False})
         self.interface.text_in_training_ai = list(self.training_genetic_elements.values())
     def _setup_training_qlearning_buttons(self):
         factory = self.interface.button_factory_f5
@@ -178,7 +178,7 @@ class GameMode(BaseMenu):
         self.screen.blit(self.interface.font5.render(f"Number of Balls\n{self.config.config_game['number_balls']:^{28 if self.config.config_game['number_balls']<10 else 26}}", True, "White"),(self.WIDTH/2+120, self.HEIGHT/2-81))
     def execute_buttons(self):
         common_buttons = [self.buttons['back'], self.buttons['continue'], self.buttons['training_ai'], self.buttons['player'], self.buttons['ai'],self.buttons['decrease_score'], self.buttons['increase_score'],self.inputs['player1'], self.inputs['player2']]
-        if self.interface.mode_game["Training AI"]: common_buttons.extend([self.buttons.get('box_type_training'), self.buttons.get('box_type_model'), self.buttons.get('save_model')])
+        if self.interface.mode_game["Training AI"]: common_buttons.extend([self.buttons.get('box_type_training'), self.buttons.get('box_type_model'),self.buttons.get('text_S') , self.buttons.get('save_model')])
         for button in common_buttons:button.draw()
         if self.interface.mode_game["Training AI"]:
             if self.interface.config.config_AI["type_training"]["Genetic"]:self._execute_training_genetic_buttons()
