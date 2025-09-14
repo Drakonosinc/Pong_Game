@@ -40,6 +40,7 @@
         "Name_key4": "\u2193"
     },
     "config_AI": {
+        "model_save": true,
         "type_training": {
             "Genetic": true,
             "Q-learning": false
