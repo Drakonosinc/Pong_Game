@@ -62,13 +62,13 @@ class GameMode(BaseMenu):
         self._setup_training_qlearning_texts()
     def _setup_type_training_buttons(self):
         factory = self.interface.button_factory_f5
-        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-136)})
+        self.buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (5, self.HEIGHT/2-136),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
+        self.buttons['box_type_training'] = factory.create_ComboBox({"text": "Training","position": (5, self.HEIGHT/2-156)})
         self.buttons['box_type_training'].charge_elements({"Genetic":lambda:(self._update_type_training("Genetic"),self._setup_scroll_bar()),"Q-learning":lambda:(self._update_type_training("Q-learning"),self._setup_scroll_bar())})
         self._update_type_training("Genetic")
-        self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (self.WIDTH/2+120, self.HEIGHT/2+139)})
+        self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (5, self.HEIGHT/2-176)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
-        self.buttons['save_model'] = factory.create_TextButton({"text": "OFF","color": self.interface.SKYBLUE,"position": (self.WIDTH-85, self.HEIGHT/2+84),"command1": lambda: self.on_off(self.config.config_AI, "model_save"),"command2": self.config.save_config})
         self.interface.save_model_button = self.buttons['save_model']
         self.interface.box_type_training = self.buttons['box_type_training']
         self.interface.box_type_model = self.buttons['box_type_model']
