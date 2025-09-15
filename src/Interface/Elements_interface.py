@@ -29,9 +29,8 @@ class ElementBehavior:
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse = config.get("detect_mouse",True)
         self.pressed = config.get("pressed",True)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False})
+        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.commands = [config.get(f"command{i}") for i in range(1,config.get("number_commands", 4))]
-        self.new_events(time=config.get("time",500))
     def events(self, event):pass
     def new_events(self,time):
         self.EVENT_NEW = pygame.USEREVENT + self.define_event()
