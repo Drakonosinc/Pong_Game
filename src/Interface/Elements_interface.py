@@ -48,18 +48,27 @@ class ElementBehavior:
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
     def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None):
-        current_time = pygame.time.get_ticks()
+        # Handle mouse press down - start tracking the click
         if pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
             self.states["active"]=True
             self.states["presses_touch"]=False
-            self.states["click_time"] = current_time
-        if self.states["click_time"] is not None:
-            if current_time - self.states["click_time"] >= 200:
+        
+        # Handle mouse release - complete the click if still over button
+        if not pressed_mouse[0] and self.states["active"]:
+            if rect.collidepoint(mouse_pos):
+                # Mouse was released over the button - execute the click
                 if self.sound_touch:self.sound_touch.play(loops=0)
-                self.states["click_time"] = None
-                self.states["presses_touch"] = True
                 self.execute_commands()
-        if pressed_mouse[0] and not rect.collidepoint(mouse_pos):self.states["active"],self.states["presses_touch"]=False,True
+            # Reset state regardless of where mouse was released
+            self.states["active"] = False
+            self.states["presses_touch"] = True
+        
+        # Cancel the click if mouse is dragged outside while pressed
+        if pressed_mouse[0] and not rect.collidepoint(mouse_pos) and self.states["active"]:
+            self.states["active"] = False
+            self.states["presses_touch"] = True
+        
+        # Draw pressed effect while mouse is held down over button
         if self.states["active"]:self.draw_pressed_effect() if draw is None else draw()
     def draw_pressed_effect(self):return NotImplementedError
     def filter_rects_collision(self,rects: dict, mouse_pos, draws: list, option: bool=False):
