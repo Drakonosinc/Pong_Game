@@ -32,12 +32,6 @@ class ElementBehavior:
         self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"active":False})
         self.commands = [config.get(f"command{i}") for i in range(1,config.get("number_commands", 4))]
     def events(self, event):pass
-    def new_events(self,time):
-        self.EVENT_NEW = pygame.USEREVENT + self.define_event()
-        pygame.time.set_timer(self.EVENT_NEW,time)
-    def define_event(self):return 1
-    def reactivate_pressed(self,event):
-        if event.type==self.EVENT_NEW:self.states["presses_touch"]=True
     def draw_hover_effect(self):raise NotImplementedError
     def mouse_collision(self,rect,mouse_pos,draw=None):
         if rect.collidepoint(mouse_pos):
