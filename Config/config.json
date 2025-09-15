@@ -71,7 +71,7 @@
         "sound_main": true
     },
     "config_game": {
-        "number_balls": 1,
+        "number_balls": true,
         "max_score": 5
     }
 }
