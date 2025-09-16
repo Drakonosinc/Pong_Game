@@ -29,7 +29,8 @@ class ElementBehavior:
         self.sound_touch = config.get("sound_touch")
         self.detect_mouse = config.get("detect_mouse",True)
         self.pressed = config.get("pressed",True)
-        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False,"repeat_bottom":False})
+        self.states=config.get("states",{"detect_hover":True,"presses_touch":True,"click_time": None,"active":False})
+        self.repeat = config.get("repeat_button",False)
         self.commands = [config.get(f"command{i}") for i in range(1,config.get("number_commands", 4))]
         self.new_events(time=config.get("time",500))
     def events(self, event):pass
@@ -58,7 +59,7 @@ class ElementBehavior:
             self.states["click_time"] = None
             self.states["presses_touch"] = True
             self.execute_commands()
-        if self.states["click_time"] is not None and not repeat:
+        if self.states["click_time"] is not None and  repeat:
             if current_time - self.states["click_time"] >= 200:execute()
         if repeat and not pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:execute()
         if pressed_mouse[0] and not rect.collidepoint(mouse_pos):self.states["active"],self.states["presses_touch"]=False,True
