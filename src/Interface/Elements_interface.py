@@ -53,12 +53,14 @@ class ElementBehavior:
             self.states["active"]=True
             self.states["presses_touch"]=False
             self.states["click_time"] = current_time
+        def execute(self):
+            if self.sound_touch:self.sound_touch.play(loops=0)
+            self.states["click_time"] = None
+            self.states["presses_touch"] = True
+            self.execute_commands()
         if self.states["click_time"] is not None and not repeat:
             if current_time - self.states["click_time"] >= 200:
-                if self.sound_touch:self.sound_touch.play(loops=0)
-                self.states["click_time"] = None
-                self.states["presses_touch"] = True
-                self.execute_commands()
+                
         if repeat and not pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
             if self.sound_touch:self.sound_touch.play(loops=0)
             self.states["click_time"] = None
