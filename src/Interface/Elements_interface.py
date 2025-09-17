@@ -48,7 +48,8 @@ class ElementBehavior:
                 if self.sound_hover:self.sound_hover.play(loops=0)
                 self.states["detect_hover"]=False
         else:self.states["detect_hover"]=True
-    def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None,repeat:bool = False):
+    def pressed_button(self,rect,pressed_mouse,mouse_pos,draw=None,repeat:bool = None):
+        repeat = self.repeat if repeat is None else repeat
         current_time = pygame.time.get_ticks()
         if pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:
             self.states["active"]=True
