@@ -59,9 +59,9 @@ class ElementBehavior:
         current_time = pygame.time.get_ticks()
         if pressed_mouse[0] and rect.collidepoint(mouse_pos) and self.states["presses_touch"]:execute(False,True,False,current_time,False)
         if not repeat and not pressed_mouse[0] and self.states["active"]:
-            if rect.collidepoint(mouse_pos):execute()
+            if rect.collidepoint(mouse_pos):execute(True)
         elif self.states["click_time"] is not None and repeat:
-            if current_time - self.states["click_time"] >= 200:execute()
+            if current_time - self.states["click_time"] >= 200:execute(True)
         if pressed_mouse[0] and not rect.collidepoint(mouse_pos) and self.states["active"]:self.states["active"],self.states["presses_touch"]=False,True
         if self.states["active"]:self.draw_pressed_effect() if draw is None else draw()
     def draw_pressed_effect(self):return NotImplementedError
