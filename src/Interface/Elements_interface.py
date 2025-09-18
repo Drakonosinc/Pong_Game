@@ -228,7 +228,7 @@ class ComboBox(TextButton):
         self.type_dropdown: str = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
         self.dropdown: list[int] = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
         self.hover_dropdown: tuple[int, int, int] = config.get("hover_dropdown",(135,206,235))
-        self.replace_text: bool = config.get("replace_text", True)
+        self.replace_text: bool = config.get("replace_text", False)
         self.adapt_dropdown: bool = config.get("adapt_dropdown", True)
         self.draw_scroll: bool = config.get("draw_scroll", True)
         self.command_dropdown = config.get("command_dropdown", None)
@@ -349,6 +349,7 @@ class ComboBox(TextButton):
             self.option_buttons[self.options[index]].rect = pygame.Rect(*self.position, *self.font.size(self.text))
             self.button_dropdown.change_item({"position": (self.position[0] + self.font.size(self.text)[0], int(self.position[1]))})
             self.button_dropdown.rect = pygame.Rect(self.button_dropdown.position, self.font.size(self.button_dropdown.text))
+            self.charge_buttons([ self.option_buttons[opt] for idx, opt in enumerate(self.options) if idx != index ])
             self.is_dropdown_open = False
     def events(self, event):
         if hasattr(self, 'scroll'):self.scroll.events(event)
