@@ -42,8 +42,8 @@
     "config_AI": {
         "model_save": true,
         "type_training": {
-            "Genetic": false,
-            "Q-learning": true
+            "Genetic": true,
+            "Q-learning": false
         },
         "type_model": {
             "Pytorch": true,
