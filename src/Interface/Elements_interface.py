@@ -320,10 +320,10 @@ class ComboBox(TextButton):
             self._repeat_charge(f"buttons_{i}",button.text,button,i)
     def _check_buttons_position(self,i: int, text: str = "") -> tuple[int, int]:
         last_button = self.option_buttons[list(self.option_buttons.keys())[-1]] if self.option_buttons else None
-        if self.type_dropdown == " V":return (self.position[0], (self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)) if not last_button else (last_button[list(self.option_buttons.keys())[-1]].rect.bottom + 5))
-        elif self.type_dropdown == " ^":return (self.position[0], (self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5)) if not last_button else (last_button[list(self.option_buttons.keys())[-1]].rect.top - self.font.get_height()))
-        elif self.type_dropdown == " >":return ((self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)) if not last_button else (last_button[list(self.option_buttons.keys())[-1]].rect.right + 5), self.position[1] + (self.font.get_height()/2))
-        elif self.type_dropdown == " <":return ((self.position[0] - (self.font.size(text)[0] + 5)) if not last_button else (last_button[list(self.option_buttons.keys())[-1]].rect.left - (self.font.size(text)[0] + 5)), self.position[1] + (self.font.get_height()/2))
+        if self.type_dropdown == " V":return (self.position[0], (self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)) if not last_button else (last_button[list(last_button.keys())[-1]].rect.bottom + 5))
+        elif self.type_dropdown == " ^":return (self.position[0], (self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5)) if not last_button else (last_button[list(last_button.keys())[-1]].rect.top - self.font.get_height()))
+        elif self.type_dropdown == " >":return ((self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)) if not last_button else (last_button[list(last_button.keys())[-1]].rect.right + 5), self.position[1] + (self.font.get_height()/2))
+        elif self.type_dropdown == " <":return ((self.position[0] - (self.font.size(text)[0] + 5)) if not last_button else (last_button[list(last_button.keys())[-1]].rect.left - (self.font.size(text)[0] + 5)), self.position[1] + (self.font.get_height()/2))
     def _repeat_charge(self,key,text,button,i) -> None:
         self.option_buttons[text] = button
         self.rect[key] = button
