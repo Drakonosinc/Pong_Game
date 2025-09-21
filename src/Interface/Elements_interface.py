@@ -228,7 +228,7 @@ class ComboBox(TextButton):
         self.type_dropdown: str = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
         self.dropdown: list[int] = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
         self.hover_dropdown: tuple[int, int, int] = config.get("hover_dropdown",(135,206,235))
-        self.replace_text: bool = config.get("replace_text", True)
+        self.replace_text: bool = config.get("replace_text", False)
         self.adapt_dropdown: bool = config.get("adapt_dropdown", True)
         self.draw_scroll: bool = config.get("draw_scroll", True)
         self.command_dropdown = config.get("command_dropdown", None)
@@ -318,17 +318,17 @@ class ComboBox(TextButton):
                 if isinstance(button.rect, pygame.Rect):button.rect.topleft = button.position
                 elif isinstance(button.rect, dict) and "button" in button.rect:button.rect["button"].topleft = button.position
             self._repeat_charge(f"buttons_{i}",button.text,button,i)
+    def _repeat_charge(self,key,text,button,i) -> None:
+        self.option_buttons[text] = button
+        self.rect[key] = button
+        self.options.append(text)
+        if len(text) >= len(self.options[i]) and (self.type_dropdown in (" V", " ^")):self.dropdown[0] = self.font.size(button.text)[0] + 5
     def _check_buttons_position(self,i: int, text: str = "") -> tuple[int, int]:
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
         if self.type_dropdown == " V":return (self.position[0], (self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)) if not last_rect else (last_rect.bottom + 5))
         elif self.type_dropdown == " ^":return (self.position[0], (self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5)) if not last_rect else (last_rect.top - self.font.get_height()))
         elif self.type_dropdown == " >":return ((self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)) if not last_rect else (last_rect.right + 5), self.position[1] + (self.font.get_height()/2))
         elif self.type_dropdown == " <":return ((self.position[0] - (self.font.size(text)[0] + 5)) if not last_rect else (last_rect.left - (self.font.size(text)[0] + 5)), self.position[1] + (self.font.get_height()/2))
-    def _repeat_charge(self,key,text,button,i) -> None:
-        self.option_buttons[text] = button
-        self.rect[key] = button
-        self.options.append(text)
-        if len(text) >= len(self.options[i]) and (self.type_dropdown in (" V", " ^")):self.dropdown[0] = self.font.size(button.text)[0] + 5
     def _create_scroll(self) -> None:
         self.scroll = self.factory.create_ScrollBar({
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
