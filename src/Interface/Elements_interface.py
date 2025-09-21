@@ -257,19 +257,19 @@ class ComboBox(TextButton):
             case "right":return " >"
             case "left":return " <"
     def _get_rect_dropdown(self)  -> pygame.Rect:
-        def anim_height():pass
+        def anim_motion(index):self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[index] else 0
         match self.type_dropdown:
             case " V":
-                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[1] else 0
+                anim_motion(1)
                 return pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), self.dropdown[0], self.anim_height_dropdown)
             case " ^":
-                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[1] else 0
+                anim_motion(1)
                 return pygame.Rect(self.position[0], self.position[1] - self.anim_height_dropdown, self.dropdown[0], self.anim_height_dropdown)
             case " >":
-                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
+                anim_motion(0)
                 return pygame.Rect(self.position[0] + (self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]), self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
             case " <":
-                self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[0] else 0
+                anim_motion(0)
                 return pygame.Rect(self.position[0] - self.anim_height_dropdown, self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
     def draw(self) -> None:
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
