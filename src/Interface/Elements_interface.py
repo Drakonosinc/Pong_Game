@@ -257,7 +257,7 @@ class ComboBox(TextButton):
             case "right":return " >"
             case "left":return " <"
     def _get_rect_dropdown(self)  -> pygame.Rect:
-        def anim_motion(index):self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[index] else 0
+        def anim_motion(index:int):self.anim_height_dropdown += 1 if self.anim_height_dropdown<self.dropdown[index] else 0
         match self.type_dropdown:
             case " V":
                 anim_motion(1)
