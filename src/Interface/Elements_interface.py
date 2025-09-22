@@ -228,7 +228,7 @@ class ComboBox(TextButton):
         self.type_dropdown: str = self.icon_dropdown((config.get("type_dropdown", "down")).lower())
         self.dropdown: list[int] = config.get("size", [self.font.size(self.text)[0]+self.font.size(self.type_dropdown)[0], 100])
         self.hover_dropdown: tuple[int, int, int] = config.get("hover_dropdown",(135,206,235))
-        self.replace_text: bool = config.get("replace_text", False)
+        self.replace_text: bool = config.get("replace_text", True)
         self.adapt_dropdown: bool = config.get("adapt_dropdown", True)
         self.draw_scroll: bool = config.get("draw_scroll", True)
         self.command_dropdown = config.get("command_dropdown", None)
@@ -337,7 +337,7 @@ class ComboBox(TextButton):
         self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
         self.draw_scroll = False
-    def _select_option(self, index):
+    def _select_option(self, index: int) -> None:
         if 0 <= index < len(self.options):
             self.text = self.options[index]
             self.option_buttons[self.options[index]].position = self.position
