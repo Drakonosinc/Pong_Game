@@ -230,3 +230,30 @@ class ComboBox(TextButton):
         dropdown_classes = {"down": ComboBoxDown,"up": ComboBoxUp,"right": ComboBoxRight,"left": ComboBoxLeft}
         dropdown_class = dropdown_classes.get(type_dropdown, ComboBoxDown)
         return dropdown_class(config)
+    def __init__(self, config: dict) -> None:
+        super().__init__(config)
+        self.type_dropdown = self.get_icon_dropdown()
+        self.dropdown = config.get("size", [self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0], 100])
+        self.hover_dropdown = config.get("hover_dropdown", (135, 206, 235))
+        self.replace_text = config.get("replace_text", True)
+        self.adapt_dropdown = config.get("adapt_dropdown", True)
+        self.draw_scroll = config.get("draw_scroll", True)
+        self.command_dropdown = config.get("command_dropdown", None)
+        self.anim_height_dropdown = 0
+        self.is_dropdown_open = False
+        self.options = []
+        self.option_buttons = {}
+        self.factory = ElementsFactory({
+            "screen": self.screen,
+            "font": self.font,
+            "color": self.color,
+            "hover_color": self.hover_color,
+            "sound_hover": self.sound_hover,
+            "sound_touch": self.sound_touch})
+        self.button_dropdown = self.factory.create_TextButton({
+            "position": (self.position[0] + self.font.size(self.text)[0], int(self.position[1])),
+            "text": self.type_dropdown,
+            "command1": lambda: setattr(self, 'is_dropdown_open', not self.is_dropdown_open),
+            "command2": self.command_dropdown if callable(self.command_dropdown) else None})
+        self.rect = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
+                    "dropdown": self.button_dropdown}
