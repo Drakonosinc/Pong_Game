@@ -267,3 +267,5 @@ class ComboBox(TextButton):
     def _adapt_size_dropdown_specific(self) -> None:pass
     @abstractmethod
     def _should_draw_option_button(self, button: object) -> bool:pass
+    @abstractmethod
+    def _update_scroll_position(self) -> None:pass
