@@ -259,3 +259,5 @@ class ComboBox(TextButton):
                     "dropdown": self.button_dropdown}
     @abstractmethod
     def get_icon_dropdown(self) -> str:pass
+    @abstractmethod
+    def _get_rect_dropdown(self) -> pygame.Rect:pass
