@@ -271,3 +271,5 @@ class ComboBox(TextButton):
     def _update_scroll_position(self) -> None:pass
     @abstractmethod
     def _get_anim_index(self) -> int:pass
+    def _anim_motion(self, index: int) -> None:
+        if self.anim_height_dropdown < self.dropdown[index]:self.anim_height_dropdown += 1
