@@ -263,3 +263,5 @@ class ComboBox(TextButton):
     def _get_rect_dropdown(self) -> pygame.Rect:pass
     @abstractmethod
     def _check_buttons_position(self, i: int, text: str = "", first: bool = False) -> tuple[int, int]:pass
+    @abstractmethod
+    def _adapt_size_dropdown_specific(self) -> None:pass
