@@ -265,3 +265,5 @@ class ComboBox(TextButton):
     def _check_buttons_position(self, i: int, text: str = "", first: bool = False) -> tuple[int, int]:pass
     @abstractmethod
     def _adapt_size_dropdown_specific(self) -> None:pass
+    @abstractmethod
+    def _should_draw_option_button(self, button: object) -> bool:pass
