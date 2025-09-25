@@ -292,3 +292,4 @@ class ComboBox(TextButton):
         if self.draw_scroll and self.option_buttons and self._should_create_scroll(): self._create_scroll()
         for button in self.option_buttons.values(): self._draw_option_buttons(button)
         if hasattr(self, 'scroll'): self._draw_scroll()
+    def _should_create_scroll(self) -> bool: return self.type_dropdown in (" V", " ^")
