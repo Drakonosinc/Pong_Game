@@ -295,3 +295,6 @@ class ComboBox(TextButton):
     def _should_create_scroll(self) -> bool: return self.type_dropdown in (" V", " ^")
     def _draw_option_buttons(self, button: object) -> None:
         if self._should_draw_option_button(button):button.draw()
+    def _adapt_size_dropdown(self) -> None:
+        self._adapt_size_dropdown_specific()
+        self.adapt_dropdown = False
