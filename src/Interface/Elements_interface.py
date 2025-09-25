@@ -307,3 +307,10 @@ class ComboBox(TextButton):
                 "command1": lambda idx=i: self._select_option(idx) if self.replace_text else None,
                 "command2": action if callable(action) else None})
             self._repeat_charge(f"elements_{i}", option, button, i)
+    def charge_buttons(self, buttons: list, first: bool = False) -> None:
+        for i, button in enumerate(buttons):
+            button.position = self._check_buttons_position(i, button.text, first)
+            if hasattr(button, 'rect'):
+                if isinstance(button.rect, pygame.Rect): button.rect.topleft = button.position
+                elif isinstance(button.rect, dict) and "button" in button.rect: button.rect["button"].topleft = button.position
+            self._repeat_charge(f"buttons_{i}", button.text, button, i)
