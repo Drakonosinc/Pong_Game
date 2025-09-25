@@ -298,3 +298,4 @@ class ComboBox(TextButton):
     def _adapt_size_dropdown(self) -> None:
         self._adapt_size_dropdown_specific()
         self.adapt_dropdown = False
+    def _draw_scroll(self) -> None:self._update_scroll_position(),self.scroll.draw()
