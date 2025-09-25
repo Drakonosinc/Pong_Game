@@ -299,3 +299,11 @@ class ComboBox(TextButton):
         self._adapt_size_dropdown_specific()
         self.adapt_dropdown = False
     def _draw_scroll(self) -> None:self._update_scroll_position(),self.scroll.draw()
+    def charge_elements(self, options: dict) -> None:
+        for i, (option, action) in enumerate(options.items()):
+            button = self.factory.create_TextButton({
+                "text": option,
+                "position": self._check_buttons_position(i, option),
+                "command1": lambda idx=i: self._select_option(idx) if self.replace_text else None,
+                "command2": action if callable(action) else None})
+            self._repeat_charge(f"elements_{i}", option, button, i)
