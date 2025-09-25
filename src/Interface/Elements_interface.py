@@ -283,3 +283,12 @@ class ComboBox(TextButton):
         if self.detect_mouse:self.mouse_collision(self.rect["button"], pygame.mouse.get_pos(), self.draw_hover_effect)
         if self.pressed:self.pressed_button(self.rect["button"], pygame.mouse.get_pressed(), pygame.mouse.get_pos())
     def draw_hover_effect(self) -> pygame.Rect: return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True, self.hover_color),self.position)
+    def draw_rect_dropdown(self) -> None:
+        self.button_dropdown.change_item({"color": self.hover_dropdown})
+        self.dropdown_rect = self._get_rect_dropdown()
+        pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
+        pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
+        if self.adapt_dropdown and self.option_buttons: self._adapt_size_dropdown()
+        if self.draw_scroll and self.option_buttons and self._should_create_scroll(): self._create_scroll()
+        for button in self.option_buttons.values(): self._draw_option_buttons(button)
+        if hasattr(self, 'scroll'): self._draw_scroll()
