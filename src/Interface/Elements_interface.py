@@ -314,3 +314,8 @@ class ComboBox(TextButton):
                 if isinstance(button.rect, pygame.Rect): button.rect.topleft = button.position
                 elif isinstance(button.rect, dict) and "button" in button.rect: button.rect["button"].topleft = button.position
             self._repeat_charge(f"buttons_{i}", button.text, button, i)
+    def _repeat_charge(self, key, text, button, i) -> None:
+        self.option_buttons[text] = button
+        self.rect[key] = button
+        self.options.append(text)
+        if len(text) >= len(self.options[i]) and self._should_create_scroll(): self.dropdown[0] = self.font.size(button.text)[0] + 5
