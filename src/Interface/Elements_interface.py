@@ -338,3 +338,4 @@ class ComboBox(TextButton):
         self.charge_buttons([button for button in self.option_buttons.values() if button.text != self.text], True)
     def events(self, event):
         if hasattr(self, 'scroll'): self.scroll.events(event)
+    def return_buttons(self, button: str): return self.option_buttons[button]
