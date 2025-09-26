@@ -341,3 +341,4 @@ class ComboBox(TextButton):
     def return_buttons(self, button: str): return self.option_buttons[button]
 class ComboBoxDown(ComboBox):    
     def get_icon_dropdown(self) -> str:return " V"
+    def _get_anim_index(self) -> int:return 1
