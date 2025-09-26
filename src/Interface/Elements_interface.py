@@ -327,3 +327,12 @@ class ComboBox(TextButton):
         self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
         self.draw_scroll = False
+    def _select_option(self, index: int) -> None:
+        if 0 <= index < len(self.options):
+            self.text = self.options[index]
+            self.option_buttons[self.options[index]].position = self.position
+            self.option_buttons[self.options[index]].rect = pygame.Rect(*self.position, *self.font.size(self.text))
+            self.button_dropdown.change_item({"position": (self.position[0] + self.font.size(self.text)[0], int(self.position[1]))})
+            self.button_dropdown.rect = pygame.Rect(self.button_dropdown.position,self.font.size(self.button_dropdown.text))
+            self.is_dropdown_open = False
+        self.charge_buttons([button for button in self.option_buttons.values() if button.text != self.text], True)
