@@ -350,3 +350,4 @@ class ComboBoxDown(ComboBox):
         if not last_rect or first:y = self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)
         else:y = last_rect.bottom + 5
         return (self.position[0], y)
+    def _adapt_size_dropdown_specific(self) -> None: self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
