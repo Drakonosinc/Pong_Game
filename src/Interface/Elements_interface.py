@@ -342,3 +342,6 @@ class ComboBox(TextButton):
 class ComboBoxDown(ComboBox):    
     def get_icon_dropdown(self) -> str:return " V"
     def _get_anim_index(self) -> int:return 1
+    def _get_rect_dropdown(self) -> pygame.Rect:
+        self._anim_motion(self._get_anim_index())
+        return pygame.Rect(self.position[0],self.position[1] + self.font.get_height(),self.dropdown[0],self.anim_height_dropdown)
