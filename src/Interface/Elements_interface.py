@@ -336,3 +336,5 @@ class ComboBox(TextButton):
             self.button_dropdown.rect = pygame.Rect(self.button_dropdown.position,self.font.size(self.button_dropdown.text))
             self.is_dropdown_open = False
         self.charge_buttons([button for button in self.option_buttons.values() if button.text != self.text], True)
+    def events(self, event):
+        if hasattr(self, 'scroll'): self.scroll.events(event)
