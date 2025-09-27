@@ -354,3 +354,4 @@ class ComboBoxDown(ComboBox):
     def _should_draw_option_button(self, button: object) -> bool: return button.rect.bottom <= self.dropdown_rect.bottom and button.rect.top >= self.dropdown_rect.top
     def _update_scroll_position(self) -> None: self.scroll.rect["rect"].height = self.dropdown_rect.height
 class ComboBoxUp(ComboBox):
+    def get_icon_dropdown(self) -> str:return " ^"
