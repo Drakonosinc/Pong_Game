@@ -353,3 +353,4 @@ class ComboBoxDown(ComboBox):
     def _adapt_size_dropdown_specific(self) -> None: self.dropdown[1] = len(self.option_buttons) * (self.font.get_height() + 5)
     def _should_draw_option_button(self, button: object) -> bool: return button.rect.bottom <= self.dropdown_rect.bottom and button.rect.top >= self.dropdown_rect.top
     def _update_scroll_position(self) -> None: self.scroll.rect["rect"].height = self.dropdown_rect.height
+class ComboBoxUp(ComboBox):
