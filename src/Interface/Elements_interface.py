@@ -369,3 +369,4 @@ class ComboBoxUp(ComboBox):
     def _update_scroll_position(self) -> None:
         if self.dropdown_rect.height != self.dropdown[1]: self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
         self.scroll.rect["rect"].height = self.dropdown_rect.height
+class ComboBoxRight(ComboBox):
