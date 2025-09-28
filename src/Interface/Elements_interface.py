@@ -370,3 +370,4 @@ class ComboBoxUp(ComboBox):
         if self.dropdown_rect.height != self.dropdown[1]: self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
         self.scroll.rect["rect"].height = self.dropdown_rect.height
 class ComboBoxRight(ComboBox):
+    def get_icon_dropdown(self) -> str: return " >"
