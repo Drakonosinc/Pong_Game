@@ -371,3 +371,4 @@ class ComboBoxUp(ComboBox):
         self.scroll.rect["rect"].height = self.dropdown_rect.height
 class ComboBoxRight(ComboBox):
     def get_icon_dropdown(self) -> str: return " >"
+    def _get_anim_index(self) -> int:return 0
