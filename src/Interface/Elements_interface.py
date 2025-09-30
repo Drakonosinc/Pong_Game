@@ -378,3 +378,4 @@ class ComboBoxRight(ComboBox):
     def _check_buttons_position(self, i: int, text: str = "", first: bool = False) -> tuple[int, int]:
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
         if not last_rect or first:x = self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)
+        else:x = last_rect.right + 5
