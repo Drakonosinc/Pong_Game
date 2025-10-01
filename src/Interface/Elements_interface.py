@@ -379,3 +379,4 @@ class ComboBoxRight(ComboBox):
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
         if not last_rect or first:x = self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)
         else:x = last_rect.right + 5
+        return (x, self.position[1] + (self.font.get_height() / 2))
