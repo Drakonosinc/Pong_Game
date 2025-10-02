@@ -381,3 +381,4 @@ class ComboBoxRight(ComboBox):
         else:x = last_rect.right + 5
         return (x, self.position[1] + (self.font.get_height() / 2))
     def _adapt_size_dropdown_specific(self) -> None:
+        if self.option_buttons:
