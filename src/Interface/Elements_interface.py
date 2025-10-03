@@ -384,3 +384,4 @@ class ComboBoxRight(ComboBox):
         if self.option_buttons:
             keys = list(self.option_buttons.keys())
             width = self.option_buttons[keys[-1]].rect.right - self.option_buttons[keys[0]].rect.left + 10
+            self.dropdown[0] = width
