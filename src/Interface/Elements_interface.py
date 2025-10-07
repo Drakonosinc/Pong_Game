@@ -389,3 +389,4 @@ class ComboBoxRight(ComboBox):
     def _should_draw_option_button(self, button: object) -> bool: return button.rect.right <= self.dropdown_rect.right and button.rect.left >= self.dropdown_rect.left
     def _update_scroll_position(self) -> None: pass
 class ComboBoxLeft(ComboBox):
+    def get_icon_dropdown(self) -> str: return " <"
