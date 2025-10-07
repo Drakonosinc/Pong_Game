@@ -390,3 +390,4 @@ class ComboBoxRight(ComboBox):
     def _update_scroll_position(self) -> None: pass
 class ComboBoxLeft(ComboBox):
     def get_icon_dropdown(self) -> str: return " <"
+    def _get_anim_index(self) -> int: return 0
