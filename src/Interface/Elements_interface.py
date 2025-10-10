@@ -395,3 +395,4 @@ class ComboBoxLeft(ComboBox):
         self._anim_motion(self._get_anim_index())
         return pygame.Rect(self.position[0] - self.anim_height_dropdown,self.position[1] + (self.font.get_height() / 2),self.anim_height_dropdown,self.dropdown[1])
     def _check_buttons_position(self, i: int, text: str = "", first: bool = False) -> tuple[int, int]:
+        last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
