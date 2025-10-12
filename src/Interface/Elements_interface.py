@@ -399,3 +399,4 @@ class ComboBoxLeft(ComboBox):
         if not last_rect or first:x = self.position[0] - (self.font.size(text)[0] + 5)
         else:x = last_rect.left - (self.font.size(text)[0] + 5)
         return (x, self.position[1] + (self.font.get_height() / 2))
+    def _adapt_size_dropdown_specific(self) -> None:
