@@ -404,3 +404,4 @@ class ComboBoxLeft(ComboBox):
             keys = list(self.option_buttons.keys())
             width = self.option_buttons[keys[0]].rect.right - self.option_buttons[keys[-1]].rect.left + 10
             self.dropdown[0] = width
+            self.dropdown[1] = self.font.get_height() + 5
