@@ -406,3 +406,4 @@ class ComboBoxLeft(ComboBox):
             self.dropdown[0] = width
             self.dropdown[1] = self.font.get_height() + 5
     def _should_draw_option_button(self, button: object) -> bool: return button.rect.right <= self.dropdown_rect.right and button.rect.left >= self.dropdown_rect.left
+    def _update_scroll_position(self) -> None: pass
