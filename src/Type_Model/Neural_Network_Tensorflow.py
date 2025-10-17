@@ -1,4 +1,4 @@
-from keras import layers, Model
+from tensorflow import layers, Model
 import numpy as np
 
 class SimpleNN(Model):
