@@ -40,10 +40,8 @@ class DQNAgent:
             q_values = self.policy_net(tensor_state)
             return int(torch.argmax(q_values).item())
     def store_transition(self, state, action, reward, next_state, done): self.memory.push((state, action, reward, next_state, done))
-        
     def optimize_model(self):
-        if len(self.memory) < self.batch_size:
-            return
+        if len(self.memory) < self.batch_size: return
             
         transitions = self.memory.sample(self.batch_size)
         states, actions, rewards, next_states, dones = zip(*transitions)
