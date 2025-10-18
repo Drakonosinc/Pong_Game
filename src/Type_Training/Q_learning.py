@@ -123,8 +123,7 @@ def q_learning_step(game, state, action):
     if _qlearning_trainer is None: return
     
     # Apply Q-learning action to player_two
-    if action == 0 and game.player_two.rect.top > 0:  # UP
-        game.player_two.rect.y -= 5
+    if action == 0 and game.player_two.rect.top > 0: game.player_two.rect.y -= 5 # UP
     elif action == 1 and game.player_two.rect.bottom < game.HEIGHT:  # DOWN
         game.player_two.rect.y += 5
 
