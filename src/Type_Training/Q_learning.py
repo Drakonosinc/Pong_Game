@@ -81,9 +81,7 @@ class QLearningTrainer:
             epsilon_start=epsilon_start, 
             epsilon_end=epsilon_end, 
             epsilon_decay=epsilon_decay)
-        
         print(f"Q-Learning trainer initialized for {episodes} episodes")
-    
     def get_action(self, state):
         """Get action from Q-learning agent"""
         return self.agent.select_action(state)
