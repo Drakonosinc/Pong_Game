@@ -72,7 +72,6 @@ class QLearningTrainer:
         self.best_reward = float('-inf')
         self.best_model = None
         self.rewards_history = []
-        
         # Create DQN agent
         self.agent = DQNAgent(
             state_size=input_size, 
@@ -81,8 +80,7 @@ class QLearningTrainer:
             gamma=gamma,
             epsilon_start=epsilon_start, 
             epsilon_end=epsilon_end, 
-            epsilon_decay=epsilon_decay
-        )
+            epsilon_decay=epsilon_decay)
         
         print(f"Q-Learning trainer initialized for {episodes} episodes")
     
