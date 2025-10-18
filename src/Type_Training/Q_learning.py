@@ -92,12 +92,10 @@ class QLearningTrainer:
     def episode_complete(self, total_reward):
         """Called when an episode is complete"""
         self.rewards_history.append(total_reward)
-        
         # Track best model
         if total_reward > self.best_reward:
             self.best_reward = total_reward
             self.best_model = copy.deepcopy(self.agent.policy_net)
-        
         # Print progress
         if self.current_episode % 10 == 0:
             avg_reward = np.mean(self.rewards_history[-10:]) if len(self.rewards_history) >= 10 else np.mean(self.rewards_history)
@@ -122,8 +120,7 @@ _qlearning_trainer = None
 def q_learning_step(game, state, action):
     """Execute one step of Q-learning training"""
     global _qlearning_trainer
-    if _qlearning_trainer is None:
-        return
+    if _qlearning_trainer is None: return
     
     # Apply Q-learning action to player_two
     if action == 0 and game.player_two.rect.top > 0:  # UP
