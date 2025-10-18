@@ -85,12 +85,10 @@ class QLearningTrainer:
     def get_action(self, state):
         """Get action from Q-learning agent"""
         return self.agent.select_action(state)
-    
     def store_experience(self, state, action, reward, next_state, done):
         """Store experience and optimize model"""
         self.agent.store_transition(state, action, reward, next_state, done)
         self.agent.optimize_model()
-    
     def episode_complete(self, total_reward):
         """Called when an episode is complete"""
         self.rewards_history.append(total_reward)
