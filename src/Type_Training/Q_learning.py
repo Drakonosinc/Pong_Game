@@ -155,8 +155,7 @@ def load_qlearning_model(path, input_size, output_size, optimizer=None):
         model = SimpleNN(input_size, output_size)
         checkpoint = torch.load(path)
         model.load_state_dict(checkpoint['model_state_dict'])
-        if optimizer:
-            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        if optimizer: optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         return model
     except FileNotFoundError:
         print(f"The file {path} was not found.")
