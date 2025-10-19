@@ -124,15 +124,12 @@ def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3,
     global _qlearning_trainer
     # Create trainer instance
     _qlearning_trainer = QLearningTrainer(game, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay)
-    
     # Initialize Q-learning state tracking
     game._qlearning_state = None
     game._qlearning_prev_reward = 0
-    
     # Run training episodes using the existing run_with_model structure
     while _qlearning_trainer.current_episode < episodes:
         game.generation = _qlearning_trainer.current_episode
-        
         # Run one episode using the existing game loop
         total_reward = game.run_with_model()
         
