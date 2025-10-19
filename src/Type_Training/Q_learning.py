@@ -144,15 +144,10 @@ def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3,
     # Set the best model to the game
     game.model = best_model
     return best_model
-
 def save_qlearning_model(model, optimizer, path):
     """Save Q-learning model (same interface as genetic algorithm)"""
     print("Saving Q-learning model")
-    torch.save({
-        'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-    }, path)
-
+    torch.save({'model_state_dict': model.state_dict(),'optimizer_state_dict': optimizer.state_dict(),}, path)
 def load_qlearning_model(path, input_size, output_size, optimizer=None):
     """Load Q-learning model (same interface as genetic algorithm)"""
     try:
