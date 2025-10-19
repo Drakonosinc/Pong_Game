@@ -132,12 +132,9 @@ def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3,
         game.generation = _qlearning_trainer.current_episode
         # Run one episode using the existing game loop
         total_reward = game.run_with_model()
-        
         # Episode complete
         training_complete = _qlearning_trainer.episode_complete(total_reward)
-        
-        if training_complete or game.exit:
-            break
+        if training_complete or game.exit: break
     
     # Get best model
     best_model = _qlearning_trainer.get_best_model()
