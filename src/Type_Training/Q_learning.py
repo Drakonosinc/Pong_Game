@@ -139,11 +139,8 @@ def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3,
     best_model = _qlearning_trainer.get_best_model()
     # Cleanup
     if hasattr(game, '_qlearning_state'): delattr(game, '_qlearning_state')
-    if hasattr(game, '_qlearning_prev_reward'):
-        delattr(game, '_qlearning_prev_reward')
-    
+    if hasattr(game, '_qlearning_prev_reward'): delattr(game, '_qlearning_prev_reward')
     _qlearning_trainer = None
-    
     # Set the best model to the game
     game.model = best_model
     return best_model
