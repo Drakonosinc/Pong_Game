@@ -109,10 +109,8 @@ class QLearningTrainer:
     def get_best_model(self):
         """Get the best model found during training"""
         return self.best_model if self.best_model is not None else self.agent.policy_net
-
 # Global trainer instance
 _qlearning_trainer = None
-
 def q_learning_step(game, state, action):
     """Execute one step of Q-learning training"""
     global _qlearning_trainer
