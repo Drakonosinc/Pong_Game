@@ -115,11 +115,9 @@ def q_learning_step(game, state, action):
     """Execute one step of Q-learning training"""
     global _qlearning_trainer
     if _qlearning_trainer is None: return
-    
     # Apply Q-learning action to player_two
     if action == 0 and game.player_two.rect.top > 0: game.player_two.rect.y -= 5 # UP
-    elif action == 1 and game.player_two.rect.bottom < game.HEIGHT:  # DOWN
-        game.player_two.rect.y += 5
+    elif action == 1 and game.player_two.rect.bottom < game.HEIGHT: game.player_two.rect.y += 5 # DOWN
 
 def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3, 
                         gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995):
