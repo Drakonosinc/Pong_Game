@@ -6,13 +6,11 @@ import numpy as np
 import copy
 from collections import deque
 from Type_Model import *
-
 class ReplayMemory:
     def __init__(self, capacity: int): self.memory = deque(maxlen=capacity)
     def push(self, transition: tuple): self.memory.append(transition)
     def sample(self, batch_size: int): return random.sample(self.memory, batch_size)
     def __len__(self) -> int: return len(self.memory)
-
 class DQNAgent:
     def __init__(self, state_size: int, action_size: int, lr: float = 1e-3, gamma: float = 0.99, 
                 epsilon_start: float = 1.0, epsilon_end: float = 0.01, epsilon_decay: float = 0.995, 
