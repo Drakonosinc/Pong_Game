@@ -350,3 +350,5 @@ class ComboBox(TextButton):
     def events(self, event):
         if hasattr(self, 'scroll'):self.scroll.events(event)
     def return_buttons(self, button:str):return self.option_buttons[button]
+    # nota agregar un menu para modificar las capas de los modelos de redes neuronales, para
+    # dar la posibilidad de modificar la cantidad de capas y neuronas por capa
