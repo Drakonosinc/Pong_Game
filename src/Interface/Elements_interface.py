@@ -262,3 +262,4 @@ class ComboBox(TextButton):
     def is_vertical(self) -> bool: return False
     def _get_rect_dropdown(self)  -> pygame.Rect: raise NotImplementedError
     def _adapt_size_dropdown(self) -> None: raise NotImplementedError
+    def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]: raise NotImplementedError
