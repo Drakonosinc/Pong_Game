@@ -259,3 +259,4 @@ class ComboBox(TextButton):
         self.rect: dict[str, object] = {"button": pygame.Rect(*self.position, *self.font.size(self.text)),
                     "dropdown": self.button_dropdown}
     def get_icon(self) -> str: raise NotImplementedError
+    def is_vertical(self) -> bool: return False
