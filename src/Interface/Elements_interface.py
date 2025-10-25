@@ -264,3 +264,4 @@ class ComboBox(TextButton):
     def _adapt_size_dropdown(self) -> None: raise NotImplementedError
     def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]: raise NotImplementedError
     def _update_scroll_before_draw(self) -> None: pass
+    def _create_scroll(self) -> None: pass
