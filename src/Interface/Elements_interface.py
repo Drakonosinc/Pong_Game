@@ -266,3 +266,4 @@ class ComboBox(TextButton):
     def _update_scroll_before_draw(self) -> None: pass
     def _create_scroll(self) -> None: pass
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None: pass
+    def draw(self) -> None:
