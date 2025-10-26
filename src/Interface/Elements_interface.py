@@ -270,3 +270,6 @@ class ComboBox(TextButton):
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
         if self.is_dropdown_open:self.draw_rect_dropdown()
+        else:
+            self.anim_height_dropdown = 0
+            self.button_dropdown.change_item({"color": self.color})
