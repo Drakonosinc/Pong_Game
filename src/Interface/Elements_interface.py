@@ -267,3 +267,4 @@ class ComboBox(TextButton):
     def _create_scroll(self) -> None: pass
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None: pass
     def draw(self) -> None:
+        self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
