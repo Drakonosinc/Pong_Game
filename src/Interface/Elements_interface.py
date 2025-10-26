@@ -286,3 +286,5 @@ class ComboBox(TextButton):
         if self.is_vertical() and self.draw_scroll and self.option_buttons:self._rebuild_scroll()
         for button in self.option_buttons.values():self._draw_option_buttons(button)
         if hasattr(self, 'scroll'):self._draw_scroll()
+    def _draw_option_buttons(self,button: object) -> None:
+        if self._is_button_visible(button):button.draw()
