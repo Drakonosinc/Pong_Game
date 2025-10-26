@@ -277,3 +277,6 @@ class ComboBox(TextButton):
         if self.pressed:self.pressed_button(self.rect["button"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
     def draw_hover_effect(self) -> pygame.Rect:
         return self.screen.blit(self.font.render(f"{self.text}{self.type_dropdown}", True,self.hover_color), (self.position))
+    def draw_rect_dropdown(self) -> None:
+        self.button_dropdown.change_item({"color": self.hover_dropdown})
+        self.dropdown_rect = self._get_rect_dropdown()
