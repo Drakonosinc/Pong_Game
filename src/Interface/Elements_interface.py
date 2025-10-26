@@ -299,3 +299,10 @@ class ComboBox(TextButton):
         self.rect["scroll"] = self.scroll.rect
         self.scroll.update_elements([*self.option_buttons.values()])
         self.draw_scroll = False
+    def charge_elements(self, options: dict) -> None:
+        for i, (option,action) in enumerate(options.items()):
+            button = self.factory.create_TextButton({
+                "text": option,
+                "position": self._check_buttons_position(i, option),
+                "command1": lambda idx=i: self._select_option(idx) if self.replace_text else None,
+                "command2": action if callable(action) else None})
