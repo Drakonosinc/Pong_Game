@@ -285,3 +285,4 @@ class ComboBox(TextButton):
         if self.adapt_dropdown and self.option_buttons:self._adapt_size_dropdown()
         if self.is_vertical() and self.draw_scroll and self.option_buttons:self._rebuild_scroll()
         for button in self.option_buttons.values():self._draw_option_buttons(button)
+        if hasattr(self, 'scroll'):self._draw_scroll()
