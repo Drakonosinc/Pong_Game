@@ -274,3 +274,4 @@ class ComboBox(TextButton):
             self.anim_height_dropdown = 0
             self.button_dropdown.change_item({"color": self.color})
         if self.detect_mouse:self.mouse_collision(self.rect["button"],pygame.mouse.get_pos(),self.draw_hover_effect)
+        if self.pressed:self.pressed_button(self.rect["button"],pygame.mouse.get_pressed(),pygame.mouse.get_pos())
