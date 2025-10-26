@@ -280,3 +280,5 @@ class ComboBox(TextButton):
     def draw_rect_dropdown(self) -> None:
         self.button_dropdown.change_item({"color": self.hover_dropdown})
         self.dropdown_rect = self._get_rect_dropdown()
+        pygame.draw.rect(self.screen, self.hover_dropdown, self.dropdown_rect)
+        pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
