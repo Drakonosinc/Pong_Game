@@ -297,3 +297,5 @@ class ComboBox(TextButton):
     def _rebuild_scroll(self) -> None:
         self._create_scroll()
         self.rect["scroll"] = self.scroll.rect
+        self.scroll.update_elements([*self.option_buttons.values()])
+        self.draw_scroll = False
