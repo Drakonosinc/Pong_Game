@@ -284,3 +284,4 @@ class ComboBox(TextButton):
         pygame.draw.rect(self.screen, self.color, self.dropdown_rect, 2)
         if self.adapt_dropdown and self.option_buttons:self._adapt_size_dropdown()
         if self.is_vertical() and self.draw_scroll and self.option_buttons:self._rebuild_scroll()
+        for button in self.option_buttons.values():self._draw_option_buttons(button)
