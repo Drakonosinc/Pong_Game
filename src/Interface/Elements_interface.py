@@ -294,3 +294,6 @@ class ComboBox(TextButton):
     def _draw_scroll(self) -> None:
         self._update_scroll_before_draw()
         self.scroll.draw()
+    def _rebuild_scroll(self) -> None:
+        self._create_scroll()
+        self.rect["scroll"] = self.scroll.rect
