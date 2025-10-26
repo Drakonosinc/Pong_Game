@@ -291,3 +291,6 @@ class ComboBox(TextButton):
     def _is_button_visible(self, button: object) -> bool:
         if self.is_vertical(): return (button.rect.bottom<=self.dropdown_rect.bottom and button.rect.top>=self.dropdown_rect.top)
         else: return (button.rect.right<=self.dropdown_rect.right and button.rect.left>=self.dropdown_rect.left)
+    def _draw_scroll(self) -> None:
+        self._update_scroll_before_draw()
+        self.scroll.draw()
