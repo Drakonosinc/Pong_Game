@@ -268,3 +268,5 @@ class ComboBox(TextButton):
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None: pass
     def draw(self) -> None:
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
+        self.button_dropdown.draw()
+        if self.is_dropdown_open:self.draw_rect_dropdown()
