@@ -318,3 +318,6 @@ class ComboBox(TextButton):
         self.rect[key] = button
         self.options.append(text)
         self._post_repeat_charge(i, text, button)
+    def _select_option(self, index: int) -> None:
+        if 0 <= index < len(self.options):
+            self.text = self.options[index]
