@@ -310,3 +310,6 @@ class ComboBox(TextButton):
     def charge_buttons(self, buttons: list, first: bool = False) -> None:
         for i, button in enumerate(buttons):
             button.position = self._check_buttons_position(i, button.text,first)
+            if hasattr(button, 'rect'):
+                if isinstance(button.rect, pygame.Rect):button.rect.topleft = button.position
+                elif isinstance(button.rect, dict) and "button" in button.rect:button.rect["button"].topleft = button.position
