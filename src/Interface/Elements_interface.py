@@ -326,3 +326,4 @@ class ComboBox(TextButton):
             self.button_dropdown.change_item({"position": (self.position[0] + self.font.size(self.text)[0], int(self.position[1]))})
             self.button_dropdown.rect = pygame.Rect(self.button_dropdown.position, self.font.size(self.button_dropdown.text))
             self.is_dropdown_open = False
+        self.charge_buttons([button for button in self.option_buttons.values() if button.text != self.text],True)
