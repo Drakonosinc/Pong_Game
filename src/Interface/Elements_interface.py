@@ -313,3 +313,4 @@ class ComboBox(TextButton):
             if hasattr(button, 'rect'):
                 if isinstance(button.rect, pygame.Rect):button.rect.topleft = button.position
                 elif isinstance(button.rect, dict) and "button" in button.rect:button.rect["button"].topleft = button.position
+            self._repeat_charge(f"buttons_{i}",button.text,button,i)
