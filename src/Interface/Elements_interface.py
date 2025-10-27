@@ -328,3 +328,5 @@ class ComboBox(TextButton):
             self.is_dropdown_open = False
         self.charge_buttons([button for button in self.option_buttons.values() if button.text != self.text],True)
         if self.is_vertical():self._rebuild_scroll()
+    def events(self, event):
+        if hasattr(self, 'scroll'):self.scroll.events(event)
