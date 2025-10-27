@@ -317,3 +317,5 @@ class ComboBox(TextButton):
     def _repeat_charge(self,key,text,button,i) -> None:
         self.option_buttons[text] = button
         self.rect[key] = button
+        self.options.append(text)
+        self._post_repeat_charge(i, text, button)
