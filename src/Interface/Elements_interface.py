@@ -337,3 +337,5 @@ class ComboBoxDown(ComboBox):
     def _get_rect_dropdown(self)  -> pygame.Rect:
         if self.anim_height_dropdown < self.dropdown[1]: self.anim_height_dropdown += 1
         return pygame.Rect(self.position[0], self.position[1] + self.font.get_height(), self.dropdown[0], self.anim_height_dropdown)
+    def _adapt_size_dropdown(self) -> None:
+        self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
