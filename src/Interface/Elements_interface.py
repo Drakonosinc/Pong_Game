@@ -340,3 +340,4 @@ class ComboBoxDown(ComboBox):
     def _adapt_size_dropdown(self) -> None:
         self.dropdown[1], self.adapt_dropdown = (len(self.option_buttons) * (self.font.get_height() + 5)), False
     def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]:
+        last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
