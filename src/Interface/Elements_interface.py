@@ -333,3 +333,4 @@ class ComboBox(TextButton):
     def return_buttons(self, button:str): return self.option_buttons[button]
 class ComboBoxDown(ComboBox):
     def get_icon(self) -> str: return " V"
+    def is_vertical(self) -> bool: return True
