@@ -331,3 +331,4 @@ class ComboBox(TextButton):
     def events(self, event):
         if hasattr(self, 'scroll'):self.scroll.events(event)
     def return_buttons(self, button:str): return self.option_buttons[button]
+class ComboBoxDown(ComboBox):
