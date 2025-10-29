@@ -353,3 +353,4 @@ class ComboBoxDown(ComboBox):
         if len(text) >= len(self.options[i]): self.dropdown[0] = self.font.size(button.text)[0] + 5
 class ComboBoxUp(ComboBox):
     def get_icon(self) -> str: return " ^"
+    def is_vertical(self) -> bool: return True
