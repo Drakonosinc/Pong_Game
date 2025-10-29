@@ -344,3 +344,4 @@ class ComboBoxDown(ComboBox):
         return (self.position[0], (self.position[1] + self.font.get_height() + i * (self.font.get_height() + 5)) if not last_rect or first else (last_rect.bottom + 5))
     def _update_scroll_before_draw(self) -> None:
         self.scroll.rect["rect"].height = self.dropdown_rect.height
+    def _create_scroll(self) -> None:
