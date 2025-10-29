@@ -356,3 +356,4 @@ class ComboBoxUp(ComboBox):
     def is_vertical(self) -> bool: return True
     def _get_rect_dropdown(self)  -> pygame.Rect:
         if self.anim_height_dropdown < self.dropdown[1]: self.anim_height_dropdown += 1
+        return pygame.Rect(self.position[0], self.position[1] - self.anim_height_dropdown, self.dropdown[0], self.anim_height_dropdown)
