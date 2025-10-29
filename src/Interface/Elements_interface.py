@@ -349,3 +349,4 @@ class ComboBoxDown(ComboBox):
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
             "thumb_height": 20,
             "color_bar": (135, 206, 235)})
+    def _post_repeat_charge(self, i:int, text:str, button: object) -> None:
