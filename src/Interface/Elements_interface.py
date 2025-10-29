@@ -354,3 +354,4 @@ class ComboBoxDown(ComboBox):
 class ComboBoxUp(ComboBox):
     def get_icon(self) -> str: return " ^"
     def is_vertical(self) -> bool: return True
+    def _get_rect_dropdown(self)  -> pygame.Rect:
