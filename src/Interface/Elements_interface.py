@@ -363,3 +363,5 @@ class ComboBoxUp(ComboBox):
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
         return (self.position[0], (self.position[1] - self.font.get_height() + i * (self.font.get_height() + 5)) if not last_rect or first else (last_rect.top - self.font.get_height()))
     def _update_scroll_before_draw(self) -> None:
+        if self.dropdown_rect.height != self.dropdown[1]:
+            self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
