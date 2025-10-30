@@ -367,3 +367,4 @@ class ComboBoxUp(ComboBox):
             self.scroll.rect["rect"].y = self.scroll.rect["thumb"].y = self.dropdown_rect.y
         self.scroll.rect["rect"].height = self.dropdown_rect.height
     def _create_scroll(self) -> None:
+        self.scroll = self.factory.create_ScrollBar({
