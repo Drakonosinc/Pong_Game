@@ -374,3 +374,4 @@ class ComboBoxUp(ComboBox):
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None:
         if len(text) >= len(self.options[i]): self.dropdown[0] = self.font.size(button.text)[0] + 5
 class ComboBoxRight(ComboBox):
+    def get_icon(self) -> str: return " >"
