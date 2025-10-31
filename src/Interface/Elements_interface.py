@@ -375,3 +375,4 @@ class ComboBoxUp(ComboBox):
         if len(text) >= len(self.options[i]): self.dropdown[0] = self.font.size(button.text)[0] + 5
 class ComboBoxRight(ComboBox):
     def get_icon(self) -> str: return " >"
+    def _get_rect_dropdown(self)  -> pygame.Rect:
