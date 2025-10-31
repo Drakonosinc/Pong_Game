@@ -370,3 +370,4 @@ class ComboBoxUp(ComboBox):
         self.scroll = self.factory.create_ScrollBar({
             "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
             "thumb_height": 20,
+            "color_bar": (135, 206, 235)})
