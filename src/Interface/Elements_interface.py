@@ -372,3 +372,4 @@ class ComboBoxUp(ComboBox):
             "thumb_height": 20,
             "color_bar": (135, 206, 235)})
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None:
+        if len(text) >= len(self.options[i]): self.dropdown[0] = self.font.size(button.text)[0] + 5
