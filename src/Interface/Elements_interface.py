@@ -381,3 +381,4 @@ class ComboBoxRight(ComboBox):
     def _adapt_size_dropdown(self) -> None:
         self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.right - self.option_buttons[list(self.option_buttons.keys())[0]].rect.left) + 10, (self.font.get_height() + 5), False
     def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]:
+        last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
