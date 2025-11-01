@@ -386,3 +386,4 @@ class ComboBoxRight(ComboBox):
 class ComboBoxLeft(ComboBox):
     def get_icon(self) -> str: return " <"
     def _get_rect_dropdown(self)  -> pygame.Rect:
+        if self.anim_height_dropdown < self.dropdown[0]: self.anim_height_dropdown += 1
