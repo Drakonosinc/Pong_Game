@@ -385,3 +385,4 @@ class ComboBoxRight(ComboBox):
         return ((self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)) if not last_rect or first else (last_rect.right + 5), self.position[1] + (self.font.get_height()/2))
 class ComboBoxLeft(ComboBox):
     def get_icon(self) -> str: return " <"
+    def _get_rect_dropdown(self)  -> pygame.Rect:
