@@ -384,3 +384,4 @@ class ComboBoxRight(ComboBox):
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
         return ((self.position[0] + ((self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]) + 5)) if not last_rect or first else (last_rect.right + 5), self.position[1] + (self.font.get_height()/2))
 class ComboBoxLeft(ComboBox):
+    def get_icon(self) -> str: return " <"
