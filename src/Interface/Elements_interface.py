@@ -379,3 +379,4 @@ class ComboBoxRight(ComboBox):
         if self.anim_height_dropdown < self.dropdown[0]: self.anim_height_dropdown += 1
         return pygame.Rect(self.position[0] + (self.font.size(self.text)[0] + self.font.size(self.type_dropdown)[0]), self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
     def _adapt_size_dropdown(self) -> None:
+        self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[-1]].rect.right - self.option_buttons[list(self.option_buttons.keys())[0]].rect.left) + 10, (self.font.get_height() + 5), False
