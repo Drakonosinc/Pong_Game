@@ -264,7 +264,11 @@ class ComboBox(TextButton):
     def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]: raise NotImplementedError
     def _update_scroll_before_draw(self) -> None: pass
     def _post_repeat_charge(self, i:int, text:str, button: object) -> None: pass
-    def _create_scroll(self) -> None: pass
+    def _create_scroll(self) -> None:
+        self.scroll = self.factory.create_ScrollBar({
+            "position": (self.position[0] + self.dropdown[0], self.position[1] + self.font.get_height(), 20, self.dropdown[1]),
+            "thumb_height": 20,
+            "color_bar": (135, 206, 235)})
     def draw(self) -> None:
         self.screen.blit(self.font.render(self.text, True,self.color),(self.position))
         self.button_dropdown.draw()
