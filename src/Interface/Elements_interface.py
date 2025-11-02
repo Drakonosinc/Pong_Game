@@ -390,3 +390,4 @@ class ComboBoxLeft(ComboBox):
         return pygame.Rect(self.position[0] - self.anim_height_dropdown, self.position[1] + (self.font.get_height()/2), self.anim_height_dropdown, self.dropdown[1])
     def _adapt_size_dropdown(self) -> None:
         self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[0]].rect.right - self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left) + 10, (self.font.get_height() + 5), False
+    def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]:
