@@ -392,3 +392,4 @@ class ComboBoxLeft(ComboBox):
         self.dropdown[0], self.dropdown[1], self.adapt_dropdown = (self.option_buttons[list(self.option_buttons.keys())[0]].rect.right - self.option_buttons[list(self.option_buttons.keys())[-1]].rect.left) + 10, (self.font.get_height() + 5), False
     def _check_buttons_position(self,i: int, text: str = "", first: bool = False) -> tuple[int, int]:
         last_rect = self.option_buttons[list(self.option_buttons.keys())[-1]].rect if self.option_buttons else None
+        return ((self.position[0] - (self.font.size(text)[0] + 5)) if not last_rect or first else (last_rect.left - (self.font.size(text)[0] + 5)), self.position[1] + (self.font.get_height()/2))
