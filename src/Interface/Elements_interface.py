@@ -21,11 +21,7 @@ class ElementsFactory:
         return ScrollBar({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_ComboBox(self,config:dict):
         type_key = (config.get("type_dropdown", "down")).lower()
-        mapping = {
-            "down": ComboBoxDown,
-            "up": ComboBoxUp,
-            "right": ComboBoxRight,
-            "left": ComboBoxLeft,}
+        mapping = {"down": ComboBoxDown, "up": ComboBoxUp, "right": ComboBoxRight, "left": ComboBoxLeft,}
         cls = mapping.get(type_key, ComboBoxDown)
         return cls({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class ElementBehavior:
