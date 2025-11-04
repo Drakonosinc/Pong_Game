@@ -22,7 +22,8 @@ class interface(load_elements,BaseMenu):
             3: self.pause_menu.render,
             4: self.options_menu.render,
             5: self.visuals_menu.render,
-            6: self.keys_menu.render}
+            6: self.keys_menu.render,
+            7: self.menu_AI.render}
         if self.main in menu_routes:menu_routes[self.main]()
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
