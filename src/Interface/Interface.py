@@ -14,6 +14,7 @@ class interface(load_elements,BaseMenu):
         self.options_menu = OptionsMenu(self)
         self.visuals_menu = VisualsMenu(self)
         self.keys_menu = KeysMenu(self)
+        self.menu_AI = AIMenu(self)
     def menus(self):
         menu_routes = {
             0: self.main_menu.render,
