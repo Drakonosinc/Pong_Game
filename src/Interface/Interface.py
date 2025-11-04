@@ -38,6 +38,7 @@ class interface(load_elements,BaseMenu):
         self.options_menu.setup_buttons()
         self.visuals_menu.setup_buttons()
         self.keys_menu.setup_buttons()
+        self.menu_AI.setup_buttons()
     def events_buttons(self,event):
         self.decrease_score_button.reactivate_pressed(event)
         self.increase_score_button.reactivate_pressed(event)
