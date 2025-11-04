@@ -6,3 +6,5 @@ class AIMenu(BaseMenu):
         self.config_buttons = {}
     def setup_buttons(self):
         factory = self.interface.button_factory_f2_5
+    def _setup_training_ai_buttons(self):
+        factory = self.interface.button_factory_f2_5
