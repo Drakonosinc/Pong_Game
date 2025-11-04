@@ -12,19 +12,19 @@ class Space_pong_game(interface):
         self.objects()
         self.draw_buttons()
     def load_varials(self):
-        self.running:bool=False
-        self.game_over:bool=False
-        self.exit:bool=False
-        self.clock=pygame.time.Clock()
-        self.FPS:int=60
-        self.generation:int=0
-        self.main:int=0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
-        self.speed:int=0
-        self.speed_up:bool=True
-        self.speed_down:bool=True
-        self.mode_game:dict[str,bool]={"Training AI":False,"Player":False,"AI":False}
-        self.sound_type:dict={"sound":f"Sound {"ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
-        self.utils_keys:dict[str,bool]={"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
+        self.running:bool = False
+        self.game_over:bool = False
+        self.exit:bool = False
+        self.clock = pygame.time.Clock()
+        self.FPS:int = 60
+        self.generation:int = 0
+        self.main:int = 0 # -1=game, 0=menu, 1=game over, 2=game mode, 3=pausa, 4=options, 5=visuals, 6=menu keys
+        self.speed:int = 0
+        self.speed_up:bool = True
+        self.speed_down:bool = True
+        self.mode_game:dict[str,bool] = {"Training AI":False,"Player":False,"AI":False}
+        self.sound_type:dict = {"sound":f"Sound {"ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
+        self.utils_keys:dict[str,bool] = {"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
     def objects(self):
         self.balls=[ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i) for i in range(1 if self.mode_game["Training AI"] else self.config.config_game["number_balls"])]
         self.player_one=Player(25,150,11,90,[True] * len(self.balls))
