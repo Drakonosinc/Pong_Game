@@ -70,7 +70,7 @@ class GameMode(BaseMenu):
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (5, self.HEIGHT/2-76)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
-        self.buttons['config_model_ai'] = factory.create_TextButton({"text": "AI parameters","position": (5, self.HEIGHT/2-56),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.objects})})
+        self.buttons['config_model_ai'] = factory.create_TextButton({"text": "AI parameters","position": (5, self.HEIGHT/2-46),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.objects})})
         self.interface.save_model_button = self.buttons['save_model']
         self.interface.box_type_training = self.buttons['box_type_training']
         self.interface.box_type_model = self.buttons['box_type_model']
