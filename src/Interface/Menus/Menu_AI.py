@@ -10,3 +10,4 @@ class AIMenu(BaseMenu):
         self.buttons['continue'] = factory.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.objects})})
     def render(self):
         self.screen.fill(self.interface.BLACK)
+        self.execute_buttons(self.buttons['back'], self.buttons['continue'])
