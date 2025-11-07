@@ -11,3 +11,4 @@ class SimpleNN(nn.Module):
         for h in hidden_sizes:
             self.hidden_layers.append(nn.Linear(in_features, int(h)))
             in_features = int(h)
+        self.output_layer = nn.Linear(in_features, output_size)
