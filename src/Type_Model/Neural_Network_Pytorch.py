@@ -3,14 +3,5 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SimpleNN(nn.Module):
-    def __init__(self, input_size, output_size):
+    def __init__(self, input_size, output_size, hidden_sizes=None):
         super(SimpleNN, self).__init__()
-        self.fc1 = nn.Linear(input_size, 128)
-        self.fc2 = nn.Linear(128, output_size)
-        self.activations=None
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        self.activations = x.detach().numpy().reshape(1, -1)  
-        self.activations = (self.activations - self.activations.min()) / (self.activations.max() - self.activations.min())  # Normaliza las activaciones
-        x = self.fc2(x)
-        return x
