@@ -8,3 +8,6 @@ class SimpleNN(nn.Module):
         if hidden_sizes is None or len(hidden_sizes) == 0: hidden_sizes = [128]
         self.hidden_layers = nn.ModuleList()
         in_features = input_size
+        for h in hidden_sizes:
+            self.hidden_layers.append(nn.Linear(in_features, int(h)))
+            in_features = int(h)
