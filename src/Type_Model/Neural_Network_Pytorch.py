@@ -18,3 +18,5 @@ class SimpleNN(nn.Module):
         for i, layer in enumerate(self.hidden_layers):
             x = torch.relu(layer(x))
             if i == 0:
+                with torch.no_grad():
+ 
