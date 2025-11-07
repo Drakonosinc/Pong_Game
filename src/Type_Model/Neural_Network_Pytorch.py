@@ -20,4 +20,4 @@ class SimpleNN(nn.Module):
             if i == 0:
                 with torch.no_grad():
                     act = x.detach().cpu().numpy().reshape(1, -1)
-                    if act.max() - act.min() != 0:
+                    if act.max() - act.min() != 0: self.activations = (act - act.min()) / (act.max() - act.min())
