@@ -13,3 +13,4 @@ class SimpleNN(nn.Module):
             in_features = int(h)
         self.output_layer = nn.Linear(in_features, output_size)
         self.fc1 = self.hidden_layers[0]
+        self.activations = None
