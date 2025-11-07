@@ -19,4 +19,4 @@ class SimpleNN(nn.Module):
             x = torch.relu(layer(x))
             if i == 0:
                 with torch.no_grad():
- 
+                    act = x.detach().cpu().numpy().reshape(1, -1)
