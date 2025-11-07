@@ -10,6 +10,7 @@ if __name__=="__main__":
                 if game.config.config_AI["type_training"]["Genetic"]:
                     genetic_config = game.config.config_AI["genetic"]
                     nn_cfg = game.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
+                    arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
                 elif game.config.config_AI["type_training"]["Q-learning"]:
                     q_config = game.config.config_AI["q_learning"]
                     game.model = best_model
