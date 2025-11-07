@@ -17,3 +17,4 @@ class SimpleNN(nn.Module):
     def forward(self, x):
         for i, layer in enumerate(self.hidden_layers):
             x = torch.relu(layer(x))
+            if i == 0:
