@@ -15,7 +15,8 @@ if __name__=="__main__":
                 elif game.config.config_AI["type_training"]["Q-learning"]:
                     q_config = game.config.config_AI["q_learning"]
                     nn_cfg = game.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
-                    game.model = best_model
+                    arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
+                game.model = best_model
                 if game.config.config_AI["model_save"]:save_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
             case {"Player": True} | {"AI": True}:game.run_with_model()
         if game.exit:break
