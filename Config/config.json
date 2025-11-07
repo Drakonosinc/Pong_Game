@@ -40,7 +40,7 @@
         "Name_key4": "\u2193"
     },
     "config_AI": {
-        "model_save": true,
+        "model_save": false,
         "type_training": {
             "Genetic": true,
             "Q-learning": false
@@ -65,6 +65,10 @@
             "memory_size": 10000,
             "batch_size": 32,
             "target_update": 100
+        },
+        "nn": {
+            "hidden_layers": 2,
+            "neurons_per_layer": 6
         }
     },
     "config_sounds": {
