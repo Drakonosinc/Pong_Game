@@ -13,3 +13,4 @@ class SimpleNN(Model):
         for i, layer in enumerate(self.hidden_layers):
             x = layer(x)
             if i == 0:
+                self.activations = x
