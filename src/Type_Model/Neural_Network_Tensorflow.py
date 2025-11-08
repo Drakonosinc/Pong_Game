@@ -9,3 +9,4 @@ class SimpleNN(Model):
         self.output_layer = layers.Dense(output_size)
         self.fc1 = self.hidden_layers[0]
         self.activations = None
+    def forward(self, x):
