@@ -19,3 +19,4 @@ class SimpleNN(Model):
                     min_val = np.min(activations_np)
                     max_val = np.max(activations_np)
                     if max_val - min_val != 0: self.activations = (activations_np - min_val) / (max_val - min_val)
+                except Exception: pass
