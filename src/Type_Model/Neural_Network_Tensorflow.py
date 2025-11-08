@@ -10,3 +10,5 @@ class SimpleNN(Model):
         self.fc1 = self.hidden_layers[0]
         self.activations = None
     def forward(self, x):
+        for i, layer in enumerate(self.hidden_layers):
+ 
