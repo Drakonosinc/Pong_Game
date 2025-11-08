@@ -12,3 +12,4 @@ class SimpleNN(Model):
     def forward(self, x):
         for i, layer in enumerate(self.hidden_layers):
             x = layer(x)
+            if i == 0:
