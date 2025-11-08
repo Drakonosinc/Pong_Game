@@ -17,3 +17,4 @@ class SimpleNN(Model):
                 try:
                     activations_np = self.activations.numpy().reshape(1, -1)
                     min_val = np.min(activations_np)
+                    max_val = np.max(activations_np)
