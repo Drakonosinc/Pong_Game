@@ -8,3 +8,4 @@ class SimpleNN(Model):
         self.hidden_layers = [layers.Dense(int(h), activation='relu') for h in hidden_sizes]
         self.output_layer = layers.Dense(output_size)
         self.fc1 = self.hidden_layers[0]
+        self.activations = None
