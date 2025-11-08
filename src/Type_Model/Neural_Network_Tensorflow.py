@@ -14,3 +14,4 @@ class SimpleNN(Model):
             x = layer(x)
             if i == 0:
                 self.activations = x
+                try:
