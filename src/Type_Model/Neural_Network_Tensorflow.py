@@ -15,3 +15,4 @@ class SimpleNN(Model):
             if i == 0:
                 self.activations = x
                 try:
+                    activations_np = self.activations.numpy().reshape(1, -1)
