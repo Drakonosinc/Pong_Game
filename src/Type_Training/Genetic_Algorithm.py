@@ -59,3 +59,7 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
             best_model = copy.deepcopy(population[fitness_scores.index(current_best)])
         print(f"Generación {generation}: Mejor Fitness = {current_best}")
         sorted_population = [model for _, model in sorted(zip(fitness_scores, population), key=lambda x: x[0], reverse=True)]
+        new_population = [copy.deepcopy(sorted_population[i]) for i in range(elitism)]
+        num_offsprings = population_size - elitism
+        parents = select_parents(population, fitness_scores, num_offsprings)
+        offspring = []
