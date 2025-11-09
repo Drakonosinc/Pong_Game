@@ -38,3 +38,10 @@ def crossover(parent1, parent2):
         child_param2.data.copy_(param2.data * mask + param1.data * (~mask))
     return child1, child2
 
+def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
+    with torch.no_grad():
+        for param in model.parameters():
+            if random.random() < mutation_rate:
+                noise = torch.randn(param.size()) * mutation_strength
+                param.add_(noise)
+    return model
