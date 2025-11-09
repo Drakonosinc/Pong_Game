@@ -28,3 +28,7 @@ def select_parents(population, fitness_scores, num_parents):
     top_fitness = [fit for ind, fit in sorted_pop_fitness[:top_count]]
     parents = random.choices(top_population, weights=top_fitness, k=num_parents)
     return parents
+
+def crossover(parent1, parent2):
+    child1 = copy.deepcopy(parent1)
+    child2 = copy.deepcopy(parent2)
