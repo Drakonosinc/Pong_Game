@@ -126,3 +126,6 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
         if optimizer and 'optimizer_state_dict' in checkpoint:
             optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         return model
+    except FileNotFoundError:
+        print(f"The file {path} was not found.")
+        return None
