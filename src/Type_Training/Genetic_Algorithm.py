@@ -12,3 +12,5 @@ def initialize_population(size, input_size, output_size, hidden_sizes=None):
         population.append(model)
     return population
 
+def evaluate_population(population, game, num_trials=3):
+    fitness_scores = []
