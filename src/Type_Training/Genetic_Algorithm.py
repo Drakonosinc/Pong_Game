@@ -50,3 +50,7 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
     population = initialize_population(population_size, input_size, output_size, hidden_sizes=hidden_sizes)
     best_fitness = -float('inf')
     best_model = None
+    for generation in range(generations):
+        game.generation = generation  
+        fitness_scores = evaluate_population(population, game, num_trials)
+        current_best = max(fitness_scores)
