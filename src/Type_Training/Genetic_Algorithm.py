@@ -57,3 +57,5 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
         if current_best > best_fitness:
             best_fitness = current_best
             best_model = copy.deepcopy(population[fitness_scores.index(current_best)])
+        print(f"Generación {generation}: Mejor Fitness = {current_best}")
+        sorted_population = [model for _, model in sorted(zip(fitness_scores, population), key=lambda x: x[0], reverse=True)]
