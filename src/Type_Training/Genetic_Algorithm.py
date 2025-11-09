@@ -123,4 +123,6 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
         else:
             model = SimpleNN(input_size, output_size, hidden_sizes=hidden_sizes)
             _filtered_load(model, state_dict)
- 
+        if optimizer and 'optimizer_state_dict' in checkpoint:
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        return model
