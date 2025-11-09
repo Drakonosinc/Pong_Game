@@ -67,3 +67,7 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
             child1, child2 = crossover(parents[i], parents[i+1])
             offspring.append(mutate(child1, mutation_rate, mutation_strength))
             offspring.append(mutate(child2, mutation_rate, mutation_strength))
+        while len(offspring) < num_offsprings:
+            extra_parent = random.choice(population)
+            offspring.append(mutate(copy.deepcopy(extra_parent), mutation_rate, mutation_strength))
+        population = new_population + offspring[:num_offsprings]
