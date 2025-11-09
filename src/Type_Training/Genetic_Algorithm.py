@@ -110,3 +110,11 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
                     remapped['output_layer.weight'] = ow
                     remapped['output_layer.bias'] = ob
             _filtered_load(model, remapped)
+        elif has_hidden:
+            indices = sorted({int(k.split('.')[1]) for k in state_dict.keys() if k.startswith('hidden_layers.')})
+            sizes = []
+            for i in indices:
+                w_key = f'hidden_layers.{i}.weight'
+                if w_key in state_dict:
+                    sizes.append(state_dict[w_key].shape[0])
+ 
