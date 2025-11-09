@@ -63,3 +63,7 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
         num_offsprings = population_size - elitism
         parents = select_parents(population, fitness_scores, num_offsprings)
         offspring = []
+        for i in range(0, len(parents) - 1, 2):
+            child1, child2 = crossover(parents[i], parents[i+1])
+            offspring.append(mutate(child1, mutation_rate, mutation_strength))
+            offspring.append(mutate(child2, mutation_rate, mutation_strength))
