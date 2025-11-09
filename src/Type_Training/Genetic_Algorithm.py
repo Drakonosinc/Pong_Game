@@ -10,3 +10,5 @@ def initialize_population(size, input_size, output_size, hidden_sizes=None):
     for _ in range(size):
         model = SimpleNN(input_size, output_size, hidden_sizes=hidden_sizes)
         population.append(model)
+    return population
+
