@@ -14,3 +14,4 @@ def initialize_population(size, input_size, output_size, hidden_sizes=None):
 
 def evaluate_population(population, game, num_trials=3):
     fitness_scores = []
+    for model in population:
