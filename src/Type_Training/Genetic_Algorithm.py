@@ -97,3 +97,8 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
         if has_fc:
             if 'fc1.weight' in state_dict:
                 first_hidden = state_dict['fc1.weight'].shape[0]
+            else:
+                any_w = next((v for k, v in state_dict.items() if k.endswith('.weight')), None)
+                first_hidden = any_w.shape[0] if any_w is not None else 128
+            model = SimpleNN(input_size, output_size, hidden_sizes=[first_hidden])
+            remapped = {}
