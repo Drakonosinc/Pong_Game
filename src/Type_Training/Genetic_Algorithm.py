@@ -129,3 +129,6 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
     except FileNotFoundError:
         print(f"The file {path} was not found.")
         return None
+    except Exception as e:
+        print(f"An error occurred while loading the model: {e}")
+        return None
