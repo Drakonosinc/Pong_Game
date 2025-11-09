@@ -86,3 +86,8 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
         checkpoint = torch.load(path)
         state_dict = checkpoint.get('model_state_dict', checkpoint)
         has_fc = any(k.startswith('fc1.') or k.startswith('fc2.') for k in state_dict.keys())
+        has_hidden = any(k.startswith('hidden_layers.') for k in state_dict.keys())
+        def _filtered_load(model, sd):
+            msd = model.state_dict()
+            filtered = {k: v for k, v in sd.items() if k in msd and msd[k].shape == v.shape}
+            missing = [k for k in sd.keys() if k not in filtered]
