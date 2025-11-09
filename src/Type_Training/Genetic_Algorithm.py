@@ -71,3 +71,6 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
             extra_parent = random.choice(population)
             offspring.append(mutate(copy.deepcopy(extra_parent), mutation_rate, mutation_strength))
         population = new_population + offspring[:num_offsprings]
+    game.model = best_model
+    return best_model
+
