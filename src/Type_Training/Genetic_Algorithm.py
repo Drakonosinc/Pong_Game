@@ -7,3 +7,6 @@ def fitness_function(model, game):
 
 def initialize_population(size, input_size, output_size, hidden_sizes=None):
     population = []
+    for _ in range(size):
+        model = SimpleNN(input_size, output_size, hidden_sizes=hidden_sizes)
+        population.append(model)
