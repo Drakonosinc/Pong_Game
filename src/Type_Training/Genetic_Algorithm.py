@@ -91,3 +91,9 @@ def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None)
             msd = model.state_dict()
             filtered = {k: v for k, v in sd.items() if k in msd and msd[k].shape == v.shape}
             missing = [k for k in sd.keys() if k not in filtered]
+            if missing:
+                pass
+            model.load_state_dict(filtered, strict=False)
+        if has_fc:
+            if 'fc1.weight' in state_dict:
+                first_hidden = state_dict['fc1.weight'].shape[0]
