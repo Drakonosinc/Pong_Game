@@ -74,3 +74,8 @@ def genetic_algorithm(game, input_size, output_size, generations=100, population
     game.model = best_model
     return best_model
 
+def save_model(model, optimizer, path):
+    print("save model")
+    torch.save({
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),}, path)
