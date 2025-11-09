@@ -32,3 +32,6 @@ def select_parents(population, fitness_scores, num_parents):
 def crossover(parent1, parent2):
     child1 = copy.deepcopy(parent1)
     child2 = copy.deepcopy(parent2)
+    for param1, param2, child_param1, child_param2 in zip(parent1.parameters(),parent2.parameters(),child1.parameters(),child2.parameters()):
+        mask = torch.rand_like(param1) > 0.5
+        child_param1.data.copy_(param1.data * mask + param2.data * (~mask))
