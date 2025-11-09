@@ -79,3 +79,10 @@ def save_model(model, optimizer, path):
     torch.save({
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),}, path)
+
+def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None):
+    try:
+        print("load model")
+        checkpoint = torch.load(path)
+        state_dict = checkpoint.get('model_state_dict', checkpoint)
+        has_fc = any(k.startswith('fc1.') or k.startswith('fc2.') for k in state_dict.keys())
