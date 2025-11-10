@@ -9,3 +9,4 @@ class AIMenu(BaseMenu):
         # Defaults if missing in config
         nn_cfg = self.interface.config.config_AI.setdefault("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
         nn_cfg["hidden_layers"] = max(1, int(nn_cfg.get("hidden_layers", 2)))
+        nn_cfg["neurons_per_layer"] = max(1, int(nn_cfg.get("neurons_per_layer", 6)))
