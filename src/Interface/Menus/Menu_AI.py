@@ -12,3 +12,4 @@ class AIMenu(BaseMenu):
         nn_cfg["neurons_per_layer"] = max(1, int(nn_cfg.get("neurons_per_layer", 6)))
         # Fixed IO sizes used by the current game
         self.input_size = 6
+        self.output_size = 2
