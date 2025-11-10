@@ -13,3 +13,4 @@ class AIMenu(BaseMenu):
         # Fixed IO sizes used by the current game
         self.input_size = 6
         self.output_size = 2
+    def setup_buttons(self):
