@@ -15,3 +15,4 @@ class AIMenu(BaseMenu):
         self.output_size = 2
     def setup_buttons(self):
         f_big = self.interface.button_factory_f5
+        f_med = self.interface.button_factory_f2_5
