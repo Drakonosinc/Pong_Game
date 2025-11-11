@@ -20,4 +20,4 @@ class AIMenu(BaseMenu):
         self.buttons['back'] = f_med.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2": ((50, 340), (50, 390), (10, 365)),"command1": lambda: self.change_mains({"main": 2})})
         # Controls (+/- layers, +/- neurons)
         self.buttons['dec_layers'] = f_med.create_TextButton({"text": "-","position": (self.WIDTH//2-130, 60),"command1": lambda: self._change_layers(-1)})
- 
+        self.buttons['inc_layers'] = f_med.create_TextButton({"text": "+","position": (self.WIDTH//2-100, 60),"command1": lambda: self._change_layers(1)})
