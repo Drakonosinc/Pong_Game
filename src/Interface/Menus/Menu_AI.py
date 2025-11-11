@@ -22,3 +22,4 @@ class AIMenu(BaseMenu):
         self.buttons['dec_layers'] = f_med.create_TextButton({"text": "-","position": (self.WIDTH//2-130, 60),"command1": lambda: self._change_layers(-1)})
         self.buttons['inc_layers'] = f_med.create_TextButton({"text": "+","position": (self.WIDTH//2-100, 60),"command1": lambda: self._change_layers(1)})
         self.buttons['dec_neurons'] = f_med.create_TextButton({"text": "-","position": (self.WIDTH//2+100, 60),"command1": lambda: self._change_neurons(-1)})
+        self.buttons['inc_neurons'] = f_med.create_TextButton({"text": "+","position": (self.WIDTH//2+130, 60),"command1": lambda: self._change_neurons(1)})
