@@ -26,3 +26,4 @@ class AIMenu(BaseMenu):
         # Build first visual network
         self._rebuild_network_visual()
     def _architecture(self):
+        cfg = self.interface.config.config_AI["nn"]
