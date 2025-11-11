@@ -25,4 +25,4 @@ class AIMenu(BaseMenu):
         self.buttons['inc_neurons'] = f_med.create_TextButton({"text": "+","position": (self.WIDTH//2+130, 60),"command1": lambda: self._change_neurons(1)})
         # Build first visual network
         self._rebuild_network_visual()
- 
+    def _architecture(self):
