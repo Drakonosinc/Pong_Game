@@ -16,3 +16,5 @@ class AIMenu(BaseMenu):
     def setup_buttons(self):
         f_big = self.interface.button_factory_f5
         f_med = self.interface.button_factory_f2_5
+        # Navigation
+        self.buttons['back'] = f_med.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2": ((50, 340), (50, 390), (10, 365)),"command1": lambda: self.change_mains({"main": 2})})
