@@ -27,3 +27,4 @@ class AIMenu(BaseMenu):
         self._rebuild_network_visual()
     def _architecture(self):
         cfg = self.interface.config.config_AI["nn"]
+        return [cfg["neurons_per_layer"]] * cfg["hidden_layers"]
