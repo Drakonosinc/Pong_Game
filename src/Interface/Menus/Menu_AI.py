@@ -34,3 +34,4 @@ class AIMenu(BaseMenu):
         self.interface.config.save_config()
         self._rebuild_network_visual()
     def _change_neurons(self, delta: int):
+        cfg = self.interface.config.config_AI["nn"]
