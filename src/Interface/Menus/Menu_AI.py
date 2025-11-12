@@ -31,3 +31,4 @@ class AIMenu(BaseMenu):
     def _change_layers(self, delta: int):
         cfg = self.interface.config.config_AI["nn"]
         cfg["hidden_layers"] = max(1, cfg["hidden_layers"] + delta)
+        self.interface.config.save_config()
