@@ -37,3 +37,4 @@ class AIMenu(BaseMenu):
         cfg = self.interface.config.config_AI["nn"]
         cfg["neurons_per_layer"] = max(1, cfg["neurons_per_layer"] + delta)
         self.interface.config.save_config()
+        self._rebuild_network_visual()
