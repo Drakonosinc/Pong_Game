@@ -32,3 +32,4 @@ class AIMenu(BaseMenu):
         cfg = self.interface.config.config_AI["nn"]
         cfg["hidden_layers"] = max(1, cfg["hidden_layers"] + delta)
         self.interface.config.save_config()
+        self._rebuild_network_visual()
