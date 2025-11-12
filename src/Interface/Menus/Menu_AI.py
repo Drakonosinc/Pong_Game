@@ -33,3 +33,4 @@ class AIMenu(BaseMenu):
         cfg["hidden_layers"] = max(1, cfg["hidden_layers"] + delta)
         self.interface.config.save_config()
         self._rebuild_network_visual()
+    def _change_neurons(self, delta: int):
