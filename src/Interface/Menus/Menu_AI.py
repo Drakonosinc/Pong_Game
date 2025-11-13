@@ -48,3 +48,4 @@ class AIMenu(BaseMenu):
         self.connections.clear()
         # Layout area
         left, right = 80, self.WIDTH - 80
+        top, bottom = 110, self.HEIGHT - 60
