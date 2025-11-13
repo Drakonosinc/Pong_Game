@@ -41,3 +41,4 @@ class AIMenu(BaseMenu):
     def _make_neuron_button(self, x: int, y: int):
         # Small square button representing a neuron (non-interactive)
         size = 10
+        rect_points = ((x - size, y - size), (x + size, y - size), (x + size, y + size), (x - size, y + size))
