@@ -52,3 +52,5 @@ class AIMenu(BaseMenu):
         arch = self._architecture()
         layers_sizes = [self.input_size, *arch, self.output_size]
         num_layers = len(layers_sizes)
+        # Compute x positions for each layer
+        x_positions = [int(left + i * (right - left) / (num_layers - 1)) for i in range(num_layers)]
