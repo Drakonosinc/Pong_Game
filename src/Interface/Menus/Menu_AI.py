@@ -46,3 +46,5 @@ class AIMenu(BaseMenu):
     def _rebuild_network_visual(self):
         self.network_buttons.clear()
         self.connections.clear()
+        # Layout area
+        left, right = 80, self.WIDTH - 80
