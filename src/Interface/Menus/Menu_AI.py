@@ -51,3 +51,4 @@ class AIMenu(BaseMenu):
         top, bottom = 110, self.HEIGHT - 60
         arch = self._architecture()
         layers_sizes = [self.input_size, *arch, self.output_size]
+        num_layers = len(layers_sizes)
