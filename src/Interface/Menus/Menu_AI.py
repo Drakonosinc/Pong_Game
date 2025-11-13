@@ -42,3 +42,4 @@ class AIMenu(BaseMenu):
         # Small square button representing a neuron (non-interactive)
         size = 10
         rect_points = ((x - size, y - size), (x + size, y - size), (x + size, y + size), (x - size, y + size))
+        return self.interface.button_factory_f5.create_PolygonButton({"position": rect_points, "detect_mouse": False, "pressed": False})
