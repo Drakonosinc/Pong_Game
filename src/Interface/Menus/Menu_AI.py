@@ -50,3 +50,4 @@ class AIMenu(BaseMenu):
         left, right = 80, self.WIDTH - 80
         top, bottom = 110, self.HEIGHT - 60
         arch = self._architecture()
+        layers_sizes = [self.input_size, *arch, self.output_size]
