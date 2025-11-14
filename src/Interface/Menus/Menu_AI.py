@@ -62,4 +62,5 @@ class AIMenu(BaseMenu):
             centers = [(x_positions[layer_idx], int(top + (i + 1) * y_gap)) for i in range(int(n_neurons))]
             layer_centers.append(centers)
             self.network_buttons.append([self._make_neuron_button(x, y) for x, y in centers])
- 
+        # Connections
+        for li in range(num_layers - 1):
