@@ -65,4 +65,4 @@ class AIMenu(BaseMenu):
         # Connections
         for li in range(num_layers - 1):
             for (x1, y1) in layer_centers[li]:
- 
+                for (x2, y2) in layer_centers[li + 1]:
