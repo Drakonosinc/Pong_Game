@@ -57,3 +57,4 @@ class AIMenu(BaseMenu):
         # Build neuron buttons per layer and store their centers
         layer_centers = []
         for layer_idx, n_neurons in enumerate(layers_sizes):
+            if n_neurons <= 0: n_neurons = 1
