@@ -60,3 +60,4 @@ class AIMenu(BaseMenu):
             if n_neurons <= 0: n_neurons = 1
             y_gap = (bottom - top) / (n_neurons + 1)
             centers = [(x_positions[layer_idx], int(top + (i + 1) * y_gap)) for i in range(int(n_neurons))]
+            layer_centers.append(centers)
