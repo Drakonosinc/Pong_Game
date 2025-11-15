@@ -74,3 +74,5 @@ class AIMenu(BaseMenu):
             for btn in layer: btn.draw()
     def render(self):
         self.screen.fill(self.interface.BLACK)
+        # Titles
+        self.screen.blit(self.interface.font5.render("AI parameters", True, self.interface.WHITE), (10, 10))
