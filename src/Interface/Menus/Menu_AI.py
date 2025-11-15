@@ -70,3 +70,4 @@ class AIMenu(BaseMenu):
     def _draw_network(self):
         # Draw connections first
         for (p1, p2) in self.connections:
+            pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
