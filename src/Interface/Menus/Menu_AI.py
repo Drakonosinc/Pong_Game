@@ -72,18 +72,4 @@ class AIMenu(BaseMenu):
         # Draw neuron buttons
         for layer in self.network_buttons:
             for btn in layer: btn.draw()
-    def render(self):
-        self.screen.fill(self.interface.BLACK)
-        # Titles
-        self.screen.blit(self.interface.font5.render("AI parameters", True, self.interface.WHITE), (10, 10))
-        self.screen.blit(self.interface.font5.render("Layers", True, self.interface.SKYBLUE), (self.WIDTH//2-170, 35))
-        self.screen.blit(self.interface.font5.render("Neurons/layer", True, self.interface.SKYBLUE), (self.WIDTH//2+30, 35))
-        # Current values
-        cfg = self.interface.config.config_AI["nn"]
-        self.screen.blit(self.interface.font5.render(str(cfg["hidden_layers"]), True, self.interface.WHITE), (self.WIDTH//2-115, 62))
-        self.screen.blit(self.interface.font5.render(str(cfg["neurons_per_layer"]), True, self.interface.WHITE), (self.WIDTH//2+85, 62))
-        # Draw network visual
-        self._draw_network()
-        # Buttons
-        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']:
-            self.buttons[key].draw()
+ 
