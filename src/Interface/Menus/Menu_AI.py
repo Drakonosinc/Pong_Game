@@ -71,3 +71,5 @@ class AIMenu(BaseMenu):
         # Draw connections first
         for (p1, p2) in self.connections:
             pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
+        # Draw neuron buttons
+        for layer in self.network_buttons:
