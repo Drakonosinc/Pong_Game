@@ -73,3 +73,4 @@ class AIMenu(BaseMenu):
             pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
         # Draw neuron buttons
         for layer in self.network_buttons:
+            for btn in layer: btn.draw()
