@@ -67,3 +67,4 @@ class AIMenu(BaseMenu):
             for (x1, y1) in layer_centers[li]:
                 for (x2, y2) in layer_centers[li + 1]:
                     self.connections.append(((x1, y1), (x2, y2)))
+    def _draw_network(self):
