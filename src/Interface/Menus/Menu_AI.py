@@ -72,4 +72,4 @@ class AIMenu(BaseMenu):
         # Draw neuron buttons
         for layer in self.network_buttons:
             for btn in layer: btn.draw()
- 
+    def render(self):
