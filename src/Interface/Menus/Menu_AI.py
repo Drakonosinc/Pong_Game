@@ -73,3 +73,4 @@ class AIMenu(BaseMenu):
         for layer in self.network_buttons:
             for btn in layer: btn.draw()
     def render(self):
+        self.screen.fill(self.interface.BLACK)
