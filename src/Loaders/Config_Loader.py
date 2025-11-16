@@ -10,6 +10,8 @@ class Config():
             self.config_keys = config["config_keys"]
             self.config_sounds = config["config_sounds"]
             self.config_AI = config["config_AI"]
+            # Ensure default NN params exist
+            self.config_AI.setdefault("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
             self.config_game = config["config_game"]
         except:self.config(alls=True),self.save_config()
     def config(self,visuals=False,keys=False,sounds=False,AI=False,game=False,alls=False):
