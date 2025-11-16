@@ -80,4 +80,4 @@ class AIMenu(BaseMenu):
         self.screen.blit(self.interface.font5.render("Neurons/layer", True, self.interface.SKYBLUE), (self.WIDTH//2+30, 35))
         # Current values
         cfg = self.interface.config.config_AI["nn"]
- 
+        self.screen.blit(self.interface.font5.render(str(cfg["hidden_layers"]), True, self.interface.WHITE), (self.WIDTH//2-115, 62))
