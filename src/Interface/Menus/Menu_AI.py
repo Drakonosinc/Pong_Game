@@ -85,4 +85,4 @@ class AIMenu(BaseMenu):
         # Draw network visual
         self._draw_network()
         # Buttons
-        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']:
+        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']: self.buttons[key].draw()
