@@ -78,3 +78,6 @@ class AIMenu(BaseMenu):
         self.screen.blit(self.interface.font5.render("AI parameters", True, self.interface.WHITE), (10, 10))
         self.screen.blit(self.interface.font5.render("Layers", True, self.interface.SKYBLUE), (self.WIDTH//2-170, 35))
         self.screen.blit(self.interface.font5.render("Neurons/layer", True, self.interface.SKYBLUE), (self.WIDTH//2+30, 35))
+        # Current values
+        cfg = self.interface.config.config_AI["nn"]
+ 
