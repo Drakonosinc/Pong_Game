@@ -76,3 +76,4 @@ class AIMenu(BaseMenu):
         self.screen.fill(self.interface.BLACK)
         # Titles
         self.screen.blit(self.interface.font5.render("AI parameters", True, self.interface.WHITE), (10, 10))
+        self.screen.blit(self.interface.font5.render("Layers", True, self.interface.SKYBLUE), (self.WIDTH//2-170, 35))
