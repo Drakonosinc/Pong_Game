@@ -82,4 +82,5 @@ class AIMenu(BaseMenu):
         cfg = self.interface.config.config_AI["nn"]
         self.screen.blit(self.interface.font5.render(str(cfg["hidden_layers"]), True, self.interface.WHITE), (self.WIDTH//2-115, 62))
         self.screen.blit(self.interface.font5.render(str(cfg["neurons_per_layer"]), True, self.interface.WHITE), (self.WIDTH//2+85, 62))
- 
+        # Draw network visual
+        self._draw_network()
