@@ -6,21 +6,17 @@ class AIHandler:
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
-        
     def get_state(self):
         return np.array([self.game.player_one.rect.x, self.game.player_one.rect.y, self.game.player_two.rect.x, 
                         self.game.player_two.rect.y, self.game.balls[0].rect.x, self.game.balls[0].rect.y])
-    
     def actions_AI(self, model):
         # Check if we're in Q-learning training mode
-        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]:
-            self._qlearning_actions(model)
+        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(model)
         else:
             # Standard genetic algorithm AI
             state = self.get_state()
             action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
             self.AI_actions(action)
-    
     def _qlearning_actions(self, model):
         """Handle Q-learning specific actions"""
         from Type_Training.Q_learning import _qlearning_trainer
