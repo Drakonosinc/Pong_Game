@@ -24,13 +24,9 @@ class AIHandler:
     def _qlearning_actions(self, model):
         """Handle Q-learning specific actions"""
         from Type_Training.Q_learning import _qlearning_trainer
-        
-        if _qlearning_trainer is None:
-            return
-        
+        if _qlearning_trainer is None: return
         current_state = self.get_state()
         current_reward = self.game.player_two.reward
-        
         # If we have previous state, store the transition
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
