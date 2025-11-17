@@ -30,11 +30,8 @@ class AIHandler:
         # If we have previous state, store the transition
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
-            done = (self.game.player_one.score >= self.game.config.config_game["max_score"] or 
-                    self.game.player_two.score >= self.game.config.config_game["max_score"])
-            
-            _qlearning_trainer.store_experience(
-                self.prev_state, self.prev_action, reward, current_state, done)
+            done = (self.game.player_one.score >= self.game.config.config_game["max_score"] or self.game.player_two.score >= self.game.config.config_game["max_score"])
+            _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
         
         # Get new action from Q-learning agent
         action = _qlearning_trainer.get_action(current_state)
