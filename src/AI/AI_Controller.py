@@ -32,24 +32,19 @@ class AIHandler:
             reward = current_reward - self.prev_reward
             done = (self.game.player_one.score >= self.game.config.config_game["max_score"] or self.game.player_two.score >= self.game.config.config_game["max_score"])
             _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
-        
         # Get new action from Q-learning agent
         action = _qlearning_trainer.get_action(current_state)
-        
         # Apply Q-learning action
         if action == 0 and self.game.player_two.rect.top > 0: self.game.player_two.rect.y -= 5
         elif action == 1 and self.game.player_two.rect.bottom < self.game.HEIGHT: self.game.player_two.rect.y += 5
-        
         # Store current state and action for next iteration
         self.prev_state = current_state.copy()
         self.prev_action = action
         self.prev_reward = current_reward
-    
     def AI_actions(self, action):
         """Standard AI actions for genetic algorithm"""
         if action[0] > 0 and self.game.player_two.rect.top > 0: self.game.player_two.rect.y -= 5
         if action[0] < 0 and self.game.player_two.rect.bottom < self.game.HEIGHT: self.game.player_two.rect.y += 5
-    
     def reset_qlearning_state(self):
         """Reset Q-learning state for new episode"""
         self.prev_state = None
