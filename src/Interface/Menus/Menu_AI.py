@@ -65,10 +65,12 @@ class AIMenu(BaseMenu):
         # Connections
         for li in range(num_layers - 1):
             for (x1, y1) in layer_centers[li]:
-                for (x2, y2) in layer_centers[li + 1]: self.connections.append(((x1, y1), (x2, y2)))
+                for (x2, y2) in layer_centers[li + 1]:
+                    self.connections.append(((x1, y1), (x2, y2)))
     def _draw_network(self):
         # Draw connections first
-        for (p1, p2) in self.connections: pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
+        for (p1, p2) in self.connections:
+            pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
         # Draw neuron buttons
         for layer in self.network_buttons:
             for btn in layer: btn.draw()
@@ -85,4 +87,5 @@ class AIMenu(BaseMenu):
         # Draw network visual
         self._draw_network()
         # Buttons
-        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']: self.buttons[key].draw()
+        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']:
+            self.buttons[key].draw()

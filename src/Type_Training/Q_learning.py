@@ -14,9 +14,10 @@ class ReplayMemory:
 class DQNAgent:
     def __init__(self, state_size: int, action_size: int, lr: float = 1e-3, gamma: float = 0.99, 
                 epsilon_start: float = 1.0, epsilon_end: float = 0.01, epsilon_decay: float = 0.995, 
-                memory_size: int = 10000, batch_size: int = 32, target_update: int = 100):
+                memory_size: int = 10000, batch_size: int = 32, target_update: int = 100, hidden_sizes=None):
         self.state_size = state_size
         self.action_size = action_size
+        self._hidden_sizes = hidden_sizes
         self.gamma = gamma
         self.epsilon = epsilon_start
         self.epsilon_min = epsilon_end
@@ -25,8 +26,8 @@ class DQNAgent:
         self.steps_done = 0
         self.target_update = target_update
         # Create networks - use SimpleNN for consistency with genetic algorithm
-        self.policy_net = SimpleNN(state_size, action_size)
-        self.target_net = SimpleNN(state_size, action_size)
+        self.policy_net = SimpleNN(state_size, action_size, hidden_sizes=self._hidden_sizes)
+        self.target_net = SimpleNN(state_size, action_size, hidden_sizes=self._hidden_sizes)
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
@@ -63,7 +64,7 @@ class DQNAgent:
 class QLearningTrainer:
     """Q-learning trainer that integrates with the existing game architecture"""
     def __init__(self, game, input_size, output_size, episodes=500, lr=1e-3, 
-                gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995):
+                gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995, hidden_sizes=None):
         self.game = game
         self.episodes = episodes
         self.current_episode = 0
@@ -76,7 +77,8 @@ class QLearningTrainer:
                             lr=lr, gamma=gamma,
                             epsilon_start=epsilon_start,
                             epsilon_end=epsilon_end,
-                            epsilon_decay=epsilon_decay)
+                            epsilon_decay=epsilon_decay,
+                            hidden_sizes=hidden_sizes)
         print(f"Q-Learning trainer initialized for {episodes} episodes")
     def get_action(self, state):
         """Get action from Q-learning agent"""
@@ -115,11 +117,11 @@ def q_learning_step(game, state, action):
     if action == 0 and game.player_two.rect.top > 0: game.player_two.rect.y -= 5 # UP
     elif action == 1 and game.player_two.rect.bottom < game.HEIGHT: game.player_two.rect.y += 5 # DOWN
 def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3, 
-                        gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995):
+                        gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995, hidden_sizes=None):
     """Main Q-learning training function that integrates with the game like genetic algorithm"""
     global _qlearning_trainer
     # Create trainer instance
-    _qlearning_trainer = QLearningTrainer(game, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay)
+    _qlearning_trainer = QLearningTrainer(game, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay, hidden_sizes=hidden_sizes)
     # Initialize Q-learning state tracking
     game._qlearning_state = None
     game._qlearning_prev_reward = 0
