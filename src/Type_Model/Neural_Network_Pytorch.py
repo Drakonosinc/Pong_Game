@@ -24,9 +24,7 @@ class SimpleNN(nn.Module):
                 # Save normalized activations of first hidden layer for UI
                 with torch.no_grad():
                     act = x.detach().cpu().numpy().reshape(1, -1)
-                    if act.max() - act.min() != 0:
-                        self.activations = (act - act.min()) / (act.max() - act.min())
-                    else:
-                        self.activations = act
+                    if act.max() - act.min() != 0: self.activations = (act - act.min()) / (act.max() - act.min())
+                    else: self.activations = act
         x = self.output_layer(x)
         return x
