@@ -54,7 +54,6 @@ class AIMenu(BaseMenu):
         num_layers = len(layers_sizes)
         # Compute x positions for each layer
         x_positions = [int(left + i * (right - left) / (num_layers - 1)) for i in range(num_layers)]
-        # Build neuron buttons per layer and store their centers
         layer_centers = []
         for layer_idx, n_neurons in enumerate(layers_sizes):
             if n_neurons <= 0: n_neurons = 1
@@ -62,11 +61,9 @@ class AIMenu(BaseMenu):
             centers = [(x_positions[layer_idx], int(top + (i + 1) * y_gap)) for i in range(int(n_neurons))]
             layer_centers.append(centers)
             self.network_buttons.append([self._make_neuron_button(x, y) for x, y in centers])
-        # Connections
         for li in range(num_layers - 1):
             for (x1, y1) in layer_centers[li]:
-                for (x2, y2) in layer_centers[li + 1]:
-                    self.connections.append(((x1, y1), (x2, y2)))
+                for (x2, y2) in layer_centers[li + 1]: self.connections.append(((x1, y1), (x2, y2)))
     def _draw_network(self):
         for (p1, p2) in self.connections: pygame.draw.line(self.screen, self.interface.SKYBLUE, p1, p2, 1)
         for layer in self.network_buttons: 
