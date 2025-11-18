@@ -39,20 +39,17 @@ class AIMenu(BaseMenu):
         self.interface.config.save_config()
         self._rebuild_network_visual()
     def _make_neuron_button(self, x: int, y: int):
-        # Small square button representing a neuron (non-interactive)
         size = 10
         rect_points = ((x - size, y - size), (x + size, y - size), (x + size, y + size), (x - size, y + size))
         return self.interface.button_factory_f5.create_PolygonButton({"position": rect_points, "detect_mouse": False, "pressed": False})
     def _rebuild_network_visual(self):
         self.network_buttons.clear()
         self.connections.clear()
-        # Layout area
         left, right = 80, self.WIDTH - 80
         top, bottom = 110, self.HEIGHT - 60
         arch = self._architecture()
         layers_sizes = [self.input_size, *arch, self.output_size]
         num_layers = len(layers_sizes)
-        # Compute x positions for each layer
         x_positions = [int(left + i * (right - left) / (num_layers - 1)) for i in range(num_layers)]
         layer_centers = []
         for layer_idx, n_neurons in enumerate(layers_sizes):
