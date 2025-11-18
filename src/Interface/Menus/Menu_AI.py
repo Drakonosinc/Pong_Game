@@ -86,6 +86,4 @@ class AIMenu(BaseMenu):
         self.screen.blit(self.interface.font5.render(str(cfg["neurons_per_layer"]), True, self.interface.WHITE), (self.WIDTH//2+85, 62))
         # Draw network visual
         self._draw_network()
-        # Buttons
-        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']:
-            self.buttons[key].draw()
+        for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']: self.buttons[key].draw()

@@ -78,8 +78,7 @@ def save_model(model, optimizer, path):
     print("save model")
     torch.save({
         'model_state_dict': model.state_dict(),
-        'optimizer_state_dict': optimizer.state_dict(),
-    }, path)
+        'optimizer_state_dict': optimizer.state_dict(),}, path)
 
 def load_model(path, input_size, output_size, optimizer=None, hidden_sizes=None):
     try:
