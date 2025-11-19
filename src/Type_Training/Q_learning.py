@@ -79,17 +79,12 @@ class QLearningTrainer:
                             epsilon_decay=epsilon_decay,
                             hidden_sizes=hidden_sizes)
         print(f"Q-Learning trainer initialized for {episodes} episodes")
-    def get_action(self, state):
-        """Get action from Q-learning agent"""
-        return self.agent.select_action(state)
+    def get_action(self, state): return self.agent.select_action(state)
     def store_experience(self, state, action, reward, next_state, done):
-        """Store experience and optimize model"""
         self.agent.store_transition(state, action, reward, next_state, done)
         self.agent.optimize_model()
     def episode_complete(self, total_reward):
-        """Called when an episode is complete"""
         self.rewards_history.append(total_reward)
-        # Track best model
         if total_reward > self.best_reward:
             self.best_reward = total_reward
             self.best_model = copy.deepcopy(self.agent.policy_net)
