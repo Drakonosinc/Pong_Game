@@ -58,10 +58,8 @@ class DQNAgent:
         # Decay epsilon
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
         self.steps_done += 1
-        # Update target network
         if self.steps_done % self.target_update == 0: self.target_net.load_state_dict(self.policy_net.state_dict())
 class QLearningTrainer:
-    """Q-learning trainer that integrates with the existing game architecture"""
     def __init__(self, game, input_size, output_size, episodes=500, lr=1e-3, 
                 gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995, hidden_sizes=None):
         self.game = game
@@ -70,7 +68,6 @@ class QLearningTrainer:
         self.best_reward = float('-inf')
         self.best_model = None
         self.rewards_history = []
-        # Create DQN agent
         self.agent = DQNAgent(state_size=input_size, 
                             action_size=output_size,
                             lr=lr, gamma=gamma,
