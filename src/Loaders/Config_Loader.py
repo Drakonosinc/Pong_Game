@@ -10,7 +10,6 @@ class Config():
             self.config_keys = config["config_keys"]
             self.config_sounds = config["config_sounds"]
             self.config_AI = config["config_AI"]
-            # Ensure default NN params exist
             self.config_AI.setdefault("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
             self.config_game = config["config_game"]
         except:self.config(alls=True),self.save_config()
@@ -24,9 +23,9 @@ class Config():
                             "value_spacecraft1":0,
                             "value_spacecraft2":0}
         if keys or alls:self.config_keys={"UP_W":K_w,"Name_key1":"W",
-                        "DOWN_S":K_s,"Name_key2":"S",
-                        "UP_ARROW":K_UP,"Name_key3":"↑",
-                        "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
+                                        "DOWN_S":K_s,"Name_key2":"S",
+                                        "UP_ARROW":K_UP,"Name_key3":"↑",
+                                        "DOWN_ARROW":K_DOWN,"Name_key4":"↓"}
         if sounds or alls:self.config_sounds={"sound_main":True}
         if AI or alls:self.config_AI={"generation_value":100,"population_value":20,"try_for_ai":3,"model_save":False,"type_training":{"genetic":True,"q-learning":False},"type_model":{"Pytorch":True,"Tensorflow":False}}
         if game or alls:self.config_game={"number_balls":1,"max_score":5}
