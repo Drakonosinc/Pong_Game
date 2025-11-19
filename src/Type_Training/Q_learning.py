@@ -127,18 +127,13 @@ def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3,
     # Run training episodes using the existing run_with_model structure
     while _qlearning_trainer.current_episode < episodes:
         game.generation = _qlearning_trainer.current_episode
-        # Run one episode using the existing game loop
         total_reward = game.run_with_model()
-        # Episode complete
         training_complete = _qlearning_trainer.episode_complete(total_reward)
         if training_complete or game.exit: break
-    # Get best model
     best_model = _qlearning_trainer.get_best_model()
-    # Cleanup
     if hasattr(game, '_qlearning_state'): delattr(game, '_qlearning_state')
     if hasattr(game, '_qlearning_prev_reward'): delattr(game, '_qlearning_prev_reward')
     _qlearning_trainer = None
-    # Set the best model to the game
     game.model = best_model
     return best_model
 def save_qlearning_model(model, optimizer, path):
