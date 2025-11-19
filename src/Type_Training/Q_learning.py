@@ -93,18 +93,15 @@ class QLearningTrainer:
         if total_reward > self.best_reward:
             self.best_reward = total_reward
             self.best_model = copy.deepcopy(self.agent.policy_net)
-        # Print progress
         if self.current_episode % 10 == 0:
             avg_reward = np.mean(self.rewards_history[-10:]) if len(self.rewards_history) >= 10 else np.mean(self.rewards_history)
             print(f"Episode {self.current_episode}/{self.episodes}: Avg Reward = {avg_reward:.2f}, Epsilon = {self.agent.epsilon:.3f}")
         self.current_episode += 1
-        # Check if training is complete
         if self.current_episode >= self.episodes:
             print(f"Q-Learning training completed. Best reward: {self.best_reward:.2f}")
             return True
         return False
-    def get_best_model(self):
-        return self.best_model if self.best_model is not None else self.agent.policy_net
+    def get_best_model(self): return self.best_model if self.best_model is not None else self.agent.policy_net
 _qlearning_trainer = None
 def q_learning_step(game, state, action):
     global _qlearning_trainer
