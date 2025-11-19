@@ -25,7 +25,6 @@ class DQNAgent:
         self.batch_size = batch_size
         self.steps_done = 0
         self.target_update = target_update
-        # Create networks - use SimpleNN for consistency with genetic algorithm
         self.policy_net = SimpleNN(state_size, action_size, hidden_sizes=self._hidden_sizes)
         self.target_net = SimpleNN(state_size, action_size, hidden_sizes=self._hidden_sizes)
         self.target_net.load_state_dict(self.policy_net.state_dict())
@@ -55,7 +54,6 @@ class DQNAgent:
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-        # Decay epsilon
         self.epsilon = max(self.epsilon_min, self.epsilon * self.epsilon_decay)
         self.steps_done += 1
         if self.steps_done % self.target_update == 0: self.target_net.load_state_dict(self.policy_net.state_dict())
