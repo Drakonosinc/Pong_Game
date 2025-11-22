@@ -35,7 +35,7 @@ class AIMenu(BaseMenu):
     def _make_neuron_button(self, x: int, y: int):
         size = 10
         rect_points = ((x - size, y - size), (x + size, y - size), (x + size, y + size), (x - size, y + size))
-        return self.interface.button_factory_f5.create_PolygonButton({"position": rect_points, "detect_mouse": False, "pressed": False})
+        return self.interface.button_factory_f5.create_PolygonButton({"position": rect_points, "pressed": False})
     def _rebuild_network_visual(self):
         self.network_buttons.clear()
         self.connections.clear()
