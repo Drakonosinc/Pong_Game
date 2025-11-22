@@ -34,7 +34,6 @@ class AIHandler:
         if action[0] > 0 and self.game.player_two.rect.top > 0: self.game.player_two.rect.y -= 5
         if action[0] < 0 and self.game.player_two.rect.bottom < self.game.HEIGHT: self.game.player_two.rect.y += 5
     def reset_qlearning_state(self):
-        """Reset Q-learning state for new episode"""
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
