@@ -68,7 +68,7 @@
         },
         "nn": {
             "hidden_layers": 2,
-            "neurons_per_layer": 6
+            "neurons_per_layer": 4
         }
     },
     "config_sounds": {

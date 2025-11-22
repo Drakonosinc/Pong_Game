@@ -66,6 +66,6 @@ class AIMenu(BaseMenu):
         self.screen.blit(self.interface.font5.render("Neurons/layer", True, self.interface.SKYBLUE), (self.WIDTH//2+30, 35))
         cfg = self.interface.config.config_AI["nn"]
         self.screen.blit(self.interface.font5.render(str(cfg["hidden_layers"]), True, self.interface.WHITE), (self.WIDTH//2-115, 62))
-        self.screen.blit(self.interface.font5.render(str(cfg["neurons_per_layer"]), True, self.interface.WHITE), (self.WIDTH//2+85, 62))
+        self.screen.blit(self.interface.font5.render(str(cfg["neurons_per_layer"]), True, self.interface.WHITE), (self.WIDTH//2+116, 62))
         self._draw_network()
         for key in ['back','dec_layers','inc_layers','dec_neurons','inc_neurons']: self.buttons[key].draw()
