@@ -16,8 +16,8 @@ class AIMenu(BaseMenu):
         self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2": ((50, 340), (50, 390), (10, 365)),"command1": lambda: self.change_mains({"main": 2})})
         self.buttons['dec_layers'] = factory.create_TextButton({"text": "-","position": (self.WIDTH//2-130, 60),"command1": lambda: self._change_layers(-1)})
         self.buttons['inc_layers'] = factory.create_TextButton({"text": "+","position": (self.WIDTH//2-100, 60),"command1": lambda: self._change_layers(1)})
-        self.buttons['dec_neurons'] = f_med.create_TextButton({"text": "-","position": (self.WIDTH//2+100, 60),"command1": lambda: self._change_neurons(-1)})
-        self.buttons['inc_neurons'] = f_med.create_TextButton({"text": "+","position": (self.WIDTH//2+130, 60),"command1": lambda: self._change_neurons(1)})
+        self.buttons['dec_neurons'] = factory.create_TextButton({"text": "-","position": (self.WIDTH//2+100, 60),"command1": lambda: self._change_neurons(-1)})
+        self.buttons['inc_neurons'] = factory.create_TextButton({"text": "+","position": (self.WIDTH//2+130, 60),"command1": lambda: self._change_neurons(1)})
         self._rebuild_network_visual()
     def _architecture(self):
         cfg = self.interface.config.config_AI["nn"]
