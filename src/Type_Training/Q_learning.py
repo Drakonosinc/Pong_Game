@@ -119,11 +119,10 @@ def save_qlearning_model(model, optimizer, path):
     """Save Q-learning model (same interface as genetic algorithm)"""
     print("Saving Q-learning model")
     torch.save({'model_state_dict': model.state_dict(),'optimizer_state_dict': optimizer.state_dict(),}, path)
-def load_qlearning_model(path, input_size, output_size, optimizer=None):
+def load_qlearning_model(path, model, input_size, output_size, optimizer=None):
     """Load Q-learning model (same interface as genetic algorithm)"""
     try:
         print("Loading Q-learning model")
-        model = SimpleNN(input_size, output_size)
         checkpoint = torch.load(path)
         model.load_state_dict(checkpoint['model_state_dict'])
         if optimizer: optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
