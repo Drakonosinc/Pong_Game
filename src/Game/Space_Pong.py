@@ -154,7 +154,6 @@ class Space_pong_game(interface):
         self.speed_up=speed_up
         self.speed_down=speed_down
         self.running=running
-        # Reset Q-learning state if in training mode
         if hasattr(self, '_qlearning_state'): self.ai_handler.reset_qlearning_state()
     def type_game(self):
         if self.mode_game["Training AI"]:self.player1_code()
