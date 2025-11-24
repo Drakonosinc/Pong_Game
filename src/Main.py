@@ -16,6 +16,7 @@ if __name__=="__main__":
                 elif game.config.config_AI["type_training"]["Q-learning"]:
                     q_config = game.config.config_AI["q_learning"]
                     best_model = q_learning_algorithm(game, input_size=len(game.ai_handler.get_state()), output_size=2, episodes=q_config["episodes"],lr=q_config["learning_rate"],gamma=q_config["gamma"],epsilon_start=q_config["epsilon_start"],epsilon_end=q_config["epsilon_end"],epsilon_decay=q_config["epsilon_decay"], hidden_sizes=arch)
+                    # if
                 game.model = best_model
             case {"Player": True} | {"AI": True}:game.run_with_model()
         if game.exit:break
