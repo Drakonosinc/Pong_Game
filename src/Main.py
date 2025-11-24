@@ -9,6 +9,7 @@ if __name__=="__main__":
             case {"Training AI": True}:
                 nn_cfg = game.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
                 arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
+                if game.config.config_AI["type_model"]["Pytorch"]: type_model = "Pytorch"
                 if game.config.config_AI["type_training"]["Genetic"]:
                     genetic_config = game.config.config_AI["genetic"]
                     best_model = genetic_algorithm(game, input_size=len(game.ai_handler.get_state()), output_size=2, generations=genetic_config["generation_value"], population_size=genetic_config["population_value"], num_trials=genetic_config["try_for_ai"], hidden_sizes=arch)
