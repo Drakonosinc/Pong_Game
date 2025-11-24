@@ -66,7 +66,8 @@ class QLearningTrainer:
         self.best_reward = float('-inf')
         self.best_model = None
         self.rewards_history = []
-        self.agent = DQNAgent(state_size=input_size, 
+        self.agent = DQNAgent(type_model=type_model,
+                            state_size=input_size, 
                             action_size=output_size,
                             lr=lr, gamma=gamma,
                             epsilon_start=epsilon_start,
