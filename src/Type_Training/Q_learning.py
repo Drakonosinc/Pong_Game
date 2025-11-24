@@ -99,10 +99,10 @@ def q_learning_step(game, state, action):
     if _qlearning_trainer is None: return
     if action == 0 and game.player_two.rect.top > 0: game.player_two.rect.y -= 5 # UP
     elif action == 1 and game.player_two.rect.bottom < game.HEIGHT: game.player_two.rect.y += 5 # DOWN
-def q_learning_algorithm(game, input_size, output_size, episodes=500, lr=1e-3, 
+def q_learning_algorithm(game, type_model, input_size, output_size, episodes=500, lr=1e-3, 
                         gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995, hidden_sizes=None):
     global _qlearning_trainer
-    _qlearning_trainer = QLearningTrainer(game, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay, hidden_sizes=hidden_sizes)
+    _qlearning_trainer = QLearningTrainer(game, type_model, input_size, output_size, episodes, lr, gamma, epsilon_start, epsilon_end, epsilon_decay, hidden_sizes=hidden_sizes)
     game._qlearning_state = None
     game._qlearning_prev_reward = 0
     while _qlearning_trainer.current_episode < episodes:
