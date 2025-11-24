@@ -58,7 +58,7 @@ class DQNAgent:
         self.steps_done += 1
         if self.steps_done % self.target_update == 0: self.target_net.load_state_dict(self.policy_net.state_dict())
 class QLearningTrainer:
-    def __init__(self, game, input_size, output_size, episodes=500, lr=1e-3, 
+    def __init__(self, game, type_model, input_size, output_size, episodes=500, lr=1e-3, 
                 gamma=0.99, epsilon_start=1.0, epsilon_end=0.01, epsilon_decay=0.995, hidden_sizes=None):
         self.game = game
         self.episodes = episodes
