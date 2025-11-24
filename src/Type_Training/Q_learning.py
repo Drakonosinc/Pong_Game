@@ -12,7 +12,7 @@ class ReplayMemory:
     def sample(self, batch_size: int): return random.sample(self.memory, batch_size)
     def __len__(self) -> int: return len(self.memory)
 class DQNAgent:
-    def __init__(self, state_size: int, action_size: int, lr: float = 1e-3, gamma: float = 0.99, 
+    def __init__(self, type_model, state_size: int, action_size: int, lr: float = 1e-3, gamma: float = 0.99, 
                 epsilon_start: float = 1.0, epsilon_end: float = 0.01, epsilon_decay: float = 0.995, 
                 memory_size: int = 10000, batch_size: int = 32, target_update: int = 100, hidden_sizes=None):
         self.state_size = state_size
