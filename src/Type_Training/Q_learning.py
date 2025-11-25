@@ -28,6 +28,8 @@ class DQNAgent:
         if type_model == "Pytorch":
             self.policy_net = SimpleNN_Pytorch(state_size, action_size, hidden_sizes=self._hidden_sizes)
             self.target_net = SimpleNN_Pytorch(state_size, action_size, hidden_sizes=self._hidden_sizes)
+        elif type_model == "Tensorflow":
+            
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
