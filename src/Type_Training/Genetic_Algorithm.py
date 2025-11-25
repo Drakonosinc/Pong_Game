@@ -94,7 +94,8 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             if missing: pass
             model.load_state_dict(filtered, strict=False)
         def model_type(type_model, input_size, output_size, hidden_sizes):
-            pass
+            if type_model == "Pytorch":
+                pass
         if has_fc:
             if 'fc1.weight' in state_dict: first_hidden = state_dict['fc1.weight'].shape[0]
             else:
