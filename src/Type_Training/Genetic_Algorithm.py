@@ -93,6 +93,8 @@ def load_genetic_model(path, input_size, output_size, optimizer=None, hidden_siz
             missing = [k for k in sd.keys() if k not in filtered]
             if missing: pass
             model.load_state_dict(filtered, strict=False)
+        def model_type(input_size, output_size, hidden_sizes):
+            pass
         if has_fc:
             if 'fc1.weight' in state_dict: first_hidden = state_dict['fc1.weight'].shape[0]
             else:
