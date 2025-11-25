@@ -80,7 +80,7 @@ def save_genetic_model(model, optimizer, path):
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),}, path)
 
-def load_genetic_model(path, input_size, output_size, optimizer=None, hidden_sizes=None):
+def load_genetic_model(path, type_model, input_size, output_size, optimizer=None, hidden_sizes=None):
     try:
         print("load model")
         checkpoint = torch.load(path)
@@ -93,7 +93,7 @@ def load_genetic_model(path, input_size, output_size, optimizer=None, hidden_siz
             missing = [k for k in sd.keys() if k not in filtered]
             if missing: pass
             model.load_state_dict(filtered, strict=False)
-        def model_type(input_size, output_size, hidden_sizes):
+        def model_type(type_model, input_size, output_size, hidden_sizes):
             pass
         if has_fc:
             if 'fc1.weight' in state_dict: first_hidden = state_dict['fc1.weight'].shape[0]
