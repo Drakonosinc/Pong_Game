@@ -118,7 +118,7 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 w_key = f'hidden_layers.{i}.weight'
                 if w_key in state_dict: sizes.append(state_dict[w_key].shape[0])
             if not sizes: sizes = hidden_sizes or [128]
-            model = SimpleNN(input_size, output_size, hidden_sizes=sizes)
+            model = model_type(type_model, input_size, output_size, hidden_sizes=sizes)
             _filtered_load(model, state_dict)
         else:
             model = SimpleNN(input_size, output_size, hidden_sizes=hidden_sizes)
