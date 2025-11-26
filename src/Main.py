@@ -15,7 +15,7 @@ if __name__=="__main__":
                 elif game.config.config_AI["type_model"]["Tensorflow"]: type_model = "Tensorflow"
                 if game.config.config_AI["type_training"]["Genetic"]:
                     genetic_config = game.config.config_AI["genetic"]
-                    best_model = genetic_algorithm(game, input_size=len(game.ai_handler.get_state()), output_size=2, generations=genetic_config["generation_value"], population_size=genetic_config["population_value"], num_trials=genetic_config["try_for_ai"], hidden_sizes=arch)
+                    best_model = genetic_algorithm(game, type_model, input_size=len(game.ai_handler.get_state()), output_size=2, generations=genetic_config["generation_value"], population_size=genetic_config["population_value"], num_trials=genetic_config["try_for_ai"], hidden_sizes=arch)
                     if game.config.config_AI["model_save"]:save_genetic_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
                 elif game.config.config_AI["type_training"]["Q-learning"]:
                     q_config = game.config.config_AI["q_learning"]
