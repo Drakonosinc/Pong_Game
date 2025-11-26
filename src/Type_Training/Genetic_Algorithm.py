@@ -5,7 +5,7 @@ def fitness_function(model, game):
     score = game.run_with_model()
     return score
 
-def initialize_population(size, input_size, output_size, hidden_sizes=None):
+def initialize_population(type_model, size, input_size, output_size, hidden_sizes=None):
     population = []
     for _ in range(size):
         model = SimpleNN(input_size, output_size, hidden_sizes=hidden_sizes)
