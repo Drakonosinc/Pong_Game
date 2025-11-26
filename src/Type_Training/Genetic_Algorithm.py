@@ -101,7 +101,7 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             else:
                 any_w = next((v for k, v in state_dict.items() if k.endswith('.weight')), None)
                 first_hidden = any_w.shape[0] if any_w is not None else 128
-            model = SimpleNN(input_size, output_size, hidden_sizes=[first_hidden])
+            model = model_type(type_model, input_size, output_size, hidden_sizes=[first_hidden])
             remapped = {}
             if 'fc1.weight' in state_dict: remapped['hidden_layers.0.weight'] = state_dict['fc1.weight']
             if 'fc1.bias' in state_dict:   remapped['hidden_layers.0.bias']   = state_dict['fc1.bias']
