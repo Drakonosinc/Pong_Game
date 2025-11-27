@@ -1,1 +1,3 @@
 WARP.md
+__pycache__/
+*.pyc
