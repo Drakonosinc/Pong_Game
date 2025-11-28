@@ -16,8 +16,8 @@ class load_elements():
         self.model_path=os.path.join(self.config.base_dir, "AI/best_model.pth")
         nn_cfg = self.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
         arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
-        # implement loading for each model type
-        self.model_training = load_model(self.model_path, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
+        type_model = next(k for k, v in self.config.config_AI["type_model"].items() if v)
+        # self.model_training = load_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
     def config_screen(self):
         self.WIDTH=self.config.config_visuals["WIDTH"]
         self.HEIGHT=self.config.config_visuals["HEIGHT"]
