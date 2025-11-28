@@ -1,4 +1,4 @@
-from tensorflow import layers, Model
+from tensorflow.keras import layers, Model
 import numpy as np
 
 class SimpleNN_Tensorflow(Model):
@@ -22,3 +22,6 @@ class SimpleNN_Tensorflow(Model):
                 except Exception: pass
         x = self.output_layer(x)
         return x
+
+    def call(self, x, training=False):
+        return self.forward(x)
