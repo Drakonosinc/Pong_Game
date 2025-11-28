@@ -143,7 +143,15 @@ class Space_pong_game(interface):
                     l = self.model.fc1
                     if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
                     elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
-                
+                if weights_preview is not None:
+                    weights_text = self.font.render(f"Model Weights: {weights_preview}", True, self.YELLOW)
+                    self.screen.blit(weights_text, (10, 50))
+            except Exception: pass
+            if getattr(self.model, 'activations', None) is not None:
+                try:
+                    activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
+                    self.screen.blit(activations_text, (10, 70))
+                except Exception: pass
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.input_player1.show_player()}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.input_player2.show_player()}", True, self.YELLOW),(580,360))
