@@ -18,7 +18,7 @@ class load_elements():
         arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
         type_training = next(k for k, v in self.config.config_AI["type_training"].items() if v)
         type_model = next(k for k, v in self.config.config_AI["type_model"].items() if v)
-        # self.model_training = load_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
+        if type_training == "Genetic": self.model_training = load_genetic_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
     def config_screen(self):
         self.WIDTH=self.config.config_visuals["WIDTH"]
         self.HEIGHT=self.config.config_visuals["HEIGHT"]
