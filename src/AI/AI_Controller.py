@@ -1,5 +1,11 @@
 import torch
 import numpy as np
+
+try:
+    import tensorflow as tf  # type: ignore
+except Exception:
+    tf = None
+
 class AIHandler:
     def __init__(self, game):
         self.game = game
@@ -9,11 +15,25 @@ class AIHandler:
     def get_state(self):
         return np.array([self.game.player_one.rect.x, self.game.player_one.rect.y, self.game.player_two.rect.x, 
                         self.game.player_two.rect.y, self.game.balls[0].rect.x, self.game.balls[0].rect.y])
+    def _call_model(self, model, state: np.ndarray) -> np.ndarray:
+        # Torch path
+        if hasattr(model, 'parameters') and isinstance(model, torch.nn.Module):
+            out = model(torch.tensor(state, dtype=torch.float32))
+            return out.detach().cpu().numpy().reshape(-1)
+        # TensorFlow path
+        if tf is not None and hasattr(model, 'trainable_variables') and isinstance(model, tf.keras.Model):
+            x = tf.convert_to_tensor(state, dtype=tf.float32)
+            if len(x.shape) == 1: x = tf.expand_dims(x, axis=0)
+            out = model(x, training=False)
+            return out.numpy().reshape(-1)
+        # Fallback: treat as numpy function-like
+        return np.asarray(model(state)).reshape(-1)
     def actions_AI(self, model):
-        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(model)
+        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]:
+            self._qlearning_actions(model)
         else:
             state = self.get_state()
-            action = model(torch.tensor(state, dtype=torch.float32)).detach().numpy()
+            action = self._call_model(model, state)
             self.AI_actions(action)
     def _qlearning_actions(self, model):
         from Type_Training.Q_learning import _qlearning_trainer

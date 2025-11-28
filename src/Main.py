@@ -15,12 +15,26 @@ if __name__=="__main__":
                 elif game.config.config_AI["type_model"]["Tensorflow"]: type_model = "Tensorflow"
                 if game.config.config_AI["type_training"]["Genetic"]:
                     genetic_config = game.config.config_AI["genetic"]
-                    best_model = genetic_algorithm(game, type_model, input_size=len(game.ai_handler.get_state()), output_size=2, generations=genetic_config["generation_value"], population_size=genetic_config["population_value"], num_trials=genetic_config["try_for_ai"], hidden_sizes=arch)
-                    if game.config.config_AI["model_save"]:save_genetic_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
+                    best_model = genetic_algorithm(
+                        game,
+                        type_model,
+                        input_size=len(game.ai_handler.get_state()),
+                        output_size=2,
+                        generations=genetic_config["generation_value"],
+                        population_size=genetic_config["population_value"],
+                        num_trials=genetic_config["try_for_ai"],
+                        hidden_sizes=arch,
+                    )
+                    if game.config.config_AI["model_save"]:
+                        if type_model == "Pytorch":
+                            save_genetic_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001), game.model_path)
+                        else:
+                            save_genetic_model(game.model, optimizer=None, path=game.model_path)
                 elif game.config.config_AI["type_training"]["Q-learning"]:
                     q_config = game.config.config_AI["q_learning"]
-                    best_model = q_learning_algorithm(game, type_model, input_size=len(game.ai_handler.get_state()), output_size=2, episodes=q_config["episodes"],lr=q_config["learning_rate"],gamma=q_config["gamma"],epsilon_start=q_config["epsilon_start"],epsilon_end=q_config["epsilon_end"],epsilon_decay=q_config["epsilon_decay"], hidden_sizes=arch)
-                    if game.config.config_AI["model_save"]:save_qlearning_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001),game.model_path)
+                    best_model = q_learning_algorithm(game, type_model, input_size=len(game.ai_handler.get_state()), output_size=2, episodes=q_config["episodes"], lr=q_config["learning_rate"], gamma=q_config["gamma"], epsilon_start=q_config["epsilon_start"], epsilon_end=q_config["epsilon_end"], epsilon_decay=q_config["epsilon_decay"], hidden_sizes=arch)
+                    if game.config.config_AI["model_save"]:
+                        save_qlearning_model(game.model, torch.optim.Adam(game.model.parameters(), lr=0.001), game.model_path)
                 game.model = best_model
             case {"Player": True} | {"AI": True}:game.run_with_model()
         if game.exit:break
