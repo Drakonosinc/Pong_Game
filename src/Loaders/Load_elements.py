@@ -34,8 +34,7 @@ class load_elements():
         self.RED=(255,0,0)
         self.GOLDEN=(255,199,51)
         self.background=self.GRAY
-    def image_direct_path(self,image,value):
-        return self.config.config_visuals[image][self.config.config_visuals[value]]
+    def image_direct_path(self,image,value): return self.config.config_visuals[image][self.config.config_visuals[value]]
     def load_images(self):
         self.angle=90
         self.image_path = os.path.join(self.config.base_dir, "images")
