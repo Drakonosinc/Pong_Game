@@ -6,3 +6,4 @@ import tensorflow as tf
 def _is_torch_model(model):
     return hasattr(model, 'parameters') and isinstance(model, torch.nn.Module)
 
+def _is_tf_model(model):
