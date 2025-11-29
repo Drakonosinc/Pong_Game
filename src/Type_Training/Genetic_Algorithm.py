@@ -10,3 +10,4 @@ def _is_tf_model(model):
     return (tf is not None) and hasattr(model, 'trainable_variables') and isinstance(model, tf.keras.Model)
 
 def _get_weights_np(model):
+    if _is_torch_model(model):
