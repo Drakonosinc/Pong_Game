@@ -4,3 +4,5 @@ from Type_Model import *
 import tensorflow as tf 
 
 def _is_torch_model(model):
+    return hasattr(model, 'parameters') and isinstance(model, torch.nn.Module)
+
