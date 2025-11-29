@@ -11,3 +11,4 @@ def _is_tf_model(model):
 
 def _get_weights_np(model):
     if _is_torch_model(model):
+        return [p.detach().cpu().numpy().copy() for p in model.parameters()]
