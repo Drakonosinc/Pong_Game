@@ -16,3 +16,4 @@ def _set_weights_np(model, weights):
     if _is_torch_model(model):
         with torch.no_grad():
             for p, w in zip(model.parameters(), weights):
+                tensor_w = torch.from_numpy(np.array(w, copy=False)).to(p.device, dtype=p.dtype)
