@@ -14,3 +14,4 @@ def _get_weights_np(model):
 
 def _set_weights_np(model, weights):
     if _is_torch_model(model):
+        with torch.no_grad():
