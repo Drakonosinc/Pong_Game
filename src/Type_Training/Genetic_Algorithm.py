@@ -13,3 +13,4 @@ def _get_weights_np(model):
     else: raise TypeError("Unsupported model type for genetic algorithm")
 
 def _set_weights_np(model, weights):
+    if _is_torch_model(model):
