@@ -12,3 +12,4 @@ def _get_weights_np(model):
     elif _is_tf_model(model): return [w.copy() for w in model.get_weights()]
     else: raise TypeError("Unsupported model type for genetic algorithm")
 
+def _set_weights_np(model, weights):
