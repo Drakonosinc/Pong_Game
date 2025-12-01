@@ -26,3 +26,4 @@ def _ensure_built_if_tf(model, input_size):
         # Build variables if the model hasn't been called yet
         try:
             if not getattr(model, 'built', False) or len(model.weights) == 0:
+                dummy = tf.zeros((1, int(input_size)), dtype=tf.float32)
