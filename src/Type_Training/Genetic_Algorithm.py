@@ -30,3 +30,4 @@ def _ensure_built_if_tf(model, input_size):
                 _ = model(dummy, training=False)
         # Best effort; if build fails it will surface on set_weights
         except Exception: pass
+

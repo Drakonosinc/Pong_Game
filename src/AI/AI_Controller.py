@@ -29,8 +29,7 @@ class AIHandler:
         # Fallback: treat as numpy function-like
         return np.asarray(model(state)).reshape(-1)
     def actions_AI(self, model):
-        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]:
-            self._qlearning_actions(model)
+        if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(model)
         else:
             state = self.get_state()
             action = self._call_model(model, state)
