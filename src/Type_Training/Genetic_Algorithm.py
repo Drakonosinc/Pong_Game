@@ -28,3 +28,5 @@ def _ensure_built_if_tf(model, input_size):
             if not getattr(model, 'built', False) or len(model.weights) == 0:
                 dummy = tf.zeros((1, int(input_size)), dtype=tf.float32)
                 _ = model(dummy, training=False)
+        # Best effort; if build fails it will surface on set_weights
+        except Exception: pass
