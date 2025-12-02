@@ -31,3 +31,4 @@ def _ensure_built_if_tf(model, input_size):
         # Best effort; if build fails it will surface on set_weights
         except Exception: pass
 
+def fitness_function(model, game):
