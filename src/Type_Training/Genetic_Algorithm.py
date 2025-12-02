@@ -34,3 +34,5 @@ def _ensure_built_if_tf(model, input_size):
 def fitness_function(model, game):
     game.model = model
     score = game.run_with_model()
+    return score
+
