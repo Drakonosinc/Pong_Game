@@ -39,3 +39,4 @@ def fitness_function(model, game):
 def initialize_population(type_model, size, input_size, output_size, hidden_sizes=None):
     population = []
     for _ in range(size):
+        if type_model == "Pytorch": model = SimpleNN_Pytorch(input_size, output_size, hidden_sizes=hidden_sizes)
