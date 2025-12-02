@@ -40,3 +40,4 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
     population = []
     for _ in range(size):
         if type_model == "Pytorch": model = SimpleNN_Pytorch(input_size, output_size, hidden_sizes=hidden_sizes)
+        elif type_model == "Tensorflow":
