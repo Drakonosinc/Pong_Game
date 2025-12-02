@@ -36,3 +36,4 @@ def fitness_function(model, game):
     score = game.run_with_model()
     return score
 
+def initialize_population(type_model, size, input_size, output_size, hidden_sizes=None):
