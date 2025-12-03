@@ -45,3 +45,5 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
             _ensure_built_if_tf(model, input_size)
         else: raise ValueError(f"Unknown type_model: {type_model}")
         population.append(model)
+    return population
+
