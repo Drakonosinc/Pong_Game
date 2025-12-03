@@ -47,3 +47,4 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
         population.append(model)
     return population
 
+def evaluate_population(population, game, num_trials=3):
