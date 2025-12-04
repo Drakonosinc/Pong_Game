@@ -53,3 +53,4 @@ def evaluate_population(population, game, num_trials=3):
         score = [fitness_function(model, game) for _ in range(num_trials)]
         fitness_scores.append(sum(score) / num_trials)
     min_score = abs(min(fitness_scores)) if min(fitness_scores) < 0 else 0
+    fitness_scores = [score + min_score + 1 for score in fitness_scores]
