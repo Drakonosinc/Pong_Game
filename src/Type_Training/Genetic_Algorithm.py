@@ -57,3 +57,4 @@ def evaluate_population(population, game, num_trials=3):
     return fitness_scores
 
 def select_parents(population, fitness_scores, num_parents):
+    sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
