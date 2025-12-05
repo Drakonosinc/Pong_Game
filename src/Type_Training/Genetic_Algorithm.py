@@ -70,3 +70,5 @@ def _new_model(type_model, input_size, output_size, hidden_sizes):
         m = SimpleNN_Tensorflow(input_size, output_size, hidden_sizes=hidden_sizes)
         _ensure_built_if_tf(m, input_size)
         return m
+    else: raise ValueError(f"Unknown type_model: {type_model}")
+
