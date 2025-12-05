@@ -72,3 +72,4 @@ def _new_model(type_model, input_size, output_size, hidden_sizes):
         return m
     else: raise ValueError(f"Unknown type_model: {type_model}")
 
+def crossover(parent1, parent2, type_model, input_size, output_size, hidden_sizes=None):
