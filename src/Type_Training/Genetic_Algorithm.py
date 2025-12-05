@@ -65,3 +65,4 @@ def select_parents(population, fitness_scores, num_parents):
     return parents
 
 def _new_model(type_model, input_size, output_size, hidden_sizes):
+    if type_model == "Pytorch": return SimpleNN_Pytorch(input_size, output_size, hidden_sizes=hidden_sizes)
