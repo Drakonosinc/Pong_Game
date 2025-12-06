@@ -84,3 +84,4 @@ def crossover(parent1, parent2, type_model, input_size, output_size, hidden_size
         child2_w.append(c2)
     child1 = _new_model(type_model, input_size, output_size, hidden_sizes)
     child2 = _new_model(type_model, input_size, output_size, hidden_sizes)
+    _set_weights_np(child1, child1_w)
