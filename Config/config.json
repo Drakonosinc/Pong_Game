@@ -46,8 +46,8 @@
             "Q-learning": false
         },
         "type_model": {
-            "Pytorch": false,
-            "Tensorflow": true
+            "Pytorch": true,
+            "Tensorflow": false
         },
         "genetic": {
             "generation_value": 100,
