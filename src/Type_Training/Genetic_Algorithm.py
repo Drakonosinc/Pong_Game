@@ -77,3 +77,4 @@ def crossover(parent1, parent2, type_model, input_size, output_size, hidden_size
     w2 = _get_weights_np(parent2)
     child1_w, child2_w = [], []
     for a, b in zip(w1, w2):
+        mask = np.random.rand(*a.shape) > 0.5
