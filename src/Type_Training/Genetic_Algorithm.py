@@ -95,3 +95,4 @@ def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
         mask = (np.random.rand(*w.shape) < float(mutation_rate))
         noise = np.random.randn(*w.shape) * float(mutation_strength)
         mutated.append((w + noise * mask).astype(w.dtype, copy=False))
+    _set_weights_np(model, mutated)
