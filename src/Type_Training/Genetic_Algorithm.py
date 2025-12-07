@@ -89,3 +89,4 @@ def crossover(parent1, parent2, type_model, input_size, output_size, hidden_size
     return child1, child2
 
 def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
+    weights = _get_weights_np(model)
