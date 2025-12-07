@@ -92,3 +92,4 @@ def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
     weights = _get_weights_np(model)
     mutated = []
     for w in weights:
+        mask = (np.random.rand(*w.shape) < float(mutation_rate))
