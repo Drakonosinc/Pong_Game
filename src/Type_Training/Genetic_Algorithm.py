@@ -104,3 +104,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
     best_model = None
     for generation in range(generations):
         game.generation = generation
+        fitness_scores = evaluate_population(population, game, num_trials)
