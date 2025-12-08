@@ -98,3 +98,4 @@ def mutate(model, mutation_rate=0.01, mutation_strength=0.1):
     _set_weights_np(model, mutated)
     return model
 
+def genetic_algorithm(game, type_model, input_size, output_size, generations=100, population_size=20, mutation_rate=0.01, mutation_strength=0.1, elitism=2, num_trials=3, hidden_sizes=None):
