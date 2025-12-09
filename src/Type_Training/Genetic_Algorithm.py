@@ -115,3 +115,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
         print(f"Generación {generation}: Mejor Fitness = {current_best}")
         sorted_population = [model for _, model in sorted(zip(fitness_scores, population), key=lambda x: x[0], reverse=True)]
         new_population = []
+        for i in range(elitism):
