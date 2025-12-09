@@ -108,3 +108,5 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
         current_best = max(fitness_scores)
         if current_best > best_fitness:
             best_fitness = current_best
+            # Keep a standalone copy of the best model
+            best_idx = fitness_scores.index(current_best)
