@@ -110,3 +110,5 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             best_fitness = current_best
             # Keep a standalone copy of the best model
             best_idx = fitness_scores.index(current_best)
+            best_parent = population[best_idx]
+            # Recreate a fresh model of the same type and copy weights
