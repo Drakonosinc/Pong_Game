@@ -110,3 +110,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             best_fitness = current_best
             best_idx = fitness_scores.index(current_best)
             best_parent = population[best_idx]
+            best_model = _new_model(type_model, input_size, output_size, hidden_sizes)
