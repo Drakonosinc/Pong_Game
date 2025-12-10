@@ -129,3 +129,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             offspring.append(mutate(child2, mutation_rate, mutation_strength))
         while len(offspring) < num_offsprings:
             extra_parent = random.choice(population)
+            extra_child = _new_model(type_model, input_size, output_size, hidden_sizes)
