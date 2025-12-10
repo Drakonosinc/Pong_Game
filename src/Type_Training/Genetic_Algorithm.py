@@ -122,3 +122,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             new_population.append(elite_copy)
         num_offsprings = population_size - elitism
         parents = select_parents(population, fitness_scores, num_offsprings)
+        offspring = []
