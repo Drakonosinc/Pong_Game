@@ -127,3 +127,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             child1, child2 = crossover(parents[i], parents[i+1], type_model, input_size, output_size, hidden_sizes)
             offspring.append(mutate(child1, mutation_rate, mutation_strength))
             offspring.append(mutate(child2, mutation_rate, mutation_strength))
+        while len(offspring) < num_offsprings:
