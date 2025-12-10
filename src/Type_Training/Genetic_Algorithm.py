@@ -123,3 +123,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
         num_offsprings = population_size - elitism
         parents = select_parents(population, fitness_scores, num_offsprings)
         offspring = []
+        for i in range(0, len(parents) - 1, 2):
