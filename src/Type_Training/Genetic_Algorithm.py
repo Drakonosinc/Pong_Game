@@ -132,3 +132,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             extra_child = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(extra_child, _get_weights_np(extra_parent))
             offspring.append(mutate(extra_child, mutation_rate, mutation_strength))
+        population = new_population + offspring[:num_offsprings]
