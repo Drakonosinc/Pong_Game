@@ -142,3 +142,4 @@ def save_genetic_model(model, optimizer, path):
     elif _is_tf_model(model):
         # Save minimal TF checkpoint as NumPy weights for portability
         weights = _get_weights_np(model)
+        np.savez(path + ".npz", *weights)
