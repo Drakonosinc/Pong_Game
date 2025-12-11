@@ -139,3 +139,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
 def save_genetic_model(model, optimizer, path):
     print("save model")
     if _is_torch_model(model): torch.save({'model_state_dict': model.state_dict(), 'optimizer_state_dict': optimizer.state_dict() if optimizer else {}}, path)
+    elif _is_tf_model(model):
