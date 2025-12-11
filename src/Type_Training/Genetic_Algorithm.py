@@ -136,3 +136,4 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
     game.model = best_model
     return best_model
 
+def save_genetic_model(model, optimizer, path):
