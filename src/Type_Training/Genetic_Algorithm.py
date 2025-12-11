@@ -134,3 +134,5 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             offspring.append(mutate(extra_child, mutation_rate, mutation_strength))
         population = new_population + offspring[:num_offsprings]
     game.model = best_model
+    return best_model
+
