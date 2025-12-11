@@ -143,3 +143,5 @@ def save_genetic_model(model, optimizer, path):
         # Save minimal TF checkpoint as NumPy weights for portability
         weights = _get_weights_np(model)
         np.savez(path + ".npz", *weights)
+    else: raise TypeError("Unsupported model type for saving")
+
