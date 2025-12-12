@@ -153,3 +153,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 keys = sorted([k for k in data.files], key=lambda x: int(x.replace('arr_', '')))
                 weights = [data[k] for k in keys]
                 model = _new_model(type_model, input_size, output_size, hidden_sizes)
+                _set_weights_np(model, weights)
