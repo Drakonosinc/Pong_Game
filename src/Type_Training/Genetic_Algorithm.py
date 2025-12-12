@@ -146,3 +146,4 @@ def save_genetic_model(model, optimizer, path):
     else: raise TypeError("Unsupported model type for saving")
 
 def load_genetic_model(path, type_model, input_size, output_size, optimizer=None, hidden_sizes=None):
+    try:
