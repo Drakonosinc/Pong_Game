@@ -150,3 +150,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         if type_model == "Tensorflow" and tf is not None:
             try:
                 data = np.load(path + ".npz")
+                keys = sorted([k for k in data.files], key=lambda x: int(x.replace('arr_', '')))
