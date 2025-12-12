@@ -148,3 +148,4 @@ def save_genetic_model(model, optimizer, path):
 def load_genetic_model(path, type_model, input_size, output_size, optimizer=None, hidden_sizes=None):
     try:
         print("load model")
+        if type_model == "Tensorflow" and tf is not None:
