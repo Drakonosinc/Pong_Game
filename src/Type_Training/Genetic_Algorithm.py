@@ -155,3 +155,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 model = _new_model(type_model, input_size, output_size, hidden_sizes)
                 _set_weights_np(model, weights)
                 return model
+            except Exception: pass 
