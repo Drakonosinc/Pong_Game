@@ -140,7 +140,6 @@ def save_genetic_model(model, optimizer, path):
     print("save model")
     if _is_torch_model(model): torch.save({'model_state_dict': model.state_dict(), 'optimizer_state_dict': optimizer.state_dict() if optimizer else {}}, path)
     elif _is_tf_model(model):
-        # Save minimal TF checkpoint as NumPy weights for portability
         weights = _get_weights_np(model)
         np.savez(path + ".npz", *weights)
     else: raise TypeError("Unsupported model type for saving")
@@ -149,3 +148,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
     try:
         print("load model")
         if type_model == "Tensorflow" and tf is not None:
+            try:
