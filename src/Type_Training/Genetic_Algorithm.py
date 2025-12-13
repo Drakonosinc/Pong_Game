@@ -157,3 +157,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 return model
             except Exception: pass 
         checkpoint = torch.load(path)
+        state_dict = checkpoint.get('model_state_dict', checkpoint)
