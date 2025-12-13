@@ -161,3 +161,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         has_fc = any(k.startswith('fc1.') or k.startswith('fc2.') for k in state_dict.keys())
         has_hidden = any(k.startswith('hidden_layers.') for k in state_dict.keys())
         def _filtered_load(model, sd):
+            msd = model.state_dict()
