@@ -166,3 +166,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             missing = [k for k in sd.keys() if k not in filtered]
             if missing: pass
             model.load_state_dict(filtered, strict=False)
+        def model_type(type_model, input_size, output_size, hidden_sizes):
