@@ -164,3 +164,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             msd = model.state_dict()
             filtered = {k: v for k, v in sd.items() if k in msd and msd[k].shape == v.shape}
             missing = [k for k in sd.keys() if k not in filtered]
+            if missing: pass
