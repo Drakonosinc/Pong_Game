@@ -170,3 +170,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             if type_model == "Pytorch": return SimpleNN_Pytorch(input_size, output_size, hidden_sizes=hidden_sizes)
             elif type_model == "Tensorflow": return SimpleNN_Tensorflow(input_size, output_size, hidden_sizes=hidden_sizes)
         if has_fc:
+            if 'fc1.weight' in state_dict: first_hidden = state_dict['fc1.weight'].shape[0]
+ 
