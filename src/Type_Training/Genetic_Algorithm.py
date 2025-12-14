@@ -174,4 +174,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             else:
                 any_w = next((v for k, v in state_dict.items() if k.endswith('.weight')), None)
                 first_hidden = any_w.shape[0] if any_w is not None else 128
+            model = model_type(type_model, input_size, output_size, hidden_sizes=[first_hidden])
  
