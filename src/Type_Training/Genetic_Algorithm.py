@@ -180,4 +180,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             if 'fc1.bias' in state_dict:   remapped['hidden_layers.0.bias']   = state_dict['fc1.bias']
             ow, ob = state_dict.get('fc2.weight'), state_dict.get('fc2.bias')
             if ow is not None and ob is not None:
-  
+                if ow.shape[0] == output_size and ow.shape[1] == first_hidden and ob.shape[0] == output_size:
+ 
