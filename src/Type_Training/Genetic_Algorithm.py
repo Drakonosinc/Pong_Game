@@ -185,3 +185,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                     remapped['output_layer.bias'] = ob
             _filtered_load(model, remapped)
         elif has_hidden:
+            indices = sorted({int(k.split('.')[1]) for k in state_dict.keys() if k.startswith('hidden_layers.')})
