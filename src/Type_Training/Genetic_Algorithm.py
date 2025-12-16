@@ -203,4 +203,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         return None
     except Exception as e:
         print(f"An error occurred while loading the model: {e}")
-  
+        return None
