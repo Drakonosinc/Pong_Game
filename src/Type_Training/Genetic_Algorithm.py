@@ -194,3 +194,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             model = model_type(type_model, input_size, output_size, hidden_sizes=sizes)
             _filtered_load(model, state_dict)
         else:
+            model = model_type(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
