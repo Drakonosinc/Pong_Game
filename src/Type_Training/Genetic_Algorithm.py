@@ -198,3 +198,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             _filtered_load(model, state_dict)
         if optimizer and 'optimizer_state_dict' in checkpoint: optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         return model
+    except FileNotFoundError:
+ 
