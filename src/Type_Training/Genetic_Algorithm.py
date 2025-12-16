@@ -200,3 +200,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         return model
     except FileNotFoundError:
         print(f"The file {path} was not found.")
+        return None
+  
