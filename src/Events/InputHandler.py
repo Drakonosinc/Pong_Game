@@ -4,4 +4,4 @@ class InputHandler:
     def __init__(self, game):
         self.game = game
     def handle_input(self):
- 
+        for event in pygame.event.get():
