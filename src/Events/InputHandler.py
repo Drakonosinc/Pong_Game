@@ -6,3 +6,4 @@ class InputHandler:
     def handle_input(self):
         for event in pygame.event.get():
             if event.type == QUIT: self.game.event_quit()
+            self._process_keydown_events(event)
