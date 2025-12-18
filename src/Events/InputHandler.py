@@ -18,3 +18,4 @@ class InputHandler:
             if self.game.main == 3 and event.key == K_p: self.game.main = -1
             elif self.game.main == -1 and event.key == K_p: self.game.main = 3
             if self.game.main == 3 or self.game.main == -1:
+                if self.game.speed_up and event.key == K_KP_PLUS: self.game.change_speed(15, 1, 10, "speed_up", speed_up=self.game.speed_up)
