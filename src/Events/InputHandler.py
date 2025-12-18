@@ -9,3 +9,4 @@ class InputHandler:
             self._process_keydown_events(event)
             if self.game.main == 2: self.game.events_buttons(event)
             if self.game.main == 6: self.game.keys_menu.event_keys(event)
+        self.game.pressed_keys = pygame.key.get_pressed()
