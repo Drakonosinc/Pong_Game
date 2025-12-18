@@ -15,3 +15,4 @@ class InputHandler:
         self._process_continuous_presses()
     def _process_keydown_events(self, event):
         if event.type == KEYDOWN:
+            if self.game.main == 3 and event.key == K_p: self.game.main = -1
