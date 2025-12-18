@@ -17,3 +17,4 @@ class InputHandler:
         if event.type == KEYDOWN:
             if self.game.main == 3 and event.key == K_p: self.game.main = -1
             elif self.game.main == -1 and event.key == K_p: self.game.main = 3
+            if self.game.main == 3 or self.game.main == -1:
