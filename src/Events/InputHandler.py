@@ -11,3 +11,4 @@ class InputHandler:
             if self.game.main == 6: self.game.keys_menu.event_keys(event)
         self.game.pressed_keys = pygame.key.get_pressed()
         self.game.pressed_mouse = pygame.mouse.get_pressed()
+        self.game.mouse_pos = pygame.mouse.get_pos()
