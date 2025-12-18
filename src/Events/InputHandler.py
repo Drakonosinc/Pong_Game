@@ -16,3 +16,4 @@ class InputHandler:
     def _process_keydown_events(self, event):
         if event.type == KEYDOWN:
             if self.game.main == 3 and event.key == K_p: self.game.main = -1
+            elif self.game.main == -1 and event.key == K_p: self.game.main = 3
