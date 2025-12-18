@@ -13,3 +13,4 @@ class InputHandler:
         self.game.pressed_mouse = pygame.mouse.get_pressed()
         self.game.mouse_pos = pygame.mouse.get_pos()
         self._process_continuous_presses()
+    def _process_keydown_events(self, event):
