@@ -23,3 +23,4 @@ class InputHandler:
             if self.game.main == -1 and event.key == K_1: self.game.manual_save_model()
     def _process_continuous_presses(self):
         keys = self.game.pressed_keys
+        if keys[K_ESCAPE]: self.game.running = False
