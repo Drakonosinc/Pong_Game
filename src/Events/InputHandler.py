@@ -21,3 +21,4 @@ class InputHandler:
                 if self.game.speed_up and event.key == K_KP_PLUS: self.game.change_speed(15, 1, 10, "speed_up", speed_up=self.game.speed_up)
                 if self.game.speed_down and event.key == K_KP_MINUS: self.game.change_speed(-15, -1, -1, "speed_down", speed_down=self.game.speed_down)
             if self.game.main == -1 and event.key == K_1: self.game.manual_save_model()
+    def _process_continuous_presses(self):
