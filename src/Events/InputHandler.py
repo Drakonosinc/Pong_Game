@@ -30,3 +30,4 @@ class InputHandler:
             if keys[self.game.config.config_keys["DOWN_S"]] and p1.rect.bottom < self.game.HEIGHT: p1.rect.y += 5
         if self.game.main == -1 and self.game.mode_game["Player"]:
             p2 = self.game.player_two
+            if keys[self.game.config.config_keys["UP_ARROW"]] and p2.rect.top > 0: p2.rect.y -= 5
