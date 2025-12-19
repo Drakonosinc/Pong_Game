@@ -25,3 +25,4 @@ class InputHandler:
         keys = self.game.pressed_keys
         if keys[K_ESCAPE]: self.game.running = False
         if self.game.main == -1 and (self.game.mode_game["Player"] or self.game.mode_game["AI"]):
+            p1 = self.game.player_one
