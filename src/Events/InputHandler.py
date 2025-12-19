@@ -26,3 +26,4 @@ class InputHandler:
         if keys[K_ESCAPE]: self.game.running = False
         if self.game.main == -1 and (self.game.mode_game["Player"] or self.game.mode_game["AI"]):
             p1 = self.game.player_one
+            if keys[self.game.config.config_keys["UP_W"]] and p1.rect.top > 0: p1.rect.y -= 5
