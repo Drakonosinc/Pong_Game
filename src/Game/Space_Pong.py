@@ -51,6 +51,8 @@ class Space_pong_game(interface):
         self.speed_down = speed_down
         self.speed_up = speed_up
         if self.speed==number: setattr(self,objet,False)
+    def manual_save_model(self):
+
     def event_keydown(self,event):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
