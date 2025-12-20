@@ -8,6 +8,7 @@ class Space_pong_game(interface):
         super().__init__()
         self.model = None
         self.ai_handler = AIHandler(self)
+        self.input_handler = InputHandler(self)
         self.load_AI()
         self.load_varials()
         self.objects()
