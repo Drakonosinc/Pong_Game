@@ -52,6 +52,7 @@ class Space_pong_game(interface):
         self.speed_up = speed_up
         if self.speed==number: setattr(self,objet,False)
     def manual_save_model(self):
+        """Método auxiliar para guardar el modelo desde el InputHandler sin importar librerías allá."""
 
     def event_keydown(self,event):
         if event.type==KEYDOWN:
