@@ -176,7 +176,7 @@ class Space_pong_game(interface):
         self.clock.tick(self.FPS)
     def run(self):
         self.running = True
-        while self.running: self.handle_keys(), self.draw(), self.item_repeat_run()
+        while self.running: self.input_handler.handle_input(), self.draw(), self.item_repeat_run()
     def run_with_model(self):
         self.running = True
         self.player_two.reward = 0
