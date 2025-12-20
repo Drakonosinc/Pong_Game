@@ -52,8 +52,8 @@ class Space_pong_game(interface):
         self.speed_up = speed_up
         if self.speed==number: setattr(self,objet,False)
     def manual_save_model(self):
-        if self.config.config_AI["type_training"]["Genetic"]:
-
+        if self.config.config_AI["type_training"]["Genetic"]: save_genetic_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
+        
     def event_keydown(self,event):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
