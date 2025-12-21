@@ -62,9 +62,7 @@ class Space_pong_game(interface):
         if self.main==-1 and self.mode_game["Player"]:
             if self.pressed_keys[self.config.config_keys["UP_ARROW"]] and self.player_two.rect.top > 0: self.player_two.rect.y -= 5
             if self.pressed_keys[self.config.config_keys["DOWN_ARROW"]] and self.player_two.rect.bottom < self.HEIGHT: self.player_two.rect.y += 5
-        if self.main==1:
-            if self.pressed_keys[K_r]: self.change_mains({"main":-1})
-            if self.pressed_keys[K_e]: self.change_mains({"main":0,"run":True})
+
     def images_elements(self):
         self.screen.blit(self.spacecraft, (-77,self.player_one.rect.y-140))
         self.screen.blit(self.spacecraft2, (578,self.player_two.rect.y-140))
