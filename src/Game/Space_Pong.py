@@ -58,9 +58,6 @@ class Space_pong_game(interface):
         if event.type==KEYDOWN:
             if self.main==3 and event.key==K_p:self.main=-1
             elif self.main==-1 and event.key==K_p:self.main=3
-            if self.main==3 or self.main==-1:
-                if self.speed_up and event.key==K_KP_PLUS: self.change_speed(15,1,10,"speed_up",speed_up=self.speed_up)
-                if self.speed_down and event.key==K_KP_MINUS: self.change_speed(-15,-1,-1,"speed_down",speed_down=self.speed_down)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
