@@ -54,10 +54,6 @@ class Space_pong_game(interface):
     def manual_save_model(self):
         if self.config.config_AI["type_training"]["Genetic"]: save_genetic_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
         elif self.config.config_AI["type_training"]["Q-learning"]: save_qlearning_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
-    def event_keydown(self,event):
-        if event.type==KEYDOWN:
-            if self.main==3 and event.key==K_p:self.main=-1
-            elif self.main==-1 and event.key==K_p:self.main=3
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
         if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
