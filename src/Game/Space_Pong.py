@@ -35,10 +35,6 @@ class Space_pong_game(interface):
         for event in pygame.event.get():
             if event.type==pygame.QUIT: self.event_quit()
             self.event_keydown(event)
-            if self.main==2: self.events_buttons(event)
-            if self.main==6: self.keys_menu.event_keys(event)
-        self.pressed_keys = pygame.key.get_pressed()
-        self.pressed_mouse = pygame.mouse.get_pressed()
 
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
