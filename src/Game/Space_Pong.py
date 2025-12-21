@@ -56,9 +56,7 @@ class Space_pong_game(interface):
         elif self.config.config_AI["type_training"]["Q-learning"]: save_qlearning_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
     def press_keys(self):
         if self.pressed_keys[K_ESCAPE]:self.running=False
-        if self.main==-1 and (self.mode_game["Player"] or self.mode_game["AI"]):
-            if self.pressed_keys[self.config.config_keys["UP_W"]] and self.player_one.rect.top > 0: self.player_one.rect.y -= 5
-            if self.pressed_keys[self.config.config_keys["DOWN_S"]] and self.player_one.rect.bottom < self.HEIGHT: self.player_one.rect.y += 5
+
     def images_elements(self):
         self.screen.blit(self.spacecraft, (-77,self.player_one.rect.y-140))
         self.screen.blit(self.spacecraft2, (578,self.player_two.rect.y-140))
