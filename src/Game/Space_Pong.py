@@ -129,7 +129,6 @@ class Space_pong_game(interface):
     def name_players(self):
         self.screen.blit(self.font.render(f"{self.input_player1.show_player()}", True, self.YELLOW),(45,360))
         self.screen.blit(self.font.render(f"{self.input_player2.show_player()}", True, self.YELLOW),(580,360))
-    def mode_speed(self): self.screen.blit(self.font.render(f"Speed: {self.speed}", True, self.YELLOW),(self.WIDTH//2-40,360))
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.player_one.reset()
         self.player_two.reset()
