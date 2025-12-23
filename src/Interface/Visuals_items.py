@@ -9,5 +9,5 @@ class Visuals_items:
         if self.game.config.config_AI["type_training"]["Q-learning"]: self.game.screen.blit(self.game.font2.render(f"Episode: {self.game.generation}", True, self.game.YELLOW), (10, 10))
         else: self.game.screen.blit(self.game.font2.render(f"Generation: {self.game.generation}", True, self.game.YELLOW), (10, 10))
     def scores(self):
-        self.screen.blit(self.font.render(f"Score {self.player_one.score}", True, self.YELLOW),(45,380))
-        self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
+        self.game.screen.blit(self.game.font.render(f"Score {self.game.player_one.score}", True, self.game.YELLOW),(45,380))
+        self.game.screen.blit(self.game.font.render(f"Score {self.game.player_two.score}", True, self.game.YELLOW),(580,380))
