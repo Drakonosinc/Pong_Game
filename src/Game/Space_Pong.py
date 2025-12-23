@@ -1,4 +1,4 @@
-from Interface.Interface import *
+from Interface import *
 from Entities import *
 from AI import *
 from Type_Training import *
