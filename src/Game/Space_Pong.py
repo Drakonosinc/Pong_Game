@@ -79,9 +79,6 @@ class Space_pong_game(interface):
             if ball.rect.x<=0: reset(ball,1,self.player_two)
             collision(self.player_one,ball,i,-1)
             collision(self.player_two,ball,i,1)
-    def scores(self):
-        self.screen.blit(self.font.render(f"Score {self.player_one.score}", True, self.YELLOW),(45,380))
-        self.screen.blit(self.font.render(f"Score {self.player_two.score}", True, self.YELLOW),(580,380))
     def restart(self):
         if self.mode_game["Training AI"] and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.change_mains({"main":1,"command":self.reset})
