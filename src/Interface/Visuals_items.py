@@ -13,4 +13,8 @@ class Visuals_items:
         self.game.screen.blit(self.game.font.render(f"Score {self.game.player_two.score}", True, self.game.YELLOW),(580,380))
     def draw_activations(self):
         if self.mode_game["AI"]: self.model = self.model_training
-        
+        if self.model!=None and (self.model.activations is not None):
+            activations = self.model.activations
+            num_activations = activations.shape[1]
+            neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
+            
