@@ -91,8 +91,6 @@ class Space_pong_game(interface):
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model!=None and (self.model.activations is not None):
             activations = self.model.activations
-            num_activations = activations.shape[1]
-            neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
             
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
