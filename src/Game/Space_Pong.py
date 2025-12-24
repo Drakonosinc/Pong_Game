@@ -93,9 +93,7 @@ class Space_pong_game(interface):
             activations = self.model.activations
             num_activations = activations.shape[1]
             neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
-            for pos in neuron_positions:
-                pygame.draw.circle(self.screen, self.WHITE, pos, 5)
-        
+            
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model is not None:
