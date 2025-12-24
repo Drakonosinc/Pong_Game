@@ -11,3 +11,6 @@ class Visuals_items:
     def scores(self):
         self.game.screen.blit(self.game.font.render(f"Score {self.game.player_one.score}", True, self.game.YELLOW),(45,380))
         self.game.screen.blit(self.game.font.render(f"Score {self.game.player_two.score}", True, self.game.YELLOW),(580,380))
+    def draw_activations(self):
+        if self.mode_game["AI"]: self.model = self.model_training
+        
