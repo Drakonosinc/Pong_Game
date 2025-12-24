@@ -87,8 +87,6 @@ class Space_pong_game(interface):
         if self.player_one.rect.top > 0 or self.player_one.rect.bottom < self.HEIGHT: self.player_one.rect.y+=self.balls[0].move_y
         if self.player_one.rect.y>=310: self.player_one.rect.y=310
         if self.player_one.rect.y<=0: self.player_one.rect.y=0
-    def draw_activations(self):
-        
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model is not None:
