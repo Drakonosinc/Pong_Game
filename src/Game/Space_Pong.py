@@ -89,9 +89,7 @@ class Space_pong_game(interface):
         if self.player_one.rect.y<=0: self.player_one.rect.y=0
     def draw_activations(self):
         if self.mode_game["AI"]: self.model = self.model_training
-        if self.model!=None and (self.model.activations is not None):
-            activations = self.model.activations
-            
+        
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model is not None:
