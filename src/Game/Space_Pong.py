@@ -58,7 +58,7 @@ class Space_pong_game(interface):
         self.images_elements()
         self.visuals_items.scores()
         self.visuals_items.name_players()
-        self.mode_speed()
+        self.visuals_items.mode_speed()
         self.menus()
     def update(self):
         def repeat(ball, reward):
