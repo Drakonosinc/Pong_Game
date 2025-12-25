@@ -92,10 +92,6 @@ class Space_pong_game(interface):
         if self.model is not None:
             try:
                 weights_preview = None
-                if hasattr(self.model, 'fc1'):
-                    l = self.model.fc1
-                    if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
-                    elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
                 
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.player_one.reset()
