@@ -12,18 +12,18 @@ class Visuals_items:
         self.game.screen.blit(self.game.font.render(f"Score {self.game.player_one.score}", True, self.game.YELLOW),(45,380))
         self.game.screen.blit(self.game.font.render(f"Score {self.game.player_two.score}", True, self.game.YELLOW),(580,380))
     def draw_activations(self):
-        if self.mode_game["AI"]: self.model = self.model_training
-        if self.model!=None and (self.model.activations is not None):
-            activations = self.model.activations
+        if self.game.mode_game["AI"]: self.game.model = self.game.model_training
+        if self.game.model!=None and (self.game.model.activations is not None):
+            activations = self.game.model.activations
             num_activations = activations.shape[1]
-            neuron_positions = [(self.WIDTH - 800 + i * 20, self.HEIGHT // 2) for i in range(num_activations)]
+            neuron_positions = [(self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)]
             for pos in neuron_positions:
-                pygame.draw.circle(self.screen, self.WHITE, pos, 5)
-                pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 210, self.HEIGHT // 2), pos, 1)
-                pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 190, self.HEIGHT // 2), pos, 1)
+                pygame.draw.circle(self.game.screen, self.game.WHITE, pos, 5)
+                pygame.draw.line(self.game.screen, self.game.WHITE, (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
+                pygame.draw.line(self.game.screen, self.game.WHITE, (self.game.WIDTH - 190, self.game.HEIGHT // 2), pos, 1)
             for i in range(num_activations):
                 activation_value = activations[0][i]
                 activation_value = max(0, min(activation_value, 1))
                 color_intensity = int(activation_value * 255)
                 color = (color_intensity, color_intensity, color_intensity)
-                pygame.draw.circle(self.screen, color, neuron_positions[i], 5)
+                pygame.draw.circle(self.game.screen, color, neuron_positions[i], 5)
