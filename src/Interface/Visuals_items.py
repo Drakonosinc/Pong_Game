@@ -22,3 +22,4 @@ class Visuals_items:
                 pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 210, self.HEIGHT // 2), pos, 1)
                 pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 190, self.HEIGHT // 2), pos, 1)
             for i in range(num_activations):
+                activation_value = activations[0][i]
