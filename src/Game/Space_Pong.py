@@ -100,11 +100,7 @@ class Space_pong_game(interface):
                     weights_text = self.font.render(f"Model Weights: {weights_preview}", True, self.YELLOW)
                     self.screen.blit(weights_text, (10, 50))
             except Exception: pass
-            if getattr(self.model, 'activations', None) is not None:
-                try:
-                    activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
-                    self.screen.blit(activations_text, (10, 70))
-                except Exception: pass
+            
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.player_one.reset()
         self.player_two.reset()
