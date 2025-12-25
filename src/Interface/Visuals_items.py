@@ -21,3 +21,4 @@ class Visuals_items:
                 pygame.draw.circle(self.screen, self.WHITE, pos, 5)
                 pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 210, self.HEIGHT // 2), pos, 1)
                 pygame.draw.line(self.screen, self.WHITE, (self.WIDTH - 190, self.HEIGHT // 2), pos, 1)
+            for i in range(num_activations):
