@@ -24,3 +24,4 @@ class Visuals_items:
             for i in range(num_activations):
                 activation_value = activations[0][i]
                 activation_value = max(0, min(activation_value, 1))
+                color_intensity = int(activation_value * 255)
