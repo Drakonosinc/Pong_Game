@@ -87,8 +87,6 @@ class Space_pong_game(interface):
         if self.player_one.rect.top > 0 or self.player_one.rect.bottom < self.HEIGHT: self.player_one.rect.y+=self.balls[0].move_y
         if self.player_one.rect.y>=310: self.player_one.rect.y=310
         if self.player_one.rect.y<=0: self.player_one.rect.y=0
-    def draw_model_data(self):
-
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.player_one.reset()
         self.player_two.reset()
