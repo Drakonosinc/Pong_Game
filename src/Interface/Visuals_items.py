@@ -31,3 +31,5 @@ class Visuals_items:
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model is not None:
             try:
+                weights_preview = None
+                if hasattr(self.model, 'fc1'):
