@@ -90,9 +90,7 @@ class Space_pong_game(interface):
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
         if self.model is not None:
-            try:
-                weights_preview = None
-                
+
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.player_one.reset()
         self.player_two.reset()
