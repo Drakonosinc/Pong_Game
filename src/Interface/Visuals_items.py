@@ -29,3 +29,5 @@ class Visuals_items:
                 pygame.draw.circle(self.game.screen, color, neuron_positions[i], 5)
     def draw_model_data(self):
         if self.mode_game["AI"]: self.model = self.model_training
+        if self.model is not None:
+            try:
