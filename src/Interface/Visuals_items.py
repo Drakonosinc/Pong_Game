@@ -33,3 +33,5 @@ class Visuals_items:
             try:
                 weights_preview = None
                 if hasattr(self.model, 'fc1'):
+                    l = self.model.fc1
+                    if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
