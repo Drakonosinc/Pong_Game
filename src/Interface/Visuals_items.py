@@ -27,3 +27,5 @@ class Visuals_items:
                 color_intensity = int(activation_value * 255)
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.game.screen, color, neuron_positions[i], 5)
+    def draw_model_data(self):
+        if self.mode_game["AI"]: self.model = self.model_training
