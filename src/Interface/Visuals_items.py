@@ -44,3 +44,4 @@ class Visuals_items:
                 try:
                     activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
                     self.screen.blit(activations_text, (10, 70))
+                except Exception: pass
