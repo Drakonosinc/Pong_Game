@@ -40,3 +40,4 @@ class Visuals_items:
                     weights_text = self.font.render(f"Model Weights: {weights_preview}", True, self.YELLOW)
                     self.screen.blit(weights_text, (10, 50))
             except Exception: pass
+            if getattr(self.model, 'activations', None) is not None:
