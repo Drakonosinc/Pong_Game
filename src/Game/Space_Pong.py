@@ -54,7 +54,7 @@ class Space_pong_game(interface):
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game["Training AI"]: self.visuals_items.draw_generation()
-        if self.mode_game["Training AI"] or self.mode_game["AI"]: self.visuals_items.draw_activations(),self.draw_model_data()
+        if self.mode_game["Training AI"] or self.mode_game["AI"]: self.visuals_items.draw_activations(),self.visuals_items.draw_model_data()
         self.images_elements()
         self.visuals_items.scores()
         self.visuals_items.name_players()
