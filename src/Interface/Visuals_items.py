@@ -42,3 +42,4 @@ class Visuals_items:
             except Exception: pass
             if getattr(self.model, 'activations', None) is not None:
                 try:
+                    activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
