@@ -28,20 +28,20 @@ class Visuals_items:
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.game.screen, color, neuron_positions[i], 5)
     def draw_model_data(self):
-        if self.mode_game["AI"]: self.model = self.model_training
-        if self.model is not None:
+        if self.game.mode_game["AI"]: self.game.model = self.game.model_training
+        if self.game.model is not None:
             try:
                 weights_preview = None
-                if hasattr(self.model, 'fc1'):
-                    l = self.model.fc1
+                if hasattr(self.game.model, 'fc1'):
+                    l = self.game.model.fc1
                     if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
                     elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
                 if weights_preview is not None:
-                    weights_text = self.font.render(f"Model Weights: {weights_preview}", True, self.YELLOW)
-                    self.screen.blit(weights_text, (10, 50))
+                    weights_text = self.game.font.render(f"Model Weights: {weights_preview}", True, self.game.YELLOW)
+                    self.game.screen.blit(weights_text, (10, 50))
             except Exception: pass
-            if getattr(self.model, 'activations', None) is not None:
+            if getattr(self.game.model, 'activations', None) is not None:
                 try:
-                    activations_text = self.font.render(f"Activations: {self.model.activations.flatten()[:5]}", True, self.YELLOW)
-                    self.screen.blit(activations_text, (10, 70))
+                    activations_text = self.game.font.render(f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.game.YELLOW)
+                    self.game.screen.blit(activations_text, (10, 70))
                 except Exception: pass
