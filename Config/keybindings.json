@@ -1,0 +1,7 @@
+{
+    "player_1": {
+        "UP": 119,
+        "DOWN": 115,
+        "label_up": "W",
+        "label_down": "S"
+    },
