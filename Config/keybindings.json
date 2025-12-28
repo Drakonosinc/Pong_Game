@@ -5,3 +5,10 @@
         "label_up": "W",
         "label_down": "S"
     },
+    "player_2": {
+        "UP": 1073741906,
+        "DOWN": 1073741905,
+        "label_up": "\u2191",
+        "label_down": "\u2193"
+    }
+}
