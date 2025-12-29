@@ -1,0 +1,26 @@
+{
+    "active_mode": "Genetic", 
+    "framework": "Pytorch",
+    "save_models": true,
+    "genetic": {
+        "generations": 100,
+        "population": 20,
+        "mutation_rate": 0.05 
+    },
+    "q_learning": {
+        "episodes": 500,
+        "learning_rate": 0.001,
+        "gamma": 0.99,
+        "epsilon": {
+            "start": 1.0,
+            "end": 0.01,
+            "decay": 0.995
+        },
+        "memory_size": 10000,
+        "batch_size": 32
+    },
+    "neural_network": {
+        "hidden_layers": 2,
+        "neurons_per_layer": 4
+    }
+}

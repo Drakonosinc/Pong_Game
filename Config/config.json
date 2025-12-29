@@ -1,34 +1,4 @@
 {
-    "config_visuals": {
-        "WIDTH": 700,
-        "HEIGHT": 400,
-        "image_background": [
-            "background1.jpg",
-            "background2.jpg",
-            "background3.jpg",
-            "background4.jpg",
-            "background5.jpg",
-            "background6.jpg",
-            "background7.jpg",
-            "background8.jpg"
-        ],
-        "value_background": 0,
-        "planets": [
-            "Mars.png",
-            "Mars1.png",
-            "meteorite.png",
-            "Saturn.png",
-            "earth.png"
-        ],
-        "value_planet": 0,
-        "spacecrafts": [
-            "spaceship.png",
-            "spaceship2.png",
-            "spaceship3.png"
-        ],
-        "value_spacecraft1": 0,
-        "value_spacecraft2": 0
-    },
     "config_keys": {
         "UP_W": 119,
         "Name_key1": "W",

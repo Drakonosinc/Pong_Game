@@ -3,9 +3,5 @@
         "width": 700,
         "height": 400
     },
-    "assets": {
-        "backgrounds": ["background1.jpg", "background2.jpg"],
-        "planets": ["Mars.png", "Saturn.png"],
-        "spacecrafts": ["spaceship.png", "spaceship2.png"]
-    }
+    
 }
