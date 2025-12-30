@@ -6,5 +6,7 @@
         "Name_key2": "S",
         "UP_ARROW": 1073741906,
         "Name_key3": "\u2191",
-    
+        "DOWN_ARROW": 1073741905,
+        "Name_key4": "\u2193"
+    }
 }
