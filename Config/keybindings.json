@@ -1,14 +1,6 @@
 {
-    "player_1": {
-        "UP": 119,
-        "DOWN": 115,
-        "label_up": "W",
-        "label_down": "S"
-    },
-    "player_2": {
-        "UP": 1073741906,
-        "DOWN": 1073741905,
-        "label_up": "\u2191",
-        "label_down": "\u2193"
-    }
+    "config_keys": {
+        "UP_W": 119,
+        "Name_key1": "W",
+    
 }
