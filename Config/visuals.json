@@ -24,5 +24,6 @@
         ],
         "value_planet": 0,
         "spacecrafts": [
+            "spaceship.png",
 
 }
