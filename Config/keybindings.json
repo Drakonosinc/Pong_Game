@@ -2,5 +2,7 @@
     "config_keys": {
         "UP_W": 119,
         "Name_key1": "W",
+        "DOWN_S": 115,
+        "Name_key2": "S",
     
 }
