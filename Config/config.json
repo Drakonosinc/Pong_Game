@@ -1,14 +1,5 @@
 {
-    "config_keys": {
-        "UP_W": 119,
-        "Name_key1": "W",
-        "DOWN_S": 115,
-        "Name_key2": "S",
-        "UP_ARROW": 1073741906,
-        "Name_key3": "\u2191",
-        "DOWN_ARROW": 1073741905,
-        "Name_key4": "\u2193"
-    },
+    
     "config_AI": {
         "model_save": false,
         "type_training": {
