@@ -23,5 +23,6 @@
             "earth.png"
         ],
         "value_planet": 0,
+        "spacecrafts": [
 
 }
