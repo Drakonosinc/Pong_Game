@@ -29,5 +29,6 @@
             "spaceship3.png"
         ],
         "value_spacecraft1": 0,
-
+        "value_spacecraft2": 0
+    }
 }
