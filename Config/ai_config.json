@@ -10,5 +10,6 @@
             "Tensorflow": false
         },
         "genetic": {
+            "generation_value": 100,
     
 }
