@@ -1,5 +1,6 @@
 {
     "config_AI": {
         "model_save": false,
+        "type_training": {
     
 }
