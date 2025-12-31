@@ -6,5 +6,6 @@
             "Q-learning": false
         },
         "type_model": {
+            "Pytorch": true,
     
 }
