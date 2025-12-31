@@ -8,5 +8,7 @@
         "type_model": {
             "Pytorch": true,
             "Tensorflow": false
+        },
+        "genetic": {
     
 }
