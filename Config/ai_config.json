@@ -4,5 +4,7 @@
         "type_training": {
             "Genetic": true,
             "Q-learning": false
+        },
+        "type_model": {
     
 }
