@@ -12,5 +12,6 @@
         "genetic": {
             "generation_value": 100,
             "population_value": 20,
+            "try_for_ai": 3,
     
 }
