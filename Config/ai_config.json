@@ -16,5 +16,6 @@
             "model_save": true
         },
         "q_learning": {
+            "episodes": 500,
     
 }
