@@ -17,5 +17,6 @@
         },
         "q_learning": {
             "episodes": 500,
+            "learning_rate": 0.001,
     
 }
