@@ -11,5 +11,6 @@
         },
         "genetic": {
             "generation_value": 100,
+            "population_value": 20,
     
 }
