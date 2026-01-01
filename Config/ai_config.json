@@ -15,5 +15,6 @@
             "try_for_ai": 3,
             "model_save": true
         },
+        "q_learning": {
     
 }
