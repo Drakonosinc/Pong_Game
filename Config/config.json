@@ -1,9 +1,0 @@
-{
-    "config_sounds": {
-        "sound_main": true
-    },
-    "config_game": {
-        "number_balls": true,
-        "max_score": 5
-    }
-}
