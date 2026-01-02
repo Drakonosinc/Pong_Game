@@ -50,9 +50,7 @@ class Space_pong_game(interface):
     def images_elements(self):
         self.screen.blit(self.spacecraft, (-77,self.player_one.rect.y-140))
         self.screen.blit(self.spacecraft2, (578,self.player_two.rect.y-140))
-        for ball in self.balls:
-            self.rotated_ball = pygame.transform.rotate(self.planet, ball.rect.x)
-            self.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
+        
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game["Training AI"]: self.visuals_items.draw_generation()
