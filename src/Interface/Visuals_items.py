@@ -1,6 +1,12 @@
 import pygame
 class Visuals_items:
     def __init__(self, game): self.game = game
+    def images_elements(self):
+        self.screen.blit(self.spacecraft, (-77,self.player_one.rect.y-140))
+        self.screen.blit(self.spacecraft2, (578,self.player_two.rect.y-140))
+        for ball in self.balls:
+            self.rotated_ball = pygame.transform.rotate(self.planet, ball.rect.x)
+            self.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
     def mode_speed(self): self.game.screen.blit(self.game.font.render(f"Speed: {self.game.speed}", True, self.game.YELLOW),(self.game.WIDTH//2-40,360))
     def name_players(self):
         self.game.screen.blit(self.game.font.render(f"{self.game.input_player1.show_player()}", True, self.game.YELLOW),(45,360))
