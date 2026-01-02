@@ -27,6 +27,7 @@
             "target_update": 100
         },
         "nn": {
-
+            "hidden_layers": 2,
+        }
     }
 }
