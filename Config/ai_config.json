@@ -25,5 +25,8 @@
             "memory_size": 10000,
             "batch_size": 32,
             "target_update": 100
-        }
+        },
+        "nn": {
+
+    }
 }
