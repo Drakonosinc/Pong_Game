@@ -47,10 +47,6 @@ class Space_pong_game(interface):
     def manual_save_model(self):
         if self.config.config_AI["type_training"]["Genetic"]: save_genetic_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
         elif self.config.config_AI["type_training"]["Q-learning"]: save_qlearning_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
-    def images_elements(self):
-        self.screen.blit(self.spacecraft, (-77,self.player_one.rect.y-140))
-        self.screen.blit(self.spacecraft2, (578,self.player_two.rect.y-140))
-        
     def draw(self):
         self.screen.blit(self.image, (0, 0))
         if self.mode_game["Training AI"]: self.visuals_items.draw_generation()
