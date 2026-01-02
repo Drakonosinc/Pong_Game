@@ -4,5 +4,6 @@
     },
     "config_game": {
         "number_balls": true,
+        "max_score": 5
     }
 }
