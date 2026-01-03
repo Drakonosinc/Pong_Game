@@ -55,4 +55,8 @@ class Visuals_items:
         self.game.screen.blit(self.image, (0, 0))
         if self.game.mode_game["Training AI"]: self.draw_generation()
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]: self.draw_activations(),self.draw_model_data()
-        
+        self.images_elements()
+        self.scores()
+        self.name_players()
+        self.mode_speed()
+        self.game.menus()
