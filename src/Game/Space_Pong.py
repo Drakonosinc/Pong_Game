@@ -30,10 +30,6 @@ class Space_pong_game(interface):
         self.mode_game:dict[str,bool] = {"Training AI":False,"Player":False,"AI":False}
         self.sound_type:dict = {"sound":f"Sound {"ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool] = {"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
-    def objects(self):
-        self.balls = [ Ball(self.WIDTH//2-28,self.HEIGHT//2-29,36,36,4+i,4+i) for i in range(1 if self.mode_game["Training AI"] else self.config.config_game["number_balls"])]
-        self.player_one = Player(25,150,11,90,[True] * len(self.balls))
-        self.player_two = Player(665,150,11,90,[True] * len(self.balls))
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
         self.type_game()
