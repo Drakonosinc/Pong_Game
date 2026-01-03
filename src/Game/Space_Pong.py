@@ -57,11 +57,7 @@ class Space_pong_game(interface):
                     player.active[i] = False
             else: player.active[i] = True
         for i, ball in enumerate(self.balls):
-            ball.move_ball(self.WIDTH,self.HEIGHT)
-            if ball.rect.x>=self.WIDTH-25: reset(ball,-1,self.player_one)
-            if ball.rect.x<=0: reset(ball,1,self.player_two)
-            collision(self.player_one,ball,i,-1)
-            collision(self.player_two,ball,i,1)
+            
     def restart(self):
         if self.mode_game["Training AI"] and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.change_mains({"main":1,"command":self.reset})
