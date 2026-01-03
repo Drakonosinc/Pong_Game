@@ -1,5 +1,5 @@
 from pygame import Rect
-
+from Entities import *
 class GameLogic:
     def __init__(self, game):
         self.game = game
