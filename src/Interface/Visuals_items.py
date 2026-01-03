@@ -51,3 +51,8 @@ class Visuals_items:
                     activations_text = self.game.font.render(f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.game.YELLOW)
                     self.game.screen.blit(activations_text, (10, 70))
                 except Exception: pass
+    def draw(self):
+        self.game.screen.blit(self.image, (0, 0))
+        if self.game.mode_game["Training AI"]: self.draw_generation()
+        if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]: self.draw_activations(),self.draw_model_data()
+        
