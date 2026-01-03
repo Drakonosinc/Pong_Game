@@ -52,10 +52,7 @@ class Space_pong_game(interface):
         if self.mode_game["Training AI"]: self.visuals_items.draw_generation()
         if self.mode_game["Training AI"] or self.mode_game["AI"]: self.visuals_items.draw_activations(),self.visuals_items.draw_model_data()
         self.visuals_items.images_elements()
-        self.visuals_items.scores()
-        self.visuals_items.name_players()
-        self.visuals_items.mode_speed()
-        self.menus()
+        
     def update(self):
         def repeat(ball, reward):
             ball.handle_collision(self.player_two,reward)
