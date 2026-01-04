@@ -46,12 +46,6 @@ class Space_pong_game(interface):
         def repeat(ball, reward):
             ball.handle_collision(self.player_two,reward)
             self.sound.play(loops=0)
-        def collision(player, ball, i, reward=1):
-            if player.check_collision(ball):
-                if player.active[i]:
-                    repeat(ball,reward)
-                    player.active[i] = False
-            else: player.active[i] = True
     def restart(self):
         if self.mode_game["Training AI"] and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.change_mains({"main":1,"command":self.reset})
