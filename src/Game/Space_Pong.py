@@ -46,10 +46,6 @@ class Space_pong_game(interface):
         def repeat(ball, reward):
             ball.handle_collision(self.player_two,reward)
             self.sound.play(loops=0)
-        def reset(ball, reward, player):
-            ball.rect = Rect(*ball.reset_position)
-            repeat(ball,reward)
-            player.update_score(1)
         def collision(player, ball, i, reward=1):
             if player.check_collision(ball):
                 if player.active[i]:
