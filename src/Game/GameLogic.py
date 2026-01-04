@@ -15,3 +15,4 @@ class GameLogic:
             if ball.rect.x >= self.width - 25: self._reset_ball(ball, -1, self.player_one)
             if ball.rect.x <= 0: self._reset_ball(ball, 1, self.player_two)
             self._handle_collision(self.player_one, ball, i, -1)
+            self._handle_collision(self.player_two, ball, i, 1)
