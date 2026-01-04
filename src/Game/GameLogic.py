@@ -13,3 +13,4 @@ class GameLogic:
         for i, ball in enumerate(self.balls):
             ball.move_ball(self.width, self.height)
             if ball.rect.x >= self.width - 25: self._reset_ball(ball, -1, self.player_one)
+            if ball.rect.x <= 0: self._reset_ball(ball, 1, self.player_two)
