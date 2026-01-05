@@ -17,3 +17,5 @@ class Config:
             if isinstance(v, dict) and isinstance(target.get(k), dict): self._deep_update(target[k], v)
             else: target[k] = v
         return target
+    def load_config(self):
+        self.config(alls=True)
