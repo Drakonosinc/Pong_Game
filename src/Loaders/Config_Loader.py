@@ -16,3 +16,4 @@ class Config:
         for k, v in src.items():
             if isinstance(v, dict) and isinstance(target.get(k), dict): self._deep_update(target[k], v)
             else: target[k] = v
+        return target
