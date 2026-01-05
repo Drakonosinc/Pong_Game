@@ -8,3 +8,5 @@ class Config:
         path = os.path.join(self.config_dir, filename)
         with open(path, "r", encoding="utf-8") as f: data = json.load(f)
         return data if isinstance(data, dict) else {}
+    def _write_json(self, filename: str, data: dict) -> None:
+        os.makedirs(self.config_dir, exist_ok=True)
