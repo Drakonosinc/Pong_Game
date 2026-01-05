@@ -14,3 +14,4 @@ class Config:
         with open(path, "w", encoding="utf-8") as f: json.dump(data, f, indent=4)
     def _deep_update(self, target: dict, src: dict) -> dict:
         for k, v in src.items():
+            if isinstance(v, dict) and isinstance(target.get(k), dict): self._deep_update(target[k], v)
