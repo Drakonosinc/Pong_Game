@@ -6,3 +6,5 @@ class Config:
         self.config_dir = os.path.join(self.base_dir, "Config")
     def _read_json(self, filename: str) -> dict:
         path = os.path.join(self.config_dir, filename)
+        with open(path, "r", encoding="utf-8") as f: data = json.load(f)
+        return data if isinstance(data, dict) else {}
