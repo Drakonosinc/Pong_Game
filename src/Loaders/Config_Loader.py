@@ -12,3 +12,5 @@ class Config:
         os.makedirs(self.config_dir, exist_ok=True)
         path = os.path.join(self.config_dir, filename)
         with open(path, "w", encoding="utf-8") as f: json.dump(data, f, indent=4)
+    def _deep_update(self, target: dict, src: dict) -> dict:
+        for k, v in src.items():
