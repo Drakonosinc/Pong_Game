@@ -19,3 +19,6 @@ class Config:
         return target
     def load_config(self):
         self.config(alls=True)
+        loaded_any = False
+        try:
+            visuals_data = self._read_json("visuals.json")
