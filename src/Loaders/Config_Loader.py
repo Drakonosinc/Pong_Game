@@ -22,3 +22,6 @@ class Config:
         loaded_any = False
         try:
             visuals_data = self._read_json("visuals.json")
+            self._load_visuals(visuals_data)
+            loaded_any = True
+        except Exception: pass
