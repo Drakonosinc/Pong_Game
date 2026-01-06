@@ -27,3 +27,5 @@ class Config:
         except Exception: pass
         try:
             keys_data = self._read_json("keybindings.json")
+            keys_block = keys_data.get("config_keys", keys_data)
+            if isinstance(keys_block, dict):
