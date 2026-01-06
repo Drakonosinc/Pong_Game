@@ -49,3 +49,6 @@ class Config:
             if isinstance(ai_block, dict):
                 self._deep_update(self.config_AI, ai_block)
                 loaded_any = True
+        except Exception: pass
+        self._validate_and_normalize()
+        if not loaded_any or not self._all_config_files_exist(): self.save_config()
