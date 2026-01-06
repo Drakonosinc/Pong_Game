@@ -46,3 +46,6 @@ class Config:
         try:
             ai_data = self._read_json("ai_config.json")
             ai_block = ai_data.get("config_AI", ai_data)
+            if isinstance(ai_block, dict):
+                self._deep_update(self.config_AI, ai_block)
+                loaded_any = True
