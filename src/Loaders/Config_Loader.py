@@ -32,3 +32,7 @@ class Config:
                 self.config_keys.update(keys_block)
                 loaded_any = True
         except Exception: pass
+        try:
+            settings_data = self._read_json("settings.json")
+            sounds_block = settings_data.get("config_sounds")
+            game_block = settings_data.get("config_game")
