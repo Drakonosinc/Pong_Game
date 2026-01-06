@@ -43,3 +43,6 @@ class Config:
                 self.config_game.update(game_block)
                 loaded_any = True
         except Exception: pass
+        try:
+            ai_data = self._read_json("ai_config.json")
+            ai_block = ai_data.get("config_AI", ai_data)
