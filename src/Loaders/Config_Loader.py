@@ -39,3 +39,7 @@ class Config:
             if isinstance(sounds_block, dict):
                 self.config_sounds.update(sounds_block)
                 loaded_any = True
+            if isinstance(game_block, dict):
+                self.config_game.update(game_block)
+                loaded_any = True
+        except Exception: pass
