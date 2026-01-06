@@ -29,3 +29,6 @@ class Config:
             keys_data = self._read_json("keybindings.json")
             keys_block = keys_data.get("config_keys", keys_data)
             if isinstance(keys_block, dict):
+                self.config_keys.update(keys_block)
+                loaded_any = True
+        except Exception: pass
