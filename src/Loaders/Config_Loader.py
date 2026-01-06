@@ -52,3 +52,6 @@ class Config:
         except Exception: pass
         self._validate_and_normalize()
         if not loaded_any or not self._all_config_files_exist(): self.save_config()
+    def _all_config_files_exist(self) -> bool:
+        return all(os.path.exists(os.path.join(self.config_dir, name))
+            for name in ("visuals.json", "keybindings.json", "settings.json", "ai_config.json"))
