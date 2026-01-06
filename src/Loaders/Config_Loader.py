@@ -36,3 +36,6 @@ class Config:
             settings_data = self._read_json("settings.json")
             sounds_block = settings_data.get("config_sounds")
             game_block = settings_data.get("config_game")
+            if isinstance(sounds_block, dict):
+                self.config_sounds.update(sounds_block)
+                loaded_any = True
