@@ -25,3 +25,5 @@ class Config:
             self._load_visuals(visuals_data)
             loaded_any = True
         except Exception: pass
+        try:
+            keys_data = self._read_json("keybindings.json")
