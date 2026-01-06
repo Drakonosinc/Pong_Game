@@ -57,3 +57,19 @@ class Config:
             for name in ("visuals.json", "keybindings.json", "settings.json", "ai_config.json"))
     def save_config(self):
         self._validate_and_normalize()
+        visuals_out = {
+            "window": {
+                "width": self.config_visuals["WIDTH"],
+                "height": self.config_visuals["HEIGHT"],},
+            "assets": {
+                "background": self.config_visuals["image_background"],
+                "value_background": self.config_visuals["value_background"],
+                "planets": self.config_visuals["planets"],
+                "value_planet": self.config_visuals["value_planet"],
+                "spacecrafts": self.config_visuals["spacecrafts"],
+                "value_spacecraft1": self.config_visuals["value_spacecraft1"],
+                "value_spacecraft2": self.config_visuals["value_spacecraft2"],},}
+        self._write_json("visuals.json", visuals_out)
+        self._write_json("keybindings.json", {"config_keys": self.config_keys})
+        self._write_json("settings.json", {"config_sounds": self.config_sounds, "config_game": self.config_game},)
+        self._write_json("ai_config.json", {"config_AI": self.config_AI})
