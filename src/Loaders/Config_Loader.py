@@ -78,3 +78,8 @@ class Config:
         if isinstance(data.get("config_visuals"), dict):
             self.config_visuals.update(data["config_visuals"])
             return
+        window = data.get("window", {})
+        assets = data.get("assets", {})
+        if isinstance(window, dict):
+            if "width" in window: self.config_visuals["WIDTH"] = window["width"]
+            if "height" in window: self.config_visuals["HEIGHT"] = window["height"]
