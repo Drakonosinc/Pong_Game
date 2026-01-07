@@ -86,3 +86,11 @@ class Config:
         if isinstance(assets, dict):
             if "background" in assets: self.config_visuals["image_background"] = assets["background"]
             elif "image_background" in assets: self.config_visuals["image_background"] = assets["image_background"]
+            for k in (
+                "value_background",
+                "planets",
+                "value_planet",
+                "spacecrafts",
+                "value_spacecraft1",
+                "value_spacecraft2",):
+                if k in assets: self.config_visuals[k] = assets[k]
