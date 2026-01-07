@@ -73,3 +73,8 @@ class Config:
         self._write_json("keybindings.json", {"config_keys": self.config_keys})
         self._write_json("settings.json", {"config_sounds": self.config_sounds, "config_game": self.config_game},)
         self._write_json("ai_config.json", {"config_AI": self.config_AI})
+    def _load_visuals(self, data: dict) -> None:
+        if not isinstance(data, dict): return
+        if isinstance(data.get("config_visuals"), dict):
+            self.config_visuals.update(data["config_visuals"])
+            return
