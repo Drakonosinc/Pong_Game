@@ -124,3 +124,5 @@ class Config:
                 "Name_key3": "↑",
                 "DOWN_ARROW": K_DOWN,
                 "Name_key4": "↓",}
+        if sounds or alls:
+            self.config_sounds = {"sound_main": True}
