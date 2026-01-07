@@ -100,3 +100,6 @@ class Config:
                 "WIDTH": 700,
                 "HEIGHT": 400,
                 "image_background": [
+                    "background1.jpg",
+                    "background2.jpg",
+                    "background3.jpg",
