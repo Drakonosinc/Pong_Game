@@ -83,3 +83,6 @@ class Config:
         if isinstance(window, dict):
             if "width" in window: self.config_visuals["WIDTH"] = window["width"]
             if "height" in window: self.config_visuals["HEIGHT"] = window["height"]
+        if isinstance(assets, dict):
+            if "background" in assets: self.config_visuals["image_background"] = assets["background"]
+            elif "image_background" in assets: self.config_visuals["image_background"] = assets["image_background"]
