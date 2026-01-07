@@ -94,3 +94,5 @@ class Config:
                 "value_spacecraft1",
                 "value_spacecraft2",):
                 if k in assets: self.config_visuals[k] = assets[k]
+    def config(self, visuals=False, keys=False, sounds=False, AI=False, game=False, alls=False):
+        if visuals or alls:
