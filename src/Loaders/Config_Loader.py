@@ -108,3 +108,6 @@ class Config:
                     "background6.jpg",
                     "background7.jpg",
                     "background8.jpg",],
+                "value_background": 0,
+                "planets": ["Mars.png", "Mars1.png", "meteorite.png", "Saturn.png", "earth.png"],
+                "value_planet": 0,
