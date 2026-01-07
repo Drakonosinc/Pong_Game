@@ -96,3 +96,7 @@ class Config:
                 if k in assets: self.config_visuals[k] = assets[k]
     def config(self, visuals=False, keys=False, sounds=False, AI=False, game=False, alls=False):
         if visuals or alls:
+            self.config_visuals = {
+                "WIDTH": 700,
+                "HEIGHT": 400,
+                "image_background": [
