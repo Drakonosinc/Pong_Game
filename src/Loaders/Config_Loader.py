@@ -111,3 +111,6 @@ class Config:
                 "value_background": 0,
                 "planets": ["Mars.png", "Mars1.png", "meteorite.png", "Saturn.png", "earth.png"],
                 "value_planet": 0,
+                "spacecrafts": ["spaceship.png", "spaceship2.png", "spaceship3.png"],
+                "value_spacecraft1": 0,
+                "value_spacecraft2": 0,}
