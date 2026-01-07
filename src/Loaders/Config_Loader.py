@@ -114,3 +114,13 @@ class Config:
                 "spacecrafts": ["spaceship.png", "spaceship2.png", "spaceship3.png"],
                 "value_spacecraft1": 0,
                 "value_spacecraft2": 0,}
+        if keys or alls:
+            self.config_keys = {
+                "UP_W": K_w,
+                "Name_key1": "W",
+                "DOWN_S": K_s,
+                "Name_key2": "S",
+                "UP_ARROW": K_UP,
+                "Name_key3": "↑",
+                "DOWN_ARROW": K_DOWN,
+                "Name_key4": "↓",}
