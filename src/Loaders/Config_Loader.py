@@ -155,3 +155,5 @@ class Config:
             if isinstance(v, bool): return default
             try: return int(v)
             except Exception: return default
+        self.config_visuals["WIDTH"] = max(1, as_int(self.config_visuals.get("WIDTH"), 700))
+        self.config_visuals["HEIGHT"] = max(1, as_int(self.config_visuals.get("HEIGHT"), 400))
