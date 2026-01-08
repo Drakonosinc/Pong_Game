@@ -167,3 +167,5 @@ class Config:
                 "background6.jpg",
                 "background7.jpg",
                 "background8.jpg",],
+            "planets": ["Mars.png", "Mars1.png", "meteorite.png", "Saturn.png", "earth.png"],
+            "spacecrafts": ["spaceship.png", "spaceship2.png", "spaceship3.png"],}
