@@ -169,3 +169,8 @@ class Config:
                 "background8.jpg",],
             "planets": ["Mars.png", "Mars1.png", "meteorite.png", "Saturn.png", "earth.png"],
             "spacecrafts": ["spaceship.png", "spaceship2.png", "spaceship3.png"],}
+        for list_key, idx_key in (
+            ("image_background", "value_background"),
+            ("planets", "value_planet"),
+            ("spacecrafts", "value_spacecraft1"),
+            ("spacecrafts", "value_spacecraft2"),):
