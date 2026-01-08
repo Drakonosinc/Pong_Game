@@ -157,3 +157,9 @@ class Config:
             except Exception: return default
         self.config_visuals["WIDTH"] = max(1, as_int(self.config_visuals.get("WIDTH"), 700))
         self.config_visuals["HEIGHT"] = max(1, as_int(self.config_visuals.get("HEIGHT"), 400))
+        default_lists = {
+            "image_background": [
+                "background1.jpg",
+                "background2.jpg",
+                "background3.jpg",
+                "background4.jpg",
