@@ -174,3 +174,7 @@ class Config:
             ("planets", "value_planet"),
             ("spacecrafts", "value_spacecraft1"),
             ("spacecrafts", "value_spacecraft2"),):
+            items = self.config_visuals.get(list_key)
+            if not isinstance(items, list) or len(items) == 0:
+                items = list(default_lists[list_key])
+                self.config_visuals[list_key] = items
