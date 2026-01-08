@@ -151,3 +151,7 @@ class Config:
         if not hasattr(self, "config_sounds") or not isinstance(self.config_sounds, dict): self.config(sounds=True)
         if not hasattr(self, "config_AI") or not isinstance(self.config_AI, dict): self.config(AI=True)
         if not hasattr(self, "config_game") or not isinstance(self.config_game, dict): self.config(game=True)
+        def as_int(v, default: int) -> int:
+            if isinstance(v, bool): return default
+            try: return int(v)
+            except Exception: return default
