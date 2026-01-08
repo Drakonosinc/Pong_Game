@@ -126,3 +126,14 @@ class Config:
                 "Name_key4": "↓",}
         if sounds or alls:
             self.config_sounds = {"sound_main": True}
+        if AI or alls:
+            self.config_AI = {
+                "model_save": False,
+                "type_training": {"Genetic": True, "Q-learning": False},
+                "type_model": {"Pytorch": True, "Tensorflow": False},
+                "genetic": {"generation_value": 100, "population_value": 20, "try_for_ai": 3},
+                "q_learning": {
+                    "episodes": 500,
+                    "learning_rate": 0.001,
+                    "gamma": 0.99,
+                    "epsilon_start": 1.0,
