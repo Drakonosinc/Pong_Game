@@ -145,3 +145,6 @@ class Config:
                 "nn": {"hidden_layers": 2, "neurons_per_layer": 6},}
         if game or alls:
             self.config_game = {"number_balls": 1, "max_score": 5}
+    def _validate_and_normalize(self):
+        if not hasattr(self, "config_visuals") or not isinstance(self.config_visuals, dict): self.config(visuals=True)
+        if not hasattr(self, "config_keys") or not isinstance(self.config_keys, dict): self.config(keys=True)
