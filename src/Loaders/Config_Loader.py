@@ -137,3 +137,9 @@ class Config:
                     "learning_rate": 0.001,
                     "gamma": 0.99,
                     "epsilon_start": 1.0,
+                    "epsilon_end": 0.01,
+                    "epsilon_decay": 0.995,
+                    "memory_size": 10000,
+                    "batch_size": 32,
+                    "target_update": 100,},
+                "nn": {"hidden_layers": 2, "neurons_per_layer": 6},}
