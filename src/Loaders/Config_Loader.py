@@ -143,3 +143,5 @@ class Config:
                     "batch_size": 32,
                     "target_update": 100,},
                 "nn": {"hidden_layers": 2, "neurons_per_layer": 6},}
+        if game or alls:
+            self.config_game = {"number_balls": 1, "max_score": 5}
