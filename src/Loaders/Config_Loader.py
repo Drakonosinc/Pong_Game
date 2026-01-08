@@ -148,3 +148,6 @@ class Config:
     def _validate_and_normalize(self):
         if not hasattr(self, "config_visuals") or not isinstance(self.config_visuals, dict): self.config(visuals=True)
         if not hasattr(self, "config_keys") or not isinstance(self.config_keys, dict): self.config(keys=True)
+        if not hasattr(self, "config_sounds") or not isinstance(self.config_sounds, dict): self.config(sounds=True)
+        if not hasattr(self, "config_AI") or not isinstance(self.config_AI, dict): self.config(AI=True)
+        if not hasattr(self, "config_game") or not isinstance(self.config_game, dict): self.config(game=True)
