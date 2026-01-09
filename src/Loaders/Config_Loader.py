@@ -216,3 +216,11 @@ class Config:
         if not any(bool(v) for v in tm.values()): tm["Pytorch"] = True
         self.config_AI["type_model"] = {"Pytorch": bool(tm.get("Pytorch")), "Tensorflow": bool(tm.get("Tensorflow"))}
         genetic = self.config_AI.get("genetic")
+        if not isinstance(genetic, dict): genetic = {}
+        genetic.setdefault("generation_value", as_int(self.config_AI.get("generation_value", 100), 100))
+        genetic.setdefault("population_value", as_int(self.config_AI.get("population_value", 20), 20))
+        genetic.setdefault("try_for_ai", as_int(self.config_AI.get("try_for_ai", 3), 3))
+        genetic["generation_value"] = max(1, as_int(genetic.get("generation_value"), 100))
+        genetic["population_value"] = max(1, as_int(genetic.get("population_value"), 20))
+        genetic["try_for_ai"] = max(1, as_int(genetic.get("try_for_ai"), 3))
+        self.config_AI["genetic"] = genetic
