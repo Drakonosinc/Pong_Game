@@ -180,3 +180,8 @@ class Config:
                 self.config_visuals[list_key] = items
             idx = as_int(self.config_visuals.get(idx_key), 0)
             self.config_visuals[idx_key] = idx % len(items)
+        default_keycodes = {
+            "UP_W": K_w,
+            "DOWN_S": K_s,
+            "UP_ARROW": K_UP,
+            "DOWN_ARROW": K_DOWN,}
