@@ -196,3 +196,6 @@ class Config:
             self.config_keys[nk] = v if isinstance(v, str) else str(v)
         self.config_sounds["sound_main"] = bool(self.config_sounds.get("sound_main", True))
         nb = self.config_game.get("number_balls", 1)
+        if isinstance(nb, bool): nb = 1 if nb else 0
+        nb = max(1, as_int(nb, 1))
+        self.config_game["number_balls"] = nb
