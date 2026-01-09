@@ -207,3 +207,6 @@ class Config:
         if ("q-learning" in tt or "q_learning" in tt) and "Q-learning" not in tt: tt["Q-learning"] = bool(tt.get("q-learning", tt.get("q_learning")))
         tt.setdefault("Genetic", True)
         tt.setdefault("Q-learning", False)
+        if not any(bool(v) for v in tt.values()): tt["Genetic"] = True
+        self.config_AI["type_training"] = {"Genetic": bool(tt.get("Genetic")), "Q-learning": bool(tt.get("Q-learning"))}
+        tm = self.config_AI.get("type_model")
