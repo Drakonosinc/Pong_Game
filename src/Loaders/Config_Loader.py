@@ -199,3 +199,6 @@ class Config:
         if isinstance(nb, bool): nb = 1 if nb else 0
         nb = max(1, as_int(nb, 1))
         self.config_game["number_balls"] = nb
+        self.config_game["max_score"] = max(1, as_int(self.config_game.get("max_score", 5), 5))
+        self.config_AI["model_save"] = bool(self.config_AI.get("model_save", False))
+        tt = self.config_AI.get("type_training")
