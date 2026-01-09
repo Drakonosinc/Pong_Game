@@ -185,3 +185,8 @@ class Config:
             "DOWN_S": K_s,
             "UP_ARROW": K_UP,
             "DOWN_ARROW": K_DOWN,}
+        default_keynames = {
+            "Name_key1": "W",
+            "Name_key2": "S",
+            "Name_key3": "↑",
+            "Name_key4": "↓",}
