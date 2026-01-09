@@ -190,3 +190,7 @@ class Config:
             "Name_key2": "S",
             "Name_key3": "↑",
             "Name_key4": "↓",}
+        for k, dv in default_keycodes.items(): self.config_keys[k] = as_int(self.config_keys.get(k), int(dv))
+        for nk, dv in default_keynames.items():
+            v = self.config_keys.get(nk, dv)
+            self.config_keys[nk] = v if isinstance(v, str) else str(v)
