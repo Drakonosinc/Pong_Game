@@ -210,3 +210,9 @@ class Config:
         if not any(bool(v) for v in tt.values()): tt["Genetic"] = True
         self.config_AI["type_training"] = {"Genetic": bool(tt.get("Genetic")), "Q-learning": bool(tt.get("Q-learning"))}
         tm = self.config_AI.get("type_model")
+        if not isinstance(tm, dict): tm = {"Pytorch": True, "Tensorflow": False}
+        tm.setdefault("Pytorch", True)
+        tm.setdefault("Tensorflow", False)
+        if not any(bool(v) for v in tm.values()): tm["Pytorch"] = True
+        self.config_AI["type_model"] = {"Pytorch": bool(tm.get("Pytorch")), "Tensorflow": bool(tm.get("Tensorflow"))}
+        genetic = self.config_AI.get("genetic")
