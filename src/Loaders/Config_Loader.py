@@ -178,3 +178,5 @@ class Config:
             if not isinstance(items, list) or len(items) == 0:
                 items = list(default_lists[list_key])
                 self.config_visuals[list_key] = items
+            idx = as_int(self.config_visuals.get(idx_key), 0)
+            self.config_visuals[idx_key] = idx % len(items)
