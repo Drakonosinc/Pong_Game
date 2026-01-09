@@ -194,3 +194,5 @@ class Config:
         for nk, dv in default_keynames.items():
             v = self.config_keys.get(nk, dv)
             self.config_keys[nk] = v if isinstance(v, str) else str(v)
+        self.config_sounds["sound_main"] = bool(self.config_sounds.get("sound_main", True))
+        nb = self.config_game.get("number_balls", 1)
