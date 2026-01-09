@@ -202,3 +202,6 @@ class Config:
         self.config_game["max_score"] = max(1, as_int(self.config_game.get("max_score", 5), 5))
         self.config_AI["model_save"] = bool(self.config_AI.get("model_save", False))
         tt = self.config_AI.get("type_training")
+        if not isinstance(tt, dict): tt = {"Genetic": True, "Q-learning": False}
+        if "genetic" in tt and "Genetic" not in tt: tt["Genetic"] = bool(tt.get("genetic"))
+        if ("q-learning" in tt or "q_learning" in tt) and "Q-learning" not in tt: tt["Q-learning"] = bool(tt.get("q-learning", tt.get("q_learning")))
