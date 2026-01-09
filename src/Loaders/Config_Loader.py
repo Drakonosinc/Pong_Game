@@ -205,3 +205,5 @@ class Config:
         if not isinstance(tt, dict): tt = {"Genetic": True, "Q-learning": False}
         if "genetic" in tt and "Genetic" not in tt: tt["Genetic"] = bool(tt.get("genetic"))
         if ("q-learning" in tt or "q_learning" in tt) and "Q-learning" not in tt: tt["Q-learning"] = bool(tt.get("q-learning", tt.get("q_learning")))
+        tt.setdefault("Genetic", True)
+        tt.setdefault("Q-learning", False)
