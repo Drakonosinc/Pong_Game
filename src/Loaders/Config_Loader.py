@@ -247,3 +247,6 @@ class Config:
             ("epsilon_start", 1.0),
             ("epsilon_end", 0.01),
             ("epsilon_decay", 0.995),):
+            try: ql[fk] = float(ql.get(fk, dv))
+            except Exception: ql[fk] = float(dv)
+        self.config_AI["q_learning"] = ql
