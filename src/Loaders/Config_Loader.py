@@ -224,3 +224,5 @@ class Config:
         genetic["population_value"] = max(1, as_int(genetic.get("population_value"), 20))
         genetic["try_for_ai"] = max(1, as_int(genetic.get("try_for_ai"), 3))
         self.config_AI["genetic"] = genetic
+        ql = self.config_AI.get("q_learning")
+        if not isinstance(ql, dict): ql = {}
