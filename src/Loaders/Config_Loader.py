@@ -236,3 +236,5 @@ class Config:
             "memory_size": 10000,
             "batch_size": 32,
             "target_update": 100,}
+        for k, dv in defaults_ql.items(): ql.setdefault(k, dv)
+        ql["episodes"] = max(1, as_int(ql.get("episodes"), 500))
