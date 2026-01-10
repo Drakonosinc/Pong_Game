@@ -252,3 +252,5 @@ class Config:
         self.config_AI["q_learning"] = ql
         nn = self.config_AI.get("nn")
         if not isinstance(nn, dict): nn = {}
+        nn.setdefault("hidden_layers", 2)
+        nn.setdefault("neurons_per_layer", 6)
