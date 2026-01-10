@@ -226,3 +226,8 @@ class Config:
         self.config_AI["genetic"] = genetic
         ql = self.config_AI.get("q_learning")
         if not isinstance(ql, dict): ql = {}
+        defaults_ql = {
+            "episodes": 500,
+            "learning_rate": 0.001,
+            "gamma": 0.99,
+            "epsilon_start": 1.0,
