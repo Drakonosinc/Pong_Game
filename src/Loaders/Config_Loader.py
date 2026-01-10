@@ -250,3 +250,5 @@ class Config:
             try: ql[fk] = float(ql.get(fk, dv))
             except Exception: ql[fk] = float(dv)
         self.config_AI["q_learning"] = ql
+        nn = self.config_AI.get("nn")
+        if not isinstance(nn, dict): nn = {}
