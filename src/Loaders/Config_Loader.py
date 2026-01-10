@@ -240,3 +240,7 @@ class Config:
         ql["episodes"] = max(1, as_int(ql.get("episodes"), 500))
         ql["memory_size"] = max(1, as_int(ql.get("memory_size"), 10000))
         ql["batch_size"] = max(1, as_int(ql.get("batch_size"), 32))
+        ql["target_update"] = max(1, as_int(ql.get("target_update"), 100))
+        for fk, dv in (
+            ("learning_rate", 0.001),
+            ("gamma", 0.99),
