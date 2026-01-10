@@ -254,3 +254,6 @@ class Config:
         if not isinstance(nn, dict): nn = {}
         nn.setdefault("hidden_layers", 2)
         nn.setdefault("neurons_per_layer", 6)
+        nn["hidden_layers"] = max(1, as_int(nn.get("hidden_layers"), 2))
+        nn["neurons_per_layer"] = max(1, as_int(nn.get("neurons_per_layer"), 6))
+        self.config_AI["nn"] = nn
