@@ -234,3 +234,5 @@ class Config:
             "epsilon_end": 0.01,
             "epsilon_decay": 0.995,
             "memory_size": 10000,
+            "batch_size": 32,
+            "target_update": 100,}
