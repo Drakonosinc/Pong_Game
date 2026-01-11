@@ -28,3 +28,6 @@ class GameLogic:
     def _repeat_collision(self, ball, reward):
         ball.handle_collision(self.player_two, reward)
         self.game.sound.play(loops=0)
+    def reset_game(self):
+        self.player_one.reset()
+        
