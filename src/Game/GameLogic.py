@@ -25,3 +25,5 @@ class GameLogic:
                 self._repeat_collision(ball, reward)
                 player.active[index] = False
         else: player.active[index] = True
+    def _repeat_collision(self, ball, reward):
+        
