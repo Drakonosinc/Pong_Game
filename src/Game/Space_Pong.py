@@ -52,9 +52,7 @@ class Space_pong_game(interface):
         if self.player_one.rect.y>=310: self.player_one.rect.y=310
         if self.player_one.rect.y<=0: self.player_one.rect.y=0
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
-        self.player_one.reset()
-        self.player_two.reset()
-        for ball in self.balls: ball.reset()
+        self.game_logic.reset_game()
         self.FPS = fps
         self.speed = speed
         self.speed_up = speed_up
