@@ -33,6 +33,8 @@ class Space_pong_game(interface):
         self.sound_exitbutton.play(loops=0)
         self.type_game()
         self.game_over, self.running, self.exit = True, False, True
+    def update(self):
+        self.game_logic.update()
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
         self.speed += speed
