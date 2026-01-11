@@ -34,4 +34,6 @@ class GameLogic:
         for ball in self.balls: ball.reset()
     def auto_play_player1(self):
         p1 = self.player_one
-        
+        if p1.rect.top > 0 or p1.rect.bottom < self.height: p1.rect.y += self.balls[0].move_y
+        if p1.rect.y >= 310: p1.rect.y = 310
+        if p1.rect.y <= 0: p1.rect.y = 0
