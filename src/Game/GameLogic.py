@@ -30,4 +30,5 @@ class GameLogic:
         self.game.sound.play(loops=0)
     def reset_game(self):
         self.player_one.reset()
-        
+        self.player_two.reset()
+        for ball in self.balls: ball.reset()
