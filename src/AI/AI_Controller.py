@@ -38,14 +38,14 @@ class AIHandler:
         from Type_Training.Q_learning import _qlearning_trainer
         if _qlearning_trainer is None: return
         current_state = self.get_state()
-        current_reward = self.game.player_two.reward
+        current_reward = self.game.game_logic.player_two.reward
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
-            done = (self.game.player_one.score >= self.game.config.config_game["max_score"] or self.game.player_two.score >= self.game.config.config_game["max_score"])
+            done = (self.game.game_logic.player_one.score >= self.game.config.config_game["max_score"] or self.game.game_logic.player_two.score >= self.game.config.config_game["max_score"])
             _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
         action = _qlearning_trainer.get_action(current_state)
-        if action == 0 and self.game.player_two.rect.top > 0: self.game.player_two.rect.y -= 5
-        elif action == 1 and self.game.player_two.rect.bottom < self.game.HEIGHT: self.game.player_two.rect.y += 5
+        if action == 0 and self.game.game_logic.player_two.rect.top > 0: self.game.game_logic.player_two.rect.y -= 5
+        elif action == 1 and self.game.game_logic.player_two.rect.bottom < self.game.HEIGHT: self.game.game_logic.player_two.rect.y += 5
         self.prev_state = current_state.copy()
         self.prev_action = action
         self.prev_reward = current_reward
