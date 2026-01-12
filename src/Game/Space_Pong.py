@@ -1,6 +1,5 @@
 from Interface import *
 from AI import *
-from Type_Training import *
 from Events import *
 from GameLogic import *
 class Space_pong_game(interface):

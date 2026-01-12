@@ -1,5 +1,6 @@
 import torch
 import numpy as np
+from Type_Training import *
 
 try:
     import tensorflow as tf  # type: ignore
@@ -56,3 +57,6 @@ class AIHandler:
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
+    def manual_save_model(self):
+        if self.game.config.config_AI["type_training"]["Genetic"]: save_genetic_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
+        elif self.game.config.config_AI["type_training"]["Q-learning"]: save_qlearning_model(self.model, torch.optim.Adam(self.model.parameters(), lr=0.001), self.model_path)
