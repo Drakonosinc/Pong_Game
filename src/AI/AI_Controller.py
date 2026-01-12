@@ -50,8 +50,8 @@ class AIHandler:
         self.prev_action = action
         self.prev_reward = current_reward
     def AI_actions(self, action):
-        if action[0] > 0 and self.game.player_two.rect.top > 0: self.game.player_two.rect.y -= 5
-        if action[0] < 0 and self.game.player_two.rect.bottom < self.game.HEIGHT: self.game.player_two.rect.y += 5
+        if action[0] > 0 and self.game.game_logic.player_two.rect.top > 0: self.game.game_logic.player_two.rect.y -= 5
+        if action[0] < 0 and self.game.game_logic.player_two.rect.bottom < self.game.HEIGHT: self.game.game_logic.player_two.rect.y += 5
     def reset_qlearning_state(self):
         self.prev_state = None
         self.prev_action = None
