@@ -13,7 +13,6 @@ class Space_pong_game(interface):
         self.game_logic = GameLogic(self)
         self.load_AI()
         self.load_varials()
-        self.objects()
         self.draw_buttons()
     def load_varials(self):
         self.running:bool = False
