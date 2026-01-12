@@ -13,8 +13,8 @@ class AIHandler:
         self.prev_action = None
         self.prev_reward = 0
     def get_state(self):
-        return np.array([self.game.player_one.rect.x, self.game.player_one.rect.y, self.game.player_two.rect.x, 
-                        self.game.player_two.rect.y, self.game.balls[0].rect.x, self.game.balls[0].rect.y])
+        return np.array([self.game.game_logic.player_one.rect.x, self.game.game_logic.player_one.rect.y, self.game.game_logic.player_two.rect.x, 
+                        self.game.game_logic.player_two.rect.y, self.game.game_logic.balls[0].rect.x, self.game.game_logic.balls[0].rect.y])
     def _call_model(self, model, state: np.ndarray) -> np.ndarray:
         # Torch path
         if hasattr(model, 'parameters') and isinstance(model, torch.nn.Module):
