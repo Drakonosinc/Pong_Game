@@ -38,8 +38,8 @@ class Space_pong_game(interface):
         self.speed_up = speed_up
         if self.speed==number: setattr(self,objet,False)
     def restart(self):
-        if self.mode_game["Training AI"] and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
-        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.player_one.score==self.config.config_game["max_score"] or self.player_two.score==self.config.config_game["max_score"]): self.change_mains({"main":1,"command":self.reset})
+        if self.mode_game["Training AI"] and (self.game_logic.player_one.score==self.config.config_game["max_score"] or self.game_logic.player_two.score==self.config.config_game["max_score"]): self.reset(running=False,fps=self.FPS,speed=self.speed,speed_up=self.speed_up,speed_down=self.speed_down)
+        if (self.mode_game["Player"] or self.mode_game["AI"]) and (self.game_logic.player_one.score==self.config.config_game["max_score"] or self.game_logic.player_two.score==self.config.config_game["max_score"]): self.change_mains({"main":1,"command":self.reset})
     def reset(self,running=True, fps=60, speed=0, speed_up=True, speed_down=True):
         self.game_logic.reset_game()
         self.FPS = fps
