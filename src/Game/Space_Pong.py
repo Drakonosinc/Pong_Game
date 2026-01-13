@@ -66,4 +66,4 @@ class Space_pong_game(interface):
                 if self.mode_game["Training AI"] or self.mode_game["AI"]: self.type_game()
                 self.game_logic.update(), self.restart()
             self.item_repeat_run()
-        return self.player_two.reward
+        return self.game_logic.player_two.reward
