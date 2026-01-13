@@ -6,12 +6,12 @@ class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
         self.model = None
+        self.load_varials()
         self.ai_handler = AIHandler(self)
         self.input_handler = InputHandler(self)
         self.visuals_items = Visuals_items(self)
         self.game_logic = GameLogic(self)
         self.load_AI()
-        self.load_varials()
         self.draw_buttons()
     def load_varials(self):
         self.running:bool = False
