@@ -23,7 +23,7 @@ class GameMode(BaseMenu):
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
         self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
-        self.buttons['continue'] = factory.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.game_logic.objects})})
+        self.buttons['continue'] = factory.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.game_logic.init_entities})})
         self.interface.back_button = self.buttons['back']
         self.interface.continue_button = self.buttons['continue']
     def _setup_mode_buttons(self):
@@ -132,8 +132,8 @@ class GameMode(BaseMenu):
         self.interface.scroll = self.config_buttons['scroll']
     def _setup_config_game_buttons(self):
         factory = self.interface.button_factory_f5
-        self.config_buttons['increase_balls'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls'),"command2": self.interface.game_logic.objects()})
-        self.config_buttons['decrease_balls'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls', True, -1),"command2": self.interface.game_logic.objects()})
+        self.config_buttons['increase_balls'] = factory.create_TextButton({"text": ">","position": (self.WIDTH-100, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls'),"command2": self.interface.game_logic.init_entities()})
+        self.config_buttons['decrease_balls'] = factory.create_TextButton({"text": "<","position": (self.WIDTH-178, self.HEIGHT/2-55),"command1": lambda: self.increase_decrease_variable(self.config.config_game, 'number_balls', True, -1),"command2": self.interface.game_logic.init_entities()})
         self.interface.increase_balls = self.config_buttons['increase_balls']
         self.interface.decrease_balls = self.config_buttons['decrease_balls']
     def _update_training_genetic_texts(self):
