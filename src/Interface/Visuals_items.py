@@ -4,7 +4,7 @@ class Visuals_items:
     def images_elements(self):
         self.game.screen.blit(self.game.spacecraft, (-77,self.game.game_logic.player_one.rect.y-140))
         self.game.screen.blit(self.game.spacecraft2, (578,self.game.game_logic.player_two.rect.y-140))
-        for ball in self.game.balls:
+        for ball in self.game.game_logic.balls:
             self.rotated_ball = pygame.transform.rotate(self.game.planet, ball.rect.x)
             self.game.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
     def mode_speed(self): self.game.screen.blit(self.game.font.render(f"Speed: {self.game.speed}", True, self.game.YELLOW),(self.game.WIDTH//2-40,360))
