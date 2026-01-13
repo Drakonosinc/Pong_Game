@@ -59,7 +59,7 @@ class Space_pong_game(interface):
         while self.running: self.input_handler.handle_input(), self.visuals_items.draw(), self.item_repeat_run()
     def run_with_model(self):
         self.running = True
-        self.player_two.reward = 0
+        self.game_logic.player_two.reward = 0
         while self.running and self.game_over==False:
             self.input_handler.handle_input(), self.visuals_items.draw()
             if self.main==-1:
