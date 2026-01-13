@@ -2,8 +2,8 @@ import pygame
 class Visuals_items:
     def __init__(self, game): self.game = game
     def images_elements(self):
-        self.game.screen.blit(self.game.spacecraft, (-77,self.game.player_one.rect.y-140))
-        self.game.screen.blit(self.game.spacecraft2, (578,self.game.player_two.rect.y-140))
+        self.game.screen.blit(self.game.spacecraft, (-77,self.game.game_logic.player_one.rect.y-140))
+        self.game.screen.blit(self.game.spacecraft2, (578,self.game.game_logic.player_two.rect.y-140))
         for ball in self.game.balls:
             self.rotated_ball = pygame.transform.rotate(self.game.planet, ball.rect.x)
             self.game.screen.blit(self.rotated_ball, (ball.rect.x,ball.rect.y))
@@ -15,8 +15,8 @@ class Visuals_items:
         if self.game.config.config_AI["type_training"]["Q-learning"]: self.game.screen.blit(self.game.font2.render(f"Episode: {self.game.generation}", True, self.game.YELLOW), (10, 10))
         else: self.game.screen.blit(self.game.font2.render(f"Generation: {self.game.generation}", True, self.game.YELLOW), (10, 10))
     def scores(self):
-        self.game.screen.blit(self.game.font.render(f"Score {self.game.player_one.score}", True, self.game.YELLOW),(45,380))
-        self.game.screen.blit(self.game.font.render(f"Score {self.game.player_two.score}", True, self.game.YELLOW),(580,380))
+        self.game.screen.blit(self.game.font.render(f"Score {self.game.game_logic.player_one.score}", True, self.game.YELLOW),(45,380))
+        self.game.screen.blit(self.game.font.render(f"Score {self.game.game_logic.player_two.score}", True, self.game.YELLOW),(580,380))
     def draw_activations(self):
         if self.game.mode_game["AI"]: self.game.model = self.game.model_training
         if self.game.model!=None and (self.game.model.activations is not None):
