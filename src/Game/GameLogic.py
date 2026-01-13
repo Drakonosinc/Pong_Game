@@ -3,6 +3,7 @@ from Entities import *
 class GameLogic:
     def __init__(self, game):
         self.game = game
+        self.width = game.WIDTH
         self.init_entities()
     def init_entities(self):
         self.balls = [Ball(self.game.WIDTH//2-28,self.game.HEIGHT//2-29,36,36,4+i,4+i) for i in range(1 if self.game.mode_game["Training AI"] else self.game.config.config_game["number_balls"])]
