@@ -1,6 +1,6 @@
 from pygame import Rect
 from Entities import *
-
+import numpy as np
 class GameLogic:
     def __init__(self, width, height, config_game, sound):
         self.width = width

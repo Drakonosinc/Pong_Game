@@ -2,10 +2,8 @@ import torch
 import numpy as np
 from Type_Training import *
 
-try:
-    import tensorflow as tf  # type: ignore
-except Exception:
-    tf = None
+try: import tensorflow as tf 
+except Exception: tf = None
 
 class AIHandler:
     def __init__(self, game):
