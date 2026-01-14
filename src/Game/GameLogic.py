@@ -42,5 +42,5 @@ class GameLogic:
         if p1.rect.y >= 310: p1.rect.y = 310
         if p1.rect.y <= 0: p1.rect.y = 0
     def get_state(self):
-        return np.array([self.game.game_logic.player_one.rect.x, self.game.game_logic.player_one.rect.y, self.game.game_logic.player_two.rect.x, 
-                        self.game.game_logic.player_two.rect.y, self.game.game_logic.balls[0].rect.x, self.game.game_logic.balls[0].rect.y])
+        return np.array([self.player_one.rect.x, self.player_one.rect.y, self.player_two.rect.x, 
+                        self.player_two.rect.y, self.balls[0].rect.x, self.balls[0].rect.y])
