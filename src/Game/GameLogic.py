@@ -1,11 +1,11 @@
 from pygame import Rect
 from Entities import *
 class GameLogic:
-    def __init__(self, width, height, config_game, sounds_dict=None):
+    def __init__(self, width, height, config_game, sound):
         self.width = width
         self.height = height
         self.config = config_game 
-        self.sounds = sounds_dict
+        self.sound = sound
         self.init_entities()
     def init_entities(self):
         self.balls = [Ball(self.width//2-28,self.height//2-29,36,36,4+i,4+i) for i in range(1 if self.config["Training AI"] else self.config["number_balls"])]
@@ -30,7 +30,7 @@ class GameLogic:
         else: player.active[index] = True
     def _repeat_collision(self, ball, reward):
         ball.handle_collision(self.player_two, reward)
-        self.game.sound.play(loops=0)
+        self.sound.play(loops=0)
     def reset_game(self):
         self.player_one.reset()
         self.player_two.reset()
