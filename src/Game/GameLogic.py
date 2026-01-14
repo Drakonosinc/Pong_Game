@@ -4,7 +4,8 @@ class GameLogic:
     def __init__(self, width, height, config_game, sounds_dict=None):
         self.width = width
         self.height = height
-        
+        self.config = config_game 
+        self.sounds = sounds_dict
         self.init_entities()
     def init_entities(self):
         self.balls = [Ball(self.width//2-28,self.height//2-29,36,36,4+i,4+i) for i in range(1 if self.config["Training AI"] else self.config["number_balls"])]
