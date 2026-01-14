@@ -41,6 +41,6 @@ class GameLogic:
         if p1.rect.top > 0 or p1.rect.bottom < self.height: p1.rect.y += self.balls[0].move_y
         if p1.rect.y >= 310: p1.rect.y = 310
         if p1.rect.y <= 0: p1.rect.y = 0
-    def get_state(self):
+    def get_state_vector(self):
         return np.array([self.player_one.rect.x, self.player_one.rect.y, self.player_two.rect.x, 
                         self.player_two.rect.y, self.balls[0].rect.x, self.balls[0].rect.y])

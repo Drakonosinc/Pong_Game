@@ -11,6 +11,7 @@ class AIHandler:
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
+    def get_state(self): return self.game.game_logic.get_state_vector()
     def _call_model(self, model, state: np.ndarray) -> np.ndarray:
         # Torch path
         if hasattr(model, 'parameters') and isinstance(model, torch.nn.Module):
