@@ -2,6 +2,8 @@ from pygame import Rect
 from Entities import *
 class GameLogic:
     def __init__(self, width, height, config_game, sounds_dict=None):
+        self.width = width
+        self.height = height
         
         self.init_entities()
     def init_entities(self):
