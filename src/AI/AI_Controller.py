@@ -13,17 +13,14 @@ class AIHandler:
         self.prev_reward = 0
     def get_state(self): return self.game.game_logic.get_state_vector()
     def _call_model(self, model, state: np.ndarray) -> np.ndarray:
-        # Torch path
         if hasattr(model, 'parameters') and isinstance(model, torch.nn.Module):
             out = model(torch.tensor(state, dtype=torch.float32))
             return out.detach().cpu().numpy().reshape(-1)
-        # TensorFlow path
         if tf is not None and hasattr(model, 'trainable_variables') and isinstance(model, tf.keras.Model):
             x = tf.convert_to_tensor(state, dtype=tf.float32)
             if len(x.shape) == 1: x = tf.expand_dims(x, axis=0)
             out = model(x, training=False)
             return out.numpy().reshape(-1)
-        # Fallback: treat as numpy function-like
         return np.asarray(model(state)).reshape(-1)
     def actions_AI(self, model):
         if hasattr(self.game, '_qlearning_state') and self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(model)
