@@ -1,5 +1,6 @@
 from pygame import Rect
 from Entities import *
+
 class GameLogic:
     def __init__(self, width, height, config_game, sound):
         self.width = width
@@ -40,3 +41,6 @@ class GameLogic:
         if p1.rect.top > 0 or p1.rect.bottom < self.height: p1.rect.y += self.balls[0].move_y
         if p1.rect.y >= 310: p1.rect.y = 310
         if p1.rect.y <= 0: p1.rect.y = 0
+    def get_state(self):
+        return np.array([self.game.game_logic.player_one.rect.x, self.game.game_logic.player_one.rect.y, self.game.game_logic.player_two.rect.x, 
+                        self.game.game_logic.player_two.rect.y, self.game.game_logic.balls[0].rect.x, self.game.game_logic.balls[0].rect.y])
