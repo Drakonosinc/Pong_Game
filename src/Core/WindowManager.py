@@ -6,3 +6,7 @@ class WindowManager:
         self.window_height = height
         self.render_width = width   
         self.render_height = height
+        self.fullscreen = False
+        monitor_info = pygame.display.Info()
+        self.monitor_width = monitor_info.current_w
+        self.monitor_height = monitor_info.current_h
