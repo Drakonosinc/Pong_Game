@@ -60,4 +60,4 @@ class Visuals_items:
         self.scores(screen)
         self.name_players(screen)
         self.mode_speed(screen)
-        self.game.menus(screen)
+        self.game.menus()
