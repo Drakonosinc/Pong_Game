@@ -15,6 +15,7 @@ class InputHandler:
         self._process_continuous_presses()
     def _process_keydown_events(self, event):
         if event.type == KEYDOWN:
+            if event.key == K_F11: self.game.window.toggle_fullscreen()
             if self.game.main == 3 and event.key == K_p: self.game.main = -1
             elif self.game.main == -1 and event.key == K_p: self.game.main = 3
             if self.game.main == 3 or self.game.main == -1:
