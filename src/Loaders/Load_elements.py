@@ -11,7 +11,7 @@ class load_elements():
         self.define_colors()
         self.load_fonts()
         self.load_sounds()
-        self.config_screen()
+        self.load_images()
     def load_AI(self):
         self.model_path=os.path.join(self.config.base_dir, "AI/best_model.pth")
         nn_cfg = self.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
@@ -24,7 +24,7 @@ class load_elements():
         self.WIDTH=self.config.config_visuals["WIDTH"]
         self.HEIGHT=self.config.config_visuals["HEIGHT"]
         self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
-        self.load_images()
+        
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
