@@ -3,10 +3,12 @@ class BaseMenu:
     def __init__(self, interface=None):
         self.interface = interface
         if interface:
-            self.screen = interface.screen
             self.WIDTH = interface.WIDTH
             self.HEIGHT = interface.HEIGHT
             self.config = interface.config
+    @property
+    def screen(self):
+        return self.interface.screen if self.interface else None
     def execute_buttons(self,*args):
         for button in args:button.draw()
     def filt(self,number):
@@ -20,7 +22,7 @@ class BaseMenu:
         while (not fade_in and alpha <= limit) or (fade_in and alpha >= limit):
             overlay.set_alpha(alpha)
             self.screen.blit(overlay, (0, 0))
-            pygame.display.flip()
+            self.interface.window.update_display()
             self.interface.clock.tick(20)
             alpha += -15 if fade_in else 15
     def change_mains(self,config):

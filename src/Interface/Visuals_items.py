@@ -52,7 +52,7 @@ class Visuals_items:
                     screen.blit(activations_text, (10, 70))
                 except Exception: pass
     def draw(self):
-        screen = self.window.canvas
+        screen = self.game.window.canvas
         screen.blit(self.game.image, (0, 0))
         if self.game.mode_game["Training AI"]: self.draw_generation(screen)
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]: self.draw_activations(screen),self.draw_model_data(screen)

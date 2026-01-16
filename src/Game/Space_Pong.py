@@ -52,7 +52,7 @@ class Space_pong_game(interface):
         if self.mode_game["Training AI"]: self.game_logic.auto_play_player1()
         self.ai_handler.actions_AI(self.model if self.mode_game["Training AI"] else self.model_training)
     def item_repeat_run(self):
-        pygame.display.flip()
+        self.window.update_display()
         self.clock.tick(self.FPS)
     def run(self):
         self.running = True
