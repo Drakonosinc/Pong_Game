@@ -25,7 +25,6 @@ class load_elements():
         self.window = WindowManager("Space Pong AI", self.config.config_visuals["WIDTH"], self.config.config_visuals["HEIGHT"])
         self.WIDTH = self.window.render_width
         self.HEIGHT = self.window.render_height
-        self.screen = self.window.canvas
         self.load_images()
     def define_colors(self):
         self.GRAY=(127,127,127)

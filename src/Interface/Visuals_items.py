@@ -33,7 +33,7 @@ class Visuals_items:
                 color_intensity = int(activation_value * 255)
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(self.game.screen, color, neuron_positions[i], 5)
-    def draw_model_data(self):
+    def draw_model_data(self, screen):
         if self.game.mode_game["AI"]: self.game.model = self.game.model_training
         if self.game.model is not None:
             try:
@@ -52,7 +52,8 @@ class Visuals_items:
                     self.game.screen.blit(activations_text, (10, 70))
                 except Exception: pass
     def draw(self):
-        self.game.screen.blit(self.game.image, (0, 0))
+        screen = self.window.canvas
+        screen.blit(self.game.image, (0, 0))
         if self.game.mode_game["Training AI"]: self.draw_generation()
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]: self.draw_activations(),self.draw_model_data()
         self.images_elements()
