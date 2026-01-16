@@ -13,3 +13,5 @@ class WindowManager:
         self.screen = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
         pygame.display.set_caption(title)
         self.canvas = pygame.Surface((self.render_width, self.render_height))
+    def toggle_fullscreen(self):
+        self.fullscreen = not self.fullscreen
