@@ -20,3 +20,6 @@ class WindowManager:
     def clear(self, color): self.canvas.fill(color)
     def update_display(self):
         window_w, window_h = self.screen.get_size()
+        scaled_surface = pygame.transform.scale(self.canvas, (window_w, window_h))
+        self.screen.blit(scaled_surface, (0, 0))
+        pygame.display.flip()
