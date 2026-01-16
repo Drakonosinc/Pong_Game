@@ -12,6 +12,7 @@ class Space_pong_game(interface):
         self.input_handler = InputHandler(self)
         self.visuals_items = Visuals_items(self)
         self.game_logic = GameLogic(self.WIDTH, self.HEIGHT, self.config.config_game, self.sound)
+        self.window = WindowManager("Space Pong AI", self.config.config_visuals["WIDTH"], self.config.config_visuals["HEIGHT"])
         self.load_AI()
         self.draw_buttons()
     def load_varials(self):
