@@ -15,6 +15,7 @@ class Space_pong_game(interface):
         self.window = WindowManager("Space Pong AI", self.config.config_visuals["WIDTH"], self.config.config_visuals["HEIGHT"])
         self.WIDTH = self.window.render_width
         self.HEIGHT = self.window.render_height
+        self.screen = self.window.canvas
         self.load_AI()
         self.draw_buttons()
     def load_varials(self):
