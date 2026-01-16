@@ -15,3 +15,4 @@ class WindowManager:
         self.canvas = pygame.Surface((self.render_width, self.render_height))
     def toggle_fullscreen(self):
         self.fullscreen = not self.fullscreen
+        if self.fullscreen: self.screen = pygame.display.set_mode((self.monitor_width, self.monitor_height), pygame.FULLSCREEN)
