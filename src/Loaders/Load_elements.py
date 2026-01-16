@@ -20,11 +20,6 @@ class load_elements():
         type_model = next(k for k, v in self.config.config_AI["type_model"].items() if v)
         if type_training == "Genetic": self.model_training = load_genetic_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
         elif type_training == "Q-learning": self.model_training = load_qlearning_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
-    def config_screen(self):
-        self.WIDTH=self.config.config_visuals["WIDTH"]
-        self.HEIGHT=self.config.config_visuals["HEIGHT"]
-        self.screen=pygame.display.set_mode((self.WIDTH,self.HEIGHT))
-        
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
