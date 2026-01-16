@@ -17,3 +17,4 @@ class WindowManager:
         self.fullscreen = not self.fullscreen
         if self.fullscreen: self.screen = pygame.display.set_mode((self.monitor_width, self.monitor_height), pygame.FULLSCREEN)
         else: self.screen = pygame.display.set_mode((self.window_width, self.window_height), pygame.RESIZABLE)
+    def clear(self, color): self.canvas.fill(color)
