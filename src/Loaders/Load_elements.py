@@ -2,6 +2,7 @@ import pygame,os
 from pygame.locals import *
 from .Config_Loader import *
 from Type_Training import *
+from Core import *
 class load_elements():
     def __init__(self):
         pygame.init()
@@ -11,7 +12,7 @@ class load_elements():
         self.define_colors()
         self.load_fonts()
         self.load_sounds()
-        self.load_images()
+        self.config_screen()
     def load_AI(self):
         self.model_path=os.path.join(self.config.base_dir, "AI/best_model.pth")
         nn_cfg = self.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
@@ -20,6 +21,12 @@ class load_elements():
         type_model = next(k for k, v in self.config.config_AI["type_model"].items() if v)
         if type_training == "Genetic": self.model_training = load_genetic_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
         elif type_training == "Q-learning": self.model_training = load_qlearning_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
+    def config_screen(self):
+        self.window = WindowManager("Space Pong AI", self.config.config_visuals["WIDTH"], self.config.config_visuals["HEIGHT"])
+        self.WIDTH = self.window.render_width
+        self.HEIGHT = self.window.render_height
+        self.screen = self.window.canvas
+        self.load_images()
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)
