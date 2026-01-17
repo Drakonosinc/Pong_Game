@@ -27,8 +27,7 @@ class load_elements():
         self.HEIGHT = self.window.render_height
         self.load_images()
     @property
-    def screen(self):
-        return self.window.canvas
+    def screen(self): return self.window.canvas
     def define_colors(self):
         self.GRAY=(127,127,127)
         self.WHITE=(255,255,255)

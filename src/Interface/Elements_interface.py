@@ -10,23 +10,24 @@ class ElementsFactory:
         self.sound_hover=config.get("sound_hover",None)
         self.sound_touch=config.get("sound_touch",None)
     def create_Text(self,config:dict):
-        return Text({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,**config})
+        return Text({"screen": self.screen,"window": self.window,"font": self.font,"color": self.color,"hover_color": self.hover_color,**config})
     def create_TextButton(self,config:dict):
-        return TextButton({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return TextButton({"screen": self.screen,"window": self.window,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_PolygonButton(self,config:dict):
-        return PolygonButton({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return PolygonButton({"screen": self.screen,"window": self.window,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_InputText(self,config:dict):
-        return Input_text({"screen": self.screen,"font": self.font,"color": self.color,"color_back":self.color_back,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return Input_text({"screen": self.screen,"window": self.window,"font": self.font,"color": self.color,"color_back":self.color_back,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_ScrollBar(self,config:dict):
-        return ScrollBar({"screen": self.screen,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return ScrollBar({"screen": self.screen,"window": self.window,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
     def create_ComboBox(self,config:dict):
         type_key = (config.get("type_dropdown", "down")).lower()
         mapping = {"down": ComboBoxDown, "up": ComboBoxUp, "right": ComboBoxRight, "left": ComboBoxLeft,}
         cls = mapping.get(type_key, ComboBoxDown)
-        return cls({"screen": self.screen,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
+        return cls({"screen": self.screen,"window": self.window,"font": self.font,"color": self.color,"hover_color": self.hover_color,"sound_hover": self.sound_hover,"sound_touch": self.sound_touch,**config})
 class ElementBehavior:
     def __init__(self, config: dict):
         self.screen = config["screen"]
+        self.window = config.get("window",None)
         self.position = config["position"]
         self.sound_hover = config.get("sound_hover")
         self.sound_touch = config.get("sound_touch")
