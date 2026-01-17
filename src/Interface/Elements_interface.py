@@ -3,6 +3,7 @@ from pygame.locals import *
 class ElementsFactory:
     def __init__(self,config:dict):
         self.screen=config["screen"]
+        self.window=config.get("window",None)
         self.font=config.get("font",pygame.font.Font(None,25))
         self.color=config.get("color",(255,255,255))
         self.hover_color=config.get("hover_color",(255, 199, 51))
