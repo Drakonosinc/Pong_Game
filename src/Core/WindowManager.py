@@ -27,3 +27,4 @@ class WindowManager:
         mouse_x, mouse_y = pygame.mouse.get_pos()
         window_w, window_h = self.screen.get_size()
         canvas_x = mouse_x * self.render_width / window_w
+        canvas_y = mouse_y * self.render_height / window_h
