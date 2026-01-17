@@ -38,6 +38,7 @@ class ElementBehavior:
         self.repeat = config.get("repeat_button",False)
         self.commands = [config.get(f"command{i}") for i in range(1,config.get("number_commands", 4))]
         self.new_events(time=config.get("time",500))
+    def get_mouse_pos(self): return self.window.get_mouse_pos() if self.window else pygame.mouse.get_pos()
     def events(self, event):pass
     def new_events(self,time):
         self.EVENT_NEW = pygame.USEREVENT + self.define_event()
