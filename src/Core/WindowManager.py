@@ -23,3 +23,5 @@ class WindowManager:
         scaled_surface = pygame.transform.scale(self.canvas, (window_w, window_h))
         self.screen.blit(scaled_surface, (0, 0))
         pygame.display.flip()
+    def get_mouse_pos(self):
+        mouse_x, mouse_y = pygame.mouse.get_pos()
