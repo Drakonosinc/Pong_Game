@@ -25,3 +25,4 @@ class WindowManager:
         pygame.display.flip()
     def get_mouse_pos(self):
         mouse_x, mouse_y = pygame.mouse.get_pos()
+        window_w, window_h = self.screen.get_size()
