@@ -28,3 +28,4 @@ class WindowManager:
         window_w, window_h = self.screen.get_size()
         canvas_x = mouse_x * self.render_width / window_w
         canvas_y = mouse_y * self.render_height / window_h
+        return (int(canvas_x), int(canvas_y))
