@@ -154,6 +154,8 @@ class Input_text(ElementBehavior):
             if rect.collidepoint(mouse_pos):
                 self.states["active"] = True
                 self.states["presses_touch"] = False
+                if self.sound_touch: self.sound_touch.play(loops=0)
+            else: self.states["active"], self.states["presses_touch"] = False, False
         
     def draw_hover_effect(self):return pygame.draw.rect(self.screen,self.hover_color,self.rect)
     def draw_pressed_effect(self):return pygame.draw.rect(self.screen,self.pressed_color,self.rect)
