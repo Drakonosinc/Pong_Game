@@ -94,7 +94,7 @@ class Text:
         self.rect = pygame.Rect(*self.position, *self.font.size(self.text))
     def draw(self):
         self.screen.blit(self.font.render(self.text, True,self.color), self.position)
-        if self.Behavior.detect_mouse:self.Behavior.mouse_collision(self.rect,pygame.mouse.get_pos(),self.draw_hover_effect)
+        if self.Behavior.detect_mouse:self.Behavior.mouse_collision(self.rect,self.Behavior.get_mouse_pos(),self.draw_hover_effect)
     def draw_hover_effect(self):return self.screen.blit(self.font.render(self.text,True,self.hover_color),self.position)
     def change_item(self,config:dict):
         self.position = config.get("position",self.position)
@@ -106,7 +106,7 @@ class TextButton(Text,ElementBehavior):
         ElementBehavior.__init__(self, config)
     def draw(self):
         super().draw()
-        if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),pygame.mouse.get_pos())
+        if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),self.get_mouse_pos())
     def change_item(self,config:dict):
         super().change_item(config)
         self.detect_mouse=config.get("detect_mouse",self.detect_mouse)
