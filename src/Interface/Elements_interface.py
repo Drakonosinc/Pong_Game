@@ -120,8 +120,8 @@ class PolygonButton(ElementBehavior):
         self.rect = pygame.draw.polygon(self.screen, self.color, self.position).copy()
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, self.position)
-        if self.detect_mouse:self.mouse_collision(self.rect,pygame.mouse.get_pos())
-        if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),pygame.mouse.get_pos())
+        if self.detect_mouse:self.mouse_collision(self.rect,self.get_mouse_pos())
+        if self.pressed:self.pressed_button(self.rect,pygame.mouse.get_pressed(),self.get_mouse_pos())
     def draw_hover_effect(self):return pygame.draw.polygon(self.screen, self.hover_color, self.hover_position)
     def change_item(self,config:dict):
         self.color=config.get("color",self.color)
