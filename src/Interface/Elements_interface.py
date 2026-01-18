@@ -156,7 +156,8 @@ class Input_text(ElementBehavior):
                 self.states["presses_touch"] = False
                 if self.sound_touch: self.sound_touch.play(loops=0)
             else: self.states["active"], self.states["presses_touch"] = False, False
-        
+        if not pressed_mouse[0]: self.states["presses_touch"] = True
+        if self.states["active"]: self.draw_pressed_effect() if draw is None else draw()
     def draw_hover_effect(self):return pygame.draw.rect(self.screen,self.hover_color,self.rect)
     def draw_pressed_effect(self):return pygame.draw.rect(self.screen,self.pressed_color,self.rect)
     def show_player(self):return self.text
