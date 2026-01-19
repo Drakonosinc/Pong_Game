@@ -29,6 +29,8 @@ class load_elements():
             self.window.window_height = new_h
             if not self.window.fullscreen: self.window.screen = pygame.display.set_mode((new_w, new_h), pygame.RESIZABLE)
         else:self.window = WindowManager("Space Pong AI", new_w, new_h)
+        self.WIDTH = self.window.render_width
+        self.HEIGHT = self.window.render_height
         
     @property
     def screen(self): return self.window.canvas
