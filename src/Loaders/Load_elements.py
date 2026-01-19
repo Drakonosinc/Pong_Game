@@ -27,6 +27,7 @@ class load_elements():
         if hasattr(self, 'window') and self.window:
             self.window.window_width = new_w
             self.window.window_height = new_h
+            if not self.window.fullscreen: self.window.screen = pygame.display.set_mode((new_w, new_h), pygame.RESIZABLE)
         
     @property
     def screen(self): return self.window.canvas
