@@ -26,6 +26,7 @@ class load_elements():
         new_h = self.config.config_visuals["HEIGHT"]
         if hasattr(self, 'window') and self.window:
             self.window.window_width = new_w
+            self.window.window_height = new_h
         
     @property
     def screen(self): return self.window.canvas
