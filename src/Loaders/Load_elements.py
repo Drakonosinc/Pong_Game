@@ -23,6 +23,7 @@ class load_elements():
         elif type_training == "Q-learning": self.model_training = load_qlearning_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
     def config_screen(self):
         new_w = self.config.config_visuals["WIDTH"]
+        new_h = self.config.config_visuals["HEIGHT"]
         
     @property
     def screen(self): return self.window.canvas
