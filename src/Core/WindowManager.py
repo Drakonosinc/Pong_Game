@@ -4,7 +4,7 @@ class WindowManager:
     def __init__(self, title="Space Pong AI", width=700, height=400):
         self.window_width = width
         self.window_height = height
-        self.render_width = width   
+        self.render_width = 700   
         self.render_height = height
         self.fullscreen = False
         monitor_info = pygame.display.Info()
