@@ -26,7 +26,7 @@ class VisualsMenu(BaseMenu):
         self.screen.blit(self.interface.font2_5.render("WIDTH", True, self.interface.SKYBLUE),(self.WIDTH/2-163, self.HEIGHT/2-200))
         self.screen.blit(self.interface.font2_5.render("HEIGHT", True, self.interface.SKYBLUE),(self.WIDTH/2+60, self.HEIGHT/2-200))
         self.screen.blit(self.interface.font2_5.render("IMAGE", True, self.interface.SKYBLUE),(self.WIDTH/2-52, self.HEIGHT/2+160))
-        self.interface.images_elements()
+        self.interface.visuals_items.images_elements(self.screen)
         self.execute_buttons(*self.buttons.values())
     def _change_items(self, item, background=None, number=0):
         if background is not None:
@@ -35,3 +35,4 @@ class VisualsMenu(BaseMenu):
             self.config.config_visuals[item] = (current_value + number) % options_length
         else:self.config.config_visuals[item] = self.config.config_visuals[item] + number
         self.interface.config_screen()
+        
