@@ -22,10 +22,8 @@ class load_elements():
         if type_training == "Genetic": self.model_training = load_genetic_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
         elif type_training == "Q-learning": self.model_training = load_qlearning_model(self.model_path, type_model, 6, 2, hidden_sizes=arch) if os.path.exists(self.model_path) else None
     def config_screen(self):
-        self.window = WindowManager("Space Pong AI", self.config.config_visuals["WIDTH"], self.config.config_visuals["HEIGHT"])
-        self.WIDTH = self.window.render_width
-        self.HEIGHT = self.window.render_height
-        self.load_images()
+        new_w = self.config.config_visuals["WIDTH"]
+        
     @property
     def screen(self): return self.window.canvas
     def define_colors(self):
