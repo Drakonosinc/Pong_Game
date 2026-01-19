@@ -35,4 +35,5 @@ class VisualsMenu(BaseMenu):
             self.config.config_visuals[item] = (current_value + number) % options_length
         else:self.config.config_visuals[item] = self.config.config_visuals[item] + number
         self.interface.config_screen()
-        
+        self.interface.setup_button_factories()
+        self.setup_buttons()
