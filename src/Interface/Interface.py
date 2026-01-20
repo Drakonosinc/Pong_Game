@@ -1,6 +1,7 @@
 from Loaders.Load_elements import *
 from .Elements_interface import *
 from .Menus import *
+from Utils.States import GameState
 class interface(load_elements,BaseMenu):
     def __init__(self):
         load_elements.__init__(self)

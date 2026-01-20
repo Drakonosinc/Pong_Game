@@ -2,7 +2,7 @@ from Interface import *
 from AI import *
 from Events import *
 from .GameLogic import *
-from Utils import *
+from Utils.States import GameState
 class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
