@@ -17,7 +17,15 @@ class interface(load_elements,BaseMenu):
         self.keys_menu = KeysMenu(self)
         self.menu_AI = AIMenu(self)
     def menus(self):
-        
+        menu_routes = {
+            GameState.MENU: self.main_menu.render,
+            GameState.GAME_OVER: self.game_over_menu.render,
+            GameState.MODE_SELECT: self.game_mode_menu.render,
+            GameState.PAUSE: self.pause_menu.render,
+            GameState.OPTIONS: self.options_menu.render,
+            GameState.VISUALS: self.visuals_menu.render,
+            GameState.KEYS: self.keys_menu.render,
+            GameState.AI_MENU: self.menu_AI.render }
         if self.main in menu_routes: menu_routes[self.main]()
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({"screen": self.screen, "window": self.window,"font": self.font5,"sound_hover": self.sound_buttonletters,"sound_touch": self.sound_touchletters})
