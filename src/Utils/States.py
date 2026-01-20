@@ -8,3 +8,4 @@ class GameState(Enum):
     OPTIONS = 4
     VISUALS = 5
     KEYS = 6
+    AI_MENU = 7
