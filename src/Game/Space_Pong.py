@@ -21,7 +21,7 @@ class Space_pong_game(interface):
         self.clock = pygame.time.Clock()
         self.FPS:int = 60
         self.generation:int = 0
-        self.main = self.main: GameState = GameState.MENU
+        self.main: GameState = GameState.MENU
         self.speed:int = 0
         self.speed_up:bool = True
         self.speed_down:bool = True
