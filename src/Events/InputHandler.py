@@ -8,8 +8,8 @@ class InputHandler:
         for event in pygame.event.get():
             if event.type == QUIT: self.game.event_quit()
             self._process_keydown_events(event)
-            if self.game.main == 2: self.game.events_buttons(event)
-            if self.game.main == 6: self.game.keys_menu.event_keys(event)
+            if self.game.main == GameState.MODE_SELECT: self.game.events_buttons(event)
+            if self.game.main == GameState.KEYS: self.game.keys_menu.event_keys(event)
         self.game.pressed_keys = pygame.key.get_pressed()
         self.game.pressed_mouse = pygame.mouse.get_pressed()
         self.game.mouse_pos = pygame.mouse.get_pos()
