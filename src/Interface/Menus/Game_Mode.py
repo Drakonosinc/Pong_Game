@@ -1,5 +1,6 @@
 import os, pygame
 from .Base_Menu import BaseMenu
+from Utils.States import GameState
 class GameMode(BaseMenu):
     def __init__(self, interface):
         super().__init__(interface)
