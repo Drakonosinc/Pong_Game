@@ -14,7 +14,7 @@ class AIMenu(BaseMenu):
         self.output_size = 2
     def setup_buttons(self):
         factory = self.interface.button_factory_f2_5
-        self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2": ((50, 340), (50, 390), (10, 365)),"command1": lambda: self.change_mains({"main": 2})})
+        self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2": ((50, 340), (50, 390), (10, 365)),"command1": lambda: self.change_mains({"main": GameState.MODE_SELECT})})
         self.buttons['dec_layers'] = factory.create_TextButton({"text": "-","position": (self.WIDTH//2-130, 60),"command1": lambda: self._change_layers(-1)})
         self.buttons['inc_layers'] = factory.create_TextButton({"text": "+","position": (self.WIDTH//2-100, 60),"command1": lambda: self._change_layers(1)})
         self.buttons['dec_neurons'] = factory.create_TextButton({"text": "-","position": (self.WIDTH//2+100, 60),"command1": lambda: self._change_neurons(-1)})
