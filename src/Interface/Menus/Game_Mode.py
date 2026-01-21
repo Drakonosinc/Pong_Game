@@ -23,8 +23,8 @@ class GameMode(BaseMenu):
         self._setup_config_game_buttons()
     def _setup_navigation_buttons(self):
         factory = self.interface.button_factory_f5
-        self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":0})})
-        self.buttons['continue'] = factory.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":-1,"run":True,"command":self.interface.game_logic.init_entities})})
+        self.buttons['back'] = factory.create_PolygonButton({"position": ((50, 350), (50, 380), (25, 365)),"position2":((50, 340), (50, 390), (10, 365)),"command1":lambda:self.change_mains({"main":GameState.MENU})})
+        self.buttons['continue'] = factory.create_PolygonButton({"position": ((650, 350), (650, 380), (675, 365)),"position2":((650, 340), (650, 390), (690, 365)),"command1":lambda:self.change_mains({"main":GameState.PLAYING,"run":True,"command":self.interface.game_logic.init_entities})})
         self.interface.back_button = self.buttons['back']
         self.interface.continue_button = self.buttons['continue']
     def _setup_mode_buttons(self):
@@ -71,7 +71,7 @@ class GameMode(BaseMenu):
         self.buttons['box_type_model'] = factory.create_ComboBox({"text": "Model","position": (5, self.HEIGHT/2-76)})
         self.buttons['box_type_model'].charge_elements({"Pytorch":lambda:self._update_model_ai("Pytorch"), "Tensorflow":lambda:self._update_model_ai("Tensorflow")})
         self._update_model_ai("Pytorch")
-        self.buttons['config_model_ai'] = factory.create_TextButton({"text": "AI parameters","position": (5, self.HEIGHT/2-46),"command1":lambda:self.change_mains({"main":7})})
+        self.buttons['config_model_ai'] = factory.create_TextButton({"text": "AI parameters","position": (5, self.HEIGHT/2-46),"command1":lambda:self.change_mains({"main":GameState.AI_MENU})})
         self.interface.save_model_button = self.buttons['save_model']
         self.interface.box_type_training = self.buttons['box_type_training']
         self.interface.box_type_model = self.buttons['box_type_model']
