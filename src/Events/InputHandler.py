@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from Utils.States import GameState
 class InputHandler:
     def __init__(self, game):
         self.game = game
