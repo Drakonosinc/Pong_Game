@@ -1,4 +1,5 @@
 from .Base_Menu import BaseMenu
+from Utils.States import GameState
 class MainMenu(BaseMenu):
     def __init__(self, interface):
         super().__init__(interface)
