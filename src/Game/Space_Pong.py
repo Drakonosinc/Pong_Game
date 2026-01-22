@@ -1,19 +1,38 @@
 from Interface import *
 from AI import *
 from Events import *
+from Events.EventManager import EventManager
+from Events.GameEvents import *
 from .GameLogic import *
 from Utils.States import GameState
 class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
+        self.event_manager = EventManager()
         self.model = None
         self.load_varials()
         self.ai_handler = AIHandler(self)
-        self.input_handler = InputHandler(self)
+        self.input_handler = InputHandler(self, self.event_manager)
         self.visuals_items = Visuals_items(self)
-        self.game_logic = GameLogic(self.WIDTH, self.HEIGHT, self.config.config_game, self.mode_game, self.sound)
+        self.game_logic = GameLogic(self.WIDTH, self.HEIGHT, self.config.config_game, self.mode_game, self.sound, self.event_manager)
         self.load_AI()
         self.draw_buttons()
+        self._register_events()
+    def _register_events(self):
+        self.event_manager.subscribe(QuitEvent, self.handle_quit_event)
+        self.event_manager.subscribe(ToggleFullscreenEvent, self.handle_fullscreen_event)
+        self.event_manager.subscribe(PauseGameEvent, self.handle_pause_event)
+        self.event_manager.subscribe(ResumeGameEvent, self.handle_resume_event)
+        self.event_manager.subscribe(ChangeSpeedEvent, self.handle_speed_event)
+        self.event_manager.subscribe(ChangeStateEvent, self.handle_state_change_event)
+        self.event_manager.subscribe(SaveModelEvent, self.handle_save_model_event)
+    def handle_quit_event(self, event): self.event_quit()
+    def handle_fullscreen_event(self, event): self.window.toggle_fullscreen()
+    def handle_pause_event(self, event): self.main = GameState.PAUSE
+    def handle_resume_event(self, event): self.main = GameState.PLAYING
+    def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
+    def handle_state_change_event(self, event): self.change_mains(event.new_state_data)
+    def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
         self.running:bool = False
         self.game_over:bool = False
@@ -26,7 +45,8 @@ class Space_pong_game(interface):
         self.speed_up:bool = True
         self.speed_down:bool = True
         self.mode_game:dict[str,bool] = {"Training AI":False,"Player":False,"AI":False}
-        self.sound_type:dict = {"sound":f"Sound {"ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"}","color":self.SKYBLUE if x else self.RED,"value":x}
+        sound_status = "ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"
+        self.sound_type:dict = {"sound":f"Sound {sound_status}","color":self.SKYBLUE if x else self.RED,"value":x}
         self.utils_keys:dict[str,bool] = {"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
     def event_quit(self):
         self.sound_exitbutton.play(loops=0)
