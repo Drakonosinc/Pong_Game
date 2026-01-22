@@ -1,18 +1,29 @@
 from pygame import Rect
 from Entities import *
 import numpy as np
+from Events.GameEvents import PlayerMoveEvent
 class GameLogic:
-    def __init__(self, width, height, config_game, mode_game, sound):
+    def __init__(self, width, height, config_game, mode_game, sound, event_manager):
         self.width = width
         self.height = height
         self.config = config_game 
         self.mode_game = mode_game
         self.sound = sound
+        self.event_manager = event_manager
         self.init_entities()
+        self.event_manager.subscribe(PlayerMoveEvent, self.handle_player_move)
     def init_entities(self):
         self.balls = [Ball(self.width//2-28,self.height//2-29,36,36,4+i,4+i) for i in range(1 if self.mode_game["Training AI"] else self.config["number_balls"])]
         self.player_one = Player(25,150,11,90,[True] * len(self.balls))
         self.player_two = Player(665,150,11,90,[True] * len(self.balls))
+    def handle_player_move(self, event: PlayerMoveEvent):
+        velocity = 5
+        target_player = None
+        if event.player_index == 1: target_player = self.player_one
+        elif event.player_index == 2: target_player = self.player_two
+        if target_player:
+            if event.direction == -1 and target_player.rect.top > 0: target_player.rect.y -= velocity
+            elif event.direction == 1 and target_player.rect.bottom < self.height: target_player.rect.y += velocity
     def update(self):
         for i, ball in enumerate(self.balls):
             ball.move_ball(self.width, self.height)
