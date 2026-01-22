@@ -9,3 +9,6 @@ class EventManager:
         if event_type in self.listeners:
             try: self.listeners[event_type].remove(listener)
             except ValueError: pass
+    def post(self, event: Event):
+        if type(event) in self.listeners:
+            for listener in self.listeners[type(event)]: listener(event)
