@@ -7,3 +7,5 @@ class EventManager:
         self.listeners[event_type].append(listener)
     def unsubscribe(self, event_type: Type[Event], listener: Callable):
         if event_type in self.listeners:
+            try: self.listeners[event_type].remove(listener)
+            except ValueError: pass
