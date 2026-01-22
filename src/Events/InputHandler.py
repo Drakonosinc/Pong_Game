@@ -35,5 +35,5 @@ class InputHandler:
             if keys[self.game.config.config_keys["UP_ARROW"]] and p2.rect.top > 0: p2.rect.y -= 5
             if keys[self.game.config.config_keys["DOWN_ARROW"]] and p2.rect.bottom < self.game.HEIGHT: p2.rect.y += 5
         if self.game.main == GameState.GAME_OVER:
-            if keys[K_r]: self.game.change_mains({"main": -1})
-            if keys[K_e]: self.game.change_mains({"main": 0, "run": True})
+            if keys[K_r]: self.game.change_mains({"main": GameState.PLAYING})
+            if keys[K_e]: self.game.change_mains({"main": GameState.MENU, "run": True})
