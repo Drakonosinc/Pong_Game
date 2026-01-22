@@ -11,3 +11,6 @@ class PlayerMoveEvent(Event):
         self.player_index = player_index
         self.direction = direction       
         self.dt = dt
+class ChangeSpeedEvent(Event):
+    def __init__(self, fps_delta, speed_delta, limit, flag_name):
+        self.fps_delta = fps_delta
