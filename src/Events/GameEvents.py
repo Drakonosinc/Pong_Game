@@ -9,3 +9,5 @@ class SaveModelEvent(Event): pass
 class PlayerMoveEvent(Event):
     def __init__(self, player_index: int, direction: int, dt: float = 1.0):
         self.player_index = player_index
+        self.direction = direction       
+        self.dt = dt
