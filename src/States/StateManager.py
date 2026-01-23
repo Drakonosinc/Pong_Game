@@ -4,3 +4,6 @@ class StateManager:
     def push(self, state, params=None):
         self.stack.append(state)
         state.enter(params)
+    def pop(self):
+        if self.stack:
+            state = self.stack.pop()
