@@ -5,3 +5,5 @@ class State(ABC):
         self.manager = game.state_manager
     @abstractmethod
     def enter(self, params=None): pass
+    @abstractmethod
+    def exit(self): pass
