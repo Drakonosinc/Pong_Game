@@ -11,3 +11,5 @@ class State(ABC):
     def update(self, dt): pass
     @abstractmethod
     def draw(self, surface): pass
+    @abstractmethod
+    def handle_event(self, event): pass
