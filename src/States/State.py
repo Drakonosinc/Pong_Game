@@ -7,3 +7,5 @@ class State(ABC):
     def enter(self, params=None): pass
     @abstractmethod
     def exit(self): pass
+    @abstractmethod
+    def update(self, dt): pass
