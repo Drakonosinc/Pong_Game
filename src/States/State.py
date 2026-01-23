@@ -9,3 +9,5 @@ class State(ABC):
     def exit(self): pass
     @abstractmethod
     def update(self, dt): pass
+    @abstractmethod
+    def draw(self, surface): pass
