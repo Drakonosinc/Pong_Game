@@ -7,3 +7,6 @@ class StateManager:
     def pop(self):
         if self.stack:
             state = self.stack.pop()
+            state.exit()
+            return state
+        return None
