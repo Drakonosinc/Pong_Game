@@ -10,6 +10,7 @@ class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
         self.event_manager = EventManager()
+        self.state_manager = StateManager()
         self.model = None
         self.load_varials()
         self.ai_handler = AIHandler(self)
