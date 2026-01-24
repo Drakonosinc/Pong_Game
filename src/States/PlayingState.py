@@ -7,3 +7,9 @@ class PlayingState(State):
         self.game.main = GameState.PLAYING
         self.game.game_over = False
         if params and params.get("reset"): self.game.reset()
+    def exit(self): pass
+    def update(self, dt):
+        if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:  self.game.type_game()
+        self.game.game_logic.update()
+        self.game.restart() 
+        if self.game.main == GameState.GAME_OVER: pass 
