@@ -15,3 +15,5 @@ class StateManager:
         self.push(state, params)
     def update(self, dt):
         if self.stack: self.stack[-1].update(dt)
+    def draw(self, surface):
+        if self.stack: self.stack[-1].draw(surface)
