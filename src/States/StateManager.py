@@ -10,3 +10,4 @@ class StateManager:
             state.exit()
             return state
         return None
+    def change(self, state, params=None):
