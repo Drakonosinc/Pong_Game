@@ -11,3 +11,4 @@ class StateManager:
             return state
         return None
     def change(self, state, params=None):
+        if self.stack: self.pop()
