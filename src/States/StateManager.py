@@ -17,3 +17,5 @@ class StateManager:
         if self.stack: self.stack[-1].update(dt)
     def draw(self, surface):
         if self.stack: self.stack[-1].draw(surface)
+    def handle_event(self, event):
+        if self.stack: self.stack[-1].handle_event(event)
