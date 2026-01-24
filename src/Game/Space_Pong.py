@@ -5,6 +5,7 @@ from Events.EventManager import EventManager
 from Events.GameEvents import *
 from .GameLogic import *
 from Utils.States import GameState
+from States.StateManager import StateManager
 class Space_pong_game(interface):
     def __init__(self):
         super().__init__()
