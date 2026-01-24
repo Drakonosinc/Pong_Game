@@ -13,3 +13,5 @@ class PlayingState(State):
         self.game.game_logic.update()
         self.game.restart() 
         if self.game.main == GameState.GAME_OVER: pass 
+    def draw(self, surface): self.game.visuals_items.draw()
+    def handle_event(self, event): pass
