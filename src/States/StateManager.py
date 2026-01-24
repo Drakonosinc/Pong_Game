@@ -12,3 +12,4 @@ class StateManager:
         return None
     def change(self, state, params=None):
         if self.stack: self.pop()
+        self.push(state, params)
