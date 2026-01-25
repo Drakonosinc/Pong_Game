@@ -4,3 +4,4 @@ class MenuState(State):
     def __init__(self, game):
         super().__init__(game)
     def enter(self, params=None): self.game.main = GameState.MENU
+    def exit(self): pass
