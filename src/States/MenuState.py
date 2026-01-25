@@ -8,3 +8,4 @@ class MenuState(State):
     def update(self, dt): pass
     def draw(self, surface): self.game.visuals_items.draw()
     def handle_event(self, event): 
+        if self.game.main == GameState.MODE_SELECT: self.game.events_buttons(event)
