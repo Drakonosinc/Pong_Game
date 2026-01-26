@@ -89,3 +89,6 @@ class Space_pong_game(interface):
             self.input_handler.handle_input()
             self.state_manager.update(dt)
             self.state_manager.draw(self.window.canvas) 
+            self.item_repeat_run()
+    def run_with_model(self):
+        self.running = True
