@@ -84,3 +84,4 @@ class Space_pong_game(interface):
         self.clock.tick(self.FPS)
     def run(self):
         self.running = True
+        dt = 0 
