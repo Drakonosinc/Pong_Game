@@ -20,6 +20,7 @@ class Space_pong_game(interface):
         self.load_AI()
         self.draw_buttons()
         self._register_events()
+        self.state_manager.push(MenuState(self))
     def _register_events(self):
         self.event_manager.subscribe(QuitEvent, self.handle_quit_event)
         self.event_manager.subscribe(ToggleFullscreenEvent, self.handle_fullscreen_event)
@@ -31,9 +32,13 @@ class Space_pong_game(interface):
     def handle_quit_event(self, event): self.event_quit()
     def handle_fullscreen_event(self, event): self.window.toggle_fullscreen()
     def handle_pause_event(self, event): self.main = GameState.PAUSE
-    def handle_resume_event(self, event): self.main = GameState.PLAYING
+    def handle_resume_event(self, event):  self.main = GameState.PLAYING
     def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
-    def handle_state_change_event(self, event): self.change_mains(event.new_state_data)
+    def handle_state_change_event(self, event):
+        self.change_mains(event.new_state_data)
+        target_main = event.new_state_data.get("main")
+        if target_main == GameState.PLAYING: self.state_manager.change(PlayingState(self), params=event.new_state_data)
+        elif target_main == GameState.MENU: self.state_manager.change(MenuState(self))
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
         self.running:bool = False
@@ -77,16 +82,3 @@ class Space_pong_game(interface):
     def item_repeat_run(self):
         self.window.update_display()
         self.clock.tick(self.FPS)
-    def run(self):
-        self.running = True
-        while self.running: self.input_handler.handle_input(), self.visuals_items.draw(), self.item_repeat_run()
-    def run_with_model(self):
-        self.running = True
-        self.game_logic.player_two.reward = 0
-        while self.running and self.game_over==False:
-            self.input_handler.handle_input(), self.visuals_items.draw()
-            if self.main == GameState.PLAYING:
-                if self.mode_game["Training AI"] or self.mode_game["AI"]: self.type_game()
-                self.game_logic.update(), self.restart()
-            self.item_repeat_run()
-        return self.game_logic.player_two.reward
