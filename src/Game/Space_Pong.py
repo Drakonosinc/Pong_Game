@@ -94,3 +94,5 @@ class Space_pong_game(interface):
         self.running = True
         self.game_logic.player_two.reward = 0
         self.state_manager.change(PlayingState(self))
+        self.run()
+        return self.game_logic.player_two.reward
