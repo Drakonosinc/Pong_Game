@@ -82,3 +82,5 @@ class Space_pong_game(interface):
     def item_repeat_run(self):
         self.window.update_display()
         self.clock.tick(self.FPS)
+    def run(self):
+        self.running = True
