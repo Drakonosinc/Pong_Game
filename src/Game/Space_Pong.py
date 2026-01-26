@@ -85,3 +85,5 @@ class Space_pong_game(interface):
     def run(self):
         self.running = True
         dt = 0 
+        while self.running:
+            self.input_handler.handle_input()
