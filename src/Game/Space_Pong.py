@@ -92,3 +92,5 @@ class Space_pong_game(interface):
             self.item_repeat_run()
     def run_with_model(self):
         self.running = True
+        self.game_logic.player_two.reward = 0
+        self.state_manager.change(PlayingState(self))
