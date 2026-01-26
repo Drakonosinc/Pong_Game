@@ -87,3 +87,5 @@ class Space_pong_game(interface):
         dt = 0 
         while self.running:
             self.input_handler.handle_input()
+            self.state_manager.update(dt)
+            self.state_manager.draw(self.window.canvas) 
