@@ -8,3 +8,4 @@ from .OptionsState import *
 from .VisualsState import *
 from .AIMenuState import *
 from .ModeSelectState import *
+from .KeysState import *
