@@ -7,3 +7,4 @@ from .PauseState import *
 from .OptionsState import *
 from .VisualsState import *
 from .AIMenuState import *
+from .ModeSelectState import *
