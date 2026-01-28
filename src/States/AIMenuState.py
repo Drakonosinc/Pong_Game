@@ -5,3 +5,4 @@ class AIMenuState(State):
         self.game.main = GameState.AI_MENU
     def exit(self): pass
     def update(self, dt): pass
+    def draw(self, surface): self.game.visuals_items.draw()
