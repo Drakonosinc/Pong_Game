@@ -31,25 +31,14 @@ class Space_pong_game(interface):
         self.event_manager.subscribe(SaveModelEvent, self.handle_save_model_event)
     def handle_quit_event(self, event): self.event_quit()
     def handle_fullscreen_event(self, event): self.window.toggle_fullscreen()
-    def handle_pause_event(self, event): self.state_manager.change(PauseState(self))
-    def handle_resume_event(self, event): self.state_manager.change(PlayingState(self))
+    def handle_pause_event(self, event): self.main = GameState.PAUSE
+    def handle_resume_event(self, event):  self.main = GameState.PLAYING
     def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
     def handle_state_change_event(self, event):
         self.change_mains(event.new_state_data)
         target_main = event.new_state_data.get("main")
-        state_map = {
-            GameState.MENU: MenuState,
-            GameState.PLAYING: PlayingState,
-            GameState.GAME_OVER: GameOverState,
-            GameState.MODE_SELECT: ModeSelectState,
-            GameState.PAUSE: PauseState,
-            GameState.OPTIONS: OptionsState,
-            GameState.VISUALS: VisualsState,
-            GameState.KEYS: KeysState,
-            GameState.AI_MENU: AIMenuState }
-        if target_main in state_map:
-            new_state = state_map[target_main](self)
-            self.state_manager.change(new_state, params=event.new_state_data)
+        if target_main == GameState.PLAYING: self.state_manager.change(PlayingState(self), params=event.new_state_data)
+        elif target_main == GameState.MENU: self.state_manager.change(MenuState(self))
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
         self.running:bool = False
