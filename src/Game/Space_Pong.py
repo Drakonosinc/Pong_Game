@@ -35,6 +35,8 @@ class Space_pong_game(interface):
     def handle_resume_event(self, event): self.state_manager.change(PlayingState(self))
     def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
     def handle_state_change_event(self, event):
+        self.change_mains(event.new_state_data)
+        target_main = event.new_state_data.get("main")
 
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
