@@ -47,7 +47,9 @@ class Space_pong_game(interface):
             GameState.VISUALS: VisualsState,
             GameState.KEYS: KeysState,
             GameState.AI_MENU: AIMenuState }
-
+        if target_main in state_map:
+            new_state = state_map[target_main](self)
+            self.state_manager.change(new_state, params=event.new_state_data)
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
         self.running:bool = False
