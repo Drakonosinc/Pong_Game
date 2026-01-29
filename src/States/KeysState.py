@@ -6,3 +6,4 @@ class KeysState(State):
     def exit(self): pass
     def update(self, dt): pass
     def draw(self, surface): self.game.visuals_items.draw()
+    def handle_event(self, event): self.game.keys_menu.event_keys(event)
