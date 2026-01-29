@@ -37,6 +37,10 @@ class Space_pong_game(interface):
     def handle_state_change_event(self, event):
         self.change_mains(event.new_state_data)
         target_main = event.new_state_data.get("main")
+        state_map = {
+            GameState.MENU: MenuState,
+            GameState.PLAYING: PlayingState,
+            GameState.GAME_OVER: GameOverState,
 
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
