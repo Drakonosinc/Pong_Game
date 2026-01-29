@@ -46,6 +46,7 @@ class Space_pong_game(interface):
             GameState.OPTIONS: OptionsState,
             GameState.VISUALS: VisualsState,
             GameState.KEYS: KeysState,
+            GameState.AI_MENU: AIMenuState }
 
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
