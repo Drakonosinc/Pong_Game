@@ -10,8 +10,7 @@ class InputHandler:
         for event in pygame.event.get():
             if event.type == QUIT: self.event_manager.post(QuitEvent())
             self._process_keydown_events(event)
-            if self.game.main == GameState.MODE_SELECT: self.game.events_buttons(event)
-            if self.game.main == GameState.KEYS: self.game.keys_menu.event_keys(event)
+            self.game.state_manager.handle_event(event)
         self.game.pressed_keys = pygame.key.get_pressed()
         self.game.pressed_mouse = pygame.mouse.get_pressed()
         self.game.mouse_pos = pygame.mouse.get_pos()
@@ -37,5 +36,5 @@ class InputHandler:
                 if keys[config_keys["UP_ARROW"]]: self.event_manager.post(PlayerMoveEvent(player_index=2, direction=-1))
                 if keys[config_keys["DOWN_ARROW"]]: self.event_manager.post(PlayerMoveEvent(player_index=2, direction=1))
         if self.game.main == GameState.GAME_OVER:
-            if keys[K_r]: self.event_manager.post(ChangeStateEvent({"main": GameState.PLAYING}))
+            if keys[K_r]: self.event_manager.post(ChangeStateEvent({"main": GameState.PLAYING, "reset": True}))
             if keys[K_e]: self.event_manager.post(ChangeStateEvent({"main": GameState.MENU, "run": True}))
