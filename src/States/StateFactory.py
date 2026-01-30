@@ -8,3 +8,6 @@ from .OptionsState import OptionsState
 from .VisualsState import VisualsState
 from .KeysState import KeysState
 from .AIMenuState import AIMenuState
+class StateFactory:
+    def __init__(self, game):
+        self.game = game
