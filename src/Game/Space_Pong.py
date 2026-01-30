@@ -17,10 +17,12 @@ class Space_pong_game(interface):
         self.input_handler = InputHandler(self, self.event_manager)
         self.visuals_items = Visuals_items(self)
         self.game_logic = GameLogic(self.WIDTH, self.HEIGHT, self.config.config_game, self.mode_game, self.sound, self.event_manager)
+        self.state_factory = StateFactory(self)
         self.load_AI()
         self.draw_buttons()
         self._register_events()
-        self.state_manager.push(MenuState(self))
+        initial_state = self.state_factory.get_state(GameState.MENU)
+        self.state_manager.push(initial_state)
     def _register_events(self):
         self.event_manager.subscribe(QuitEvent, self.handle_quit_event)
         self.event_manager.subscribe(ToggleFullscreenEvent, self.handle_fullscreen_event)
@@ -31,14 +33,14 @@ class Space_pong_game(interface):
         self.event_manager.subscribe(SaveModelEvent, self.handle_save_model_event)
     def handle_quit_event(self, event): self.event_quit()
     def handle_fullscreen_event(self, event): self.window.toggle_fullscreen()
-    def handle_pause_event(self, event): self.main = GameState.PAUSE
-    def handle_resume_event(self, event):  self.main = GameState.PLAYING
+    def handle_pause_event(self, event): self.state_manager.change(self.state_factory.get_state(GameState.PAUSE))
+    def handle_resume_event(self, event): self.state_manager.change(self.state_factory.get_state(GameState.PLAYING))
     def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
     def handle_state_change_event(self, event):
         self.change_mains(event.new_state_data)
         target_main = event.new_state_data.get("main")
-        if target_main == GameState.PLAYING: self.state_manager.change(PlayingState(self), params=event.new_state_data)
-        elif target_main == GameState.MENU: self.state_manager.change(MenuState(self))
+        new_state = self.state_factory.get_state(target_main)
+        if new_state: self.state_manager.change(new_state, params=event.new_state_data)
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def load_varials(self):
         self.running:bool = False
@@ -93,6 +95,6 @@ class Space_pong_game(interface):
     def run_with_model(self):
         self.running = True
         self.game_logic.player_two.reward = 0
-        self.state_manager.change(PlayingState(self))
+        self.state_manager.change(self.state_factory.get_state(GameState.PLAYING))
         self.run()
         return self.game_logic.player_two.reward
