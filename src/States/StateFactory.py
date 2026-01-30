@@ -17,3 +17,5 @@ class StateFactory:
             GameState.GAME_OVER: GameOverState,
             GameState.MODE_SELECT: ModeSelectState,
             GameState.PAUSE: PauseState,
+            GameState.OPTIONS: OptionsState,
+            GameState.VISUALS: VisualsState,
