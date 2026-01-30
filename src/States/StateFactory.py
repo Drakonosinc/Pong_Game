@@ -14,3 +14,6 @@ class StateFactory:
         self.state_map = {
             GameState.MENU: MenuState,
             GameState.PLAYING: PlayingState,
+            GameState.GAME_OVER: GameOverState,
+            GameState.MODE_SELECT: ModeSelectState,
+            GameState.PAUSE: PauseState,
