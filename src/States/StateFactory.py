@@ -11,3 +11,6 @@ from .AIMenuState import AIMenuState
 class StateFactory:
     def __init__(self, game):
         self.game = game
+        self.state_map = {
+            GameState.MENU: MenuState,
+            GameState.PLAYING: PlayingState,
