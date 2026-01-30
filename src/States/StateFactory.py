@@ -19,3 +19,5 @@ class StateFactory:
             GameState.PAUSE: PauseState,
             GameState.OPTIONS: OptionsState,
             GameState.VISUALS: VisualsState,
+            GameState.KEYS: KeysState,
+            GameState.AI_MENU: AIMenuState}
