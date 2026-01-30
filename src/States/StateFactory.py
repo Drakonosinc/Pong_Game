@@ -21,3 +21,6 @@ class StateFactory:
             GameState.VISUALS: VisualsState,
             GameState.KEYS: KeysState,
             GameState.AI_MENU: AIMenuState}
+    def get_state(self, state_enum):
+        if state_enum in self.state_map: return self.state_map[state_enum](self.game)
+        return None
