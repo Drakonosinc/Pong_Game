@@ -17,3 +17,6 @@ class AssetManager:
         self.GRAY = (127, 127, 127)
         self.WHITE = (255, 255, 255)
         self.BLACK = (0, 0, 0)
+        self.GREEN = (0, 255, 0)
+        self.BLUE = (0, 0, 255)
+        self.SKYBLUE = (135, 206, 235)
