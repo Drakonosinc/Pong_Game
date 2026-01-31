@@ -28,3 +28,6 @@ class AssetManager:
         self.font = pygame.font.Font(None, 25)
         self.font2 = pygame.font.Font(None, 35)
         self.font3_5 = pygame.font.SysFont("times new roman", 30)
+        self.font3_8 = pygame.font.SysFont("times new roman", 38)
+        self.font4_5 = pygame.font.SysFont("times new roman", 80)
+        font_ttf = os.path.join(self.font_path, "8bitOperatorPlusSC-Bold.ttf")
