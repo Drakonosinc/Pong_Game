@@ -11,3 +11,5 @@ class AssetManager:
         self.sound_path = os.path.join(self.config.base_dir, "sounds")
         self.define_colors()
         self.load_fonts()
+        self.load_sounds()
+        self.load_images()
