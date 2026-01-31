@@ -24,3 +24,7 @@ class AssetManager:
         self.RED = (255, 0, 0)
         self.GOLDEN = (255, 199, 51)
         self.background_color = self.GRAY
+    def load_fonts(self):
+        self.font = pygame.font.Font(None, 25)
+        self.font2 = pygame.font.Font(None, 35)
+        self.font3_5 = pygame.font.SysFont("times new roman", 30)
