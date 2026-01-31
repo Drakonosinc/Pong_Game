@@ -8,3 +8,6 @@ class AssetManager:
         self.HEIGHT = window_manager.render_height
         self.image_path = os.path.join(self.config.base_dir, "images")
         self.font_path = os.path.join(self.config.base_dir, "fonts")
+        self.sound_path = os.path.join(self.config.base_dir, "sounds")
+        self.define_colors()
+        self.load_fonts()
