@@ -13,3 +13,7 @@ class AssetManager:
         self.load_fonts()
         self.load_sounds()
         self.load_images()
+    def define_colors(self):
+        self.GRAY = (127, 127, 127)
+        self.WHITE = (255, 255, 255)
+        self.BLACK = (0, 0, 0)
