@@ -39,3 +39,5 @@ class AssetManager:
         else:
             print(f"Advertencia: No se encontró la fuente en {font_ttf}, usando default.")
             self.font2_5 = self.font2
+            self.font3 = self.font2
+            self.font4 = self.font2
