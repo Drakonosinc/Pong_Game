@@ -61,3 +61,6 @@ class AssetManager:
         self.image = pygame.image.load(os.path.join(self.image_path, bg_file)).convert()
         self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))
         planet_file = self._image_direct_path("planets", "value_planet")
+        self.planet = pygame.image.load(os.path.join(self.image_path, planet_file)).convert_alpha()
+        self.planet = pygame.transform.scale(self.planet, (40, 40))
+        sp1_file = self._image_direct_path("spacecrafts", "value_spacecraft1")
