@@ -58,3 +58,6 @@ class AssetManager:
     def load_images(self):
         self.angle = 90
         bg_file = self._image_direct_path("image_background", "value_background")
+        self.image = pygame.image.load(os.path.join(self.image_path, bg_file)).convert()
+        self.image = pygame.transform.scale(self.image, (self.WIDTH, self.HEIGHT))
+        planet_file = self._image_direct_path("planets", "value_planet")
