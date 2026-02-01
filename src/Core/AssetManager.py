@@ -48,3 +48,5 @@ class AssetManager:
         self.sound_exitbutton = pygame.mixer.Sound(os.path.join(self.sound_path, "exitbutton.wav"))
         self.sound_buttonletters = pygame.mixer.Sound(os.path.join(self.sound_path, "buttonletters.mp3"))
         self.sound_back = pygame.mixer.Sound(os.path.join(self.sound_path, "pong_back.mp3"))
+        if self.config.config_sounds.get("sound_main", True): self.sound_back.play(loops=-1)
+        self.sound_back.set_volume(0.2)
