@@ -42,3 +42,5 @@ class AssetManager:
             self.font3 = self.font2
             self.font4 = self.font2
             self.font5 = self.font
+    def load_sounds(self):
+        self.sound = pygame.mixer.Sound(os.path.join(self.sound_path, "pong.wav"))
