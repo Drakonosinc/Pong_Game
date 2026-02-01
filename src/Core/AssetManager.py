@@ -41,3 +41,4 @@ class AssetManager:
             self.font2_5 = self.font2
             self.font3 = self.font2
             self.font4 = self.font2
+            self.font5 = self.font
