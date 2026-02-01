@@ -55,3 +55,6 @@ class AssetManager:
         lista_imagenes = visuals[image_key]
         indice = visuals[value_key]
         return lista_imagenes[indice]
+    def load_images(self):
+        self.angle = 90
+        bg_file = self._image_direct_path("image_background", "value_background")
