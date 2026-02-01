@@ -53,3 +53,5 @@ class AssetManager:
     def _image_direct_path(self, image_key, value_key):
         visuals = self.config.config_visuals
         lista_imagenes = visuals[image_key]
+        indice = visuals[value_key]
+        return lista_imagenes[indice]
