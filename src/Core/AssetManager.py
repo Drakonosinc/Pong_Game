@@ -50,3 +50,6 @@ class AssetManager:
         self.sound_back = pygame.mixer.Sound(os.path.join(self.sound_path, "pong_back.mp3"))
         if self.config.config_sounds.get("sound_main", True): self.sound_back.play(loops=-1)
         self.sound_back.set_volume(0.2)
+    def _image_direct_path(self, image_key, value_key):
+        visuals = self.config.config_visuals
+        lista_imagenes = visuals[image_key]
