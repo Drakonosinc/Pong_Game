@@ -36,3 +36,6 @@ class AssetManager:
             self.font3 = pygame.font.Font(font_ttf, 60)
             self.font4 = pygame.font.Font(font_ttf, 75)
             self.font5 = pygame.font.Font(font_ttf, 20)
+        else:
+            print(f"Advertencia: No se encontró la fuente en {font_ttf}, usando default.")
+            self.font2_5 = self.font2
