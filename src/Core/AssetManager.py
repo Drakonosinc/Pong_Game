@@ -67,3 +67,4 @@ class AssetManager:
         self.spacecraft = pygame.image.load(os.path.join(self.image_path, sp1_file)).convert_alpha()
         self.spacecraft = pygame.transform.scale(self.spacecraft, (350, 200))
         self.spacecraft = pygame.transform.rotate(self.spacecraft, self.angle)
+        sp2_file = self._image_direct_path("spacecrafts", "value_spacecraft2")
