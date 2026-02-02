@@ -69,3 +69,11 @@ class interface(BaseMenu):
         self.visuals_menu.setup_buttons()
         self.keys_menu.setup_buttons()
         self.menu_AI.setup_buttons()
+    def events_buttons(self, event):
+        if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
+        if hasattr(self, 'increase_score_button'): self.increase_score_button.reactivate_pressed(event)
+        if hasattr(self, 'input_player1'): self.input_player1.change_text(event)
+        if hasattr(self, 'input_player2'): self.input_player2.change_text(event)
+        if hasattr(self, 'scroll'): self.scroll.events(event)
+        if hasattr(self, 'box_type_training'): self.box_type_training.events(event)
+        if hasattr(self, 'box_type_model'): self.box_type_model.events(event)
