@@ -71,3 +71,7 @@ class AssetManager:
         self.spacecraft2 = pygame.image.load(os.path.join(self.image_path, sp2_file)).convert_alpha()
         self.spacecraft2 = pygame.transform.scale(self.spacecraft2, (350, 200))
         self.spacecraft2 = pygame.transform.rotate(self.spacecraft2, self.angle * 3)
+    def reload_graphics(self):
+        self.WIDTH = self.window_manager.render_width
+        self.HEIGHT = self.window_manager.render_height
+        self.load_images()
