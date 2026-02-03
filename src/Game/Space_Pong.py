@@ -13,7 +13,7 @@ class Space_pong_game:
         pygame.display.set_caption("Space Pong")
         self.event_manager = EventManager()
         self.state_manager = StateManager()
-        self.config_loader = Config_Loader()
+        self.config_loader = Config()
         self.config_loader.load_config()
         self.config = self.config_loader
         w = self.config.config_visuals["WIDTH"]
