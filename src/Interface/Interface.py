@@ -1,7 +1,7 @@
 from .Elements_interface import *
 from .Menus import *
 from Utils.States import GameState
-class interface(BaseMenu):
+class Interface(BaseMenu):
     def __init__(self, context):
         BaseMenu.__init__(self, self)
         self.context = context
