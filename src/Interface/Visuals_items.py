@@ -35,3 +35,23 @@ class Visuals_items:
                 activation_value = activations[0][i]
                 activation_value = max(0, min(activation_value, 1))
                 color_intensity = int(activation_value * 255)
+                color = (color_intensity, color_intensity, color_intensity)
+                pygame.draw.circle(screen, color, neuron_positions[i], 5)
+    def draw_model_data(self, screen):
+        if self.game.mode_game["AI"]: self.game.model = self.game.model_training
+        if self.game.model is not None:
+            try:
+                weights_preview = None
+                if hasattr(self.game.model, 'fc1'):
+                    l = self.game.model.fc1
+                    if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
+                    elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
+                if weights_preview is not None:
+                    weights_text = self.assets.font.render(f"Model Weights: {weights_preview}", True, self.assets.YELLOW)
+                    screen.blit(weights_text, (10, 50))
+            except Exception: pass
+            if getattr(self.game.model, 'activations', None) is not None:
+                try:
+                    activations_text = self.assets.font.render(f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.assets.YELLOW)
+                    screen.blit(activations_text, (10, 70))
+                except Exception: pass
