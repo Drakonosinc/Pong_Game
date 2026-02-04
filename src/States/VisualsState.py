@@ -7,3 +7,5 @@ class VisualsState(State):
         self.menu = VisualsMenu(self.game.ui)
     def enter(self, params=None):
         self.game.main = GameState.VISUALS
+        self.game.ui.setup_button_factories()
+        self.menu.setup_buttons()
