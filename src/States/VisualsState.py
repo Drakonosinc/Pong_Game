@@ -11,3 +11,6 @@ class VisualsState(State):
         self.menu.setup_buttons()
     def exit(self): pass
     def update(self, dt): pass
+    def draw(self, surface):
+        self.game.visuals_items.draw()
+        self.menu.render()
