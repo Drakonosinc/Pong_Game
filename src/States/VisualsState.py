@@ -5,3 +5,5 @@ class VisualsState(State):
     def __init__(self, game):
         super().__init__(game)
         self.menu = VisualsMenu(self.game.ui)
+    def enter(self, params=None):
+        self.game.main = GameState.VISUALS
