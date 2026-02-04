@@ -1,3 +1,7 @@
 from .State import State
 from Utils.States import GameState
 from Interface.Menus.Visuals_Menu import VisualsMenu
+class VisualsState(State):
+    def __init__(self, game):
+        super().__init__(game)
+        self.menu = VisualsMenu(self.game.ui)
