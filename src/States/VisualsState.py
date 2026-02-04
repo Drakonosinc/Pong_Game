@@ -10,3 +10,4 @@ class VisualsState(State):
         self.game.ui.setup_button_factories()
         self.menu.setup_buttons()
     def exit(self): pass
+    def update(self, dt): pass
