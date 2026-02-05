@@ -2,11 +2,13 @@ from .Elements_interface import *
 from Interface.Menus.Base_Menu import BaseMenu 
 class Interface(BaseMenu):
     def __init__(self, context):
-        BaseMenu.__init__(self, self)
         self.context = context
         self.window = context.window_manager
         self.screen = context.window_manager.canvas
         self.config = context.config
+        self.WIDTH = self.config.config_visuals["WIDTH"]
+        self.HEIGHT = self.config.config_visuals["HEIGHT"]
+        BaseMenu.__init__(self, self)
         assets = context.assets
         self.font = assets.font
         self.font2 = assets.font2
