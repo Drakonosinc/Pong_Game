@@ -1,6 +1,6 @@
 from .Elements_interface import *
 from Interface.Menus.Base_Menu import BaseMenu 
-
+from Events.GameEvents import QuitEvent
 class Interface(BaseMenu):
     def __init__(self, context):
         self.context = context
@@ -27,6 +27,9 @@ class Interface(BaseMenu):
         self.spacecraft2 = assets.spacecraft2
         self.SKYBLUE = assets.SKYBLUE
         self.RED = assets.RED
+        self.BLACK = assets.BLACK
+        self.WHITE = assets.WHITE
+        self.YELLOW = assets.YELLOW
         self.setup_button_factories()
     @property
     def screen(self): return self._screen
@@ -51,3 +54,4 @@ class Interface(BaseMenu):
         if hasattr(self, 'scroll'): self.scroll.events(event)
         if hasattr(self, 'box_type_training'): self.box_type_training.events(event)
         if hasattr(self, 'box_type_model'): self.box_type_model.events(event)
+    def event_quit(self): self.context.event_manager.post(QuitEvent())

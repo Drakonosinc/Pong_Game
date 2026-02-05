@@ -35,7 +35,6 @@ class Space_pong_game:
         ai_loader = AILoader(self.context)
         self.model_training = ai_loader.load_model()
         self.model = None
-        self.ui.draw_buttons()
         self._register_events()
         initial_state = self.state_factory.get_state(GameState.MENU)
         self.state_manager.push(initial_state)
