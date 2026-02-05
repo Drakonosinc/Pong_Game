@@ -14,3 +14,5 @@ class AIMenuState(State):
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
+    def handle_event(self, event):
+        if self.game.main == GameState.AI_MENU: self.game.events_buttons(event)
