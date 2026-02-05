@@ -1,10 +1,11 @@
 from .Elements_interface import *
 from Interface.Menus.Base_Menu import BaseMenu 
+
 class Interface(BaseMenu):
     def __init__(self, context):
         self.context = context
         self.window = context.window_manager
-        self.screen = context.window_manager.canvas
+        self._screen = context.window_manager.canvas 
         self.config = context.config
         self.WIDTH = self.config.config_visuals["WIDTH"]
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
@@ -27,6 +28,8 @@ class Interface(BaseMenu):
         self.SKYBLUE = assets.SKYBLUE
         self.RED = assets.RED
         self.setup_button_factories()
+    @property
+    def screen(self): return self._screen
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({
             "screen": self.screen, 
