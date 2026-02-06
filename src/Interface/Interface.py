@@ -12,6 +12,7 @@ class Interface(BaseMenu):
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
         self.clock = pygame.time.Clock()
         BaseMenu.__init__(self, self)
+        self.font_path = assets.font_path
         assets = context.assets
         self.font = assets.font
         self.font2 = assets.font2
