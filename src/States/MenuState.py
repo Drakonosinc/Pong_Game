@@ -1,7 +1,8 @@
 from .State import State
 from Utils.States import GameState
 from Interface.Menus.Main_Menu import MainMenu
-
+from .ModeSelectState import ModeSelectState
+from .OptionsState import OptionsState
 class MenuState(State):
     def __init__(self, game):
         super().__init__(game)
