@@ -27,10 +27,10 @@ class Space_pong_game:
             window_manager=self.window_manager)
         self.load_varials()
         self.input_handler = InputHandler(self, self.event_manager)
+        self.game_logic = GameLogic(w, h, self.config.config_game, self.mode_game, self.asset_manager.sound, self.event_manager)
         self.ui = Interface(self.context)
         self.ui.game_logic = self.game_logic
         self.visuals_items = Visuals_items(self)
-        self.game_logic = GameLogic(w, h, self.config.config_game, self.mode_game, self.asset_manager.sound, self.event_manager)
         self.ai_handler = AIHandler(self)
         self.state_factory = StateFactory(self)
         ai_loader = AILoader(self.context)
