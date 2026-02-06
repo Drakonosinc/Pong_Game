@@ -16,9 +16,9 @@ class Space_pong_game:
         self.config_loader = Config()
         self.config_loader.load_config()
         self.config = self.config_loader
-        w = self.config.config_visuals["WIDTH"]
-        h = self.config.config_visuals["HEIGHT"]
-        self.window_manager = WindowManager("Space Pong AI", w, h)
+        self.WIDTH = self.config.config_visuals["WIDTH"]
+        self.HEIGHT = self.config.config_visuals["HEIGHT"]
+        self.window_manager = WindowManager("Space Pong AI", self.WIDTH, self.HEIGHT)
         self.asset_manager = AssetManager(self.config, self.window_manager)
         self.context = GameContext(
             config=self.config,
@@ -27,7 +27,7 @@ class Space_pong_game:
             window_manager=self.window_manager)
         self.load_varials()
         self.input_handler = InputHandler(self, self.event_manager)
-        self.game_logic = GameLogic(w, h, self.config.config_game, self.mode_game, self.asset_manager.sound, self.event_manager)
+        self.game_logic = GameLogic(self.WIDTH, self.HEIGHT, self.config.config_game, self.mode_game, self.asset_manager.sound, self.event_manager)
         self.ui = Interface(self.context)
         self.ui.game_logic = self.game_logic
         self.visuals_items = Visuals_items(self)
