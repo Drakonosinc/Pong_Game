@@ -1,3 +1,4 @@
+import pygame
 from .Elements_interface import *
 from Interface.Menus.Base_Menu import BaseMenu 
 from Events.GameEvents import QuitEvent
@@ -9,6 +10,7 @@ class Interface(BaseMenu):
         self.config = context.config
         self.WIDTH = self.config.config_visuals["WIDTH"]
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
+        self.clock = pygame.time.Clock()
         BaseMenu.__init__(self, self)
         assets = context.assets
         self.font = assets.font
