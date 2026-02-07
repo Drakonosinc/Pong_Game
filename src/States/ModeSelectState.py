@@ -8,3 +8,8 @@ class ModeSelectState(State):
     def __init__(self, game):
         super().__init__(game)
         self.menu = GameMode(self.game.ui)
+    def enter(self, params=None):
+        self.game.main = GameState.MODE_SELECT
+        self.game.ui.main = GameState.MODE_SELECT
+        self.game.ui.setup_button_factories()
+        self.menu.setup_buttons()
