@@ -13,3 +13,4 @@ class ModeSelectState(State):
         self.game.ui.main = GameState.MODE_SELECT
         self.game.ui.setup_button_factories()
         self.menu.setup_buttons()
+    def exit(self): pass
