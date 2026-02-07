@@ -13,3 +13,4 @@ class OptionsState(State):
         self.game.ui.main = GameState.OPTIONS
         self.game.ui.setup_button_factories()
         self.menu.setup_buttons()
+    def exit(self): pass
