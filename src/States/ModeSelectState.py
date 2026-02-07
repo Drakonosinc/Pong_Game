@@ -14,3 +14,8 @@ class ModeSelectState(State):
         self.game.ui.setup_button_factories()
         self.menu.setup_buttons()
     def exit(self): pass
+    def update(self, dt):
+        ui_main = getattr(self.game.ui, 'main', None)
+        if ui_main == GameState.PLAYING: self.game.state_manager.change(PlayingState(self.game))
+        elif ui_main == GameState.AI_MENU: self.game.state_manager.change(AIMenuState(self.game))
+        elif ui_main == GameState.MENU: self.game.state_manager.change(MenuState(self.game))
