@@ -22,3 +22,4 @@ class OptionsState(State):
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
+    def handle_event(self, event):
