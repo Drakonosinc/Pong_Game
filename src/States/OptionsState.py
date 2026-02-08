@@ -18,3 +18,4 @@ class OptionsState(State):
         ui_main = getattr(self.game.ui, 'main', None)
         if ui_main == GameState.VISUALS: self.game.state_manager.change(VisualsState(self.game))
         elif ui_main == GameState.KEYS: self.game.state_manager.change(KeysState(self.game))
+        elif ui_main == GameState.MENU: self.game.state_manager.change(MenuState(self.game))
