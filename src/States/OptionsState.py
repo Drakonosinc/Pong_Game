@@ -23,3 +23,4 @@ class OptionsState(State):
         self.game.visuals_items.draw()
         self.menu.render()
     def handle_event(self, event):
+        if self.game.main == GameState.OPTIONS: self.game.events_buttons(event)
