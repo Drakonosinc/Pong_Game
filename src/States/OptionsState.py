@@ -15,3 +15,4 @@ class OptionsState(State):
         self.menu.setup_buttons()
     def exit(self): pass
     def update(self, dt):
+        ui_main = getattr(self.game.ui, 'main', None)
