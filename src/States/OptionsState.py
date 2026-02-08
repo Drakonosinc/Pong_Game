@@ -16,3 +16,4 @@ class OptionsState(State):
     def exit(self): pass
     def update(self, dt):
         ui_main = getattr(self.game.ui, 'main', None)
+        if ui_main == GameState.VISUALS: self.game.state_manager.change(VisualsState(self.game))
