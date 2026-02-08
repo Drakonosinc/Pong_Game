@@ -21,3 +21,4 @@ class OptionsState(State):
         elif ui_main == GameState.MENU: self.game.state_manager.change(MenuState(self.game))
     def draw(self, surface):
         self.game.visuals_items.draw()
+        self.menu.render()
