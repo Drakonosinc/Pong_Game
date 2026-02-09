@@ -22,3 +22,5 @@ class PauseState(State):
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
+    def handle_event(self, event):
+        if self.game.main == GameState.PAUSE: self.game.events_buttons(event)
