@@ -19,3 +19,6 @@ class PauseState(State):
         if ui_main == GameState.PLAYING: self.game.state_manager.change(PlayingState(self.game))
         elif ui_main == GameState.MENU: self.game.state_manager.change(MenuState(self.game))
         elif ui_main == GameState.OPTIONS: self.game.state_manager.change(OptionsState(self.game))
+    def draw(self, surface):
+        self.game.visuals_items.draw()
+        self.menu.render()
