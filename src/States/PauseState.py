@@ -4,3 +4,7 @@ from Interface.Menus.Pause import Pause
 from .PlayingState import PlayingState
 from .MenuState import MenuState
 from .OptionsState import OptionsState
+class PauseState(State):
+    def __init__(self, game):
+        super().__init__(game)
+        self.menu = Pause(self.game.ui)
