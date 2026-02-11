@@ -12,7 +12,6 @@ class Space_pong_game:
         pygame.init()
         pygame.display.set_caption("Space Pong")
         self.event_manager = EventManager()
-        self.state_manager = StateManager()
         self.config_loader = Config()
         self.config_loader.load_config()
         self.config = self.config_loader
@@ -33,14 +32,14 @@ class Space_pong_game:
         self.ui.mode_game = self.mode_game
         self.visuals_items = Visuals_items(self)
         self.ai_handler = AIHandler(self)
-        self.state_factory = StateFactory(self)
         ai_loader = AILoader(self.context)
         self.model_training = ai_loader.load_model()
         self.ui.model_training = self.model_training
         self.model = None
+        self.state_factory = StateFactory(self)
+        self.state_manager = StateManager(self.state_factory)
         self._register_events()
-        initial_state = self.state_factory.get_state(GameState.MENU)
-        self.state_manager.push(initial_state)
+        self.state_manager.change_state(GameState.MENU)
     @property
     def sound(self): return self.context.assets
     @property
@@ -55,17 +54,15 @@ class Space_pong_game:
         self.event_manager.subscribe(SaveModelEvent, self.handle_save_model_event)
     def handle_quit_event(self, event): self.event_quit()
     def handle_fullscreen_event(self, event): self.window_manager.toggle_fullscreen()
-    def handle_pause_event(self, event): self.state_manager.change(self.state_factory.get_state(GameState.PAUSE))
-    def handle_resume_event(self, event): self.state_manager.change(self.state_factory.get_state(GameState.PLAYING))
+    def handle_pause_event(self, event): self.state_manager.change_state(GameState.PAUSE)
+    def handle_resume_event(self, event): self.state_manager.change_state(GameState.PLAYING)
     def handle_speed_event(self, event): self.change_speed(event.fps_delta, event.speed_delta, event.limit, event.flag_name)
     def handle_save_model_event(self, event): self.ai_handler.manual_save_model()
     def handle_state_change_event(self, event):
         self.change_mains(event.new_state_data)
         target_main = event.new_state_data.get("main")
-        new_state = self.state_factory.get_state(target_main)
-        if new_state: self.state_manager.change(new_state, params=event.new_state_data)
-    def change_mains(self, data):
-        if "main" in data: self.main = data["main"]
+        if target_main: self.state_manager.change_state(target_main, params=event.new_state_data)
+    def change_mains(self, data): if "main" in data: self.main = data["main"]
     def load_varials(self):
         self.running = False
         self.game_over = False
@@ -96,7 +93,8 @@ class Space_pong_game:
         p2_score = self.game_logic.player_two.score
         max_score = self.config.config_game["max_score"]
         reached_limit = (p1_score == max_score or p2_score == max_score)
-        if self.mode_game["Training AI"] and reached_limit: self.reset(running=False, fps=self.FPS, speed=self.speed, speed_up=self.speed_up, speed_down=self.speed_down)
+        if self.mode_game["Training AI"] and reached_limit: 
+            self.reset(running=False, fps=self.FPS, speed=self.speed, speed_up=self.speed_up, speed_down=self.speed_down)
         if (self.mode_game["Player"] or self.mode_game["AI"]) and reached_limit:
             self.change_mains({"main": GameState.GAME_OVER})
             self.reset()
@@ -125,7 +123,7 @@ class Space_pong_game:
     def run_with_model(self):
         self.running = True
         self.game_logic.player_two.reward = 0
-        self.state_manager.change(self.state_factory.get_state(GameState.PLAYING))
+        self.state_manager.change_state(GameState.PLAYING)
         self.run()
         return self.game_logic.player_two.reward
     def events_buttons(self, event): self.ui.events_buttons(event)
