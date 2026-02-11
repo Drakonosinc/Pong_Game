@@ -1,7 +1,6 @@
 from .State import State
 from Utils.States import GameState
 from Interface.Menus.Menu_AI import AIMenu
-from .ModeSelectState import ModeSelectState
 class AIMenuState(State):
     def __init__(self, game):
         super().__init__(game)
@@ -14,7 +13,7 @@ class AIMenuState(State):
     def exit(self): pass
     def update(self, dt):
         ui_main = getattr(self.game.ui, 'main', None)
-        if ui_main == GameState.MODE_SELECT: self.game.state_manager.change(ModeSelectState(self.game))
+        if ui_main == GameState.MODE_SELECT: self.game.state_manager.change_state(GameState.MODE_SELECT)
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
