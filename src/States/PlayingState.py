@@ -9,3 +9,4 @@ class PlayingState(State):
         self.game.ui.main = GameState.PLAYING
         self.game.game_over = False
         if params and params.get("reset"): self.game.reset()
+    def exit(self): pass
