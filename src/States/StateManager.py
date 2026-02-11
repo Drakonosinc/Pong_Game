@@ -23,7 +23,6 @@ class StateManager:
             state.exit()
             return state
         return None
-
     def update(self, dt):
         if self.stack: self.stack[-1].update(dt)
     def draw(self, surface):
