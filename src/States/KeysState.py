@@ -1,7 +1,6 @@
 from .State import State
 from Utils.States import GameState
 from Interface.Menus.Menu_Keys import KeysMenu
-from .OptionsState import OptionsState
 class KeysState(State):
     def __init__(self, game):
         super().__init__(game)
@@ -14,7 +13,7 @@ class KeysState(State):
     def exit(self): pass
     def update(self, dt):
         ui_main = getattr(self.game.ui, 'main', None)
-        if ui_main == GameState.OPTIONS: self.game.state_manager.change(OptionsState(self.game))
+        if ui_main == GameState.OPTIONS: self.game.state_manager.change_state(GameState.OPTIONS)
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
