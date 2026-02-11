@@ -12,3 +12,6 @@ class PlayingState(State):
     def exit(self): pass
     def update(self, dt):
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:  self.game.type_game()
+        self.game.game_logic.update()
+        self.game.restart() 
+        if self.game.main == GameState.GAME_OVER: self.game.state_manager.change(GameOverState(self.game))
