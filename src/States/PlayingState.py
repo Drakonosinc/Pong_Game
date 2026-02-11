@@ -6,3 +6,4 @@ class PlayingState(State):
         super().__init__(game)
     def enter(self, params=None):
         self.game.main = GameState.PLAYING
+        self.game.ui.main = GameState.PLAYING
