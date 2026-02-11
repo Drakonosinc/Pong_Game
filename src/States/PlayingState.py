@@ -7,3 +7,4 @@ class PlayingState(State):
     def enter(self, params=None):
         self.game.main = GameState.PLAYING
         self.game.ui.main = GameState.PLAYING
+        self.game.game_over = False
