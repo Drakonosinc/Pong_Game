@@ -62,7 +62,8 @@ class Space_pong_game:
         self.change_mains(event.new_state_data)
         target_main = event.new_state_data.get("main")
         if target_main: self.state_manager.change_state(target_main, params=event.new_state_data)
-    def change_mains(self, data): if "main" in data: self.main = data["main"]
+    def change_mains(self, data): 
+        if "main" in data: self.main = data["main"]
     def load_varials(self):
         self.running = False
         self.game_over = False
