@@ -1,8 +1,6 @@
 from .State import State
 from Utils.States import GameState
 from Interface.Menus.Game_Over import GameOver
-from .MenuState import MenuState
-from .PlayingState import PlayingState
 class GameOverState(State):
     def __init__(self, game):
         super().__init__(game)
@@ -15,8 +13,8 @@ class GameOverState(State):
     def exit(self): pass
     def update(self, dt):
         ui_main = getattr(self.game.ui, 'main', None)
-        if ui_main == GameState.MENU: self.game.state_manager.change(MenuState(self.game))
-        elif ui_main == GameState.PLAYING: self.game.state_manager.change(PlayingState(self.game))
+        if ui_main == GameState.MENU: self.game.state_manager.change_state(GameState.MENU)
+        elif ui_main == GameState.PLAYING: self.game.state_manager.change_state(GameState.PLAYING)
     def draw(self, surface):
         self.game.visuals_items.draw()
         self.menu.render()
