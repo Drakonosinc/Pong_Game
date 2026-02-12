@@ -15,3 +15,4 @@ class PauseState(State):
         ui_main = getattr(self.game.ui, 'main', None)
         if ui_main == GameState.PLAYING: self.game.state_manager.change_state(GameState.PLAYING)
         elif ui_main == GameState.MENU: self.game.state_manager.change_state(GameState.MENU)
+        elif ui_main == GameState.OPTIONS: self.game.state_manager.change_state(GameState.OPTIONS)
