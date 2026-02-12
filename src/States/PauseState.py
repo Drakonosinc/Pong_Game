@@ -8,3 +8,5 @@ class PauseState(State):
     def enter(self, params=None):
         self.game.main = GameState.PAUSE
         self.game.ui.main = GameState.PAUSE
+        self.game.ui.setup_button_factories()
+        self.menu.setup_buttons()
