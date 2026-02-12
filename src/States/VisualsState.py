@@ -10,3 +10,12 @@ class VisualsState(State):
         self.game.ui.main = GameState.VISUALS
         self.game.ui.setup_button_factories()
         self.menu.setup_buttons()
+    def exit(self): pass
+    def update(self, dt):
+        ui_main = getattr(self.game.ui, 'main', None)
+        if ui_main == GameState.OPTIONS: self.game.state_manager.change_state(GameState.OPTIONS)
+    def draw(self, surface):
+        self.game.visuals_items.draw()
+        self.menu.render()
+    def handle_event(self, event):
+        if self.game.main == GameState.VISUALS:  self.game.events_buttons(event)
