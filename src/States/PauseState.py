@@ -13,3 +13,4 @@ class PauseState(State):
     def exit(self): pass
     def update(self, dt):
         ui_main = getattr(self.game.ui, 'main', None)
+        if ui_main == GameState.PLAYING: self.game.state_manager.change_state(GameState.PLAYING)
