@@ -10,3 +10,5 @@ class Rectangle:
     def left(self) -> float: return self.x
     @property
     def right(self) -> float: return self.x + self.width
+    @property
+    def top(self) -> float: return self.y
