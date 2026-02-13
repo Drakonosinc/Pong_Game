@@ -6,3 +6,5 @@ class Rectangle:
     y: float
     width: float
     height: float
+    @property
+    def left(self) -> float: return self.x
