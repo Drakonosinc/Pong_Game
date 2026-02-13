@@ -4,3 +4,5 @@ from typing import Union, Tuple
 class Rectangle:
     x: float
     y: float
+    width: float
+    height: float
