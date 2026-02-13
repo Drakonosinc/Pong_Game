@@ -16,3 +16,5 @@ class Rectangle:
     def bottom(self) -> float: return self.y + self.height
     @property
     def center(self) -> Tuple[float, float]: return (self.x + self.width / 2, self.y + self.height / 2)
+    def colliderect(self, other: 'Rectangle') -> bool:
+        if not isinstance(other, Rectangle): raise TypeError("Collision check requires a Rectangle instance.")
