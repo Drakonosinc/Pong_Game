@@ -8,3 +8,5 @@ class Rectangle:
     height: float
     @property
     def left(self) -> float: return self.x
+    @property
+    def right(self) -> float: return self.x + self.width
