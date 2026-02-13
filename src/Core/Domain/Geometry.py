@@ -14,3 +14,5 @@ class Rectangle:
     def top(self) -> float: return self.y
     @property
     def bottom(self) -> float: return self.y + self.height
+    @property
+    def center(self) -> Tuple[float, float]: return (self.x + self.width / 2, self.y + self.height / 2)
