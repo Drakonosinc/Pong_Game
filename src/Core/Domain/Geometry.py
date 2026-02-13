@@ -18,3 +18,5 @@ class Rectangle:
     def center(self) -> Tuple[float, float]: return (self.x + self.width / 2, self.y + self.height / 2)
     def colliderect(self, other: 'Rectangle') -> bool:
         if not isinstance(other, Rectangle): raise TypeError("Collision check requires a Rectangle instance.")
+        return (self.x < other.x + other.width and
+                self.x + self.width > other.x and
