@@ -22,3 +22,4 @@ class Rectangle:
                 self.x + self.width > other.x and
                 self.y < other.y + other.height and
                 self.y + self.height > other.y)
+    def to_tuple(self) -> Tuple[float, float, float, float]: return (self.x, self.y, self.width, self.height)
