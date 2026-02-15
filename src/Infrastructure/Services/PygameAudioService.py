@@ -5,3 +5,4 @@ class PygameAudioService(IAudioService):
         self.assets = asset_manager
         self._sound_map = {
             "collision": self.assets.sound,
+            "touch": self.assets.sound_touchletters,
