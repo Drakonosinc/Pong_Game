@@ -7,3 +7,4 @@ class PygameAudioService(IAudioService):
             "collision": self.assets.sound,
             "touch": self.assets.sound_touchletters,
             "exit": self.assets.sound_exitbutton,
+            "click": self.assets.sound_buttonletters}
