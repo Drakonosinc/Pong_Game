@@ -10,3 +10,4 @@ class PygameAudioService(IAudioService):
             "click": self.assets.sound_buttonletters}
     def play(self, sound_id: str, loop: bool = False) -> None:
         sound = self._sound_map.get(sound_id)
+        if sound:
