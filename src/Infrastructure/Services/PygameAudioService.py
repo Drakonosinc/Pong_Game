@@ -12,3 +12,4 @@ class PygameAudioService(IAudioService):
         sound = self._sound_map.get(sound_id)
         if sound:
             loops = -1 if loop else 0
+            sound.play(loops=loops)
