@@ -11,3 +11,4 @@ class PygameAudioService(IAudioService):
     def play(self, sound_id: str, loop: bool = False) -> None:
         sound = self._sound_map.get(sound_id)
         if sound:
+            loops = -1 if loop else 0
