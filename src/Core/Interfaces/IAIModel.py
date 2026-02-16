@@ -3,3 +3,5 @@ import numpy as np
 class IAIModel(ABC):
     @abstractmethod
     def predict(self, state: np.ndarray) -> np.ndarray: pass
+    @abstractmethod
+    def save(self, path: str): pass
