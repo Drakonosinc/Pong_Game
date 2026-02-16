@@ -16,3 +16,4 @@ class PygameAudioService(IAudioService):
         else: print(f"[AudioService] Warning: Sound ID '{sound_id}' not found.")
     def stop(self, sound_id: str) -> None:
         sound = self._sound_map.get(sound_id)
+        if sound: sound.stop()
