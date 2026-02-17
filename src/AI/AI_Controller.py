@@ -9,3 +9,5 @@ class AIHandler:
         self.model_adapter: IAIModel = None 
     def set_model(self, model_adapter: IAIModel): self.model_adapter = model_adapter
     def get_state(self): return self.game.game_logic.get_state_vector()
+    def actions_AI(self):
+        if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions()
