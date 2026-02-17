@@ -12,3 +12,4 @@ class PyTorchAdapter(IAIModel):
             state_tensor = torch.FloatTensor(state).to(self.device)
             output = self.model(state_tensor)
             return output.cpu().numpy().flatten()
+    def save(self, path: str): torch.save(self.model.state_dict(), path)
