@@ -10,3 +10,4 @@ class PyTorchAdapter(IAIModel):
         self.model.eval()
         with torch.no_grad():
             state_tensor = torch.FloatTensor(state).to(self.device)
+            output = self.model(state_tensor)
