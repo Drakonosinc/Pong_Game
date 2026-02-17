@@ -13,3 +13,4 @@ class PyTorchAdapter(IAIModel):
             output = self.model(state_tensor)
             return output.cpu().numpy().flatten()
     def save(self, path: str): torch.save(self.model.state_dict(), path)
+    def load(self, path: str): self.model.load_state_dict(torch.load(path))
