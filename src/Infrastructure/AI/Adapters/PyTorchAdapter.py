@@ -9,3 +9,4 @@ class PyTorchAdapter(IAIModel):
     def predict(self, state: np.ndarray) -> np.ndarray:
         self.model.eval()
         with torch.no_grad():
+            state_tensor = torch.FloatTensor(state).to(self.device)
