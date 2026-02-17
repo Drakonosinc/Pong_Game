@@ -8,3 +8,4 @@ class PyTorchAdapter(IAIModel):
         self.model.to(self.device)
     def predict(self, state: np.ndarray) -> np.ndarray:
         self.model.eval()
+        with torch.no_grad():
