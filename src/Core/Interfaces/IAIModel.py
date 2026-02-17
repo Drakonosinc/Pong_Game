@@ -5,3 +5,5 @@ class IAIModel(ABC):
     def predict(self, state: np.ndarray) -> np.ndarray: pass
     @abstractmethod
     def save(self, path: str): pass
+    @abstractmethod
+    def load(self, path: str): pass
