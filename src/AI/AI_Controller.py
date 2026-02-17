@@ -8,3 +8,4 @@ class AIHandler:
         self.prev_reward = 0
         self.model_adapter: IAIModel = None 
     def set_model(self, model_adapter: IAIModel): self.model_adapter = model_adapter
+    def get_state(self): return self.game.game_logic.get_state_vector()
