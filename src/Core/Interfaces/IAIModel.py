@@ -7,3 +7,5 @@ class IAIModel(ABC):
     def save(self, path: str): pass
     @abstractmethod
     def load(self, path: str): pass
+    @abstractmethod
+    def get_internal_model(self): pass
