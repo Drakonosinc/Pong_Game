@@ -26,3 +26,5 @@ class AIHandler:
             done = (self.game.game_logic.player_one.score >= self.game.config.config_game["max_score"] or 
                     self.game.game_logic.player_two.score >= self.game.config.config_game["max_score"])
             _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
+        action = _qlearning_trainer.get_action(current_state)
+        p2 = self.game.game_logic.player_two
