@@ -13,3 +13,4 @@ class AIHandler:
         if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions()
         else:
             if not self.model_adapter: return
+            state = self.get_state()
