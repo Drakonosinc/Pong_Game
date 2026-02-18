@@ -20,3 +20,4 @@ class AIHandler:
         from src.Type_Training.Q_learning import _qlearning_trainer
         if _qlearning_trainer is None: return
         current_state = self.get_state()
+        current_reward = self.game.game_logic.player_two.reward
