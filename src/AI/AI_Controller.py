@@ -15,3 +15,4 @@ class AIHandler:
             if not self.model_adapter: return
             state = self.get_state()
             action = self.model_adapter.predict(state)
+            self.AI_actions(action)
