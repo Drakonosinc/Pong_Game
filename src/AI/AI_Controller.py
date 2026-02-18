@@ -21,3 +21,5 @@ class AIHandler:
         if _qlearning_trainer is None: return
         current_state = self.get_state()
         current_reward = self.game.game_logic.player_two.reward
+        if self.prev_state is not None and self.prev_action is not None:
+            reward = current_reward - self.prev_reward
