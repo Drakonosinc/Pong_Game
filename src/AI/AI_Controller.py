@@ -23,3 +23,5 @@ class AIHandler:
         current_reward = self.game.game_logic.player_two.reward
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
+            done = (self.game.game_logic.player_one.score >= self.game.config.config_game["max_score"] or 
+                    self.game.game_logic.player_two.score >= self.game.config.config_game["max_score"])
