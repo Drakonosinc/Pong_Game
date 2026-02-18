@@ -16,3 +16,5 @@ class AIHandler:
             state = self.get_state()
             action = self.model_adapter.predict(state)
             self.AI_actions(action)
+    def _qlearning_actions(self):
+        from src.Type_Training.Q_learning import _qlearning_trainer
