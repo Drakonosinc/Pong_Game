@@ -28,3 +28,4 @@ class AIHandler:
             _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
         action = _qlearning_trainer.get_action(current_state)
         p2 = self.game.game_logic.player_two
+        if action == 0 and p2.rect.top > 0: p2.rect.y -= 5
