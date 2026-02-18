@@ -19,3 +19,4 @@ class AIHandler:
     def _qlearning_actions(self):
         from src.Type_Training.Q_learning import _qlearning_trainer
         if _qlearning_trainer is None: return
+        current_state = self.get_state()
