@@ -32,3 +32,4 @@ class AIHandler:
         elif action == 1 and p2.rect.bottom < self.game.HEIGHT: p2.rect.y += 5
         self.prev_state = current_state.copy()
         self.prev_action = action
+        self.prev_reward = current_reward
