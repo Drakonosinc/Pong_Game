@@ -33,3 +33,4 @@ class AIHandler:
         self.prev_state = current_state.copy()
         self.prev_action = action
         self.prev_reward = current_reward
+    def AI_actions(self, action):
