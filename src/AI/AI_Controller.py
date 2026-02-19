@@ -30,3 +30,4 @@ class AIHandler:
         p2 = self.game.game_logic.player_two
         if action == 0 and p2.rect.top > 0: p2.rect.y -= 5
         elif action == 1 and p2.rect.bottom < self.game.HEIGHT: p2.rect.y += 5
+        self.prev_state = current_state.copy()
