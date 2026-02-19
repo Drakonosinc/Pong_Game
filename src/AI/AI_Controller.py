@@ -38,3 +38,4 @@ class AIHandler:
         if action[0] > 0 and p2.rect.top > 0: p2.rect.y -= 5
         if action[0] < 0 and p2.rect.bottom < self.game.HEIGHT: p2.rect.y += 5
     def reset_qlearning_state(self):
+        self.prev_state = None
