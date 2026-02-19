@@ -34,3 +34,4 @@ class AIHandler:
         self.prev_action = action
         self.prev_reward = current_reward
     def AI_actions(self, action):
+        p2 = self.game.game_logic.player_two
