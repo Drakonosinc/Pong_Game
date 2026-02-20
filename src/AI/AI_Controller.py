@@ -42,3 +42,4 @@ class AIHandler:
         self.prev_action = None
         self.prev_reward = 0
     def manual_save_model(self):
+        if self.model_adapter: self.model_adapter.save(self.game.model_path)
