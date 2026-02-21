@@ -6,3 +6,4 @@ class GeneticTrainer(ITrainer):
     def train(self, game):
         print("[GeneticTrainer] Iniciando protocolo genético...")
         cfg = game.config.config_AI
+        nn_cfg = cfg.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
