@@ -19,3 +19,4 @@ class GeneticTrainer(ITrainer):
             population_size=gen_cfg["population_value"],
             num_trials=gen_cfg["try_for_ai"],
             hidden_sizes=arch)
+        if cfg["model_save"]:
