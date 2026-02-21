@@ -5,3 +5,4 @@ from src.Type_Training.Q_learning import q_learning_algorithm, save_qlearning_mo
 class GeneticTrainer(ITrainer):
     def train(self, game):
         print("[GeneticTrainer] Iniciando protocolo genético...")
+        cfg = game.config.config_AI
