@@ -10,3 +10,12 @@ class GeneticTrainer(ITrainer):
         arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
         type_model_str = next(k for k, v in cfg["type_model"].items() if v)
         gen_cfg = cfg["genetic"]
+        best_model = genetic_algorithm(
+            game,
+            type_model_str,
+            input_size=len(game.ai_handler.get_state()),
+            output_size=2,
+            generations=gen_cfg["generation_value"],
+            population_size=gen_cfg["population_value"],
+            num_trials=gen_cfg["try_for_ai"],
+            hidden_sizes=arch)
