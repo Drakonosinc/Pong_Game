@@ -4,3 +4,4 @@ from src.Type_Training.Genetic_Algorithm import genetic_algorithm, save_genetic_
 from src.Type_Training.Q_learning import q_learning_algorithm, save_qlearning_model
 class GeneticTrainer(ITrainer):
     def train(self, game):
+        print("[GeneticTrainer] Iniciando protocolo genético...")
