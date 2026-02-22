@@ -28,3 +28,4 @@ class QLearningTrainer(ITrainer):
         print("[QLearningTrainer] Iniciando protocolo Q-Learning...")
         cfg = game.config.config_AI
         nn_cfg = cfg.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
+        arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
