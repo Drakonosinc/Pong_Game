@@ -32,3 +32,4 @@ class QLearningTrainer(ITrainer):
         type_model_str = next(k for k, v in cfg["type_model"].items() if v)
         q_cfg = cfg["q_learning"]
         best_model = q_learning_algorithm(
+            game, 
