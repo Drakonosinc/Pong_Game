@@ -26,3 +26,4 @@ class GeneticTrainer(ITrainer):
 class QLearningTrainer(ITrainer):
     def train(self, game):
         print("[QLearningTrainer] Iniciando protocolo Q-Learning...")
+        cfg = game.config.config_AI
