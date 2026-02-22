@@ -33,3 +33,4 @@ class QLearningTrainer(ITrainer):
         q_cfg = cfg["q_learning"]
         best_model = q_learning_algorithm(
             game, 
+            type_model_str, 
