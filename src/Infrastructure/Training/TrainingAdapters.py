@@ -22,3 +22,4 @@ class GeneticTrainer(ITrainer):
         if cfg["model_save"]:
             if type_model_str == "Pytorch": save_genetic_model(best_model, torch.optim.Adam(best_model.parameters(), lr=0.001), game.model_path)
             else: save_genetic_model(best_model, optimizer=None, path=game.model_path)
+        return best_model
