@@ -31,3 +31,4 @@ class QLearningTrainer(ITrainer):
         arch = [nn_cfg.get("neurons_per_layer", 6)] * nn_cfg.get("hidden_layers", 2)
         type_model_str = next(k for k, v in cfg["type_model"].items() if v)
         q_cfg = cfg["q_learning"]
+        best_model = q_learning_algorithm(
