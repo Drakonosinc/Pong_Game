@@ -24,3 +24,4 @@ class GeneticTrainer(ITrainer):
             else: save_genetic_model(best_model, optimizer=None, path=game.model_path)
         return best_model
 class QLearningTrainer(ITrainer):
+    def train(self, game):
