@@ -25,3 +25,4 @@ class GeneticTrainer(ITrainer):
         return best_model
 class QLearningTrainer(ITrainer):
     def train(self, game):
+        print("[QLearningTrainer] Iniciando protocolo Q-Learning...")
