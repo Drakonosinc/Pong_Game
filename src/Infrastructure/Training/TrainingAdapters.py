@@ -36,3 +36,4 @@ class QLearningTrainer(ITrainer):
             type_model_str, 
             input_size=len(game.ai_handler.get_state()), 
             output_size=2, 
+            episodes=q_cfg["episodes"], 
