@@ -44,3 +44,4 @@ class QLearningTrainer(ITrainer):
             epsilon_decay=q_cfg["epsilon_decay"], 
             hidden_sizes=arch)
         if cfg["model_save"]: save_qlearning_model(best_model, torch.optim.Adam(best_model.parameters(), lr=0.001), game.model_path)
+        return best_model
