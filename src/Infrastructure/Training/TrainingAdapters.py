@@ -41,3 +41,4 @@ class QLearningTrainer(ITrainer):
             gamma=q_cfg["gamma"], 
             epsilon_start=q_cfg["epsilon_start"], 
             epsilon_end=q_cfg["epsilon_end"], 
+            epsilon_decay=q_cfg["epsilon_decay"], 
