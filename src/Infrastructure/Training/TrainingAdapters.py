@@ -34,3 +34,4 @@ class QLearningTrainer(ITrainer):
         best_model = q_learning_algorithm(
             game, 
             type_model_str, 
+            input_size=len(game.ai_handler.get_state()), 
