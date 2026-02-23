@@ -43,3 +43,4 @@ class QLearningTrainer(ITrainer):
             epsilon_end=q_cfg["epsilon_end"], 
             epsilon_decay=q_cfg["epsilon_decay"], 
             hidden_sizes=arch)
+        if cfg["model_save"]:
