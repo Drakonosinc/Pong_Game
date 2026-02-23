@@ -40,3 +40,4 @@ class QLearningTrainer(ITrainer):
             lr=q_cfg["learning_rate"], 
             gamma=q_cfg["gamma"], 
             epsilon_start=q_cfg["epsilon_start"], 
+            epsilon_end=q_cfg["epsilon_end"], 
