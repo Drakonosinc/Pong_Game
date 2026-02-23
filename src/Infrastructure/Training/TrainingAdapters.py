@@ -38,3 +38,4 @@ class QLearningTrainer(ITrainer):
             output_size=2, 
             episodes=q_cfg["episodes"], 
             lr=q_cfg["learning_rate"], 
+            gamma=q_cfg["gamma"], 
