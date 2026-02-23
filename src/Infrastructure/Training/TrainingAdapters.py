@@ -39,3 +39,4 @@ class QLearningTrainer(ITrainer):
             episodes=q_cfg["episodes"], 
             lr=q_cfg["learning_rate"], 
             gamma=q_cfg["gamma"], 
+            epsilon_start=q_cfg["epsilon_start"], 
