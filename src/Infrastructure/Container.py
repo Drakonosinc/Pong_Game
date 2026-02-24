@@ -8,3 +8,4 @@ class Container:
         self.game = None
     def create_app(self) -> 'Space_pong_game':
         self.game = Space_pong_game()
+        self._configure_ai_strategy()
