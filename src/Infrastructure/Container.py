@@ -12,3 +12,4 @@ class Container:
         return self.game
     def _configure_ai_strategy(self):
         config = self.game.config.config_AI
+        type_model = config.get("type_model", {})
