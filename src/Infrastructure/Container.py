@@ -11,3 +11,4 @@ class Container:
         self._configure_ai_strategy()
         return self.game
     def _configure_ai_strategy(self):
+        config = self.game.config.config_AI
