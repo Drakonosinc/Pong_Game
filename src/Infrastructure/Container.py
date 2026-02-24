@@ -10,3 +10,4 @@ class Container:
         self.game = Space_pong_game()
         self._configure_ai_strategy()
         return self.game
+    def _configure_ai_strategy(self):
