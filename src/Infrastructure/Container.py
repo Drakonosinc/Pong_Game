@@ -17,3 +17,4 @@ class Container:
     def get_trainer(self) -> object:
         if not self.game: raise Exception("Game not initialized")
         training_config = self.game.config.config_AI["type_training"]
+        if training_config.get("Genetic", False): return GeneticTrainer()
