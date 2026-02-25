@@ -14,3 +14,4 @@ class Container:
         config = self.game.config.config_AI
         type_model = config.get("type_model", {})
         if type_model.get("Pytorch", False): pass 
+    def get_trainer(self) -> object:
