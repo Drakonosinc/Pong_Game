@@ -15,3 +15,4 @@ class Container:
         type_model = config.get("type_model", {})
         if type_model.get("Pytorch", False): pass 
     def get_trainer(self) -> object:
+        if not self.game: raise Exception("Game not initialized")
