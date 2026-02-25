@@ -19,3 +19,4 @@ class Container:
         training_config = self.game.config.config_AI["type_training"]
         if training_config.get("Genetic", False): return GeneticTrainer()
         elif training_config.get("Q-learning", False): return QLearningTrainer()
+        return None
