@@ -4,3 +4,4 @@ except ImportError: tf = None
 from src.Core.Interfaces.IAIModel import IAIModel
 class TensorFlowAdapter(IAIModel):
     def __init__(self, model):
+        if tf is None: raise ImportError("TensorFlow no está instalado en el entorno actual.")
