@@ -14,3 +14,4 @@ class TensorFlowAdapter(IAIModel):
     def save(self, path: str):
         if hasattr(self.model, 'save'): self.model.save(path)
     def load(self, path: str): self.model = tf.keras.models.load_model(path)
+    def get_internal_model(self): return self.model
