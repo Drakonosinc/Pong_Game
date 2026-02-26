@@ -10,3 +10,5 @@ class Container:
         self.game = Space_pong_game()
         self._configure_ai_strategy(self.game.model_training)
         return self.game
+    def _configure_ai_strategy(self, base_model):
+        if not base_model: return
