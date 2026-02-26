@@ -13,3 +13,4 @@ class TensorFlowAdapter(IAIModel):
         return out.numpy().flatten()
     def save(self, path: str):
         if hasattr(self.model, 'save'): self.model.save(path)
+    def load(self, path: str): self.model = tf.keras.models.load_model(path)
