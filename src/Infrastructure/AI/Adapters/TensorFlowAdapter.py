@@ -7,3 +7,4 @@ class TensorFlowAdapter(IAIModel):
         if tf is None: raise ImportError("TensorFlow no está instalado en el entorno actual.")
         self.model = model
     def predict(self, state: np.ndarray) -> np.ndarray:
+        x = tf.convert_to_tensor(state, dtype=tf.float32)
