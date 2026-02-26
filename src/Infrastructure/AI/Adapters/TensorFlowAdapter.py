@@ -9,3 +9,4 @@ class TensorFlowAdapter(IAIModel):
     def predict(self, state: np.ndarray) -> np.ndarray:
         x = tf.convert_to_tensor(state, dtype=tf.float32)
         if len(x.shape) == 1: x = tf.expand_dims(x, axis=0)
+        out = self.model(x, training=False)
