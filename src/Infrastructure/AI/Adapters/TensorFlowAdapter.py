@@ -12,3 +12,4 @@ class TensorFlowAdapter(IAIModel):
         out = self.model(x, training=False)
         return out.numpy().flatten()
     def save(self, path: str):
+        if hasattr(self.model, 'save'): self.model.save(path)
