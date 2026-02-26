@@ -11,3 +11,4 @@ class TensorFlowAdapter(IAIModel):
         if len(x.shape) == 1: x = tf.expand_dims(x, axis=0)
         out = self.model(x, training=False)
         return out.numpy().flatten()
+    def save(self, path: str):
