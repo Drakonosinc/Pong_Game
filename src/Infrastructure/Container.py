@@ -13,3 +13,4 @@ class Container:
     def _configure_ai_strategy(self, base_model):
         if not base_model: return
         config = self.game.config.config_AI
+        type_model = config.get("type_model", {})
