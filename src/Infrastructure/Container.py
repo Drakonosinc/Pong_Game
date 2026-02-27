@@ -17,3 +17,4 @@ class Container:
         if type_model.get("Pytorch", False): adapter = PyTorchAdapter(base_model)
         elif type_model.get("Tensorflow", False): adapter = TensorFlowAdapter(base_model)
         else: adapter = MockAdapter(output_size=2)
+        self.game.ai_handler.set_model(adapter)
