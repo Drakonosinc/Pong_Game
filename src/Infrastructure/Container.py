@@ -19,3 +19,4 @@ class Container:
         else: adapter = MockAdapter(output_size=2)
         self.game.ai_handler.set_model(adapter)
     def get_trainer(self) -> object:
+        if not self.game: raise RuntimeError("El juego no ha sido inicializado por el contenedor.")
