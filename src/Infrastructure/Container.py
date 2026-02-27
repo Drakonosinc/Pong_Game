@@ -14,3 +14,4 @@ class Container:
         if not base_model: return
         config = self.game.config.config_AI
         type_model = config.get("type_model", {})
+        if type_model.get("Pytorch", False): adapter = PyTorchAdapter(base_model)
