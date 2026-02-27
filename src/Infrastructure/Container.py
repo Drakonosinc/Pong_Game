@@ -16,3 +16,4 @@ class Container:
         type_model = config.get("type_model", {})
         if type_model.get("Pytorch", False): adapter = PyTorchAdapter(base_model)
         elif type_model.get("Tensorflow", False): adapter = TensorFlowAdapter(base_model)
+        else: adapter = MockAdapter(output_size=2)
