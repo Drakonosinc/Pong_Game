@@ -18,3 +18,4 @@ class Container:
         elif type_model.get("Tensorflow", False): adapter = TensorFlowAdapter(base_model)
         else: adapter = MockAdapter(output_size=2)
         self.game.ai_handler.set_model(adapter)
+    def get_trainer(self) -> object:
