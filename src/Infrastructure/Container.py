@@ -28,3 +28,4 @@ class Container:
         config = self.game.config.config_AI
         type_model = config.get("type_model", {})
         if type_model.get("Pytorch", False): adapter = PyTorchAdapter(trained_model)
+        elif type_model.get("Tensorflow", False): 
