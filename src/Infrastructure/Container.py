@@ -26,3 +26,4 @@ class Container:
         raise ValueError("No se especificó una estrategia de entrenamiento válida en la configuración.")
     def wrap_trained_model(self, trained_model):
         config = self.game.config.config_AI
+        type_model = config.get("type_model", {})
