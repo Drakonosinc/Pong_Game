@@ -24,3 +24,4 @@ class Container:
         if training_config.get("Genetic", False): return GeneticTrainer()
         elif training_config.get("Q-learning", False): return QLearningTrainer()
         raise ValueError("No se especificó una estrategia de entrenamiento válida en la configuración.")
+    def wrap_trained_model(self, trained_model):
