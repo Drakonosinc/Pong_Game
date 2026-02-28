@@ -27,4 +27,4 @@ class Container:
     def wrap_trained_model(self, trained_model):
         config = self.game.config.config_AI
         type_model = config.get("type_model", {})
-        if type_model.get("Pytorch", False): 
+        if type_model.get("Pytorch", False): adapter = PyTorchAdapter(trained_model)
