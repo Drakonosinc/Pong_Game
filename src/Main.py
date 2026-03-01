@@ -7,3 +7,4 @@ def main():
     while True:
         game.run()
         game.game_over = False
+        if game.mode_game["Training AI"]:
