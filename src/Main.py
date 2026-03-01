@@ -10,3 +10,4 @@ def main():
         if game.mode_game["Training AI"]:
             trainer = container.get_trainer()
             best_model = trainer.train(game)
+            game.model = best_model
