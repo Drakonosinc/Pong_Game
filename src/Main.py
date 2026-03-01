@@ -5,3 +5,4 @@ def main():
     container = Container()
     game = container.create_app()
     while True:
+        game.run()
