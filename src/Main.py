@@ -6,3 +6,4 @@ def main():
     game = container.create_app()
     while True:
         game.run()
+        game.game_over = False
