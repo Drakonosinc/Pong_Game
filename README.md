@@ -1,6 +1,20 @@
 # Pong_Game
 **This game is created with pygame and pytorch, it is a pong with complete interfaces created entirely with object-oriented programming and integrates an AI training system implemented with a neural network created in pytorch and trained through a genetic algorithm, I will eventually update it with technical and visual improvements.**
 
+## How to run
+
+From `1/final_version`:
+
+```bash
+python -m src.Main
+```
+
+From the workspace root:
+
+```bash
+python 1/final_version/src/Main.py
+```
+
 ## License
 
 This project is licensed under the [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
