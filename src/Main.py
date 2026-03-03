@@ -21,8 +21,7 @@ def main():
                 container.wrap_trained_model(best_model)
         elif game.mode_game["Player"] or game.mode_game["AI"]:
             game.run_with_model()
-        if game.exit:
-            break
+        if game.exit: break
     pygame.quit()
     sys.exit()
 if __name__ == "__main__": main()
