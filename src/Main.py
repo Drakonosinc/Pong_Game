@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 SRC_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = SRC_ROOT.parent
 
 import pygame
 from src.Infrastructure.Container import Container
