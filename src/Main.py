@@ -1,8 +1,6 @@
 import sys
 from pathlib import Path
 
-
-
 import pygame
 from src.Infrastructure.Container import Container
 def main():
@@ -23,7 +21,5 @@ def main():
             break
     pygame.quit()
     sys.exit()
-
-
 if __name__ == "__main__":
     main()
