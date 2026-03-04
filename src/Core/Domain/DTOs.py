@@ -8,3 +8,4 @@ class WorldStateDTO:
     p2_y: float
     ball_x: float
     ball_y: float
+    def to_array(self) -> np.ndarray:
