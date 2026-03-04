@@ -4,3 +4,4 @@ import numpy as np
 class WorldStateDTO:
     p1_x: float
     p1_y: float
+    p2_x: float
