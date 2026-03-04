@@ -3,3 +3,4 @@ import numpy as np
 @dataclass(frozen=True)
 class WorldStateDTO:
     p1_x: float
+    p1_y: float
