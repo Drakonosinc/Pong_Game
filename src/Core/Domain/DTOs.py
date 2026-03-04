@@ -6,3 +6,4 @@ class WorldStateDTO:
     p1_y: float
     p2_x: float
     p2_y: float
+    ball_x: float
