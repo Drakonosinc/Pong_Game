@@ -22,3 +22,4 @@ class ChangeSpeedEvent(Event):
 class GameStateChangedEvent(Event):
     def __init__(self, state_dto: WorldStateDTO, player_two_reward: float, p1_score: int, p2_score: int):
         self.state_dto = state_dto
+        self.reward = player_two_reward
