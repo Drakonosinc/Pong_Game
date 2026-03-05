@@ -11,3 +11,4 @@ class WorldStateDTO:
     def to_array(self) -> np.ndarray:
         return np.array([
             self.p1_x, self.p1_y, 
+            self.p2_x, self.p2_y, 
