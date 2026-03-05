@@ -10,3 +10,4 @@ class WorldStateDTO:
     ball_y: float
     def to_array(self) -> np.ndarray:
         return np.array([
+            self.p1_x, self.p1_y, 
