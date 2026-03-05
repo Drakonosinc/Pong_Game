@@ -13,3 +13,4 @@ class WorldStateDTO:
             self.p1_x, self.p1_y, 
             self.p2_x, self.p2_y, 
             self.ball_x, self.ball_y
+        ], dtype=np.float32)
