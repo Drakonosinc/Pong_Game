@@ -20,3 +20,4 @@ class ChangeSpeedEvent(Event):
         self.limit = limit
         self.flag_name = flag_name
 class GameStateChangedEvent(Event):
+    def __init__(self, state_dto: WorldStateDTO, player_two_reward: float, p1_score: int, p2_score: int):
