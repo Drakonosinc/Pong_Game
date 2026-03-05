@@ -19,3 +19,4 @@ class ChangeSpeedEvent(Event):
         self.speed_delta = speed_delta
         self.limit = limit
         self.flag_name = flag_name
+class GameStateChangedEvent(Event):
