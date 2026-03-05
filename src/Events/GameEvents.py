@@ -1,5 +1,6 @@
 from .EventManager import Event
 from src.Core.Domain.DTOs import WorldStateDTO
+import numpy as np
 class QuitEvent(Event): pass
 class ToggleFullscreenEvent(Event): pass
 class PauseGameEvent(Event): pass
