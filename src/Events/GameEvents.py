@@ -1,4 +1,5 @@
 from .EventManager import Event
+from src.Core.Domain.DTOs import WorldStateDTO
 class QuitEvent(Event): pass
 class ToggleFullscreenEvent(Event): pass
 class PauseGameEvent(Event): pass
