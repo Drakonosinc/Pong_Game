@@ -26,3 +26,4 @@ class GameStateChangedEvent(Event):
         self.p1_score = p1_score
         self.p2_score = p2_score
 class ActionDecidedEvent(Event):
+    def __init__(self, action: np.ndarray):
