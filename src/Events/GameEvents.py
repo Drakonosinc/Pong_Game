@@ -25,3 +25,4 @@ class GameStateChangedEvent(Event):
         self.reward = player_two_reward
         self.p1_score = p1_score
         self.p2_score = p2_score
+class ActionDecidedEvent(Event):
