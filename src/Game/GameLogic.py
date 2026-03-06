@@ -15,3 +15,4 @@ class GameLogic:
         self.event_manager = event_manager
         self.init_entities()
         self.event_manager.subscribe(PlayerMoveEvent, self.handle_player_move)
+        self.event_manager.subscribe(ActionDecidedEvent, self.handle_action_decided)
