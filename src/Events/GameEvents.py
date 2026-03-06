@@ -24,3 +24,4 @@ class GameStateChangedEvent(Event):
         self.state_dto = state_dto
         self.reward = player_two_reward
         self.p1_score = p1_score
+        self.p2_score = p2_score
