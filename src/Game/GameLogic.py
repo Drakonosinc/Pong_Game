@@ -14,3 +14,4 @@ class GameLogic:
         self.audio_service = audio_service
         self.event_manager = event_manager
         self.init_entities()
+        self.event_manager.subscribe(PlayerMoveEvent, self.handle_player_move)
