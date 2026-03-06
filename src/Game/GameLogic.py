@@ -12,3 +12,5 @@ class GameLogic:
         self.config = config_game 
         self.mode_game = mode_game
         self.audio_service = audio_service
+        self.event_manager = event_manager
+        self.init_entities()
