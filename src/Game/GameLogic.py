@@ -16,3 +16,5 @@ class GameLogic:
         self.init_entities()
         self.event_manager.subscribe(PlayerMoveEvent, self.handle_player_move)
         self.event_manager.subscribe(ActionDecidedEvent, self.handle_action_decided)
+    def init_entities(self):
+        num_balls = 1 if self.mode_game["Training AI"] else self.config["number_balls"]
