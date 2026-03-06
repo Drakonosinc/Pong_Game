@@ -5,3 +5,10 @@ from src.Events.GameEvents import PlayerMoveEvent, GameStateChangedEvent, Action
 from src.Core.Interfaces.ISoundService import IAudioService
 from src.Core.Domain.Geometry import Rectangle
 from src.Core.Domain.DTOs import WorldStateDTO
+class GameLogic:
+    def __init__(self, width, height, config_game, mode_game, audio_service: IAudioService, event_manager):
+        self.width = width
+        self.height = height
+        self.config = config_game 
+        self.mode_game = mode_game
+        self.audio_service = audio_service
