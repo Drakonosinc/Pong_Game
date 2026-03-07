@@ -19,3 +19,4 @@ class GameLogic:
     def init_entities(self):
         num_balls = 1 if self.mode_game["Training AI"] else self.config["number_balls"]
         self.balls = [Ball(self.width//2-28, self.height//2-29, 36, 36, 4+i, 4+i) for i in range(num_balls)]
+        self.player_one = Player(25, 150, 11, 90, [True] * len(self.balls))
