@@ -31,3 +31,4 @@ class GameLogic:
             elif event.direction == 1 and target_player.rect.bottom < self.height: target_player.rect.y += velocity
     def update(self):
         for i, ball in enumerate(self.balls):
+            ball.move_ball(self.width, self.height)
