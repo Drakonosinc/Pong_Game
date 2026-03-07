@@ -27,3 +27,4 @@ class GameLogic:
         if event.player_index == 1: target_player = self.player_one
         elif event.player_index == 2: target_player = self.player_two
         if target_player:
+            if event.direction == -1 and target_player.rect.top > 0: target_player.rect.y -= velocity
