@@ -28,3 +28,4 @@ class GameLogic:
         elif event.player_index == 2: target_player = self.player_two
         if target_player:
             if event.direction == -1 and target_player.rect.top > 0: target_player.rect.y -= velocity
+            elif event.direction == 1 and target_player.rect.bottom < self.height: target_player.rect.y += velocity
