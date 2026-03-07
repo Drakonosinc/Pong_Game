@@ -24,3 +24,4 @@ class GameLogic:
     def handle_player_move(self, event: PlayerMoveEvent):
         velocity = 5
         target_player = None
+        if event.player_index == 1: target_player = self.player_one
