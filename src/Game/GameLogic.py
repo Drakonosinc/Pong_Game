@@ -26,3 +26,4 @@ class GameLogic:
         target_player = None
         if event.player_index == 1: target_player = self.player_one
         elif event.player_index == 2: target_player = self.player_two
+        if target_player:
