@@ -23,3 +23,4 @@ class GameLogic:
         self.player_two = Player(665, 150, 11, 90, [True] * len(self.balls))
     def handle_player_move(self, event: PlayerMoveEvent):
         velocity = 5
+        target_player = None
