@@ -37,3 +37,4 @@ class GameLogic:
             self._handle_collision(self.player_one, ball, i, -1)
             self._handle_collision(self.player_two, ball, i, 1)
         if self.mode_game["Training AI"] or self.mode_game["AI"]: self.emit_state()
+    def emit_state(self):
