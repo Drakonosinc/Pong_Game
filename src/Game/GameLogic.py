@@ -42,3 +42,4 @@ class GameLogic:
             p1_x=self.player_one.rect.x, p1_y=self.player_one.rect.y,
             p2_x=self.player_two.rect.x, p2_y=self.player_two.rect.y,
             ball_x=self.balls[0].rect.x, ball_y=self.balls[0].rect.y)
+        self.event_manager.post(GameStateChangedEvent(
