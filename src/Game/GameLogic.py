@@ -39,3 +39,4 @@ class GameLogic:
         if self.mode_game["Training AI"] or self.mode_game["AI"]: self.emit_state()
     def emit_state(self):
         dto = WorldStateDTO(
+            p1_x=self.player_one.rect.x, p1_y=self.player_one.rect.y,
