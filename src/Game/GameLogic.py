@@ -45,3 +45,4 @@ class GameLogic:
         self.event_manager.post(GameStateChangedEvent(
             state_dto=dto,
             player_two_reward=self.player_two.reward,
+            p1_score=self.player_one.score,
