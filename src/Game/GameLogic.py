@@ -46,3 +46,4 @@ class GameLogic:
             state_dto=dto,
             player_two_reward=self.player_two.reward,
             p1_score=self.player_one.score,
+            p2_score=self.player_two.score))
