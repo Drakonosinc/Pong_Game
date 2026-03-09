@@ -56,3 +56,4 @@ class GameLogic:
         else:
             if action[0] > 0 and p2.rect.top > 0: p2.rect.y -= 5
             if action[0] < 0 and p2.rect.bottom < self.height: p2.rect.y += 5
+    def _reset_ball(self, ball, reward, player):
