@@ -47,3 +47,4 @@ class GameLogic:
             player_two_reward=self.player_two.reward,
             p1_score=self.player_one.score,
             p2_score=self.player_two.score))
+    def handle_action_decided(self, event: ActionDecidedEvent):
