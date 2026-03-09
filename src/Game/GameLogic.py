@@ -53,3 +53,4 @@ class GameLogic:
         if isinstance(action, (int, np.integer)):
             if action == 0 and p2.rect.top > 0: p2.rect.y -= 5
             elif action == 1 and p2.rect.bottom < self.height: p2.rect.y += 5
+        else:
