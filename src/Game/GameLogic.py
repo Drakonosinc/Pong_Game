@@ -55,3 +55,4 @@ class GameLogic:
             elif action == 1 and p2.rect.bottom < self.height: p2.rect.y += 5
         else:
             if action[0] > 0 and p2.rect.top > 0: p2.rect.y -= 5
+            if action[0] < 0 and p2.rect.bottom < self.height: p2.rect.y += 5
