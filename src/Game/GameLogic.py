@@ -44,3 +44,4 @@ class GameLogic:
             ball_x=self.balls[0].rect.x, ball_y=self.balls[0].rect.y)
         self.event_manager.post(GameStateChangedEvent(
             state_dto=dto,
+            player_two_reward=self.player_two.reward,
