@@ -51,3 +51,4 @@ class GameLogic:
         action = event.action
         p2 = self.player_two
         if isinstance(action, (int, np.integer)):
+            if action == 0 and p2.rect.top > 0: p2.rect.y -= 5
