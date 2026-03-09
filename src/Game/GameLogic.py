@@ -50,3 +50,4 @@ class GameLogic:
     def handle_action_decided(self, event: ActionDecidedEvent):
         action = event.action
         p2 = self.player_two
+        if isinstance(action, (int, np.integer)):
