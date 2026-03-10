@@ -58,3 +58,5 @@ class GameLogic:
             if action[0] < 0 and p2.rect.bottom < self.height: p2.rect.y += 5
     def _reset_ball(self, ball, reward, player):
         ball.rect = Rectangle(*ball.reset_position)
+        self._repeat_collision(ball, reward)
+        
