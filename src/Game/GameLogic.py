@@ -68,3 +68,4 @@ class GameLogic:
         else: player.active[index] = True
     def _repeat_collision(self, ball, reward):
         ball.handle_collision(self.player_two, reward)
+        self.audio_service.play("collision")
