@@ -70,3 +70,4 @@ class GameLogic:
         ball.handle_collision(self.player_two, reward)
         self.audio_service.play("collision")
     def reset_game(self):
+        self.player_one.reset()
