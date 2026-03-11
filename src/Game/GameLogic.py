@@ -64,3 +64,4 @@ class GameLogic:
         if player.check_collision(ball.rect):
             if player.active[index]:
                 self._repeat_collision(ball, reward)
+                player.active[index] = False
