@@ -59,4 +59,4 @@ class GameLogic:
     def _reset_ball(self, ball, reward, player):
         ball.rect = Rectangle(*ball.reset_position)
         self._repeat_collision(ball, reward)
-        
+        player.update_score(1)
