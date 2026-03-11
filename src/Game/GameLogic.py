@@ -69,3 +69,4 @@ class GameLogic:
     def _repeat_collision(self, ball, reward):
         ball.handle_collision(self.player_two, reward)
         self.audio_service.play("collision")
+    def reset_game(self):
