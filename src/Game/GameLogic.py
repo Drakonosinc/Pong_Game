@@ -62,3 +62,4 @@ class GameLogic:
         player.update_score(1)
     def _handle_collision(self, player, ball, index, reward):
         if player.check_collision(ball.rect):
+            if player.active[index]:
