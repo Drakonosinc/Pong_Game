@@ -72,3 +72,4 @@ class GameLogic:
     def reset_game(self):
         self.player_one.reset()
         self.player_two.reset()
+        for ball in self.balls: ball.reset()
