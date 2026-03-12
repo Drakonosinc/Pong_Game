@@ -71,3 +71,4 @@ class GameLogic:
         self.audio_service.play("collision")
     def reset_game(self):
         self.player_one.reset()
+        self.player_two.reset()
