@@ -5,3 +5,4 @@ class AIHandler:
     def __init__(self, game):
         self.game = game
         self.prev_state = None
+        self.prev_action = None
