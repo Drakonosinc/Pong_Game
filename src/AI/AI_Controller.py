@@ -9,3 +9,4 @@ class AIHandler:
         self.prev_reward = 0
         self.model_adapter: IAIModel = None 
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_game_state_changed)
+    def set_model(self, model_adapter: IAIModel): 
