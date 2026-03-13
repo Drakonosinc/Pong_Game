@@ -12,3 +12,4 @@ class AIHandler:
     def set_model(self, model_adapter: IAIModel): 
         self.model_adapter = model_adapter
     def handle_game_state_changed(self, event: GameStateChangedEvent):
+        state_array = event.state_dto.to_array()
