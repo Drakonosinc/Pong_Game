@@ -11,3 +11,4 @@ class AIHandler:
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_game_state_changed)
     def set_model(self, model_adapter: IAIModel): 
         self.model_adapter = model_adapter
+    def handle_game_state_changed(self, event: GameStateChangedEvent):
