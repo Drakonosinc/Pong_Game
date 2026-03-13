@@ -6,3 +6,4 @@ class AIHandler:
         self.game = game
         self.prev_state = None
         self.prev_action = None
+        self.prev_reward = 0
