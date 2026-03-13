@@ -13,3 +13,4 @@ class AIHandler:
         self.model_adapter = model_adapter
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
+        if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
