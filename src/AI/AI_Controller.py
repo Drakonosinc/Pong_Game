@@ -7,3 +7,4 @@ class AIHandler:
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
+        self.model_adapter: IAIModel = None 
