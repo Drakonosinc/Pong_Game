@@ -4,3 +4,4 @@ from src.Events.GameEvents import GameStateChangedEvent, ActionDecidedEvent
 class AIHandler:
     def __init__(self, game):
         self.game = game
+        self.prev_state = None
