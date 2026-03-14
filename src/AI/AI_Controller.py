@@ -15,3 +15,4 @@ class AIHandler:
         state_array = event.state_dto.to_array()
         if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
         else:
+            if not self.model_adapter: return
