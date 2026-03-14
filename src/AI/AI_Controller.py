@@ -23,3 +23,4 @@ class AIHandler:
         if _qlearning_trainer is None: return
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
+            max_score = self.game.config.config_game["max_score"]
