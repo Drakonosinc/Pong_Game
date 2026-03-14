@@ -22,3 +22,4 @@ class AIHandler:
         from src.Type_Training.Q_learning import _qlearning_trainer
         if _qlearning_trainer is None: return
         if self.prev_state is not None and self.prev_action is not None:
+            reward = current_reward - self.prev_reward
