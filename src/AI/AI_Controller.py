@@ -21,3 +21,4 @@ class AIHandler:
     def _qlearning_actions(self, current_state, current_reward, p1_score, p2_score):
         from src.Type_Training.Q_learning import _qlearning_trainer
         if _qlearning_trainer is None: return
+        if self.prev_state is not None and self.prev_action is not None:
