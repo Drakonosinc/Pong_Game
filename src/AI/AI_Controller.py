@@ -20,3 +20,4 @@ class AIHandler:
             self.game.event_manager.post(ActionDecidedEvent(action))
     def _qlearning_actions(self, current_state, current_reward, p1_score, p2_score):
         from src.Type_Training.Q_learning import _qlearning_trainer
+        if _qlearning_trainer is None: return
