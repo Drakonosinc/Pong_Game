@@ -25,3 +25,4 @@ class AIHandler:
             reward = current_reward - self.prev_reward
             max_score = self.game.config.config_game["max_score"]
             done = (p1_score >= max_score or p2_score >= max_score)
+            _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
