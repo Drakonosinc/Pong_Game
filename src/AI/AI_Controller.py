@@ -18,3 +18,4 @@ class AIHandler:
             if not self.model_adapter: return
             action = self.model_adapter.predict(state_array)
             self.game.event_manager.post(ActionDecidedEvent(action))
+    def _qlearning_actions(self, current_state, current_reward, p1_score, p2_score):
