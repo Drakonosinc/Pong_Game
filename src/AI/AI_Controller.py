@@ -17,3 +17,4 @@ class AIHandler:
         else:
             if not self.model_adapter: return
             action = self.model_adapter.predict(state_array)
+            self.game.event_manager.post(ActionDecidedEvent(action))
