@@ -24,3 +24,4 @@ class AIHandler:
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
             max_score = self.game.config.config_game["max_score"]
+            done = (p1_score >= max_score or p2_score >= max_score)
