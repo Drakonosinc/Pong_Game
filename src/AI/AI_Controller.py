@@ -32,3 +32,4 @@ class AIHandler:
         self.prev_action = action
         self.prev_reward = current_reward
     def reset_qlearning_state(self):
+        self.prev_state = None
