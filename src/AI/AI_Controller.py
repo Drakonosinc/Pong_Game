@@ -27,3 +27,4 @@ class AIHandler:
             done = (p1_score >= max_score or p2_score >= max_score)
             _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
         action = _qlearning_trainer.get_action(current_state)
+        self.game.event_manager.post(ActionDecidedEvent(action))
