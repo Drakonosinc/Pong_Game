@@ -29,3 +29,4 @@ class AIHandler:
         action = _qlearning_trainer.get_action(current_state)
         self.game.event_manager.post(ActionDecidedEvent(action))
         self.prev_state = current_state.copy()
+        self.prev_action = action
