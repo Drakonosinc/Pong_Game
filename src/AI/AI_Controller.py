@@ -30,3 +30,4 @@ class AIHandler:
         self.game.event_manager.post(ActionDecidedEvent(action))
         self.prev_state = current_state.copy()
         self.prev_action = action
+        self.prev_reward = current_reward
