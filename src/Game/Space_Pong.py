@@ -117,7 +117,6 @@ class Space_pong_game:
         if hasattr(self, '_qlearning_state'): self.ai_handler.reset_qlearning_state()
     def type_game(self):
         if self.mode_game["Training AI"]: self.game_logic.auto_play_player1()
-        self.ai_handler.actions_AI(self.model if self.mode_game["Training AI"] else self.model_training)
     def item_repeat_run(self):
         self.window_manager.update_display()
         self.clock.tick(self.FPS)
