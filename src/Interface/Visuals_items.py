@@ -7,3 +7,4 @@ class Visuals_items:
         self.ui = game.ui 
         self.current_state_dto = None
         self.p1_score = 0
+        self.p2_score = 0
