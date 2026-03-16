@@ -5,3 +5,4 @@ class Visuals_items:
         self.game = game
         self.assets = game.context.assets
         self.ui = game.ui 
+        self.current_state_dto = None
