@@ -4,3 +4,4 @@ class Visuals_items:
     def __init__(self, game):
         self.game = game
         self.assets = game.context.assets
+        self.ui = game.ui 
