@@ -19,3 +19,4 @@ class Visuals_items:
         screen.blit(self.assets.spacecraft2, (578, self.current_state_dto.p2_y - 140))
         self.rotated_ball = pygame.transform.rotate(self.assets.planet, self.current_state_dto.ball_x)
         screen.blit(self.rotated_ball, (self.current_state_dto.ball_x, self.current_state_dto.ball_y))
+    def mode_speed(self, screen):
