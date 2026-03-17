@@ -16,3 +16,4 @@ class Visuals_items:
     def images_elements(self, screen):
         if not self.current_state_dto: return 
         screen.blit(self.assets.spacecraft, (-77, self.current_state_dto.p1_y - 140))
+        screen.blit(self.assets.spacecraft2, (578, self.current_state_dto.p2_y - 140))
