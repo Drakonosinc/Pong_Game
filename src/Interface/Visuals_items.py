@@ -22,3 +22,4 @@ class Visuals_items:
     def mode_speed(self, screen):
         screen.blit(self.assets.font.render(f"Speed: {self.game.speed}", True, self.assets.YELLOW), (self.game.WIDTH // 2 - 40, 360))
     def name_players(self, screen):
+        if hasattr(self.ui, 'input_player1') and hasattr(self.ui, 'input_player2'):
