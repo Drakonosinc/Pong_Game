@@ -13,3 +13,4 @@ class Visuals_items:
         self.current_state_dto = event.state_dto
         self.p1_score = event.p1_score
         self.p2_score = event.p2_score
+    def images_elements(self, screen):
