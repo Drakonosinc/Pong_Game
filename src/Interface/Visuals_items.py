@@ -20,3 +20,4 @@ class Visuals_items:
         self.rotated_ball = pygame.transform.rotate(self.assets.planet, self.current_state_dto.ball_x)
         screen.blit(self.rotated_ball, (self.current_state_dto.ball_x, self.current_state_dto.ball_y))
     def mode_speed(self, screen):
+        screen.blit(self.assets.font.render(f"Speed: {self.game.speed}", True, self.assets.YELLOW), (self.game.WIDTH // 2 - 40, 360))
