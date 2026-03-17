@@ -11,3 +11,4 @@ class Visuals_items:
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_state_changed)
     def handle_state_changed(self, event: GameStateChangedEvent):
         self.current_state_dto = event.state_dto
+        self.p1_score = event.p1_score
