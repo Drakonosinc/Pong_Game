@@ -12,3 +12,4 @@ class Visuals_items:
     def handle_state_changed(self, event: GameStateChangedEvent):
         self.current_state_dto = event.state_dto
         self.p1_score = event.p1_score
+        self.p2_score = event.p2_score
