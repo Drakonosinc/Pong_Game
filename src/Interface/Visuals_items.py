@@ -31,3 +31,4 @@ class Visuals_items:
     def scores(self, screen):
         screen.blit(self.assets.font.render(f"Score {self.p1_score}", True, self.assets.YELLOW), (45, 380))
         screen.blit(self.assets.font.render(f"Score {self.p2_score}", True, self.assets.YELLOW), (580, 380))
+    def draw_activations(self, screen):
