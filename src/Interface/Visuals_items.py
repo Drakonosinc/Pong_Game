@@ -32,3 +32,4 @@ class Visuals_items:
         screen.blit(self.assets.font.render(f"Score {self.p1_score}", True, self.assets.YELLOW), (45, 380))
         screen.blit(self.assets.font.render(f"Score {self.p2_score}", True, self.assets.YELLOW), (580, 380))
     def draw_activations(self, screen):
+        if self.game.mode_game["AI"]: self.game.model = self.game.model_training
