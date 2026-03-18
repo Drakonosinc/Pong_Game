@@ -29,3 +29,4 @@ class Visuals_items:
         if self.game.config.config_AI["type_training"]["Q-learning"]: screen.blit(self.assets.font2.render(f"Episode: {self.game.generation}", True, self.assets.YELLOW), (10, 10))
         else: screen.blit(self.assets.font2.render(f"Generation: {self.game.generation}", True, self.assets.YELLOW), (10, 10))
     def scores(self, screen):
+        screen.blit(self.assets.font.render(f"Score {self.p1_score}", True, self.assets.YELLOW), (45, 380))
