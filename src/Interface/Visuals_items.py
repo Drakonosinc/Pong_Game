@@ -35,3 +35,4 @@ class Visuals_items:
         if self.game.mode_game["AI"]: self.game.model = self.game.model_training
         if self.game.model != None and (getattr(self.game.model, 'activations', None) is not None):
             activations = self.game.model.activations
+            num_activations = activations.shape[1]
