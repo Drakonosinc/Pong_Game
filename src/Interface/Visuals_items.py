@@ -25,3 +25,4 @@ class Visuals_items:
         if hasattr(self.ui, 'input_player1') and hasattr(self.ui, 'input_player2'):
             screen.blit(self.assets.font.render(f"{self.ui.input_player1.show_player()}", True, self.assets.YELLOW), (45, 360))
             screen.blit(self.assets.font.render(f"{self.ui.input_player2.show_player()}", True, self.assets.YELLOW), (580, 360))
+    def draw_generation(self, screen):
