@@ -40,3 +40,4 @@ class Visuals_items:
             for pos in neuron_positions:
                 pygame.draw.circle(screen, self.assets.WHITE, pos, 5)
                 pygame.draw.line(screen, self.assets.WHITE, (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
+                pygame.draw.line(screen, self.assets.WHITE, (self.game.WIDTH - 190, self.game.HEIGHT // 2), pos, 1)
