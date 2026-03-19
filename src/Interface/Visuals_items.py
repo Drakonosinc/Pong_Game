@@ -46,3 +46,4 @@ class Visuals_items:
                 activation_value = max(0, min(activation_value, 1))
                 color_intensity = int(activation_value * 255)
                 color = (color_intensity, color_intensity, color_intensity)
+                pygame.draw.circle(screen, color, neuron_positions[i], 5)
