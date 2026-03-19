@@ -36,3 +36,4 @@ class Visuals_items:
         if self.game.model != None and (getattr(self.game.model, 'activations', None) is not None):
             activations = self.game.model.activations
             num_activations = activations.shape[1]
+            neuron_positions = [(self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)]
