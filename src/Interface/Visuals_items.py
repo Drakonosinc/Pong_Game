@@ -39,3 +39,4 @@ class Visuals_items:
             neuron_positions = [(self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)]
             for pos in neuron_positions:
                 pygame.draw.circle(screen, self.assets.WHITE, pos, 5)
+                pygame.draw.line(screen, self.assets.WHITE, (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
