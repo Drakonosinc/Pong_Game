@@ -38,3 +38,4 @@ class Visuals_items:
             num_activations = activations.shape[1]
             neuron_positions = [(self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)]
             for pos in neuron_positions:
+                pygame.draw.circle(screen, self.assets.WHITE, pos, 5)
