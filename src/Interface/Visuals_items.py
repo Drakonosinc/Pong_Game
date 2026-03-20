@@ -59,3 +59,4 @@ class Visuals_items:
                 if weights_preview is not None:
                     weights_text = self.assets.font.render(f"Model Weights: {weights_preview}", True, self.assets.YELLOW)
                     screen.blit(weights_text, (10, 50))
+            except Exception: pass
