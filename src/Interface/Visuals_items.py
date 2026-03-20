@@ -52,3 +52,4 @@ class Visuals_items:
         if self.game.model is not None:
             try:
                 weights_preview = None
+                if hasattr(self.game.model, 'fc1'):
