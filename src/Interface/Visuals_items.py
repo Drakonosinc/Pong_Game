@@ -50,3 +50,4 @@ class Visuals_items:
     def draw_model_data(self, screen):
         if self.game.mode_game["AI"]: self.game.model = self.game.model_training
         if self.game.model is not None:
+            try:
