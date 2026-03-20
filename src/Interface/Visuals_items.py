@@ -56,3 +56,4 @@ class Visuals_items:
                     l = self.game.model.fc1
                     if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
                     elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
+                if weights_preview is not None:
