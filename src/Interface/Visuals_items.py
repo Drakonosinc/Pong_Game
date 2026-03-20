@@ -54,3 +54,4 @@ class Visuals_items:
                 weights_preview = None
                 if hasattr(self.game.model, 'fc1'):
                     l = self.game.model.fc1
+                    if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
