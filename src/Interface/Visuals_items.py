@@ -48,3 +48,4 @@ class Visuals_items:
                 color = (color_intensity, color_intensity, color_intensity)
                 pygame.draw.circle(screen, color, neuron_positions[i], 5)
     def draw_model_data(self, screen):
+        if self.game.mode_game["AI"]: self.game.model = self.game.model_training
