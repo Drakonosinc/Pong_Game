@@ -57,3 +57,4 @@ class Visuals_items:
                     if hasattr(l, 'weight'): weights_preview = l.weight.detach().cpu().numpy().flatten()[:5]
                     elif hasattr(l, 'kernel'): weights_preview = l.kernel.numpy().flatten()[:5]
                 if weights_preview is not None:
+                    weights_text = self.assets.font.render(f"Model Weights: {weights_preview}", True, self.assets.YELLOW)
