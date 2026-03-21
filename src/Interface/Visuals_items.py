@@ -64,3 +64,4 @@ class Visuals_items:
                 try:
                     activations_text = self.assets.font.render(f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.assets.YELLOW)
                     screen.blit(activations_text, (10, 70))
+                except Exception: pass
