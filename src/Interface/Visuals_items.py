@@ -61,3 +61,4 @@ class Visuals_items:
                     screen.blit(weights_text, (10, 50))
             except Exception: pass
             if getattr(self.game.model, 'activations', None) is not None:
+                try:
