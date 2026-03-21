@@ -66,3 +66,4 @@ class Visuals_items:
                     screen.blit(activations_text, (10, 70))
                 except Exception: pass
     def draw(self):
+        screen = self.game.window_manager.canvas
