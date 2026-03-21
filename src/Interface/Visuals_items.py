@@ -71,3 +71,4 @@ class Visuals_items:
         if self.game.mode_game["Training AI"]: self.draw_generation(screen)
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:
             self.draw_activations(screen)
+            self.draw_model_data(screen)
