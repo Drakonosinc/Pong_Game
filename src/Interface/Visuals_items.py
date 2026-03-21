@@ -63,3 +63,4 @@ class Visuals_items:
             if getattr(self.game.model, 'activations', None) is not None:
                 try:
                     activations_text = self.assets.font.render(f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.assets.YELLOW)
+                    screen.blit(activations_text, (10, 70))
