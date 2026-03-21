@@ -70,3 +70,4 @@ class Visuals_items:
         screen.blit(self.assets.image, (0, 0))
         if self.game.mode_game["Training AI"]: self.draw_generation(screen)
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:
+            self.draw_activations(screen)
