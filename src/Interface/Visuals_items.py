@@ -68,3 +68,4 @@ class Visuals_items:
     def draw(self):
         screen = self.game.window_manager.canvas
         screen.blit(self.assets.image, (0, 0))
+        if self.game.mode_game["Training AI"]: self.draw_generation(screen)
