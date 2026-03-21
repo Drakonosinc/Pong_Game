@@ -67,3 +67,4 @@ class Visuals_items:
                 except Exception: pass
     def draw(self):
         screen = self.game.window_manager.canvas
+        screen.blit(self.assets.image, (0, 0))
