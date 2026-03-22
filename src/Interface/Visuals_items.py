@@ -74,3 +74,4 @@ class Visuals_items:
             self.draw_model_data(screen)
         self.images_elements(screen)
         self.scores(screen)
+        self.name_players(screen)
