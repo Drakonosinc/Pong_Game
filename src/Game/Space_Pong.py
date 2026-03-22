@@ -119,6 +119,7 @@ class Space_pong_game:
         if self.mode_game["Training AI"]: self.game_logic.auto_play_player1()
     def item_repeat_run(self):
         if not self.mode_game["Training AI"]:
+            self.window_manager.update_display()
         
     def run(self):
         self.running = True
