@@ -122,6 +122,7 @@ class Space_pong_game:
             self.window_manager.update_display()
             self.clock.tick(self.FPS)
         else:
+            if self.speed < 100:
         
     def run(self):
         self.running = True
