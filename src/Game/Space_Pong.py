@@ -121,6 +121,7 @@ class Space_pong_game:
         if not self.mode_game["Training AI"]:
             self.window_manager.update_display()
             self.clock.tick(self.FPS)
+        else:
         
     def run(self):
         self.running = True
