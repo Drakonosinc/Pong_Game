@@ -73,3 +73,4 @@ class Visuals_items:
             self.draw_activations(screen)
             self.draw_model_data(screen)
         self.images_elements(screen)
+        self.scores(screen)
