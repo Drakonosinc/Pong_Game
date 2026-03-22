@@ -75,3 +75,4 @@ class Visuals_items:
         self.images_elements(screen)
         self.scores(screen)
         self.name_players(screen)
+        self.mode_speed(screen)
