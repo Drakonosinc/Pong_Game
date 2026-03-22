@@ -120,6 +120,7 @@ class Space_pong_game:
     def item_repeat_run(self):
         if not self.mode_game["Training AI"]:
             self.window_manager.update_display()
+            self.clock.tick(self.FPS)
         
     def run(self):
         self.running = True
