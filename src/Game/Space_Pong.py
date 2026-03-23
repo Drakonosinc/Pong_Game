@@ -131,7 +131,7 @@ class Space_pong_game:
         while self.running:
             self.input_handler.handle_input()
             self.state_manager.update(dt)
-            self.state_manager.draw(self.window_manager.canvas) 
+            if not self.mode_game["Training AI"] or self.speed < 100: self.state_manager.draw(self.window_manager.canvas) 
             self.item_repeat_run()
     def run_with_model(self):
         self.running = True
