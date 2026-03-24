@@ -16,4 +16,4 @@ def main():
             trainer = container.get_trainer()
             best_model = trainer.train(game)
             game.model = best_model
-            if best_model: 
+            if best_model: container.wrap_trained_model(best_model)
