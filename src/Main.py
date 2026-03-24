@@ -13,3 +13,4 @@ def main():
         game.run()
         game.game_over = False
         if game.mode_game["Training AI"]:
+            trainer = container.get_trainer()
