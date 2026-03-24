@@ -20,3 +20,4 @@ def main():
         elif game.mode_game["Player"] or game.mode_game["AI"]: game.run_with_model()
         if game.exit: break
     sys.exit(0)
+if __name__ == "__main__":
