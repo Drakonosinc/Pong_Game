@@ -77,3 +77,4 @@ class GameLogic:
         p1 = self.player_one
         if p1.rect.top > 0 or p1.rect.bottom < self.height: p1.rect.y += self.balls[0].move_y
         max_y = self.height - p1.rect.height
+        if p1.rect.y >= max_y: 
