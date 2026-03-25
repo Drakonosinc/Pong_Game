@@ -74,3 +74,4 @@ class GameLogic:
         self.player_two.reset()
         for ball in self.balls: ball.reset()
     def auto_play_player1(self):
+        p1 = self.player_one
