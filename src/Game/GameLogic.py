@@ -75,3 +75,4 @@ class GameLogic:
         for ball in self.balls: ball.reset()
     def auto_play_player1(self):
         p1 = self.player_one
+        if p1.rect.top > 0 or p1.rect.bottom < self.height: 
