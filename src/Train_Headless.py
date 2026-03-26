@@ -14,3 +14,4 @@ from src.Infrastructure.Container import Container
 class MockAudioService(IAudioService):
     def play(self, sound_id: str, loop: bool = False) -> None: pass
     def stop(self, sound_id: str) -> None: pass
+class HeadlessEnvironment:
