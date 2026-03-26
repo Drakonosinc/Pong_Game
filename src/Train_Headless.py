@@ -7,3 +7,4 @@ for path in (PROJECT_ROOT, SRC_ROOT):
     if path_str not in sys.path: sys.path.insert(0, path_str)
 from src.Loaders.Config_Loader import Config
 from src.Events.EventManager import EventManager
+from src.Game.GameLogic import GameLogic
