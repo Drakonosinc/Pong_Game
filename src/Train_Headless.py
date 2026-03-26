@@ -11,3 +11,4 @@ from src.Game.GameLogic import GameLogic
 from src.AI.AI_Controller import AIHandler
 from src.Core.Interfaces.ISoundService import IAudioService
 from src.Infrastructure.Container import Container
+class MockAudioService(IAudioService):
