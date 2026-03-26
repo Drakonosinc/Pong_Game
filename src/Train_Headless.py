@@ -12,3 +12,4 @@ from src.AI.AI_Controller import AIHandler
 from src.Core.Interfaces.ISoundService import IAudioService
 from src.Infrastructure.Container import Container
 class MockAudioService(IAudioService):
+    def play(self, sound_id: str, loop: bool = False) -> None: pass
