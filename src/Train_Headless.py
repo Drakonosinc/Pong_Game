@@ -15,3 +15,4 @@ class MockAudioService(IAudioService):
     def play(self, sound_id: str, loop: bool = False) -> None: pass
     def stop(self, sound_id: str) -> None: pass
 class HeadlessEnvironment:
+    def __init__(self):
