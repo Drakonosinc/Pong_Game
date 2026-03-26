@@ -9,3 +9,4 @@ from src.Loaders.Config_Loader import Config
 from src.Events.EventManager import EventManager
 from src.Game.GameLogic import GameLogic
 from src.AI.AI_Controller import AIHandler
+from src.Core.Interfaces.ISoundService import IAudioService
