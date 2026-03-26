@@ -8,3 +8,4 @@ for path in (PROJECT_ROOT, SRC_ROOT):
 from src.Loaders.Config_Loader import Config
 from src.Events.EventManager import EventManager
 from src.Game.GameLogic import GameLogic
+from src.AI.AI_Controller import AIHandler
