@@ -19,3 +19,4 @@ class HeadlessEnvironment:
         self.config_loader = Config()
         self.config_loader.load_config()
         self.config = self.config_loader
+        self.WIDTH = self.config.config_visuals["WIDTH"]
