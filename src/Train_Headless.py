@@ -27,3 +27,4 @@ class HeadlessEnvironment:
         self.game_logic = GameLogic(
             self.WIDTH, 
             self.HEIGHT, 
+            self.config.config_game, 
