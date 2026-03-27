@@ -24,3 +24,4 @@ class HeadlessEnvironment:
         self.mode_game = {"Training AI": True, "Player": False, "AI": False}
         self.event_manager = EventManager()
         self.audio_service = MockAudioService()
+        self.game_logic = GameLogic(
