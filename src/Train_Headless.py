@@ -16,3 +16,4 @@ class MockAudioService(IAudioService):
     def stop(self, sound_id: str) -> None: pass
 class HeadlessEnvironment:
     def __init__(self):
+        self.config_loader = Config()
