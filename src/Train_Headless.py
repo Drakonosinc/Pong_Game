@@ -22,3 +22,4 @@ class HeadlessEnvironment:
         self.WIDTH = self.config.config_visuals["WIDTH"]
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
         self.mode_game = {"Training AI": True, "Player": False, "AI": False}
+        self.event_manager = EventManager()
