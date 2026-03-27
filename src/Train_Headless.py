@@ -25,3 +25,4 @@ class HeadlessEnvironment:
         self.event_manager = EventManager()
         self.audio_service = MockAudioService()
         self.game_logic = GameLogic(
+            self.WIDTH, 
