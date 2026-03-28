@@ -31,3 +31,4 @@ class HeadlessEnvironment:
             self.mode_game, 
             self.audio_service, 
             self.event_manager)
+        self.ai_handler = AIHandler(self)
