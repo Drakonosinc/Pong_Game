@@ -35,3 +35,4 @@ class HeadlessEnvironment:
         self.model_path = self.config.config_AI.get("model_path", "model.pth")
         self.generation = 0
         self.running = False
+    def reset(self, running=True, **kwargs):
