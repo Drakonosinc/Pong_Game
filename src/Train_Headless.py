@@ -34,3 +34,4 @@ class HeadlessEnvironment:
         self.ai_handler = AIHandler(self)
         self.model_path = self.config.config_AI.get("model_path", "model.pth")
         self.generation = 0
+        self.running = False
