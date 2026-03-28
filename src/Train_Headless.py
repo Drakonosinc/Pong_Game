@@ -29,3 +29,4 @@ class HeadlessEnvironment:
             self.HEIGHT, 
             self.config.config_game, 
             self.mode_game, 
+            self.audio_service, 
