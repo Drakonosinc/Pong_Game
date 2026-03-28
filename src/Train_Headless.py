@@ -32,3 +32,4 @@ class HeadlessEnvironment:
             self.audio_service, 
             self.event_manager)
         self.ai_handler = AIHandler(self)
+        self.model_path = self.config.config_AI.get("model_path", "model.pth")
