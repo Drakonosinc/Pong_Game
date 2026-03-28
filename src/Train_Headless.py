@@ -28,3 +28,4 @@ class HeadlessEnvironment:
             self.WIDTH, 
             self.HEIGHT, 
             self.config.config_game, 
+            self.mode_game, 
