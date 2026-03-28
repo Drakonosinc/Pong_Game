@@ -36,3 +36,4 @@ class HeadlessEnvironment:
         self.generation = 0
         self.running = False
     def reset(self, running=True, **kwargs):
+        self.game_logic.reset_game()
