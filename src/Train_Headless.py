@@ -33,3 +33,4 @@ class HeadlessEnvironment:
             self.event_manager)
         self.ai_handler = AIHandler(self)
         self.model_path = self.config.config_AI.get("model_path", "model.pth")
+        self.generation = 0
