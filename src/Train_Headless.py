@@ -50,3 +50,4 @@ class HeadlessEnvironment:
                 self.running = False
 def main():
     print("==================================================")
+    print(" INICIANDO SIMULADOR HEADLESS (MODO ALTO RENDIMIENTO)")
