@@ -43,3 +43,4 @@ class HeadlessEnvironment:
         self.running = True
         while self.running:
             if self.mode_game["Training AI"]: self.game_logic.auto_play_player1()
+            self.game_logic.update()
