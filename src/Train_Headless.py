@@ -41,3 +41,4 @@ class HeadlessEnvironment:
         self.running = running
     def run(self):
         self.running = True
+        while self.running:
