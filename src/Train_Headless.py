@@ -49,3 +49,4 @@ class HeadlessEnvironment:
                 self.game_logic.player_two.score >= max_score):
                 self.running = False
 def main():
+    print("==================================================")
