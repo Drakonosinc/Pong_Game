@@ -45,3 +45,4 @@ class HeadlessEnvironment:
             if self.mode_game["Training AI"]: self.game_logic.auto_play_player1()
             self.game_logic.update()
             max_score = self.config.config_game["max_score"]
+            if (self.game_logic.player_one.score >= max_score or 
