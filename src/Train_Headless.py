@@ -46,3 +46,4 @@ class HeadlessEnvironment:
             self.game_logic.update()
             max_score = self.config.config_game["max_score"]
             if (self.game_logic.player_one.score >= max_score or 
+                self.game_logic.player_two.score >= max_score):
