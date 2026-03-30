@@ -63,3 +63,4 @@ def main():
     print("[*] Ejecutando generaciones matemáticas (Sin Frame Limits)...")
     best_model = trainer.train(env)
     print("\n[+] Entrenamiento Finalizado. Modelo listo para producción.")
+    sys.exit(0)
