@@ -55,3 +55,4 @@ def main():
     env = HeadlessEnvironment()
     container = Container()
     container.game = env 
+    trainer = container.get_trainer()
