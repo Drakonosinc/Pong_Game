@@ -53,3 +53,4 @@ def main():
     print(" INICIANDO SIMULADOR HEADLESS (MODO ALTO RENDIMIENTO)")
     print("==================================================")
     env = HeadlessEnvironment()
+    container = Container()
