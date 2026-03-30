@@ -59,3 +59,4 @@ def main():
     if not trainer:
         print("[ERROR] Estrategia de entrenamiento no encontrada.")
         sys.exit(1)
+    print(f"[*] Estrategia seleccionada: {trainer.__class__.__name__}")
