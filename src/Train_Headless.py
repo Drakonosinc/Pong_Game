@@ -56,3 +56,4 @@ def main():
     container = Container()
     container.game = env 
     trainer = container.get_trainer()
+    if not trainer:
