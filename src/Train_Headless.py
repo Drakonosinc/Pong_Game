@@ -57,3 +57,4 @@ def main():
     container.game = env 
     trainer = container.get_trainer()
     if not trainer:
+        print("[ERROR] Estrategia de entrenamiento no encontrada.")
