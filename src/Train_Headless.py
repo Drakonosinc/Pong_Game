@@ -54,3 +54,4 @@ def main():
     print("==================================================")
     env = HeadlessEnvironment()
     container = Container()
+    container.game = env 
