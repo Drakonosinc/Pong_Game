@@ -62,3 +62,4 @@ def main():
     print(f"[*] Estrategia seleccionada: {trainer.__class__.__name__}")
     print("[*] Ejecutando generaciones matemáticas (Sin Frame Limits)...")
     best_model = trainer.train(env)
+    print("\n[+] Entrenamiento Finalizado. Modelo listo para producción.")
