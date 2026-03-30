@@ -52,3 +52,4 @@ def main():
     print("==================================================")
     print(" INICIANDO SIMULADOR HEADLESS (MODO ALTO RENDIMIENTO)")
     print("==================================================")
+    env = HeadlessEnvironment()
