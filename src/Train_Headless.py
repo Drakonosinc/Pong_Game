@@ -58,3 +58,4 @@ def main():
     trainer = container.get_trainer()
     if not trainer:
         print("[ERROR] Estrategia de entrenamiento no encontrada.")
+        sys.exit(1)
