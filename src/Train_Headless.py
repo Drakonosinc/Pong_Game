@@ -60,3 +60,4 @@ def main():
         print("[ERROR] Estrategia de entrenamiento no encontrada.")
         sys.exit(1)
     print(f"[*] Estrategia seleccionada: {trainer.__class__.__name__}")
+    print("[*] Ejecutando generaciones matemáticas (Sin Frame Limits)...")
