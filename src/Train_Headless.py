@@ -57,6 +57,7 @@ class HeadlessEnvironment:
                 self.game_logic.player_two.score >= max_score):
                 self.running = False
     def run_with_model(self):
+        self.ai_handler.set_runtime_model(self.model)
 
 def main():
     print("==================================================")
