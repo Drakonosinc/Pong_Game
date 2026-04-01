@@ -60,7 +60,7 @@ class HeadlessEnvironment:
         self.ai_handler.set_runtime_model(self.model)
         self.reset(running=True)
         self.run()
-
+        return self.game_logic.player_two.reward
 def main():
     print("==================================================")
     print(" INICIANDO SIMULADOR HEADLESS (MODO ALTO RENDIMIENTO)")
