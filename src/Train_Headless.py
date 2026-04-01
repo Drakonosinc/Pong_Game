@@ -40,6 +40,7 @@ class HeadlessEnvironment:
     def reset(self, running=True, **kwargs):
         self.game_logic.reset_game()
         self.game_logic.player_one.reward = 0
+        self.game_logic.player_two.reward = 0
         if hasattr(self, '_qlearning_state'): self.ai_handler.reset_qlearning_state()
         self.running = running
     def run(self):
