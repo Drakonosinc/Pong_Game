@@ -37,6 +37,9 @@ class HeadlessEnvironment:
         self.generation = 0
         self.exit = False
         self.running = False
+    @property
+    def player_one(self): return self.game_logic.player_one
+
     def reset(self, running=True, **kwargs):
         self.game_logic.reset_game()
         self.game_logic.player_one.reward = 0
