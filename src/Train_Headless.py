@@ -56,6 +56,8 @@ class HeadlessEnvironment:
             if (self.game_logic.player_one.score >= max_score or 
                 self.game_logic.player_two.score >= max_score):
                 self.running = False
+    def run_with_model(self):
+
 def main():
     print("==================================================")
     print(" INICIANDO SIMULADOR HEADLESS (MODO ALTO RENDIMIENTO)")
