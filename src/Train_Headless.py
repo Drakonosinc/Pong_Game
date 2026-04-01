@@ -58,6 +58,7 @@ class HeadlessEnvironment:
                 self.running = False
     def run_with_model(self):
         self.ai_handler.set_runtime_model(self.model)
+        self.reset(running=True)
 
 def main():
     print("==================================================")
