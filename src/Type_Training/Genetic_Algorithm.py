@@ -33,6 +33,7 @@ def _ensure_built_if_tf(model, input_size):
 
 def fitness_function(model, game):
     game.model = model
+    if hasattr(game, 'ai_handler') and hasattr(game.ai_handler, 'set_runtime_model'): game.ai_handler.set_runtime_model(model)
     score = game.run_with_model()
     return score
 
