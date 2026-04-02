@@ -16,6 +16,7 @@ class AIHandler:
         if isinstance(model, IAIModel):
             self.model_adapter = model
             return
+        current_model = self.model_adapter.get_internal_model() if self.model_adapter else None
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
