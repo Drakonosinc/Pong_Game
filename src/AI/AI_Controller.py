@@ -20,6 +20,7 @@ class AIHandler:
         if current_model is model: return
         type_model = self.game.config.config_AI.get("type_model", {})
         if type_model.get("Pytorch", False):
+            from src.Infrastructure.AI.Adapters.PyTorchAdapter import PyTorchAdapter
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
