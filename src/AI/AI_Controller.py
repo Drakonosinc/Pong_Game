@@ -14,6 +14,7 @@ class AIHandler:
     def set_runtime_model(self, model):
         if model is None: return
         if isinstance(model, IAIModel):
+            self.model_adapter = model
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
