@@ -24,6 +24,7 @@ class AIHandler:
             self.model_adapter = PyTorchAdapter(model)
         elif type_model.get("Tensorflow", False):
             from src.Infrastructure.AI.Adapters.TensorFlowAdapter import TensorFlowAdapter
+            self.model_adapter = TensorFlowAdapter(model)
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
