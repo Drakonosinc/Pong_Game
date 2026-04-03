@@ -27,6 +27,7 @@ class AIHandler:
             self.model_adapter = TensorFlowAdapter(model)
         else:
             from src.Infrastructure.AI.Adapters.MockAdapter import MockAdapter
+            self.model_adapter = MockAdapter(output_size=2)
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
