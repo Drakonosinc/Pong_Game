@@ -36,7 +36,8 @@ class AIHandler:
         return np.array([
             game_logic.player_one.rect.x, game_logic.player_one.rect.y,
             game_logic.player_two.rect.x, game_logic.player_two.rect.y,
-
+            game_logic.balls[0].rect.x, game_logic.balls[0].rect.y
+        ], dtype=np.float32)
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
         if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
