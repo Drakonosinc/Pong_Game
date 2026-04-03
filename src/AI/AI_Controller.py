@@ -32,6 +32,7 @@ class AIHandler:
         game_logic = getattr(self.game, "game_logic", None)
         if game_logic is None:
             if self.prev_state is not None: return self.prev_state.copy()
+            raise RuntimeError("No hay un GameLogic disponible para construir el estado actual.")
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
