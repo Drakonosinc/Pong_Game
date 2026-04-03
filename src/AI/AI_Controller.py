@@ -25,6 +25,7 @@ class AIHandler:
         elif type_model.get("Tensorflow", False):
             from src.Infrastructure.AI.Adapters.TensorFlowAdapter import TensorFlowAdapter
             self.model_adapter = TensorFlowAdapter(model)
+        else:
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
