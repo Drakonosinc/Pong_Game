@@ -31,6 +31,7 @@ class AIHandler:
     def get_state(self):
         game_logic = getattr(self.game, "game_logic", None)
         if game_logic is None:
+            if self.prev_state is not None: return self.prev_state.copy()
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
