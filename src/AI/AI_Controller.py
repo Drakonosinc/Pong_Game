@@ -35,6 +35,7 @@ class AIHandler:
             raise RuntimeError("No hay un GameLogic disponible para construir el estado actual.")
         return np.array([
             game_logic.player_one.rect.x, game_logic.player_one.rect.y,
+            game_logic.player_two.rect.x, game_logic.player_two.rect.y,
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
