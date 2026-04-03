@@ -30,6 +30,7 @@ class AIHandler:
             self.model_adapter = MockAdapter(output_size=2)
     def get_state(self):
         game_logic = getattr(self.game, "game_logic", None)
+        if game_logic is None:
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
