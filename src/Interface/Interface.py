@@ -13,3 +13,6 @@ class Interface(BaseMenu):
         self.WIDTH = self.config.config_visuals["WIDTH"]
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
         self.clock = pygame.time.Clock()
+        BaseMenu.__init__(self, self)
+        self._sync_assets()
+        self.setup_button_factories()
