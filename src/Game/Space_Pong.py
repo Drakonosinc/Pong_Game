@@ -36,6 +36,7 @@ class Space_pong_game:
             self.audio_service, 
             self.event_manager)
         self.ui = Interface(self.context)
+        self.ui.bind_game(self)
         self.ui.game_logic = self.game_logic
         self.ui.mode_game = self.mode_game
         self.visuals_items = Visuals_items(self)
