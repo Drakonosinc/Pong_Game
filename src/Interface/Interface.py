@@ -20,3 +20,4 @@ class Interface(BaseMenu):
         assets = self.context.assets
         self.font_path = assets.font_path
         self.font = assets.font
+        self.font2 = assets.font2
