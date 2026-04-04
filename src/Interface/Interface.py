@@ -10,3 +10,6 @@ class Interface(BaseMenu):
         self.window = context.window_manager
         self._screen = context.window_manager.canvas 
         self.config = context.config
+        self.WIDTH = self.config.config_visuals["WIDTH"]
+        self.HEIGHT = self.config.config_visuals["HEIGHT"]
+        self.clock = pygame.time.Clock()
