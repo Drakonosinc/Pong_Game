@@ -19,3 +19,4 @@ class Interface(BaseMenu):
     def _sync_assets(self):
         assets = self.context.assets
         self.font_path = assets.font_path
+        self.font = assets.font
