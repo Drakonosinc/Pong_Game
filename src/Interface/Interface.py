@@ -18,3 +18,4 @@ class Interface(BaseMenu):
         self.setup_button_factories()
     def _sync_assets(self):
         assets = self.context.assets
+        self.font_path = assets.font_path
