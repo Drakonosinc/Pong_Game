@@ -16,3 +16,4 @@ class Interface(BaseMenu):
         BaseMenu.__init__(self, self)
         self._sync_assets()
         self.setup_button_factories()
+    def _sync_assets(self):
