@@ -22,3 +22,4 @@ class Interface(BaseMenu):
         self.font = assets.font
         self.font2 = assets.font2
         self.font2_5 = assets.font2_5
+        self.font3 = assets.font3
