@@ -29,3 +29,4 @@ class Interface(BaseMenu):
         self.font4_5 = assets.font4_5
         self.font5 = assets.font5
         self.sound_buttonletters = assets.sound_buttonletters
+        self.sound_touchletters = assets.sound_touchletters
