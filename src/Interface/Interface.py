@@ -33,3 +33,4 @@ class Interface(BaseMenu):
         self.sound_exitbutton = assets.sound_exitbutton
         self.sound_back = assets.sound_back
         self.sound = assets.sound
+        self.image = assets.image
