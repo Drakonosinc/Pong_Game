@@ -39,3 +39,4 @@ class Interface(BaseMenu):
         self.spacecraft2 = assets.spacecraft2
         self.GRAY = assets.GRAY
         self.SKYBLUE = assets.SKYBLUE
+        self.RED = assets.RED
