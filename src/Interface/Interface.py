@@ -34,3 +34,4 @@ class Interface(BaseMenu):
         self.sound_back = assets.sound_back
         self.sound = assets.sound
         self.image = assets.image
+        self.planet = assets.planet
