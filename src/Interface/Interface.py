@@ -44,3 +44,4 @@ class Interface(BaseMenu):
         self.WHITE = assets.WHITE
         self.GREEN = assets.GREEN
         self.BLUE = assets.BLUE
+        self.YELLOW = assets.YELLOW
