@@ -36,3 +36,4 @@ class Interface(BaseMenu):
         self.image = assets.image
         self.planet = assets.planet
         self.spacecraft = assets.spacecraft
+        self.spacecraft2 = assets.spacecraft2
