@@ -49,3 +49,4 @@ class Interface(BaseMenu):
     def bind_game(self, game):
         self.game = game
     def __getattr__(self, name):
+        assets = self.__dict__.get("context").assets if "context" in self.__dict__ else None
