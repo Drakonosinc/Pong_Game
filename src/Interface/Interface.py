@@ -54,3 +54,5 @@ class Interface(BaseMenu):
         game = self.__dict__.get("game")
         if game and hasattr(game, name): return getattr(game, name)
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+    @property
+    def screen(self): return self._screen
