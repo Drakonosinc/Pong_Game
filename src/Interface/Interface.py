@@ -56,3 +56,4 @@ class Interface(BaseMenu):
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
     @property
     def screen(self): return self._screen
+    def setup_button_factories(self):
