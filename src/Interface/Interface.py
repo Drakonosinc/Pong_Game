@@ -50,3 +50,4 @@ class Interface(BaseMenu):
         self.game = game
     def __getattr__(self, name):
         assets = self.__dict__.get("context").assets if "context" in self.__dict__ else None
+        if assets and hasattr(assets, name): return getattr(assets, name)
