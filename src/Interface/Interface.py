@@ -46,3 +46,4 @@ class Interface(BaseMenu):
         self.BLUE = assets.BLUE
         self.YELLOW = assets.YELLOW
         self.GOLDEN = assets.GOLDEN
+    def bind_game(self, game):
