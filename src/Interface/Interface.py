@@ -68,3 +68,4 @@ class Interface(BaseMenu):
             "window": self.window,
             "font": self.font2_5,
             "sound_hover": self.sound_buttonletters,
+            "sound_touch": self.sound_touchletters})
