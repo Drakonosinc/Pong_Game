@@ -69,3 +69,4 @@ class Interface(BaseMenu):
             "font": self.font2_5,
             "sound_hover": self.sound_buttonletters,
             "sound_touch": self.sound_touchletters})
+    def config_screen(self):
