@@ -59,3 +59,4 @@ class Interface(BaseMenu):
     def setup_button_factories(self):
         self.button_factory_f5 = ElementsFactory({
             "screen": self.screen, 
+            "window": self.window,
