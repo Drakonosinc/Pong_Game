@@ -67,3 +67,4 @@ class Interface(BaseMenu):
             "screen": self.screen,
             "window": self.window,
             "font": self.font2_5,
+            "sound_hover": self.sound_buttonletters,
