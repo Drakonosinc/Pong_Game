@@ -65,3 +65,4 @@ class Interface(BaseMenu):
             "sound_touch": self.sound_touchletters})
         self.button_factory_f2_5 = ElementsFactory({
             "screen": self.screen,
+            "window": self.window,
