@@ -70,3 +70,4 @@ class Interface(BaseMenu):
             "sound_hover": self.sound_buttonletters,
             "sound_touch": self.sound_touchletters})
     def config_screen(self):
+        new_w = self.config.config_visuals["WIDTH"]
