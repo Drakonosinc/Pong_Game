@@ -66,3 +66,4 @@ class Interface(BaseMenu):
         self.button_factory_f2_5 = ElementsFactory({
             "screen": self.screen,
             "window": self.window,
+            "font": self.font2_5,
