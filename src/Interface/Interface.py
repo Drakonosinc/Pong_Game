@@ -72,3 +72,4 @@ class Interface(BaseMenu):
     def config_screen(self):
         new_w = self.config.config_visuals["WIDTH"]
         new_h = self.config.config_visuals["HEIGHT"]
+        self.window.window_width = new_w
