@@ -79,3 +79,4 @@ class Interface(BaseMenu):
         self.HEIGHT = self.window.render_height
         self.context.assets.reload_graphics()
         self._screen = self.window.canvas
+        self._sync_assets()
