@@ -77,3 +77,4 @@ class Interface(BaseMenu):
         if not self.window.fullscreen: self.window.screen = pygame.display.set_mode((new_w, new_h), pygame.RESIZABLE)
         self.WIDTH = self.window.render_width
         self.HEIGHT = self.window.render_height
+        self.context.assets.reload_graphics()
