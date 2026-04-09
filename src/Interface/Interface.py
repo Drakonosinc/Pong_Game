@@ -71,3 +71,4 @@ class Interface(BaseMenu):
             "sound_touch": self.sound_touchletters})
     def config_screen(self):
         new_w = self.config.config_visuals["WIDTH"]
+        new_h = self.config.config_visuals["HEIGHT"]
