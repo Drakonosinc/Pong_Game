@@ -91,3 +91,4 @@ class Interface(BaseMenu):
     def events_buttons(self, event):
         if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
         if hasattr(self, 'increase_score_button'): self.increase_score_button.reactivate_pressed(event)
+        if hasattr(self, 'input_player1'): 
