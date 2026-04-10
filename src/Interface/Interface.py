@@ -87,3 +87,4 @@ class Interface(BaseMenu):
         if self.game:
             self.game.model_training = model_training
             if getattr(self.game, "ai_handler", None): self.game.ai_handler.set_runtime_model(model_training)
+        return model_training
