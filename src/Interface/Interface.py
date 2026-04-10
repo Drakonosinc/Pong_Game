@@ -84,3 +84,4 @@ class Interface(BaseMenu):
     def load_AI(self):
         model_training = AILoader(self.context).load_model()
         self.model_training = model_training
+        if self.game:
