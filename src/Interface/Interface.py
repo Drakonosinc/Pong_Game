@@ -82,3 +82,4 @@ class Interface(BaseMenu):
         self._sync_assets()
         self.setup_button_factories()
     def load_AI(self):
+        model_training = AILoader(self.context).load_model()
