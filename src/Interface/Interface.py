@@ -83,3 +83,4 @@ class Interface(BaseMenu):
         self.setup_button_factories()
     def load_AI(self):
         model_training = AILoader(self.context).load_model()
+        self.model_training = model_training
