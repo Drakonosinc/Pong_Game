@@ -89,3 +89,4 @@ class Interface(BaseMenu):
             if getattr(self.game, "ai_handler", None): self.game.ai_handler.set_runtime_model(model_training)
         return model_training
     def events_buttons(self, event):
+        if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
