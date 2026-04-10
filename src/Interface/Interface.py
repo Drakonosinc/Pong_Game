@@ -81,3 +81,4 @@ class Interface(BaseMenu):
         self._screen = self.window.canvas
         self._sync_assets()
         self.setup_button_factories()
+    def load_AI(self):
