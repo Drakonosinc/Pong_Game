@@ -95,3 +95,4 @@ class Interface(BaseMenu):
         if hasattr(self, 'input_player2'): self.input_player2.change_text(event)
         if hasattr(self, 'scroll'): self.scroll.events(event)
         if hasattr(self, 'box_type_training'): self.box_type_training.events(event)
+        if hasattr(self, 'box_type_model'): 
