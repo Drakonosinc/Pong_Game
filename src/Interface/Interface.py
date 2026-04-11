@@ -92,4 +92,4 @@ class Interface(BaseMenu):
         if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
         if hasattr(self, 'increase_score_button'): self.increase_score_button.reactivate_pressed(event)
         if hasattr(self, 'input_player1'): self.input_player1.change_text(event)
-        if hasattr(self, 'input_player2'): 
+        if hasattr(self, 'input_player2'): self.input_player2.change_text(event)
