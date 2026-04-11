@@ -96,3 +96,4 @@ class Interface(BaseMenu):
         if hasattr(self, 'scroll'): self.scroll.events(event)
         if hasattr(self, 'box_type_training'): self.box_type_training.events(event)
         if hasattr(self, 'box_type_model'): self.box_type_model.events(event)
+    def event_quit(self): self.context.event_manager.post(QuitEvent())
