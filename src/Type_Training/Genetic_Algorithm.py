@@ -47,7 +47,6 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
     return population
 
 
-
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
     top_count = max(2, len(sorted_pop_fitness) // 2)
@@ -129,6 +128,7 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             offspring.append(mutate(extra_child, mutation_rate, mutation_strength))
         if game.exit: break
         population = new_population + offspring[:num_offsprings]
+    if best_model is None and population: best_model = population[0]
     game.model = best_model
     return best_model
 
