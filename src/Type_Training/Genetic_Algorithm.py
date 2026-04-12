@@ -98,6 +98,7 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
         if game.exit: break
         game.generation = generation
         evaluated_population, fitness_scores = evaluate_population(population, game, num_trials)
+        if not fitness_scores: break
         current_best = max(fitness_scores)
         if current_best > best_fitness:
             best_fitness = current_best
