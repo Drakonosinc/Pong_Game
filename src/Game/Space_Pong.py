@@ -89,6 +89,7 @@ class Space_pong_game:
         sound_status = "ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"
         self.sound_type = {"sound":f"Sound {sound_status}","color":self.context.assets.SKYBLUE if x else self.context.assets.RED,"value":x}
         self.utils_keys = {"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
+
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
         self.speed += speed
