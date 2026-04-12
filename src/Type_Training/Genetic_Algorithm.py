@@ -47,6 +47,7 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
     return population
 
 
+
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
     top_count = max(2, len(sorted_pop_fitness) // 2)
@@ -106,6 +107,7 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             best_model = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(best_model, _get_weights_np(best_parent))
         print(f"Generación {generation}: Mejor Fitness = {current_best}")
+        sorted_population = [model for _, model in sorted(zip(fitness_scores, evaluated_population), key=lambda x: x[0], reverse=True)]
         new_population = []
         for i in range(elitism):
             elite_parent = sorted_population[i]
