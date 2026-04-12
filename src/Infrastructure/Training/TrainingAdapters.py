@@ -19,7 +19,7 @@ class GeneticTrainer(ITrainer):
             population_size=gen_cfg["population_value"],
             num_trials=gen_cfg["try_for_ai"],
             hidden_sizes=arch)
-        if cfg["model_save"]:
+        if cfg["model_save"] and best_model is not None:
             if type_model_str == "Pytorch": save_genetic_model(best_model, torch.optim.Adam(best_model.parameters(), lr=0.001), game.model_path)
             else: save_genetic_model(best_model, optimizer=None, path=game.model_path)
         return best_model
@@ -43,5 +43,4 @@ class QLearningTrainer(ITrainer):
             epsilon_end=q_cfg["epsilon_end"], 
             epsilon_decay=q_cfg["epsilon_decay"], 
             hidden_sizes=arch)
-        if cfg["model_save"]: save_qlearning_model(best_model, torch.optim.Adam(best_model.parameters(), lr=0.001), game.model_path)
         return best_model

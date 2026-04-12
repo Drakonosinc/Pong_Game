@@ -77,6 +77,7 @@ class Space_pong_game:
         self.running = False
         self.game_over = False
         self.exit = False
+        self._shutdown_done = False
         self.clock = pygame.time.Clock()
         self.FPS = 60
         self.generation = 0
@@ -88,10 +89,6 @@ class Space_pong_game:
         sound_status = "ON" if (x:=self.config.config_sounds["sound_main"]) else "OFF"
         self.sound_type = {"sound":f"Sound {sound_status}","color":self.context.assets.SKYBLUE if x else self.context.assets.RED,"value":x}
         self.utils_keys = {"UP_W":False,"DOWN_S":False,"UP_ARROW":False,"DOWN_ARROW":False}
-    def event_quit(self):
-        self.ui.sound_exitbutton.play(loops=0)
-        self.type_game()
-        self.game_over, self.running, self.exit = True, False, True
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
         self.speed += speed

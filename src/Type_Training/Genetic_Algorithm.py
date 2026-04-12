@@ -46,14 +46,7 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
         population.append(model)
     return population
 
-def evaluate_population(population, game, num_trials=3):
-    fitness_scores = []
-    for model in population:
-        score = [fitness_function(model, game) for _ in range(num_trials)]
-        fitness_scores.append(sum(score) / num_trials)
-    min_score = abs(min(fitness_scores)) if min(fitness_scores) < 0 else 0
-    fitness_scores = [score + min_score + 1 for score in fitness_scores]
-    return fitness_scores
+
 
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
@@ -103,16 +96,13 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
     best_model = None
     for generation in range(generations):
         game.generation = generation
-        fitness_scores = evaluate_population(population, game, num_trials)
         current_best = max(fitness_scores)
         if current_best > best_fitness:
             best_fitness = current_best
             best_idx = fitness_scores.index(current_best)
-            best_parent = population[best_idx]
             best_model = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(best_model, _get_weights_np(best_parent))
         print(f"Generación {generation}: Mejor Fitness = {current_best}")
-        sorted_population = [model for _, model in sorted(zip(fitness_scores, population), key=lambda x: x[0], reverse=True)]
         new_population = []
         for i in range(elitism):
             elite_parent = sorted_population[i]
@@ -120,13 +110,12 @@ def genetic_algorithm(game, type_model, input_size, output_size, generations=100
             _set_weights_np(elite_copy, _get_weights_np(elite_parent))
             new_population.append(elite_copy)
         num_offsprings = population_size - elitism
-        parents = select_parents(population, fitness_scores, num_offsprings)
         offspring = []
         for i in range(0, len(parents) - 1, 2):
             child1, child2 = crossover(parents[i], parents[i+1], type_model, input_size, output_size, hidden_sizes)
             offspring.append(mutate(child1, mutation_rate, mutation_strength))
             offspring.append(mutate(child2, mutation_rate, mutation_strength))
-        while len(offspring) < num_offsprings:
+        while len(offspring) < num_offsprings and not game.exit:
             extra_parent = random.choice(population)
             extra_child = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(extra_child, _get_weights_np(extra_parent))
