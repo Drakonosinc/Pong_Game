@@ -100,7 +100,7 @@ class Space_pong_game:
         self.running = False
         self.game_over = True
         self.exit = True
-
+        if pygame.get_init(): pygame.quit()
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
         self.speed += speed
