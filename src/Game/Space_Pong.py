@@ -92,6 +92,7 @@ class Space_pong_game:
     def event_quit(self):
         if self.exit: return
         try: self.ui.sound_exitbutton.play(loops=0)
+        except pygame.error: pass
 
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
