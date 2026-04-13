@@ -96,6 +96,7 @@ class Space_pong_game:
         self.game_over, self.running, self.exit = True, False, True
     def shutdown(self):
         if self._shutdown_done: return
+        self._shutdown_done = True
 
     def change_speed(self, fps, speed, number, objet, speed_down=True, speed_up=True):
         self.FPS += fps
