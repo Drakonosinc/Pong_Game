@@ -55,6 +55,7 @@ def evaluate_population(population, game, num_trials=3):
         for _ in range(num_trials):
             score.append(fitness_function(model, game))
             if game.exit: break
+        if not score: break
 
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
