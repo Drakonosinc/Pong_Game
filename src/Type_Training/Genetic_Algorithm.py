@@ -49,6 +49,7 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
 def evaluate_population(population, game, num_trials=3):
     evaluated_population = []
     fitness_scores = []
+    for model in population:
 
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
