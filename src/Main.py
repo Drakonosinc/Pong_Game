@@ -8,3 +8,4 @@ for path in (PROJECT_ROOT, SRC_ROOT):
 from src.Infrastructure.Container import Container
 def main():
     container = Container()
+    game = None
