@@ -13,3 +13,4 @@ def main():
         game = container.create_app()
         while True:
             game.run()
+            if game.exit: break
