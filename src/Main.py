@@ -14,3 +14,4 @@ def main():
         while True:
             game.run()
             if game.exit: break
+            game.game_over = False
