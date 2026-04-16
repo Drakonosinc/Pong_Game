@@ -9,3 +9,4 @@ from src.Infrastructure.Container import Container
 def main():
     container = Container()
     game = None
+    try:
