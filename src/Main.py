@@ -12,3 +12,4 @@ def main():
     try:
         game = container.create_app()
         while True:
+            game.run()
