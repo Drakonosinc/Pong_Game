@@ -10,3 +10,4 @@ def main():
     container = Container()
     game = None
     try:
+        game = container.create_app()
