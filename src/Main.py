@@ -7,3 +7,4 @@ for path in (PROJECT_ROOT, SRC_ROOT):
     if path_str not in sys.path: sys.path.insert(0, path_str)
 from src.Infrastructure.Container import Container
 def main():
+    container = Container()
