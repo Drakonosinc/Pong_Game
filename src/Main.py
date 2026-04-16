@@ -11,3 +11,4 @@ def main():
     game = None
     try:
         game = container.create_app()
+        while True:
