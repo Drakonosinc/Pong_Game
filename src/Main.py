@@ -25,4 +25,4 @@ def main():
                 game.run_with_model()
                 if game.exit: break
     finally:
-        if game is not None: 
+        if game is not None: game.shutdown()
