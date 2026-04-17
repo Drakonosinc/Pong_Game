@@ -19,3 +19,12 @@ def main():
                 trainer = container.get_trainer()
                 best_model = trainer.train(game)
                 if game.exit: break
+                game.model = best_model
+                if best_model: container.wrap_trained_model(best_model)
+            elif game.mode_game["Player"] or game.mode_game["AI"]:
+                game.run_with_model()
+                if game.exit: break
+    finally:
+        if game is not None: game.shutdown()
+    sys.exit(0)
+if __name__ == "__main__": main()
