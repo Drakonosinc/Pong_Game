@@ -21,3 +21,5 @@ def main():
                 if game.exit: break
                 game.model = best_model
                 if best_model: container.wrap_trained_model(best_model)
+            elif game.mode_game["Player"] or game.mode_game["AI"]:
+                
