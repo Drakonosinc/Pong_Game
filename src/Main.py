@@ -26,3 +26,4 @@ def main():
                 if game.exit: break
     finally:
         if game is not None: game.shutdown()
+    sys.exit(0)
