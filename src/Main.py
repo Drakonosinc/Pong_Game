@@ -20,4 +20,4 @@ def main():
                 best_model = trainer.train(game)
                 if game.exit: break
                 game.model = best_model
-                if best_model: 
+                if best_model: container.wrap_trained_model(best_model)
