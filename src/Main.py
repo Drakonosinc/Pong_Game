@@ -27,4 +27,4 @@ def main():
     finally:
         if game is not None: game.shutdown()
     sys.exit(0)
-if __name__ == "__main__": 
+if __name__ == "__main__": main()
