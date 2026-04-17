@@ -11,6 +11,8 @@ class AIHandler:
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_game_state_changed)
     def set_model(self, model_adapter: IAIModel): 
         self.model_adapter = model_adapter
+    def clear_model(self):
+        self.model_adapter = None
     def set_runtime_model(self, model):
         if model is None: return
         if isinstance(model, IAIModel):

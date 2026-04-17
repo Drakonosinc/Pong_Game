@@ -5,7 +5,7 @@ import random
 import numpy as np
 import copy
 from collections import deque
-from Type_Model import *
+
 class ReplayMemory:
     def __init__(self, capacity: int): self.memory = deque(maxlen=capacity)
     def push(self, transition: tuple): self.memory.append(transition)
@@ -25,12 +25,6 @@ class DQNAgent:
         self.batch_size = batch_size
         self.steps_done = 0
         self.target_update = target_update
-        if type_model == "Pytorch":
-            self.policy_net = SimpleNN_Pytorch(state_size, action_size, hidden_sizes=self._hidden_sizes)
-            self.target_net = SimpleNN_Pytorch(state_size, action_size, hidden_sizes=self._hidden_sizes)
-        elif type_model == "Tensorflow":
-            self.policy_net = SimpleNN_Tensorflow(state_size, action_size, hidden_sizes=self._hidden_sizes)
-            self.target_net = SimpleNN_Tensorflow(state_size, action_size, hidden_sizes=self._hidden_sizes)
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
@@ -124,7 +118,7 @@ def save_qlearning_model(model, optimizer, path):
     """Save Q-learning model (same interface as genetic algorithm)"""
     print("Saving Q-learning model")
     torch.save({'model_state_dict': model.state_dict(),'optimizer_state_dict': optimizer.state_dict(),}, path)
-def load_qlearning_model(path, model, optimizer=None):
+def load_qlearning_model(path, model_or_type_model, input_size=None, output_size=None, optimizer=None, hidden_sizes=None):
     """Load Q-learning model (same interface as genetic algorithm)"""
     try:
         print("Loading Q-learning model")

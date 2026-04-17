@@ -81,13 +81,7 @@ class Interface(BaseMenu):
         self._screen = self.window.canvas
         self._sync_assets()
         self.setup_button_factories()
-    def load_AI(self):
-        model_training = AILoader(self.context).load_model()
-        self.model_training = model_training
-        if self.game:
-            self.game.model_training = model_training
-            if getattr(self.game, "ai_handler", None): self.game.ai_handler.set_runtime_model(model_training)
-        return model_training
+
     def events_buttons(self, event):
         if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
         if hasattr(self, 'increase_score_button'): self.increase_score_button.reactivate_pressed(event)
