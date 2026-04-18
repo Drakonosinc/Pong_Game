@@ -7,6 +7,7 @@ class Interface(BaseMenu):
     def __init__(self, context):
         self.context = context
         self.game = None
+        self.model_training = None
         self.window = context.window_manager
         self._screen = context.window_manager.canvas 
         self.config = context.config
@@ -48,6 +49,7 @@ class Interface(BaseMenu):
         self.GOLDEN = assets.GOLDEN
     def bind_game(self, game):
         self.game = game
+        self.model_training = getattr(game, "model_training", None)
     def __getattr__(self, name):
         assets = self.__dict__.get("context").assets if "context" in self.__dict__ else None
         if assets and hasattr(assets, name): return getattr(assets, name)
@@ -81,7 +83,11 @@ class Interface(BaseMenu):
         self._screen = self.window.canvas
         self._sync_assets()
         self.setup_button_factories()
-
+    def load_AI(self):
+        result = AILoader(self.context).load_model_result()
+        self.model_training = result.model
+        if self.game: self.game.apply_loaded_ai_result(result)
+        return result.model
     def events_buttons(self, event):
         if hasattr(self, 'decrease_score_button'): self.decrease_score_button.reactivate_pressed(event)
         if hasattr(self, 'increase_score_button'): self.increase_score_button.reactivate_pressed(event)

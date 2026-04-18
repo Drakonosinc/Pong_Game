@@ -25,6 +25,8 @@ class DQNAgent:
         self.batch_size = batch_size
         self.steps_done = 0
         self.target_update = target_update
+        self.policy_net = _build_qlearning_model(type_model, state_size, action_size, hidden_sizes=self._hidden_sizes)
+        self.target_net = _build_qlearning_model(type_model, state_size, action_size, hidden_sizes=self._hidden_sizes)
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=lr)
