@@ -5,6 +5,7 @@ import random
 import numpy as np
 import copy
 from collections import deque
+from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
 
 class ReplayMemory:
     def __init__(self, capacity: int): self.memory = deque(maxlen=capacity)
