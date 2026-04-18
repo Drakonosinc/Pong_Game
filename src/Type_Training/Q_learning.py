@@ -128,6 +128,8 @@ def load_qlearning_model(path, model_or_type_model, input_size=None, output_size
     """Load Q-learning model (same interface as genetic algorithm)"""
     try:
         print("Loading Q-learning model")
+        if isinstance(model_or_type_model, str):
+
         checkpoint = torch.load(path)
         model.load_state_dict(checkpoint['model_state_dict'])
         if optimizer: optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
