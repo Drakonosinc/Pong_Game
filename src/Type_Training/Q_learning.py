@@ -130,8 +130,7 @@ def load_qlearning_model(path, model_or_type_model, input_size=None, output_size
         print("Loading Q-learning model")
         if isinstance(model_or_type_model, str):
             model = _build_qlearning_model(model_or_type_model, input_size, output_size, hidden_sizes=hidden_sizes)
-        else:
-            model = model_or_type_model
+        else: model = model_or_type_model
         checkpoint = torch.load(path)
         model.load_state_dict(checkpoint['model_state_dict'])
         if optimizer: optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
