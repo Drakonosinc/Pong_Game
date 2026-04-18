@@ -8,6 +8,7 @@ from collections import deque
 from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
 def _build_qlearning_model(type_model, state_size, action_size, hidden_sizes=None):
     if type_model != "Pytorch":
+        raise NotImplementedError("Q-learning solo soporta Pytorch en este proyecto.")
 
 class ReplayMemory:
     def __init__(self, capacity: int): self.memory = deque(maxlen=capacity)
