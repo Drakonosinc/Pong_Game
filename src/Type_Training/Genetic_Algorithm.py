@@ -37,3 +37,7 @@ def _set_weights_np(model, weights):
                 tensor_w = torch.from_numpy(np.array(w, copy=False)).to(p.device, dtype=p.dtype)
                 p.copy_(tensor_w)
         return
+    if _is_tf_model(model):
+        model.set_weights([np.array(w, copy=False) for w in weights])
+        return
+    raise TypeError("Unsupported model type for genetic algorithm")
