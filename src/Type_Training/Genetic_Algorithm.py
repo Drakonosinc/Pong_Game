@@ -9,3 +9,5 @@ def _load_tensorflow(optional: bool = True):
     except ImportError:
         if optional: return None
         raise ImportError("TensorFlow no esta instalado en el entorno actual.")
+def _build_model(type_model, input_size, output_size, hidden_sizes=None):
+    if type_model == "Pytorch":
