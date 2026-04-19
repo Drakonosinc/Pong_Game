@@ -19,3 +19,6 @@ def _build_model(type_model, input_size, output_size, hidden_sizes=None):
         _load_tensorflow(optional=False)
         from src.Type_Model.Neural_Network_Tensorflow import SimpleNN_Tensorflow
         return SimpleNN_Tensorflow(input_size, output_size, hidden_sizes=hidden_sizes)
+    raise ValueError(f"Unknown type_model: {type_model}")
+def _is_torch_model(model):
+    return torch is not None and hasattr(model, "parameters") and isinstance(model, torch.nn.Module)
