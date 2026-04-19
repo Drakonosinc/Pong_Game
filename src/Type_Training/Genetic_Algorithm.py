@@ -22,3 +22,4 @@ def _build_model(type_model, input_size, output_size, hidden_sizes=None):
     raise ValueError(f"Unknown type_model: {type_model}")
 def _is_torch_model(model):
     return torch is not None and hasattr(model, "parameters") and isinstance(model, torch.nn.Module)
+def _is_tf_model(model):
