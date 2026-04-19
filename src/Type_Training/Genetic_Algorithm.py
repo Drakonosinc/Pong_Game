@@ -30,3 +30,10 @@ def _get_weights_np(model):
     if _is_torch_model(model): return [p.detach().cpu().numpy().copy() for p in model.parameters()]
     if _is_tf_model(model): return [w.copy() for w in model.get_weights()]
     raise TypeError("Unsupported model type for genetic algorithm")
+def _set_weights_np(model, weights):
+    if _is_torch_model(model):
+        with torch.no_grad():
+            for p, w in zip(model.parameters(), weights):
+                tensor_w = torch.from_numpy(np.array(w, copy=False)).to(p.device, dtype=p.dtype)
+                p.copy_(tensor_w)
+        return
