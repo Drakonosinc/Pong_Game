@@ -15,3 +15,7 @@ def _build_model(type_model, input_size, output_size, hidden_sizes=None):
             raise ImportError("PyTorch no esta instalado en el entorno actual.")
         from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
         return SimpleNN_Pytorch(input_size, output_size, hidden_sizes=hidden_sizes)
+    if type_model == "Tensorflow":
+        _load_tensorflow(optional=False)
+        from src.Type_Model.Neural_Network_Tensorflow import SimpleNN_Tensorflow
+        return SimpleNN_Tensorflow(input_size, output_size, hidden_sizes=hidden_sizes)
