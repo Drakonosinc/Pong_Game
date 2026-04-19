@@ -6,3 +6,6 @@ def _load_tensorflow(optional: bool = True):
     try:
         import tensorflow as tf
         return tf
+    except ImportError:
+        if optional: return None
+        raise ImportError("TensorFlow no esta instalado en el entorno actual.")
