@@ -26,3 +26,7 @@ def _is_tf_model(model):
     if not hasattr(model, "trainable_variables"): return False
     tf = _load_tensorflow(optional=True)
     return (tf is not None) and isinstance(model, tf.keras.Model)
+def _get_weights_np(model):
+    if _is_torch_model(model): return [p.detach().cpu().numpy().copy() for p in model.parameters()]
+    if _is_tf_model(model): return [w.copy() for w in model.get_weights()]
+    raise TypeError("Unsupported model type for genetic algorithm")
