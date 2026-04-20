@@ -49,3 +49,5 @@ def _ensure_built_if_tf(model, input_size):
                 dummy = tf.zeros((1, int(input_size)), dtype=tf.float32)
                 _ = model(dummy, training=False)
         except Exception: pass
+def fitness_function(model, game):
+    game.model = model
