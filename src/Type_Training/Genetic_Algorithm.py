@@ -42,3 +42,4 @@ def _set_weights_np(model, weights):
         return
     raise TypeError("Unsupported model type for genetic algorithm")
 def _ensure_built_if_tf(model, input_size):
+    if _is_tf_model(model):
