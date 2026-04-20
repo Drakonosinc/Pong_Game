@@ -41,3 +41,4 @@ def _set_weights_np(model, weights):
         model.set_weights([np.array(w, copy=False) for w in weights])
         return
     raise TypeError("Unsupported model type for genetic algorithm")
+def _ensure_built_if_tf(model, input_size):
