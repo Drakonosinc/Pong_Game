@@ -53,3 +53,4 @@ def fitness_function(model, game):
     game.model = model
     if hasattr(game, "ai_handler") and hasattr(game.ai_handler, "set_runtime_model"):
         game.ai_handler.set_runtime_model(model)
+    return game.run_with_model()
