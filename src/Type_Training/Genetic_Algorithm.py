@@ -58,3 +58,6 @@ def initialize_population(type_model, size, input_size, output_size, hidden_size
     population = []
     for _ in range(size):
         model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
+        _ensure_built_if_tf(model, input_size)
+        population.append(model)
+    return population
