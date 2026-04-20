@@ -56,3 +56,5 @@ def fitness_function(model, game):
     return game.run_with_model()
 def initialize_population(type_model, size, input_size, output_size, hidden_sizes=None):
     population = []
+    for _ in range(size):
+        model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
