@@ -45,3 +45,4 @@ def _ensure_built_if_tf(model, input_size):
     if _is_tf_model(model):
         try:
             if not getattr(model, "built", False) or len(model.weights) == 0:
+                tf = _load_tensorflow(optional=False)
