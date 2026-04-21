@@ -65,3 +65,4 @@ def evaluate_population(population, game, num_trials=3):
     evaluated_population = []
     fitness_scores = []
     for model in population:
+        if game.exit: break
