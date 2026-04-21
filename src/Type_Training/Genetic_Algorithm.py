@@ -69,3 +69,4 @@ def evaluate_population(population, game, num_trials=3):
         score = []
         for _ in range(num_trials):
             score.append(fitness_function(model, game))
+            if game.exit: break
