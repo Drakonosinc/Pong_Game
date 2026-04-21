@@ -72,3 +72,4 @@ def evaluate_population(population, game, num_trials=3):
             if game.exit: break
         if not score: break
         evaluated_population.append(model)
+        fitness_scores.append(sum(score) / len(score))
