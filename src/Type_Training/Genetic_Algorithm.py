@@ -86,3 +86,4 @@ def select_parents(population, fitness_scores, num_parents):
     return random.choices(top_population, weights=top_fitness, k=num_parents)
 def _new_model(type_model, input_size, output_size, hidden_sizes):
     model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
+    _ensure_built_if_tf(model, input_size)
