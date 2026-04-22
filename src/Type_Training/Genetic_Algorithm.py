@@ -88,3 +88,4 @@ def _new_model(type_model, input_size, output_size, hidden_sizes):
     model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
     _ensure_built_if_tf(model, input_size)
     return model
+def crossover(parent1, parent2, type_model, input_size, output_size, hidden_sizes=None):
