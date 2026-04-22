@@ -80,3 +80,4 @@ def evaluate_population(population, game, num_trials=3):
     return evaluated_population, fitness_scores
 def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
+    top_count = max(2, len(sorted_pop_fitness) // 2)
