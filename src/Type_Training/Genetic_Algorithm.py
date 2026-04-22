@@ -78,3 +78,4 @@ def evaluate_population(population, game, num_trials=3):
     min_score = abs(min(fitness_scores)) if min(fitness_scores) < 0 else 0
     fitness_scores = [score + min_score + 1 for score in fitness_scores]
     return evaluated_population, fitness_scores
+def select_parents(population, fitness_scores, num_parents):
