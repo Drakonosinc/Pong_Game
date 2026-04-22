@@ -83,3 +83,4 @@ def select_parents(population, fitness_scores, num_parents):
     top_count = max(2, len(sorted_pop_fitness) // 2)
     top_population = [individual for individual, _ in sorted_pop_fitness[:top_count]]
     top_fitness = [fitness for _, fitness in sorted_pop_fitness[:top_count]]
+    return random.choices(top_population, weights=top_fitness, k=num_parents)
