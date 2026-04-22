@@ -82,3 +82,4 @@ def select_parents(population, fitness_scores, num_parents):
     sorted_pop_fitness = sorted(zip(population, fitness_scores), key=lambda x: x[1], reverse=True)
     top_count = max(2, len(sorted_pop_fitness) // 2)
     top_population = [individual for individual, _ in sorted_pop_fitness[:top_count]]
+    top_fitness = [fitness for _, fitness in sorted_pop_fitness[:top_count]]
