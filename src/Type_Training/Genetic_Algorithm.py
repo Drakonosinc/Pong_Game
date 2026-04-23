@@ -95,3 +95,4 @@ def crossover(parent1, parent2, type_model, input_size, output_size, hidden_size
     for a, b in zip(w1, w2):
         mask = np.random.rand(*a.shape) > 0.5
         child1_w.append(np.where(mask, a, b))
+        child2_w.append(np.where(mask, b, a))
