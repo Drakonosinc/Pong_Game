@@ -97,3 +97,4 @@ def crossover(parent1, parent2, type_model, input_size, output_size, hidden_size
         child1_w.append(np.where(mask, a, b))
         child2_w.append(np.where(mask, b, a))
     child1 = _new_model(type_model, input_size, output_size, hidden_sizes)
+    child2 = _new_model(type_model, input_size, output_size, hidden_sizes)
