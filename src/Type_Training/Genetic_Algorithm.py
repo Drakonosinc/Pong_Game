@@ -127,3 +127,4 @@ def genetic_algorithm(
     best_model = None
     for generation in range(generations):
         if game.exit: break
+        game.generation = generation
