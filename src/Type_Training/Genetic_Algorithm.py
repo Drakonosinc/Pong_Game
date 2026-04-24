@@ -123,3 +123,4 @@ def genetic_algorithm(
     num_trials=3,
     hidden_sizes=None,):
     population = initialize_population(type_model, population_size, input_size, output_size, hidden_sizes=hidden_sizes)
+    best_fitness = -float("inf")
