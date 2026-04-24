@@ -126,3 +126,4 @@ def genetic_algorithm(
     best_fitness = -float("inf")
     best_model = None
     for generation in range(generations):
+        if game.exit: break
