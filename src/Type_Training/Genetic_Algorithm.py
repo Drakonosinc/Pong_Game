@@ -122,3 +122,4 @@ def genetic_algorithm(
     elitism=2,
     num_trials=3,
     hidden_sizes=None,):
+    population = initialize_population(type_model, population_size, input_size, output_size, hidden_sizes=hidden_sizes)
