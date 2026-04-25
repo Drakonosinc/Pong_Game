@@ -133,3 +133,4 @@ def genetic_algorithm(
         current_best = max(fitness_scores)
         if current_best > best_fitness:
             best_fitness = current_best
+            best_idx = fitness_scores.index(current_best)
