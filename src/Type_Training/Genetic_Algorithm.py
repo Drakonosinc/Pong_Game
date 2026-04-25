@@ -128,3 +128,4 @@ def genetic_algorithm(
     for generation in range(generations):
         if game.exit: break
         game.generation = generation
+        evaluated_population, fitness_scores = evaluate_population(population, game, num_trials)
