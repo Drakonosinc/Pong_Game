@@ -138,3 +138,4 @@ def genetic_algorithm(
             best_model = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(best_model, _get_weights_np(best_parent))
         print(f"Generacion {generation}: Mejor Fitness = {current_best}")
+        if game.exit: break
