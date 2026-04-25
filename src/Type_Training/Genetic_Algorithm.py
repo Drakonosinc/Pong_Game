@@ -140,3 +140,4 @@ def genetic_algorithm(
         print(f"Generacion {generation}: Mejor Fitness = {current_best}")
         if game.exit: break
         sorted_population = [model for _, model in sorted(zip(fitness_scores, evaluated_population), key=lambda x: x[0], reverse=True)]
+        new_population = []
