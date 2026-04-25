@@ -131,3 +131,5 @@ def genetic_algorithm(
         evaluated_population, fitness_scores = evaluate_population(population, game, num_trials)
         if not fitness_scores: break
         current_best = max(fitness_scores)
+        if current_best > best_fitness:
+            best_fitness = current_best
