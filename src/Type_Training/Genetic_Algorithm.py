@@ -129,3 +129,4 @@ def genetic_algorithm(
         if game.exit: break
         game.generation = generation
         evaluated_population, fitness_scores = evaluate_population(population, game, num_trials)
+        if not fitness_scores: break
