@@ -149,3 +149,5 @@ def genetic_algorithm(
         num_offsprings = population_size - elitism
         parents = select_parents(evaluated_population, fitness_scores, num_offsprings)
         offspring = []
+        for i in range(0, len(parents) - 1, 2):
+            child1, child2 = crossover(parents[i], parents[i + 1], type_model, input_size, output_size, hidden_sizes)
