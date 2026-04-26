@@ -145,3 +145,4 @@ def genetic_algorithm(
             elite_parent = sorted_population[i]
             elite_copy = _new_model(type_model, input_size, output_size, hidden_sizes)
             _set_weights_np(elite_copy, _get_weights_np(elite_parent))
+            new_population.append(elite_copy)
