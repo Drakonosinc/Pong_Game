@@ -141,3 +141,5 @@ def genetic_algorithm(
         if game.exit: break
         sorted_population = [model for _, model in sorted(zip(fitness_scores, evaluated_population), key=lambda x: x[0], reverse=True)]
         new_population = []
+        for i in range(elitism):
+            elite_parent = sorted_population[i]
