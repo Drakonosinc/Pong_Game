@@ -156,3 +156,4 @@ def genetic_algorithm(
         while len(offspring) < num_offsprings and not game.exit:
             extra_parent = random.choice(population)
             extra_child = _new_model(type_model, input_size, output_size, hidden_sizes)
+            _set_weights_np(extra_child, _get_weights_np(extra_parent))
