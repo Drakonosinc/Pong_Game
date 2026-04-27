@@ -167,3 +167,4 @@ def save_genetic_model(model, optimizer, path):
     print("save model")
     if _is_torch_model(model):
         torch.save(
+            {"model_state_dict": model.state_dict(),
