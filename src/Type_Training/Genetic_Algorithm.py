@@ -170,3 +170,5 @@ def save_genetic_model(model, optimizer, path):
             {"model_state_dict": model.state_dict(),
             "optimizer_state_dict": optimizer.state_dict() if optimizer else {},},path,)
         return
+    if _is_tf_model(model):
+        weights = _get_weights_np(model)
