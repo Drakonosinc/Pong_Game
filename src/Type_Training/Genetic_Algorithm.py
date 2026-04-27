@@ -160,3 +160,4 @@ def genetic_algorithm(
             offspring.append(mutate(extra_child, mutation_rate, mutation_strength))
         if game.exit: break
         population = new_population + offspring[:num_offsprings]
+    if best_model is None and population: best_model = population[0]
