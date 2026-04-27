@@ -159,3 +159,4 @@ def genetic_algorithm(
             _set_weights_np(extra_child, _get_weights_np(extra_parent))
             offspring.append(mutate(extra_child, mutation_rate, mutation_strength))
         if game.exit: break
+        population = new_population + offspring[:num_offsprings]
