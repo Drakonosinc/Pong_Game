@@ -163,3 +163,5 @@ def genetic_algorithm(
     if best_model is None and population: best_model = population[0]
     game.model = best_model
     return best_model
+def save_genetic_model(model, optimizer, path):
+    print("save model")
