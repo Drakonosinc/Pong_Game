@@ -165,3 +165,5 @@ def genetic_algorithm(
     return best_model
 def save_genetic_model(model, optimizer, path):
     print("save model")
+    if _is_torch_model(model):
+        torch.save(
