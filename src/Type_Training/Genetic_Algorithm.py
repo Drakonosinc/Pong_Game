@@ -180,3 +180,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         print("load model")
         if type_model == "Tensorflow":
             _load_tensorflow(optional=False)
+            try:
+                data = np.load(path + ".npz")
