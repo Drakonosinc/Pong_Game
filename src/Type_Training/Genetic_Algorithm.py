@@ -174,3 +174,4 @@ def save_genetic_model(model, optimizer, path):
         weights = _get_weights_np(model)
         np.savez(path + ".npz", *weights)
         return
+    raise TypeError("Unsupported model type for saving")
