@@ -182,3 +182,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             _load_tensorflow(optional=False)
             try:
                 data = np.load(path + ".npz")
+                keys = sorted([key for key in data.files], key=lambda value: int(value.replace("arr_", "")))
