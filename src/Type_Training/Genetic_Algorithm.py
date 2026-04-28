@@ -184,3 +184,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 data = np.load(path + ".npz")
                 keys = sorted([key for key in data.files], key=lambda value: int(value.replace("arr_", "")))
                 weights = [data[key] for key in keys]
+                model = _new_model(type_model, input_size, output_size, hidden_sizes)
