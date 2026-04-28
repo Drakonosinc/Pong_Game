@@ -173,3 +173,4 @@ def save_genetic_model(model, optimizer, path):
     if _is_tf_model(model):
         weights = _get_weights_np(model)
         np.savez(path + ".npz", *weights)
+        return
