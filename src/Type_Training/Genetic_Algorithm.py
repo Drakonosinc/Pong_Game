@@ -192,3 +192,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             raise ImportError("PyTorch no esta instalado en el entorno actual.")
         checkpoint = torch.load(path)
         state_dict = checkpoint.get("model_state_dict", checkpoint)
+        has_fc = any(key.startswith("fc1.") or key.startswith("fc2.") for key in state_dict.keys())
