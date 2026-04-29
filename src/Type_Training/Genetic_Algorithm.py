@@ -190,3 +190,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             except Exception: pass
         if torch is None:
             raise ImportError("PyTorch no esta instalado en el entorno actual.")
+        checkpoint = torch.load(path)
