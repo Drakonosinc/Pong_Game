@@ -196,3 +196,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         has_hidden = any(key.startswith("hidden_layers.") for key in state_dict.keys())
         def _filtered_load(model, model_state_dict):
             target_state = model.state_dict()
+            filtered = {key: value
