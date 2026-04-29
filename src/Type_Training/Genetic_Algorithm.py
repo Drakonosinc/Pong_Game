@@ -193,3 +193,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         checkpoint = torch.load(path)
         state_dict = checkpoint.get("model_state_dict", checkpoint)
         has_fc = any(key.startswith("fc1.") or key.startswith("fc2.") for key in state_dict.keys())
+        has_hidden = any(key.startswith("hidden_layers.") for key in state_dict.keys())
