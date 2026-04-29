@@ -197,3 +197,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
         def _filtered_load(model, model_state_dict):
             target_state = model.state_dict()
             filtered = {key: value
+                for key, value in model_state_dict.items()
