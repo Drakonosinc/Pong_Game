@@ -188,3 +188,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 _set_weights_np(model, weights)
                 return model
             except Exception: pass
+        if torch is None:
+            raise ImportError("PyTorch no esta instalado en el entorno actual.")
