@@ -217,3 +217,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 if output_weight.shape[0] == output_size and output_weight.shape[1] == first_hidden and output_bias.shape[0] == output_size:
                     remapped["output_layer.weight"] = output_weight
                     remapped["output_layer.bias"] = output_bias
+            _filtered_load(model, remapped)
