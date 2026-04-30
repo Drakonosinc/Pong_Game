@@ -204,3 +204,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             if "fc1.weight" in state_dict: first_hidden = state_dict["fc1.weight"].shape[0]
             else:
                 any_weight = next((value for key, value in state_dict.items() if key.endswith(".weight")), None)
+                first_hidden = any_weight.shape[0] if any_weight is not None else 128
