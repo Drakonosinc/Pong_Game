@@ -206,3 +206,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 any_weight = next((value for key, value in state_dict.items() if key.endswith(".weight")), None)
                 first_hidden = any_weight.shape[0] if any_weight is not None else 128
             model = _build_model(type_model, input_size, output_size, hidden_sizes=[first_hidden])
+            remapped = {}
