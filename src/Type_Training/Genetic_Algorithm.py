@@ -212,3 +212,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             if "fc1.bias" in state_dict:
                 remapped["hidden_layers.0.bias"] = state_dict["fc1.bias"]
             output_weight = state_dict.get("fc2.weight")
+            output_bias = state_dict.get("fc2.bias")
