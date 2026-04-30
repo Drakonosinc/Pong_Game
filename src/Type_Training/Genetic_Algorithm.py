@@ -202,3 +202,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
             model.load_state_dict(filtered, strict=False)
         if has_fc:
             if "fc1.weight" in state_dict: first_hidden = state_dict["fc1.weight"].shape[0]
+            else:
+                any_weight = next((value for key, value in state_dict.items() if key.endswith(".weight")), None)
