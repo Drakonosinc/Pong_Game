@@ -207,3 +207,5 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 first_hidden = any_weight.shape[0] if any_weight is not None else 128
             model = _build_model(type_model, input_size, output_size, hidden_sizes=[first_hidden])
             remapped = {}
+            if "fc1.weight" in state_dict:
+                remapped["hidden_layers.0.weight"] = state_dict["fc1.weight"]
