@@ -226,3 +226,4 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 if weight_key in state_dict:
                     sizes.append(state_dict[weight_key].shape[0])
             if not sizes: sizes = hidden_sizes or [128]
+            model = _build_model(type_model, input_size, output_size, hidden_sizes=sizes)
