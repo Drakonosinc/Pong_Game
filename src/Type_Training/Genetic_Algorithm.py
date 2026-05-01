@@ -225,18 +225,3 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 weight_key = f"hidden_layers.{index}.weight"
                 if weight_key in state_dict:
                     sizes.append(state_dict[weight_key].shape[0])
-            if not sizes: sizes = hidden_sizes or [128]
-            model = _build_model(type_model, input_size, output_size, hidden_sizes=sizes)
-            _filtered_load(model, state_dict)
-        else:
-            model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
-            _filtered_load(model, state_dict)
-        if optimizer and "optimizer_state_dict" in checkpoint:
-            optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
-        return model
-    except FileNotFoundError:
-        print(f"The file {path} was not found.")
-        return None
-    except Exception as exc:
-        print(f"An error occurred while loading the model: {exc}")
-        return None
