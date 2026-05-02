@@ -4,3 +4,4 @@ class Container:
         self.game = None
     def create_app(self) -> 'Space_pong_game':
         self.game = Space_pong_game()
+        return self.game
