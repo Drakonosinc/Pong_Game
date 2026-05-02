@@ -9,3 +9,4 @@ class Container:
         if not self.game: raise RuntimeError("El juego no ha sido inicializado por el contenedor.")
         training_config = self.game.config.config_AI["type_training"]
         if training_config.get("Genetic", False):
+            from src.Infrastructure.Training.TrainingAdapters import GeneticTrainer
