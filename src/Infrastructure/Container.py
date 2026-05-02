@@ -7,3 +7,4 @@ class Container:
         return self.game
     def get_trainer(self) -> object:
         if not self.game: raise RuntimeError("El juego no ha sido inicializado por el contenedor.")
+        training_config = self.game.config.config_AI["type_training"]
