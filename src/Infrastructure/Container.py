@@ -5,3 +5,4 @@ class Container:
     def create_app(self) -> 'Space_pong_game':
         self.game = Space_pong_game()
         return self.game
+    def get_trainer(self) -> object:
