@@ -6,3 +6,4 @@ class Container:
         self.game = Space_pong_game()
         return self.game
     def get_trainer(self) -> object:
+        if not self.game: raise RuntimeError("El juego no ha sido inicializado por el contenedor.")
