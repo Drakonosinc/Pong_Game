@@ -14,3 +14,4 @@ class Container:
         elif training_config.get("Q-learning", False):
             from src.Infrastructure.Training.TrainingAdapters import QLearningTrainer
             return QLearningTrainer()
+        raise ValueError("No se especificó una estrategia de entrenamiento válida en la configuración.")
