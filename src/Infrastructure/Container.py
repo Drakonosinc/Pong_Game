@@ -12,3 +12,4 @@ class Container:
             from src.Infrastructure.Training.TrainingAdapters import GeneticTrainer
             return GeneticTrainer()
         elif training_config.get("Q-learning", False):
+            from src.Infrastructure.Training.TrainingAdapters import QLearningTrainer
