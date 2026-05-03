@@ -15,3 +15,4 @@ class Container:
             from src.Infrastructure.Training.TrainingAdapters import QLearningTrainer
             return QLearningTrainer()
         raise ValueError("No se especificó una estrategia de entrenamiento válida en la configuración.")
+    def wrap_trained_model(self, trained_model):
