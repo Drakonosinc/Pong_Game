@@ -16,3 +16,4 @@ class Container:
             return QLearningTrainer()
         raise ValueError("No se especificó una estrategia de entrenamiento válida en la configuración.")
     def wrap_trained_model(self, trained_model):
+        if self.game and trained_model is not None: self.game.publish_runtime_model(trained_model)
