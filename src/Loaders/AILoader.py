@@ -10,3 +10,4 @@ class AILoader:
     def __init__(self, context_or_config):
         if hasattr(context_or_config, "base_dir") and hasattr(context_or_config, "config_AI"):
             self.config = context_or_config
+        else: self.config = context_or_config.config
