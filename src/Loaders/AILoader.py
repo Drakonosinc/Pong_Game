@@ -14,3 +14,4 @@ class AILoader:
         self.base_dir = self.config.base_dir
     def _get_selected_training(self) -> str:
         training = next((key for key, value in self.config.config_AI["type_training"].items() if value), None)
+        if training is None: raise ValueError("No se especifico un tipo de entrenamiento valido.")
