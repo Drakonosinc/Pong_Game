@@ -5,3 +5,4 @@ from typing import Any
 class AIModelLoadResult:
     model: Any = None
     model_found: bool = False
+    error_message: str | None = None
