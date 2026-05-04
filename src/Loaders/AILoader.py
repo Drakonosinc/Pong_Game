@@ -7,3 +7,4 @@ class AIModelLoadResult:
     model_found: bool = False
     error_message: str | None = None
 class AILoader:
+    def __init__(self, context_or_config):
