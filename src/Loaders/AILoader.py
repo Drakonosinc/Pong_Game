@@ -4,3 +4,4 @@ from typing import Any
 @dataclass(slots=True)
 class AIModelLoadResult:
     model: Any = None
+    model_found: bool = False
