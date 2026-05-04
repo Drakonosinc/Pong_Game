@@ -12,3 +12,4 @@ class AILoader:
             self.config = context_or_config
         else: self.config = context_or_config.config
         self.base_dir = self.config.base_dir
+    def _get_selected_training(self) -> str:
