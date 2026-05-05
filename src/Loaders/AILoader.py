@@ -17,3 +17,4 @@ class AILoader:
         if training is None: raise ValueError("No se especifico un tipo de entrenamiento valido.")
         return training
     def _get_selected_model(self) -> str:
+        model = next((key for key, value in self.config.config_AI["type_model"].items() if value), None)
