@@ -23,3 +23,4 @@ class AILoader:
     def _get_hidden_architecture(self) -> list[int]:
         nn_cfg = self.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
         neurons = nn_cfg.get("neurons_per_layer", 6)
+        layers = nn_cfg.get("hidden_layers", 2)
