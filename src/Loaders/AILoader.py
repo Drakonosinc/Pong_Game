@@ -25,3 +25,4 @@ class AILoader:
         neurons = nn_cfg.get("neurons_per_layer", 6)
         layers = nn_cfg.get("hidden_layers", 2)
         return [neurons] * layers
+    def _resolve_loader(self):
