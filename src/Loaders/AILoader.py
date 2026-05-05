@@ -19,3 +19,4 @@ class AILoader:
     def _get_selected_model(self) -> str:
         model = next((key for key, value in self.config.config_AI["type_model"].items() if value), None)
         if model is None: raise ValueError("No se especifico un tipo de modelo valido.")
+        return model
