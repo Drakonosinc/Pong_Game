@@ -21,3 +21,4 @@ class AILoader:
         if model is None: raise ValueError("No se especifico un tipo de modelo valido.")
         return model
     def _get_hidden_architecture(self) -> list[int]:
+        nn_cfg = self.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
