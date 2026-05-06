@@ -31,3 +31,4 @@ class AILoader:
         arch = self._get_hidden_architecture()
         if training == "Genetic":
             from src.Type_Training.Genetic_Algorithm import load_genetic_model
+            return load_genetic_model, (model_type, 6, 2), {"hidden_sizes": arch}
