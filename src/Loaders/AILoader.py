@@ -30,3 +30,4 @@ class AILoader:
         model_type = self._get_selected_model()
         arch = self._get_hidden_architecture()
         if training == "Genetic":
+            from src.Type_Training.Genetic_Algorithm import load_genetic_model
