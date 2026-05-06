@@ -27,3 +27,4 @@ class AILoader:
         return [neurons] * layers
     def _resolve_loader(self):
         training = self._get_selected_training()
+        model_type = self._get_selected_model()
