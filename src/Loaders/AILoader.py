@@ -29,3 +29,4 @@ class AILoader:
         training = self._get_selected_training()
         model_type = self._get_selected_model()
         arch = self._get_hidden_architecture()
+        if training == "Genetic":
