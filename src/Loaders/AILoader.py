@@ -34,3 +34,4 @@ class AILoader:
             return load_genetic_model, (model_type, 6, 2), {"hidden_sizes": arch}
         if training == "Q-learning":
             from src.Type_Training.Q_learning import load_qlearning_model
+            return load_qlearning_model, (model_type, 6, 2), {"hidden_sizes": arch}
