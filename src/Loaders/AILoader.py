@@ -39,17 +39,3 @@ class AILoader:
     def load_model_result(self) -> AIModelLoadResult:
         model_path = os.path.join(self.base_dir, "AI", "best_model.pth")
         try:
-            load_callable, args, kwargs = self._resolve_loader()
-            if not os.path.exists(model_path):
-                return AIModelLoadResult(model=None, model_found=False, error_message=None)
-            model = load_callable(model_path, *args, **kwargs)
-            if model is None:
-                return AIModelLoadResult(
-                    model=None,
-                    model_found=False,
-                    error_message="No se pudo cargar el modelo guardado.",)
-            return AIModelLoadResult(model=model, model_found=True, error_message=None)
-        except Exception as exc:
-            return AIModelLoadResult(model=None, model_found=False, error_message=str(exc))
-    def load_model(self):
-        return self.load_model_result().model
