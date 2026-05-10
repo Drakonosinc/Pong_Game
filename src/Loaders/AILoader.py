@@ -40,3 +40,4 @@ class AILoader:
         model_path = os.path.join(self.base_dir, "AI", "best_model.pth")
         try:
             load_callable, args, kwargs = self._resolve_loader()
+            if not os.path.exists(model_path):
