@@ -43,3 +43,4 @@ class AILoader:
             if not os.path.exists(model_path):
                 return AIModelLoadResult(model=None, model_found=False, error_message=None)
             model = load_callable(model_path, *args, **kwargs)
+            if model is None:
