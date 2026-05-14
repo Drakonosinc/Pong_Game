@@ -46,3 +46,4 @@ class AILoader:
             if model is None:
                 return AIModelLoadResult(
                     model=None,
+                    model_found=False,
