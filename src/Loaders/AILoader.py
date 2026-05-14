@@ -45,3 +45,4 @@ class AILoader:
             model = load_callable(model_path, *args, **kwargs)
             if model is None:
                 return AIModelLoadResult(
+                    model=None,
