@@ -48,3 +48,4 @@ class AILoader:
                     model=None,
                     model_found=False,
                     error_message="No se pudo cargar el modelo guardado.",)
+            return AIModelLoadResult(model=model, model_found=True, error_message=None)
