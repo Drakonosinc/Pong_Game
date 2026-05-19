@@ -52,3 +52,4 @@ class AILoader:
         except Exception as exc:
             return AIModelLoadResult(model=None, model_found=False, error_message=str(exc))
     def load_model(self):
+        return self.load_model_result().model
