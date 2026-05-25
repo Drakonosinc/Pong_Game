@@ -161,6 +161,9 @@ class Input_text(ElementBehavior):
     def draw_hover_effect(self):return pygame.draw.rect(self.screen,self.hover_color,self.rect)
     def draw_pressed_effect(self):return pygame.draw.rect(self.screen,self.pressed_color,self.rect)
     def show_player(self):return self.text
+class ScrollBar(ElementBehavior):
+    def __init__(self, config: dict):
+        super().__init__(config)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
