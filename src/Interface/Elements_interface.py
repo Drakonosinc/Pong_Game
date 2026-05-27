@@ -164,6 +164,7 @@ class Input_text(ElementBehavior):
 class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
         super().__init__(config)
+        rect = pygame.Rect(*self.position)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
