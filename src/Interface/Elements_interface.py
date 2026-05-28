@@ -165,6 +165,7 @@ class ScrollBar(ElementBehavior):
     def __init__(self, config: dict):
         super().__init__(config)
         rect = pygame.Rect(*self.position)
+        self.type_of_orientation = config.get("type_of_orientation", "vertical").lower()
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
