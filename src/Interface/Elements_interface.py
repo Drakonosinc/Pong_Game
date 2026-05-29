@@ -166,6 +166,7 @@ class ScrollBar(ElementBehavior):
         super().__init__(config)
         rect = pygame.Rect(*self.position)
         self.type_of_orientation = config.get("type_of_orientation", "vertical").lower()
+        self.hover_color = config.get("hover_color", (255, 199, 51))
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
