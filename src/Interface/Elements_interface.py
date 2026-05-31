@@ -168,6 +168,7 @@ class ScrollBar(ElementBehavior):
         self.type_of_orientation = config.get("type_of_orientation", "vertical").lower()
         self.hover_color = config.get("hover_color", (255, 199, 51))
         self.color = config.get("color", (200, 200, 200))
+        self.color_thumb = config.get("color_bar", (135, 206, 235))
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
