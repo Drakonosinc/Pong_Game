@@ -171,6 +171,7 @@ class ScrollBar(ElementBehavior):
         self.color_thumb = config.get("color_bar", (135, 206, 235))
         if self.type_of_orientation == "vertical":
             self.thumb_size = config.get("thumb_height", max(20, int(self.position[3] * config.get("thumb_ratio", 0.2))))
+            self.thumb_rect = pygame.Rect(rect.x, rect.y, rect.width, self.thumb_size)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
