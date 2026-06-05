@@ -175,6 +175,7 @@ class ScrollBar(ElementBehavior):
         else:
             self.thumb_size = config.get("thumb_width", max(20, int(self.position[2] * config.get("thumb_ratio", 0.2))))
             self.thumb_rect = pygame.Rect(rect.x, rect.y, self.thumb_size, rect.height)
+        self.elements = None
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
