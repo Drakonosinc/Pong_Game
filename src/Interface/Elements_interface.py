@@ -177,6 +177,7 @@ class ScrollBar(ElementBehavior):
             self.thumb_rect = pygame.Rect(rect.x, rect.y, self.thumb_size, rect.height)
         self.elements = None
         self.dragging = False
+        self.drag_offset = 0
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
