@@ -178,6 +178,7 @@ class ScrollBar(ElementBehavior):
         self.elements = None
         self.dragging = False
         self.drag_offset = 0
+        self.rect = {"rect": rect, "thumb": self.thumb_rect} 
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
