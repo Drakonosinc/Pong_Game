@@ -179,6 +179,10 @@ class ScrollBar(ElementBehavior):
         self.dragging = False
         self.drag_offset = 0
         self.rect = {"rect": rect, "thumb": self.thumb_rect} 
+    def events(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self.thumb_rect.collidepoint(event.pos):
+                self.dragging = True
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
