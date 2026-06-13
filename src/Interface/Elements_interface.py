@@ -189,6 +189,7 @@ class ScrollBar(ElementBehavior):
         elif event.type == pygame.MOUSEMOTION and self.dragging:
             if self.type_of_orientation == "vertical":
                 new_pos = event.pos[1] - self.drag_offset
+                new_pos = max(self.rect["rect"].top, min(new_pos, self.rect["rect"].bottom - self.thumb_size))
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
