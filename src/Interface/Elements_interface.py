@@ -190,6 +190,7 @@ class ScrollBar(ElementBehavior):
             if self.type_of_orientation == "vertical":
                 new_pos = event.pos[1] - self.drag_offset
                 new_pos = max(self.rect["rect"].top, min(new_pos, self.rect["rect"].bottom - self.thumb_size))
+                self.thumb_rect.y = new_pos
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
