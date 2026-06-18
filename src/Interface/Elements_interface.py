@@ -195,6 +195,7 @@ class ScrollBar(ElementBehavior):
                 new_pos = event.pos[0] - self.drag_offset
                 new_pos = max(self.rect["rect"].left, min(new_pos, self.rect["rect"].right - self.thumb_size))
                 self.thumb_rect.x = new_pos
+            self.scroll_elements()
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
