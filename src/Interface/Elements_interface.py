@@ -200,6 +200,9 @@ class ScrollBar(ElementBehavior):
         max_scroll = self.content_size
         if max_scroll == 0: 
             proportion = 0.0
+        else: 
+            if self.type_of_orientation == "vertical":
+                proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_size)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
