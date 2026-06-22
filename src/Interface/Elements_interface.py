@@ -203,6 +203,8 @@ class ScrollBar(ElementBehavior):
         else: 
             if self.type_of_orientation == "vertical":
                 proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_size)
+            else:
+                proportion = (self.thumb_rect.x - self.rect["rect"].x) / (self.rect["rect"].width - self.thumb_size)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
