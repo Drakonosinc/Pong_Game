@@ -210,6 +210,7 @@ class ScrollBar(ElementBehavior):
             if self.type_of_orientation == "vertical":
                 old_pos = el.position[1]
                 new_pos = y0 - offset
+                el.position = (x0, new_pos)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
