@@ -211,6 +211,8 @@ class ScrollBar(ElementBehavior):
                 old_pos = el.position[1]
                 new_pos = y0 - offset
                 el.position = (x0, new_pos)
+            else:
+                old_pos = el.position[0]
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
