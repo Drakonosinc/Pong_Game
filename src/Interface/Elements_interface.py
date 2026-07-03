@@ -219,6 +219,7 @@ class ScrollBar(ElementBehavior):
             def add_delta(item, delta):
                 if isinstance(item, pygame.Rect):
                     if self.type_of_orientation == "vertical": item.y += delta
+                    else: item.x += delta
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
