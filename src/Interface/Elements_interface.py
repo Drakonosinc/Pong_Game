@@ -226,6 +226,8 @@ class ScrollBar(ElementBehavior):
                     add_delta(item.rect, delta)
                     if self.type_of_orientation == "vertical":
                         item.position = (item.position[0], item.position[1] + delta)
+                    else:
+                        item.position = (item.position[0] + delta, item.position[1])
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
