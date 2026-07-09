@@ -230,6 +230,8 @@ class ScrollBar(ElementBehavior):
                         item.position = (item.position[0] + delta, item.position[1])
             if isinstance(el.rect, dict):
                 for key in el.rect: add_delta(el.rect[key], delta)
+            else: 
+                add_delta(el.rect, delta)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
