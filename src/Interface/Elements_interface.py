@@ -234,6 +234,7 @@ class ScrollBar(ElementBehavior):
                 add_delta(el.rect, delta)
         if hasattr(el, 'scroll') and isinstance(el.scroll, ScrollBar):
             el.scroll.initial_positions = [(sub_el.position[0], sub_el.position[1]) for sub_el in el.scroll.elements]
+        if callable(self.commands): self.commands(proportion)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
