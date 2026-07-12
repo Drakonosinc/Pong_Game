@@ -235,6 +235,8 @@ class ScrollBar(ElementBehavior):
         if hasattr(el, 'scroll') and isinstance(el.scroll, ScrollBar):
             el.scroll.initial_positions = [(sub_el.position[0], sub_el.position[1]) for sub_el in el.scroll.elements]
         if callable(self.commands): self.commands(proportion)
+    def draw(self):
+        pygame.draw.rect(self.screen, self.color, self.rect["rect"])
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
