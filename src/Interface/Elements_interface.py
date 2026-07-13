@@ -237,6 +237,7 @@ class ScrollBar(ElementBehavior):
         if callable(self.commands): self.commands(proportion)
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
+        pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
