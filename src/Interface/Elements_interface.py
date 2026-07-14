@@ -238,6 +238,7 @@ class ScrollBar(ElementBehavior):
     def draw(self):
         pygame.draw.rect(self.screen, self.color, self.rect["rect"])
         pygame.draw.rect(self.screen, self.color_thumb, self.thumb_rect)
+        if self.detect_mouse: self.mouse_collision(self.thumb_rect, self.get_mouse_pos())
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
