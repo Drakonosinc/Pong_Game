@@ -242,6 +242,9 @@ class ScrollBar(ElementBehavior):
         if self.pressed: self.pressed_button(self.thumb_rect, pygame.mouse.get_pressed(), self.get_mouse_pos())
     def draw_hover_effect(self):
         return pygame.draw.rect(self.screen, self.hover_color, self.thumb_rect)
+    def update_elements(self, elements: list):
+        if self.elements is None:
+            self.elements = elements
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
