@@ -245,6 +245,7 @@ class ScrollBar(ElementBehavior):
     def update_elements(self, elements: list):
         if self.elements is None:
             self.elements = elements
+            self.initial_positions = [(el.position[0], el.position[1]) for el in self.elements]
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
