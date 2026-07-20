@@ -249,6 +249,8 @@ class ScrollBar(ElementBehavior):
             if self.elements:
                 if self.type_of_orientation == "vertical":
                     start_pos = min(y for _, y in self.initial_positions)
+                else:
+                    start_pos = min(x for x, _ in self.initial_positions)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
