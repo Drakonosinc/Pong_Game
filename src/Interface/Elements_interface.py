@@ -251,6 +251,8 @@ class ScrollBar(ElementBehavior):
                     start_pos = min(y for _, y in self.initial_positions)
                 else:
                     start_pos = min(x for x, _ in self.initial_positions)
+                    
+                end_pos = self.return_rect()
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
