@@ -254,6 +254,8 @@ class ScrollBar(ElementBehavior):
                     
                 end_pos = self.return_rect()
                 self.content_size = end_pos - start_pos
+            else:
+                self.content_size = self.rect["rect"].height if self.type_of_orientation == "vertical" else self.rect["rect"].width
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
