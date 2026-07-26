@@ -262,6 +262,8 @@ class ScrollBar(ElementBehavior):
                 return val.bottom if self.type_of_orientation == "vertical" else val.right
             elif isinstance(val, dict):
                 return max(get_bound(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
+            elif hasattr(val, 'rect'):
+                return get_bound(val.rect)
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
