@@ -264,6 +264,7 @@ class ScrollBar(ElementBehavior):
                 return max(get_bound(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
             elif hasattr(val, 'rect'):
                 return get_bound(val.rect)
+            return 0
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
