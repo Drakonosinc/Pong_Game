@@ -269,6 +269,8 @@ class ScrollBar(ElementBehavior):
         if self.elements:
             for el in self.elements:
                 rect = getattr(el, 'rect', None)
+                if isinstance(rect, dict):
+                    for v in rect.values(): max_bound = max(max_bound, get_bound(v))
 
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
