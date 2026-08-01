@@ -273,7 +273,7 @@ class ScrollBar(ElementBehavior):
                     for v in rect.values(): max_bound = max(max_bound, get_bound(v))
                 else:
                     max_bound = max(max_bound, get_bound(rect))
-
+        return max_bound
 class ComboBox(TextButton):
     def __init__(self, config: dict) -> None:
         super().__init__(config)
