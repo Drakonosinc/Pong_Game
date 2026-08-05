@@ -258,8 +258,7 @@ class ScrollBar(ElementBehavior):
                 self.content_size = self.rect["rect"].height if self.type_of_orientation == "vertical" else self.rect["rect"].width
     def return_rect(self):
         def get_bound(val):
-            if isinstance(val, pygame.Rect):
-                return val.bottom if self.type_of_orientation == "vertical" else val.right
+            if isinstance(val, pygame.Rect): return val.bottom if self.type_of_orientation == "vertical" else val.right
             elif isinstance(val, dict): return max(get_bound(v) for v in val.values() if isinstance(v, (pygame.Rect, dict)))
             elif hasattr(val, 'rect'): return get_bound(val.rect)
             return 0
