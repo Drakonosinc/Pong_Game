@@ -247,8 +247,7 @@ class ScrollBar(ElementBehavior):
             self.elements = elements
             self.initial_positions = [(el.position[0], el.position[1]) for el in self.elements]
             if self.elements:
-                if self.type_of_orientation == "vertical":
-                    start_pos = min(y for _, y in self.initial_positions)
+                if self.type_of_orientation == "vertical": start_pos = min(y for _, y in self.initial_positions)
                 else: start_pos = min(x for x, _ in self.initial_positions)
                 end_pos = self.return_rect()
                 self.content_size = end_pos - start_pos
