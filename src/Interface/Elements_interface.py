@@ -228,7 +228,8 @@ class ScrollBar(ElementBehavior):
                         item.position = (item.position[0], item.position[1] + delta)
                     else:
                         item.position = (item.position[0] + delta, item.position[1])
-            if isinstance(el.rect, dict): for key in el.rect: add_delta(el.rect[key], delta)
+            if isinstance(el.rect, dict): 
+                for key in el.rect: add_delta(el.rect[key], delta)
             else: add_delta(el.rect, delta)
         if hasattr(el, 'scroll') and isinstance(el.scroll, ScrollBar): el.scroll.initial_positions = [(sub_el.position[0], sub_el.position[1]) for sub_el in el.scroll.elements]
         if callable(self.commands): self.commands(proportion)
