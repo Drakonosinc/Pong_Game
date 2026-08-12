@@ -226,8 +226,7 @@ class ScrollBar(ElementBehavior):
                     add_delta(item.rect, delta)
                     if self.type_of_orientation == "vertical":
                         item.position = (item.position[0], item.position[1] + delta)
-                    else:
-                        item.position = (item.position[0] + delta, item.position[1])
+                    else: item.position = (item.position[0] + delta, item.position[1])
             if isinstance(el.rect, dict): 
                 for key in el.rect: add_delta(el.rect[key], delta)
             else: add_delta(el.rect, delta)
