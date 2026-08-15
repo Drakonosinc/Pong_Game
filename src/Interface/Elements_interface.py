@@ -201,8 +201,7 @@ class ScrollBar(ElementBehavior):
         if max_scroll == 0: 
             proportion = 0.0
         else: 
-            if self.type_of_orientation == "vertical":
-                proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_size)
+            if self.type_of_orientation == "vertical": proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_size)
             else: proportion = (self.thumb_rect.x - self.rect["rect"].x) / (self.rect["rect"].width - self.thumb_size)
         offset = int(proportion * max_scroll)
         for el, (x0, y0) in zip(self.elements, self.initial_positions):
