@@ -198,8 +198,7 @@ class ScrollBar(ElementBehavior):
             self.scroll_elements()
     def scroll_elements(self):
         max_scroll = self.content_size
-        if max_scroll == 0: 
-            proportion = 0.0
+        if max_scroll == 0:  proportion = 0.0
         else: 
             if self.type_of_orientation == "vertical": proportion = (self.thumb_rect.y - self.rect["rect"].y) / (self.rect["rect"].height - self.thumb_size)
             else: proportion = (self.thumb_rect.x - self.rect["rect"].x) / (self.rect["rect"].width - self.thumb_size)
