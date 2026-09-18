@@ -200,7 +200,17 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                 for key, value in model_state_dict.items()
                 if key in target_state and target_state[key].shape == value.shape}
             model.load_state_dict(filtered, strict=False)
-        if has_fc:
+        if has_hidden:
+            indices = sorted({int(key.split(".")[1]) for key in state_dict.keys() if key.startswith("hidden_layers.")})
+            sizes = []
+            for index in indices:
+                weight_key = f"hidden_layers.{index}.weight"
+                if weight_key in state_dict:
+                    sizes.append(state_dict[weight_key].shape[0])
+            if not sizes: sizes = hidden_sizes or [128]
+            model = _build_model(type_model, input_size, output_size, hidden_sizes=sizes)
+            _filtered_load(model, state_dict)
+        elif has_fc:
             if "fc1.weight" in state_dict: first_hidden = state_dict["fc1.weight"].shape[0]
             else:
                 any_weight = next((value for key, value in state_dict.items() if key.endswith(".weight")), None)
@@ -218,16 +228,6 @@ def load_genetic_model(path, type_model, input_size, output_size, optimizer=None
                     remapped["output_layer.weight"] = output_weight
                     remapped["output_layer.bias"] = output_bias
             _filtered_load(model, remapped)
-        elif has_hidden:
-            indices = sorted({int(key.split(".")[1]) for key in state_dict.keys() if key.startswith("hidden_layers.")})
-            sizes = []
-            for index in indices:
-                weight_key = f"hidden_layers.{index}.weight"
-                if weight_key in state_dict:
-                    sizes.append(state_dict[weight_key].shape[0])
-            if not sizes: sizes = hidden_sizes or [128]
-            model = _build_model(type_model, input_size, output_size, hidden_sizes=sizes)
-            _filtered_load(model, state_dict)
         else:
             model = _build_model(type_model, input_size, output_size, hidden_sizes=hidden_sizes)
             _filtered_load(model, state_dict)
