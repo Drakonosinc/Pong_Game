@@ -13,3 +13,8 @@ from src.Interface.Elements_interface import (
     ScrollBar,
     ComboBoxDown,
 )
+
+
+class TestUIElements(unittest.TestCase):
+    def setUp(self):
+        self.surface = pygame.Surface((700, 400))
