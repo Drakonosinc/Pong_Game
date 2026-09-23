@@ -18,3 +18,4 @@ from src.Interface.Elements_interface import (
 class TestUIElements(unittest.TestCase):
     def setUp(self):
         self.surface = pygame.Surface((700, 400))
+        self.font = pygame.font.Font(None, 24)
