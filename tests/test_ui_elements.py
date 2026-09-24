@@ -19,3 +19,9 @@ class TestUIElements(unittest.TestCase):
     def setUp(self):
         self.surface = pygame.Surface((700, 400))
         self.font = pygame.font.Font(None, 24)
+        self.factory = ElementsFactory({
+            "screen": self.surface,
+            "font": self.font,
+            "color": (255, 255, 255),
+            "hover_color": (255, 199, 51),
+        })
