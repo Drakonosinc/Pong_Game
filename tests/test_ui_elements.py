@@ -28,3 +28,4 @@ class TestUIElements(unittest.TestCase):
 
     def test_factory_creates_primitives(self):
         text_el = self.factory.create_Text({"text": "Hello Pong", "position": (10, 10)})
+        self.assertIsInstance(text_el, Text)
