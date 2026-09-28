@@ -35,3 +35,4 @@ class TestUIElements(unittest.TestCase):
             "position": (100, 100),
             "command1": lambda: None,
         })
+        self.assertIsInstance(btn, TextButton)
