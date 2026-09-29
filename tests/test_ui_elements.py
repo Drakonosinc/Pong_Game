@@ -36,3 +36,5 @@ class TestUIElements(unittest.TestCase):
             "command1": lambda: None,
         })
         self.assertIsInstance(btn, TextButton)
+
+        poly_btn = self.factory.create_PolygonButton({
