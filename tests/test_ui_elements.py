@@ -40,3 +40,4 @@ class TestUIElements(unittest.TestCase):
         poly_btn = self.factory.create_PolygonButton({
             "position": [(10, 10), (30, 10), (20, 30)],
         })
+        self.assertIsInstance(poly_btn, PolygonButton)
