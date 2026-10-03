@@ -43,3 +43,5 @@ class TestUIElements(unittest.TestCase):
         self.assertIsInstance(poly_btn, PolygonButton)
 
         input_txt = self.factory.create_InputText({
+            "position": (200, 200, 150, 40),
+        })
