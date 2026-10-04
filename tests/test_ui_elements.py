@@ -45,3 +45,4 @@ class TestUIElements(unittest.TestCase):
         input_txt = self.factory.create_InputText({
             "position": (200, 200, 150, 40),
         })
+        self.assertIsInstance(input_txt, Input_text)
