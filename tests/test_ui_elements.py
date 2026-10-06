@@ -48,3 +48,5 @@ class TestUIElements(unittest.TestCase):
         self.assertIsInstance(input_txt, Input_text)
 
         scrollbar = self.factory.create_ScrollBar({
+            "position": (300, 50, 20, 100),
+        })
