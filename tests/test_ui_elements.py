@@ -53,3 +53,4 @@ class TestUIElements(unittest.TestCase):
         self.assertIsInstance(scrollbar, ScrollBar)
 
         combo = self.factory.create_ComboBox({
+            "text": "Select",
