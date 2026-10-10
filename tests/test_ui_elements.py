@@ -54,3 +54,4 @@ class TestUIElements(unittest.TestCase):
 
         combo = self.factory.create_ComboBox({
             "text": "Select",
+            "position": (400, 50),
