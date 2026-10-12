@@ -56,3 +56,5 @@ class TestUIElements(unittest.TestCase):
             "text": "Select",
             "position": (400, 50),
             "options": ["Opt1", "Opt2"],
+            "type_dropdown": "down",
+        })
