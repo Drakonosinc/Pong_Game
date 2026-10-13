@@ -58,3 +58,4 @@ class TestUIElements(unittest.TestCase):
             "options": ["Opt1", "Opt2"],
             "type_dropdown": "down",
         })
+        self.assertIsInstance(combo, ComboBoxDown)
