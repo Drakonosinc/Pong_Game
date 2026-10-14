@@ -59,3 +59,5 @@ class TestUIElements(unittest.TestCase):
             "type_dropdown": "down",
         })
         self.assertIsInstance(combo, ComboBoxDown)
+
+    def test_text_draw(self):
