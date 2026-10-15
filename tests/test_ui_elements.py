@@ -61,3 +61,4 @@ class TestUIElements(unittest.TestCase):
         self.assertIsInstance(combo, ComboBoxDown)
 
     def test_text_draw(self):
+        text_el = self.factory.create_Text({"text": "Test Score: 10", "position": (20, 20)})
