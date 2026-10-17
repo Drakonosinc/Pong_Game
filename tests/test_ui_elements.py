@@ -63,3 +63,6 @@ class TestUIElements(unittest.TestCase):
     def test_text_draw(self):
         text_el = self.factory.create_Text({"text": "Test Score: 10", "position": (20, 20)})
         text_el.draw()
+
+    def test_text_button_command_execution(self):
+        command_called = []
