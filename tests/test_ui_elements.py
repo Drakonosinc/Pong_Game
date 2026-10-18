@@ -66,3 +66,4 @@ class TestUIElements(unittest.TestCase):
 
     def test_text_button_command_execution(self):
         command_called = []
+        btn = self.factory.create_TextButton({
