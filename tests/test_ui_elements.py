@@ -69,3 +69,4 @@ class TestUIElements(unittest.TestCase):
         btn = self.factory.create_TextButton({
             "text": "Action",
             "position": (50, 50),
+            "command1": lambda: command_called.append(True),
