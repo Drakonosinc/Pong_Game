@@ -70,3 +70,7 @@ class TestUIElements(unittest.TestCase):
             "text": "Action",
             "position": (50, 50),
             "command1": lambda: command_called.append(True),
+        })
+
+        # Simulate button press
+        btn.states["presses_touch"] = True
