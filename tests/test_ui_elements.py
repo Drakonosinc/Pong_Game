@@ -74,3 +74,4 @@ class TestUIElements(unittest.TestCase):
 
         # Simulate button press
         btn.states["presses_touch"] = True
+        btn.pressed_button(
