@@ -76,3 +76,4 @@ class TestUIElements(unittest.TestCase):
         btn.states["presses_touch"] = True
         btn.pressed_button(
             rect=btn.rect,
+            pressed_mouse=(True, False, False),
