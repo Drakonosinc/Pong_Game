@@ -78,3 +78,5 @@ class TestUIElements(unittest.TestCase):
             rect=btn.rect,
             pressed_mouse=(True, False, False),
             mouse_pos=(btn.rect.centerx, btn.rect.centery),
+            draw=lambda: None,
+        )
