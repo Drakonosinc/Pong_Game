@@ -80,3 +80,4 @@ class TestUIElements(unittest.TestCase):
             mouse_pos=(btn.rect.centerx, btn.rect.centery),
             draw=lambda: None,
         )
+        self.assertTrue(btn.states["active"])
