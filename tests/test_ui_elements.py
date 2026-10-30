@@ -81,3 +81,6 @@ class TestUIElements(unittest.TestCase):
             draw=lambda: None,
         )
         self.assertTrue(btn.states["active"])
+
+        # Release mouse over button triggers command
+        btn.pressed_button(
