@@ -85,3 +85,4 @@ class TestUIElements(unittest.TestCase):
         # Release mouse over button triggers command
         btn.pressed_button(
             rect=btn.rect,
+            pressed_mouse=(False, False, False),
