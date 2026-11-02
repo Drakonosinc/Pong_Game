@@ -86,3 +86,4 @@ class TestUIElements(unittest.TestCase):
         btn.pressed_button(
             rect=btn.rect,
             pressed_mouse=(False, False, False),
+            mouse_pos=(btn.rect.centerx, btn.rect.centery),
