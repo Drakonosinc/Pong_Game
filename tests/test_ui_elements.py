@@ -89,3 +89,4 @@ class TestUIElements(unittest.TestCase):
             mouse_pos=(btn.rect.centerx, btn.rect.centery),
             draw=lambda: None,
         )
+        self.assertEqual(len(command_called), 1)
