@@ -90,3 +90,6 @@ class TestUIElements(unittest.TestCase):
             draw=lambda: None,
         )
         self.assertEqual(len(command_called), 1)
+
+    def test_input_text_typing_and_backspace(self):
+        input_txt = self.factory.create_InputText({
