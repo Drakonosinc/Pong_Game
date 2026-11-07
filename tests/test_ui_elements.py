@@ -93,3 +93,5 @@ class TestUIElements(unittest.TestCase):
 
     def test_input_text_typing_and_backspace(self):
         input_txt = self.factory.create_InputText({
+            "position": (10, 10, 100, 30),
+        })
