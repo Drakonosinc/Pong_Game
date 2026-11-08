@@ -95,3 +95,4 @@ class TestUIElements(unittest.TestCase):
         input_txt = self.factory.create_InputText({
             "position": (10, 10, 100, 30),
         })
+        input_txt.states["active"] = True
