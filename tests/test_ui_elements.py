@@ -96,3 +96,6 @@ class TestUIElements(unittest.TestCase):
             "position": (10, 10, 100, 30),
         })
         input_txt.states["active"] = True
+
+        # Type 'A'
+        ev_a = pygame.event.Event(KEYDOWN, key=K_a, unicode="A")
