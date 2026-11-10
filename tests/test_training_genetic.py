@@ -6,18 +6,18 @@ import numpy as np
 import torch
 from tests import conftest
 
-from src.Type_Training.Genetic_Algorithm import (
-    initialize_population,
-    _get_weights_np,
-    _set_weights_np,
-    select_parents,
+from pyforgeai import (
+    SimpleNN_Pytorch,
     crossover,
+    genetic_algorithm,
+    get_weights_np as _get_weights_np,
+    initialize_population,
+    load_genetic_model,
     mutate,
     save_genetic_model,
-    load_genetic_model,
-    genetic_algorithm,
+    select_parents,
+    set_weights_np as _set_weights_np,
 )
-from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
 
 
 class TestGeneticAlgorithm(unittest.TestCase):

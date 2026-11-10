@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from tests import conftest
 
-from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
+from pyforgeai import SimpleNN_Pytorch, SimpleNN_Tensorflow
 
 
 class TestNeuralNetworks(unittest.TestCase):
@@ -31,7 +31,6 @@ class TestNeuralNetworks(unittest.TestCase):
     def test_tensorflow_network_if_installed(self):
         try:
             import tensorflow as tf
-            from src.Type_Model.Neural_Network_Tensorflow import SimpleNN_Tensorflow
 
             net_tf = SimpleNN_Tensorflow(input_size=6, output_size=2, hidden_sizes=[16, 8])
             x_tf = tf.random.normal((1, 6))

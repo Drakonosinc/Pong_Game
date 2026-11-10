@@ -6,12 +6,12 @@ import numpy as np
 import torch
 from tests import conftest
 
-from src.Type_Training.Q_learning import (
-    ReplayMemory,
+from pyforgeai import (
     DQNAgent,
     QLearningTrainer,
-    save_qlearning_model,
+    ReplayMemory,
     load_qlearning_model,
+    save_qlearning_model,
 )
 
 

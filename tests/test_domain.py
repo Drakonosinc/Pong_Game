@@ -5,9 +5,8 @@ from tests import conftest  # Configura sys.path y variables dummy
 from src.Core.Domain.Geometry import Rectangle
 from src.Core.Domain.DTOs import WorldStateDTO
 from src.Core.GameContext import GameContext
-from src.Core.Interfaces.IAIModel import IAIModel
 from src.Core.Interfaces.ISoundService import IAudioService
-from src.Core.Interfaces.ITrainer import ITrainer
+from pyforgeai import IAIModel, ITrainer
 
 
 class TestRectangle(unittest.TestCase):

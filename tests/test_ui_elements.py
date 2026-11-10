@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 from tests import conftest
 
-from src.Interface.Elements_interface import (
+from pyforgeui import (
     ElementsFactory,
     Text,
     TextButton,
@@ -99,3 +99,19 @@ class TestUIElements(unittest.TestCase):
 
         # Type 'A'
         ev_a = pygame.event.Event(KEYDOWN, key=K_a, unicode="A")
+        input_txt.change_text(ev_a)
+        self.assertEqual(input_txt.text, "A")
+
+        # Type 'B'
+        ev_b = pygame.event.Event(KEYDOWN, key=K_b, unicode="B")
+        input_txt.change_text(ev_b)
+        self.assertEqual(input_txt.text, "AB")
+
+        # Backspace deletes 'B'
+        ev_back = pygame.event.Event(KEYDOWN, key=K_BACKSPACE, unicode="")
+        input_txt.change_text(ev_back)
+        self.assertEqual(input_txt.text, "A")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -7,8 +7,7 @@ import torch
 import torch.nn as nn
 from tests import conftest
 
-from src.Infrastructure.AI.Adapters.MockAdapter import MockAdapter
-from src.Infrastructure.AI.Adapters.PyTorchAdapter import PyTorchAdapter
+from pyforgeai import MockAdapter, PyTorchAdapter, TensorFlowAdapter
 from src.AI.AI_Controller import AIHandler
 from src.Events.EventManager import EventManager
 from src.Events.GameEvents import GameStateChangedEvent, ActionDecidedEvent
@@ -61,7 +60,6 @@ class TestAIAdapters(unittest.TestCase):
     def test_tensorflow_adapter_if_installed(self):
         try:
             import tensorflow as tf
-            from src.Infrastructure.AI.Adapters.TensorFlowAdapter import TensorFlowAdapter
 
             inputs = tf.keras.Input(shape=(6,))
             outputs = tf.keras.layers.Dense(2)(inputs)

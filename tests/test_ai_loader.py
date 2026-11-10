@@ -5,9 +5,12 @@ from unittest.mock import MagicMock
 import torch
 from tests import conftest
 
-from src.Loaders.AILoader import AILoader, AIModelLoadResult
-from src.Type_Model.Neural_Network_Pytorch import SimpleNN_Pytorch
-from src.Type_Training.Genetic_Algorithm import save_genetic_model
+from pyforgeai import (
+    AILoader,
+    AIModelLoadResult,
+    SimpleNN_Pytorch,
+    save_genetic_model,
+)
 
 
 class TestAILoader(unittest.TestCase):

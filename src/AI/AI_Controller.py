@@ -1,68 +1,88 @@
 import numpy as np
-from src.Core.Interfaces.IAIModel import IAIModel
+from pyforgeai import (
+    IAIModel,
+    MockAdapter,
+    PyTorchAdapter,
+    TensorFlowAdapter,
+    get_active_qlearning_trainer,
+)
 from src.Events.GameEvents import GameStateChangedEvent, ActionDecidedEvent
+
+
 class AIHandler:
     def __init__(self, game):
         self.game = game
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
-        self.model_adapter: IAIModel = None 
+        self.model_adapter: IAIModel = None
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_game_state_changed)
-    def set_model(self, model_adapter: IAIModel): 
+
+    def set_model(self, model_adapter: IAIModel):
         self.model_adapter = model_adapter
+
     def clear_model(self):
         self.model_adapter = None
+
     def set_runtime_model(self, model):
-        if model is None: return
+        if model is None:
+            return
         if isinstance(model, IAIModel):
             self.model_adapter = model
             return
         current_model = self.model_adapter.get_internal_model() if self.model_adapter else None
-        if current_model is model: return
+        if current_model is model:
+            return
         type_model = self.game.config.config_AI.get("type_model", {})
         if type_model.get("Pytorch", False):
-            from src.Infrastructure.AI.Adapters.PyTorchAdapter import PyTorchAdapter
             self.model_adapter = PyTorchAdapter(model)
         elif type_model.get("Tensorflow", False):
-            from src.Infrastructure.AI.Adapters.TensorFlowAdapter import TensorFlowAdapter
             self.model_adapter = TensorFlowAdapter(model)
         else:
-            from src.Infrastructure.AI.Adapters.MockAdapter import MockAdapter
             self.model_adapter = MockAdapter(output_size=2)
+
     def get_state(self):
         game_logic = getattr(self.game, "game_logic", None)
         if game_logic is None:
-            if self.prev_state is not None: return self.prev_state.copy()
+            if self.prev_state is not None:
+                return self.prev_state.copy()
             raise RuntimeError("No hay un GameLogic disponible para construir el estado actual.")
         return np.array([
             game_logic.player_one.rect.x, game_logic.player_one.rect.y,
             game_logic.player_two.rect.x, game_logic.player_two.rect.y,
             game_logic.balls[0].rect.x, game_logic.balls[0].rect.y
         ], dtype=np.float32)
+
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
-        if self.game.config.config_AI["type_training"]["Q-learning"]: self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
+        if self.game.config.config_AI["type_training"]["Q-learning"]:
+            self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
         else:
-            if not self.model_adapter: return
+            if not self.model_adapter:
+                return
             action = self.model_adapter.predict(state_array)
             self.game.event_manager.post(ActionDecidedEvent(action))
+
     def _qlearning_actions(self, current_state, current_reward, p1_score, p2_score):
-        from src.Type_Training.Q_learning import _qlearning_trainer
-        if _qlearning_trainer is None: return
+        trainer = get_active_qlearning_trainer(self.game)
+        if trainer is None:
+            return
         if self.prev_state is not None and self.prev_action is not None:
             reward = current_reward - self.prev_reward
             max_score = self.game.config.config_game["max_score"]
             done = (p1_score >= max_score or p2_score >= max_score)
-            _qlearning_trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
-        action = _qlearning_trainer.get_action(current_state)
+            trainer.store_experience(self.prev_state, self.prev_action, reward, current_state, done)
+        action = trainer.get_action(current_state)
         self.game.event_manager.post(ActionDecidedEvent(action))
         self.prev_state = current_state.copy()
         self.prev_action = action
         self.prev_reward = current_reward
+
     def reset_qlearning_state(self):
         self.prev_state = None
         self.prev_action = None
         self.prev_reward = 0
+
     def manual_save_model(self):
-        if self.model_adapter: self.model_adapter.save(self.game.model_path)
+        if self.model_adapter:
+            self.model_adapter.save(self.game.model_path)
