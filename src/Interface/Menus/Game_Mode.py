@@ -375,13 +375,11 @@ class GameMode(BaseMenu):
         })
 
     def _setup_scroll_bar(self):
-        self._setup_training_genetic_elements()
-        self._setup_training_qlearning_elements()
         factory = self.interface.button_factory_f5
         self.config_buttons["scroll"] = factory.create_ScrollBar({
             "position": (self.WIDTH - 30, 100, 20, self.HEIGHT - 200),
             "thumb_height": 20,
-            "scroll_area": pygame.Rect(int(self.WIDTH / 2 + 60), 66, int(self.WIDTH / 2 - 65), int(self.HEIGHT - 126)),
+            "scroll_area": pygame.Rect(0, 66, self.WIDTH, self.HEIGHT - 66),
         })
         buttons_list = list(
             self.config_genetic_buttons.values()
