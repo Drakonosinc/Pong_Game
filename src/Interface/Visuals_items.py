@@ -1,4 +1,5 @@
 import pygame
+from pyforgeui import RetroVisualFX
 from pyforgefx import (
     ParticleEmitter,
     ScreenShake,
@@ -39,6 +40,18 @@ class Visuals_items:
         self.game.event_manager.subscribe(GameStateChangedEvent, self.handle_state_changed)
         self.game.event_manager.subscribe(BallBounceEvent, self.handle_ball_bounce)
         self.game.event_manager.subscribe(GoalScoredEvent, self.handle_goal_scored)
+
+    def _blit_hud_text(self, screen: pygame.Surface, font: pygame.font.Font, text: str, pos: tuple[int, int], color, glow_color=None):
+        surf, (px, py), _, _ = RetroVisualFX.render_text_styled(
+            font,
+            text,
+            color=color,
+            shadow=True,
+            glow=True,
+            glow_color=glow_color if glow_color is not None else color,
+            glow_radius=3,
+        )
+        screen.blit(surf, (int(pos[0]) - px, int(pos[1]) - py))
 
     def handle_state_changed(self, event: GameStateChangedEvent):
         self.current_state_dto = event.state_dto
@@ -94,7 +107,7 @@ class Visuals_items:
             p1_frame = self.assets.p1_animator.update(dt)
             p2_frame = self.assets.p2_animator.update(dt)
             screen.blit(p1_frame, (-77 - 6 + ox, dto.p1_y - 140 - 6 + oy))
-            screen.blit(p2_frame, (578 - 6 + ox, dto.p2_y - 140 - 6 + oy))
+            screen.blit(p2_frame, (578 - 6 + ox, dto.p1_y if False else dto.p2_y - 140 - 6 + oy))
         else:
             screen.blit(self.assets.spacecraft, (-77 + ox, dto.p1_y - 140 + oy))
             screen.blit(self.assets.spacecraft2, (578 + ox, dto.p2_y - 140 + oy))
@@ -107,37 +120,41 @@ class Visuals_items:
             screen.blit(self.rotated_ball, (dto.ball_x + ox, dto.ball_y + oy))
 
     def mode_speed(self, screen):
-        screen.blit(
-            self.assets.font.render(f"Speed: {self.game.speed}", True, self.assets.YELLOW),
+        self._blit_hud_text(
+            screen,
+            self.assets.font,
+            f"Speed: {self.game.speed}",
             (self.game.WIDTH // 2 - 40, 360),
+            self.assets.YELLOW,
+            glow_color=(255, 199, 51),
         )
 
     def name_players(self, screen):
         if hasattr(self.ui, "input_player1") and hasattr(self.ui, "input_player2"):
-            screen.blit(
-                self.assets.font.render(f"{self.ui.input_player1.show_player()}", True, self.assets.YELLOW),
+            self._blit_hud_text(
+                screen,
+                self.assets.font,
+                f"{self.ui.input_player1.show_player()}",
                 (45, 360),
+                self.assets.YELLOW,
+                glow_color=(56, 189, 248),
             )
-            screen.blit(
-                self.assets.font.render(f"{self.ui.input_player2.show_player()}", True, self.assets.YELLOW),
+            self._blit_hud_text(
+                screen,
+                self.assets.font,
+                f"{self.ui.input_player2.show_player()}",
                 (580, 360),
+                self.assets.YELLOW,
+                glow_color=(168, 85, 247),
             )
 
     def draw_generation(self, screen):
-        if self.game.config.config_AI["type_training"]["Q-learning"]:
-            screen.blit(
-                self.assets.font2.render(f"Episode: {self.game.generation}", True, self.assets.YELLOW),
-                (10, 10),
-            )
-        else:
-            screen.blit(
-                self.assets.font2.render(f"Generation: {self.game.generation}", True, self.assets.YELLOW),
-                (10, 10),
-            )
+        label = f"Episode: {self.game.generation}" if self.game.config.config_AI["type_training"]["Q-learning"] else f"Generation: {self.game.generation}"
+        self._blit_hud_text(screen, self.assets.font2, label, (10, 10), self.assets.YELLOW, glow_color=(56, 189, 248))
 
     def scores(self, screen):
-        screen.blit(self.assets.font.render(f"Score {self.p1_score}", True, self.assets.YELLOW), (45, 380))
-        screen.blit(self.assets.font.render(f"Score {self.p2_score}", True, self.assets.YELLOW), (580, 380))
+        self._blit_hud_text(screen, self.assets.font, f"Score {self.p1_score}", (45, 380), self.assets.YELLOW, glow_color=(56, 189, 248))
+        self._blit_hud_text(screen, self.assets.font, f"Score {self.p2_score}", (580, 380), self.assets.YELLOW, glow_color=(168, 85, 247))
 
     def draw_activations(self, screen):
         if self.game.mode_game["AI"]:
@@ -149,15 +166,14 @@ class Visuals_items:
                 (self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)
             ]
             for pos in neuron_positions:
-                pygame.draw.circle(screen, self.assets.WHITE, pos, 5)
-                pygame.draw.line(screen, self.assets.WHITE, (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
-                pygame.draw.line(screen, self.assets.WHITE, (self.game.WIDTH - 190, self.game.HEIGHT // 2), pos, 1)
+                pygame.draw.line(screen, (56, 189, 248), (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
+                pygame.draw.line(screen, (168, 85, 247), (self.game.WIDTH - 190, self.game.HEIGHT // 2), pos, 1)
             for i in range(num_activations):
-                activation_value = activations[0][i]
-                activation_value = max(0, min(activation_value, 1))
-                color_intensity = int(activation_value * 255)
-                color = (color_intensity, color_intensity, color_intensity)
-                pygame.draw.circle(screen, color, neuron_positions[i], 5)
+                activation_value = float(activations[0][i])
+                activation_value = max(0.0, min(activation_value, 1.0))
+                color = RetroVisualFX.lerp_color((25, 45, 85), (56, 225, 255), activation_value)
+                pygame.draw.circle(screen, color, neuron_positions[i], 6)
+                pygame.draw.circle(screen, (255, 255, 255), neuron_positions[i], 6, 1)
 
     def draw_model_data(self, screen):
         if self.game.mode_game["AI"]:
@@ -172,18 +188,26 @@ class Visuals_items:
                     elif hasattr(layer, "kernel"):
                         weights_preview = layer.kernel.numpy().flatten()[:5]
                 if weights_preview is not None:
-                    weights_text = self.assets.font.render(
-                        f"Model Weights: {weights_preview}", True, self.assets.YELLOW
+                    self._blit_hud_text(
+                        screen,
+                        self.assets.font,
+                        f"Model Weights: {weights_preview}",
+                        (10, 50),
+                        self.assets.YELLOW,
+                        glow_color=(56, 189, 248),
                     )
-                    screen.blit(weights_text, (10, 50))
             except Exception:
                 pass
             if getattr(self.game.model, "activations", None) is not None:
                 try:
-                    activations_text = self.assets.font.render(
-                        f"Activations: {self.game.model.activations.flatten()[:5]}", True, self.assets.YELLOW
+                    self._blit_hud_text(
+                        screen,
+                        self.assets.font,
+                        f"Activations: {self.game.model.activations.flatten()[:5]}",
+                        (10, 70),
+                        self.assets.YELLOW,
+                        glow_color=(168, 85, 247),
                     )
-                    screen.blit(activations_text, (10, 70))
                 except Exception:
                     pass
 

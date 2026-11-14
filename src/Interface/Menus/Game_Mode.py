@@ -1,6 +1,7 @@
 import os
 
 import pygame
+from pyforgeui import RetroVisualFX
 
 from .Base_Menu import BaseMenu
 from Utils.States import GameState
@@ -100,6 +101,7 @@ class GameMode(BaseMenu):
         self.buttons["decrease_score"] = factory.create_PolygonButton({
             "color": self.interface.BLACK,
             "position": ((320, 185), (320, 205), (300, 195)),
+            "position2": ((320, 181), (320, 209), (294, 195)),
             "color2": self.interface.WHITE,
             "repeat_button": True,
             "command1": lambda: self.increase_decrease_variable(self.config.config_game, "max_score", 1, -1),
@@ -107,6 +109,7 @@ class GameMode(BaseMenu):
         self.buttons["increase_score"] = factory.create_PolygonButton({
             "color": self.interface.BLACK,
             "position": ((380, 185), (380, 205), (400, 195)),
+            "position2": ((380, 181), (380, 209), (406, 195)),
             "color2": self.interface.WHITE,
             "repeat_button": True,
             "command1": lambda: self.increase_decrease_variable(self.config.config_game, "max_score"),
@@ -241,6 +244,7 @@ class GameMode(BaseMenu):
             "text": "Config Training\n            AI            ",
             "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 132),
             "detect_mouse": False,
+            "highlight_second_line": False,
         })
         self.training_genetic_elements["text_G"] = factory.create_Text({
             "text": f"Generation Size\n{genetic['generation_value']:^26}",
@@ -342,6 +346,7 @@ class GameMode(BaseMenu):
             "text": "Config Training\n            AI            ",
             "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 132),
             "detect_mouse": False,
+            "highlight_second_line": False,
         })
         self.training_qlearning_elements["text_E"] = factory.create_Text({
             "text": f"Episodes Size\n{q_learning['episodes']:^26}",
@@ -378,8 +383,8 @@ class GameMode(BaseMenu):
         factory = self.interface.button_factory_f5
         self.config_buttons["scroll"] = factory.create_ScrollBar({
             "position": (self.WIDTH - 30, 100, 20, self.HEIGHT - 200),
-            "thumb_height": 20,
-            "scroll_area": pygame.Rect(0, 66, self.WIDTH, self.HEIGHT - 66),
+            "thumb_height": 24,
+            "scroll_area": pygame.Rect(0, 68, self.WIDTH, self.HEIGHT - 128),
         })
         buttons_list = list(
             self.config_genetic_buttons.values()
@@ -454,8 +459,38 @@ class GameMode(BaseMenu):
             "text": "ON" if self.config.config_AI["model_save"] else "OFF",
         })
 
+    def _draw_section_frames(self):
+        # Left AI controls HUD frame (aligned at y=68 below player 1 input)
+        if self.interface.mode_game["Training AI"]:
+            self.draw_hud_frame(
+                (3, int(self.HEIGHT / 2 - 132), 230, 120),
+                accent_color=(56, 189, 248),
+                bg_alpha=145,
+                corner_size=10,
+            )
+        # Center Game Mode & Max Score HUD frame (aligned at y=68 below Game Mode title)
+        self.draw_hud_frame(
+            (int(self.WIDTH / 2 - 82), int(self.HEIGHT / 2 - 132), 164, 150),
+            accent_color=(168, 85, 247),
+            bg_alpha=145,
+            corner_size=10,
+        )
+        # Right Configuration HUD frame (only when a mode is active, aligned at y=68 below player 2 input)
+        if any(self.interface.mode_game.get(k, False) for k in ("Training AI", "Player", "AI")):
+            right_x = int(self.WIDTH / 2 + 108)
+            right_y = int(self.HEIGHT / 2 - 132)
+            right_w = max(80, int(self.WIDTH - right_x - 6))
+            right_h = max(80, int(self.HEIGHT - right_y - 60))
+            self.draw_hud_frame(
+                (right_x, right_y, right_w, right_h),
+                accent_color=(56, 189, 248),
+                bg_alpha=145,
+                corner_size=10,
+            )
+
     def render(self):
-        self.screen.fill(self.interface.BLACK)
+        self.draw_retro_backdrop(show_grid=True, show_particles=True)
+        self._draw_section_frames()
         font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
         self._render_main_texts(font_modegame)
         if self.interface.mode_game["Training AI"]:
@@ -467,15 +502,16 @@ class GameMode(BaseMenu):
             self._render_game_options()
         self.execute_buttons()
         self._update_score_button_state()
+        self.draw_post_overlay()
 
     def _render_main_texts(self, font_modegame):
-        self.screen.blit(font_modegame.render("Game Mode", True, "white"), (self.WIDTH / 2 - 70, self.HEIGHT / 2 - 162))
-        self.screen.blit(self.interface.font5.render("Enter Player Name One", True, "white"), (7, 10))
-        self.screen.blit(self.interface.font5.render("Enter Player Name Two", True, "white"), (416, 10))
-        self.screen.blit(font_modegame.render("Max Score", True, "white"), (self.WIDTH / 2 - 68, self.HEIGHT / 2 - 50))
-        self.screen.blit(font_modegame.render(f"{self.config.config_game['max_score']}", True, "white"), (self.WIDTH / 2 - 8, self.HEIGHT / 2 - 20))
+        self.draw_styled_label(font_modegame, "Game Mode", (self.WIDTH / 2 - 70, self.HEIGHT / 2 - 162), color=(255, 255, 255), glow_color=(168, 85, 247))
+        self.draw_styled_label(self.interface.font5, "Enter Player Name One", (7, 10), color=(255, 255, 255), glow_color=(56, 189, 248))
+        self.draw_styled_label(self.interface.font5, "Enter Player Name Two", (416, 10), color=(255, 255, 255), glow_color=(56, 189, 248))
+        self.draw_styled_label(font_modegame, "Max Score", (self.WIDTH / 2 - 68, self.HEIGHT / 2 - 50), color=(255, 255, 255), glow_color=(56, 189, 248))
+        self.draw_styled_label(font_modegame, f"{self.config.config_game['max_score']}", (self.WIDTH / 2 - 8, self.HEIGHT / 2 - 20), color=(255, 199, 51), glow_color=(255, 199, 51))
         status_text, status_color = self.interface.game.get_ai_status()
-        self.screen.blit(self.interface.font5.render(status_text, True, status_color), (10, self.HEIGHT - 24))
+        RetroVisualFX.draw_status_badge(self.screen, self.interface.font5, status_text, (10, self.HEIGHT - 24), status_color=status_color)
 
     def _render_training_genetic(self):
         for text_element in self.training_genetic_elements.values():
@@ -491,8 +527,8 @@ class GameMode(BaseMenu):
         config_text = "Configuration of\n       Gameplay       "
         width = 28 if self.config.config_game["number_balls"] < 10 else 26
         balls_text = f"Number of Balls\n{self.config.config_game['number_balls']:^{width}}"
-        self.screen.blit(self.interface.font5.render(config_text, True, "white"), (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 136))
-        self.screen.blit(self.interface.font5.render(balls_text, True, "white"), (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 81))
+        self.draw_styled_label(self.interface.font5, config_text, (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 136), color=(255, 255, 255), glow_color=(56, 189, 248))
+        self.draw_styled_label(self.interface.font5, balls_text, (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 81), color=(255, 255, 255), glow_color=(56, 189, 248), highlight_second_line=True)
 
     def execute_buttons(self):
         self._update_mode_buttons()
@@ -512,8 +548,6 @@ class GameMode(BaseMenu):
                 self.buttons.get("text_S"),
                 self.buttons.get("save_model"),
                 self.buttons["config_model_ai"],
-                self.buttons.get("box_type_model"),
-                self.buttons.get("box_type_training"),
             ])
         for button in common_buttons:
             button.draw()
@@ -523,6 +557,11 @@ class GameMode(BaseMenu):
             elif self.interface.config.config_AI["type_training"]["Q-learning"]:
                 self._execute_training_qlearning_buttons()
             self.config_buttons["scroll"].draw()
+            # Draw dropdown comboboxes last so open popup overlays render on top
+            if self.buttons.get("box_type_model"):
+                self.buttons["box_type_model"].draw()
+            if self.buttons.get("box_type_training"):
+                self.buttons["box_type_training"].draw()
         elif self.interface.mode_game["Player"] or self.interface.mode_game["AI"]:
             self._execute_game_config_buttons()
 

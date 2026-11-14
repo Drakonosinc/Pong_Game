@@ -14,6 +14,7 @@ class Interface(BaseMenu):
         self.WIDTH = self.config.config_visuals["WIDTH"]
         self.HEIGHT = self.config.config_visuals["HEIGHT"]
         self.clock = pygame.time.Clock()
+        self.backdrop = RetroBackdrop(self.WIDTH, self.HEIGHT)
         BaseMenu.__init__(self, self)
         self._sync_assets()
         self.setup_button_factories()
@@ -81,6 +82,7 @@ class Interface(BaseMenu):
         self.HEIGHT = self.window.render_height
         self.context.assets.reload_graphics()
         self._screen = self.window.canvas
+        self.backdrop.resize(self.WIDTH, self.HEIGHT)
         self._sync_assets()
         self.setup_button_factories()
     def load_AI(self):

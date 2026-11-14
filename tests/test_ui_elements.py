@@ -112,6 +112,24 @@ class TestUIElements(unittest.TestCase):
         input_txt.change_text(ev_back)
         self.assertEqual(input_txt.text, "A")
 
+    def test_all_spacepong_menus_retro_modern_render(self):
+        from src.Infrastructure.Container import Container
+        container = Container()
+        game = container.create_app()
+        from src.Interface.Menus.Main_Menu import MainMenu
+        from src.Interface.Menus.Game_Mode import GameMode
+        from src.Interface.Menus.Options_Menu import OptionsMenu
+        from src.Interface.Menus.Visuals_Menu import VisualsMenu
+        from src.Interface.Menus.Menu_AI import AIMenu
+        from src.Interface.Menus.Menu_Keys import KeysMenu
+        from src.Interface.Menus.Pause import Pause
+        from src.Interface.Menus.Game_Over import GameOver
+
+        for menu_cls in (MainMenu, GameMode, OptionsMenu, VisualsMenu, AIMenu, KeysMenu, Pause, GameOver):
+            m = menu_cls(game.ui)
+            m.setup_buttons()
+            m.render()
+
 
 if __name__ == "__main__":
     unittest.main()
