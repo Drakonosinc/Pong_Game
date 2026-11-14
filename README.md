@@ -5,9 +5,10 @@
 [![Pygame-CE](https://img.shields.io/badge/Pygame--CE-2.5%2B-00A86B.svg)](https://pyga.me/)
 [![PyForgeUI](https://img.shields.io/badge/UI-PyForgeUI-orange.svg)](https://pypi.org/project/pyforgeui/)
 [![PyForgeAI](https://img.shields.io/badge/AI-PyForgeAI-EE4C2C.svg)](https://pypi.org/project/pyforgeai-engine/)
+[![PyForgeFX](https://img.shields.io/badge/VFX-PyForgeFX-9B59B6.svg)](https://github.com/Drakonosinc/PyForgeFX)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-**Space Pong AI** is a space-themed arcade Pong game and interactive AI laboratory built with **Pygame-CE**, **[PyForgeUI](https://github.com/Drakonosinc/PyForgeUI)**, and **[PyForgeAI](https://github.com/Drakonosinc/PyForgeAI)**. Designed around an event-driven Clean Architecture (`EventManager`, `StateManager`, and `GameLogic` decoupled from rendering), it allows you to play locally, challenge pre-trained neural networks, or train new agents in real time (or headless high-speed mode) using **Neuroevolution (Genetic Algorithms)** and **Deep Q-Learning (DQN)**.
+**Space Pong AI** is a space-themed arcade Pong game and interactive AI laboratory built with **Pygame-CE**, **[PyForgeUI](https://github.com/Drakonosinc/PyForgeUI)**, **[PyForgeAI](https://github.com/Drakonosinc/PyForgeAI)**, and **[PyForgeFX](https://github.com/Drakonosinc/PyForgeFX)**. Designed around an event-driven Clean Architecture (`EventManager`, `StateManager`, and `GameLogic` decoupled from rendering), it allows you to play locally, challenge pre-trained neural networks, or train new agents in real time (or headless high-speed mode) using **Neuroevolution (Genetic Algorithms)** and **Deep Q-Learning (DQN)**.
 
 ---
 
@@ -23,6 +24,9 @@
   - **Real-Time Neural HUD**: Live on-screen rendering of normalized hidden-layer neuron activations and synaptic weight previews during AI matches and training.
 - **Powered by `PyForgeUI` (`pyforgeui`)**:
   - Multi-screen interface (`Main Menu`, `Game Mode`, `AI Configuration`, `Options`, `Visuals Customizer`, `Keybindings`, `Pause`, and `Game Over`) built with `ElementsFactory` widgets (`TextButton`, `PolygonButton`, `InputText`, `ScrollBar`, `ComboBox`).
+- **Powered by `PyForgeFX` (`pyforgefx`)**:
+  - **Multi-Frame SpriteSheet Animations**: State-driven spacecraft animations (`idle`, `thrust` engine flames on movement, and `hit` energy shield flash on impact) plus continuous 12-frame planetary/meteorite spin strips in `images/spritesheets/`.
+  - **Real-Time Arcade VFX**: Alpha-fading motion trails behind every ball (`TrailRenderer`), spark and explosion bursts (`ParticleEmitter`), expanding energy rings (`ShockwaveManager`), multi-layer deep-space starfield (`StarfieldParallax`), and impact camera trauma (`ScreenShake`).
 - **Event-Driven Clean Architecture**:
   - Pure domain physics and collision engine (`GameLogic`, `Rectangle`, `WorldStateDTO`) completely decoupled from `pygame` rendering, enabling deterministic headless simulation and unit testing.
 

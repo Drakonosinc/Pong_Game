@@ -122,7 +122,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
         mock_game.run_with_model.return_value = 15.0
 
         best = genetic_algorithm(
-            game=mock_game,
+            target=lambda m: float(mock_game.run_with_model()),
             type_model="Pytorch",
             input_size=self.input_size,
             output_size=self.output_size,
@@ -130,6 +130,7 @@ class TestGeneticAlgorithm(unittest.TestCase):
             population_size=4,
             num_trials=1,
             hidden_sizes=self.hidden_sizes,
+            on_best_fn=lambda m: setattr(mock_game, "model", m),
         )
         self.assertIsNotNone(best)
         self.assertIs(mock_game.model, best)

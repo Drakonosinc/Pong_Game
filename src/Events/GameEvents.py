@@ -1,30 +1,74 @@
 from .EventManager import Event
 from src.Core.Domain.DTOs import WorldStateDTO
 import numpy as np
-class QuitEvent(Event): pass
-class ToggleFullscreenEvent(Event): pass
-class PauseGameEvent(Event): pass
-class ResumeGameEvent(Event): pass
+
+
+class QuitEvent(Event):
+    pass
+
+
+class ToggleFullscreenEvent(Event):
+    pass
+
+
+class PauseGameEvent(Event):
+    pass
+
+
+class ResumeGameEvent(Event):
+    pass
+
+
 class ChangeStateEvent(Event):
-    def __init__(self, new_state_data: dict): self.new_state_data = new_state_data
-class SaveModelEvent(Event): pass
+    def __init__(self, new_state_data: dict):
+        self.new_state_data = new_state_data
+
+
+class SaveModelEvent(Event):
+    pass
+
+
 class PlayerMoveEvent(Event):
     def __init__(self, player_index: int, direction: int, dt: float = 1.0):
         self.player_index = player_index
-        self.direction = direction       
+        self.direction = direction
         self.dt = dt
+
+
 class ChangeSpeedEvent(Event):
     def __init__(self, fps_delta, speed_delta, limit, flag_name):
         self.fps_delta = fps_delta
         self.speed_delta = speed_delta
         self.limit = limit
         self.flag_name = flag_name
+
+
 class GameStateChangedEvent(Event):
     def __init__(self, state_dto: WorldStateDTO, player_two_reward: float, p1_score: int, p2_score: int):
         self.state_dto = state_dto
         self.reward = player_two_reward
         self.p1_score = p1_score
         self.p2_score = p2_score
+
+
 class ActionDecidedEvent(Event):
     def __init__(self, action: np.ndarray):
         self.action = action
+
+
+class BallBounceEvent(Event):
+    """Emitted when a ball collides with a player spacecraft paddle."""
+
+    def __init__(self, x: float, y: float, player_index: int):
+        self.x = float(x)
+        self.y = float(y)
+        self.player_index = int(player_index)
+
+
+class GoalScoredEvent(Event):
+    """Emitted when a ball crosses a goal boundary and a player scores."""
+
+    def __init__(self, x: float, y: float, scoring_player: int):
+        self.x = float(x)
+        self.y = float(y)
+        self.scoring_player = int(scoring_player)

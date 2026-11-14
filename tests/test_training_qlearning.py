@@ -78,9 +78,7 @@ class TestQLearning(unittest.TestCase):
         self.assertLess(agent.epsilon, initial_eps)
 
     def test_qlearning_trainer_lifecycle(self):
-        mock_game = MagicMock()
         trainer = QLearningTrainer(
-            game=mock_game,
             type_model="Pytorch",
             input_size=6,
             output_size=2,
