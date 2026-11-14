@@ -27,8 +27,8 @@
             "target_update": 100
         },
         "nn": {
-            "hidden_layers": 2,
-            "neurons_per_layer": 4
+            "hidden_layers": 4,
+            "neurons_per_layer": 12
         }
     }
 }

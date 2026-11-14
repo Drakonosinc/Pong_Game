@@ -130,6 +130,34 @@ class TestUIElements(unittest.TestCase):
             m.setup_buttons()
             m.render()
 
+    def test_game_mode_max_score_buttons(self):
+        from src.Infrastructure.Container import Container
+        from src.Interface.Menus.Game_Mode import GameMode
+
+        container = Container()
+        game = container.create_app()
+        gm = GameMode(game.ui)
+        gm.setup_buttons()
+
+        self.assertEqual(gm.config.config_game["max_score"], 5)
+
+        inc_btn = gm.buttons["increase_score"]
+        dec_btn = gm.buttons["decrease_score"]
+        inc_pos = (inc_btn.rect.centerx, inc_btn.rect.centery)
+        dec_pos = (dec_btn.rect.centerx, dec_btn.rect.centery)
+
+        # Click increase_score (5 -> 6)
+        inc_btn.pressed_button(inc_btn.rect, (True, False, False), inc_pos, draw=lambda: None, repeat=inc_btn.repeat)
+        inc_btn.pressed_button(inc_btn.rect, (False, False, False), inc_pos, draw=lambda: None, repeat=inc_btn.repeat)
+        self.assertEqual(gm.config.config_game["max_score"], 6)
+        gm.render()
+
+        # Click decrease_score (6 -> 5)
+        dec_btn.pressed_button(dec_btn.rect, (True, False, False), dec_pos, draw=lambda: None, repeat=dec_btn.repeat)
+        dec_btn.pressed_button(dec_btn.rect, (False, False, False), dec_pos, draw=lambda: None, repeat=dec_btn.repeat)
+        self.assertEqual(gm.config.config_game["max_score"], 5)
+        gm.render()
+
 
 if __name__ == "__main__":
     unittest.main()

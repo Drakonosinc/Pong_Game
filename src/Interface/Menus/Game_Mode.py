@@ -17,6 +17,7 @@ class GameMode(BaseMenu):
         self.config_qlearning_buttons = {}
         self.training_genetic_elements = {}
         self.training_qlearning_elements = {}
+        self._font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
 
     def setup_buttons(self):
         self._setup_navigation_buttons()
@@ -491,8 +492,7 @@ class GameMode(BaseMenu):
     def render(self):
         self.draw_retro_backdrop(show_grid=True, show_particles=True)
         self._draw_section_frames()
-        font_modegame = pygame.font.Font(os.path.join(self.interface.font_path, "8bitOperatorPlusSC-Bold.ttf"), 22)
-        self._render_main_texts(font_modegame)
+        self._render_main_texts(self._font_modegame)
         if self.interface.mode_game["Training AI"]:
             if self.interface.config.config_AI["type_training"]["Genetic"]:
                 self._render_training_genetic()
