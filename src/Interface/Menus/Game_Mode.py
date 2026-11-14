@@ -239,7 +239,7 @@ class GameMode(BaseMenu):
         genetic = self.config.config_AI["genetic"]
         self.training_genetic_elements["text_C"] = factory.create_Text({
             "text": "Config Training\n            AI            ",
-            "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 136),
+            "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 132),
             "detect_mouse": False,
         })
         self.training_genetic_elements["text_G"] = factory.create_Text({
@@ -340,7 +340,7 @@ class GameMode(BaseMenu):
         q_learning = self.config.config_AI["q_learning"]
         self.training_qlearning_elements["text_C"] = factory.create_Text({
             "text": "Config Training\n            AI            ",
-            "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 136),
+            "position": (self.WIDTH / 2 + 120, self.HEIGHT / 2 - 132),
             "detect_mouse": False,
         })
         self.training_qlearning_elements["text_E"] = factory.create_Text({
@@ -375,8 +375,14 @@ class GameMode(BaseMenu):
         })
 
     def _setup_scroll_bar(self):
+        self._setup_training_genetic_elements()
+        self._setup_training_qlearning_elements()
         factory = self.interface.button_factory_f5
-        self.config_buttons["scroll"] = factory.create_ScrollBar({"position": (self.WIDTH - 30, 100, 20, self.HEIGHT - 200), "thumb_height": 20})
+        self.config_buttons["scroll"] = factory.create_ScrollBar({
+            "position": (self.WIDTH - 30, 100, 20, self.HEIGHT - 200),
+            "thumb_height": 20,
+            "scroll_area": pygame.Rect(int(self.WIDTH / 2 + 60), 66, int(self.WIDTH / 2 - 65), int(self.HEIGHT - 126)),
+        })
         buttons_list = list(
             self.config_genetic_buttons.values()
             if self.interface.config.config_AI["type_training"]["Genetic"]

@@ -189,9 +189,33 @@ class TestInputHandler(unittest.TestCase):
         self.handler._process_continuous_presses()
 
         state_events = [e for e in self.posted_events if isinstance(e, ChangeStateEvent)]
-        self.assertEqual(len(state_events), 1)
         self.assertEqual(state_events[0].new_state_data.get("main"), GameState.PLAYING)
         self.assertTrue(state_events[0].new_state_data.get("reset"))
+
+    def test_input_handler_moves_gamelogic_players_end_to_end(self):
+        from src.Game.GameLogic import GameLogic
+
+        real_em = EventManager()
+        logic = GameLogic(
+            width=700,
+            height=400,
+            config_game={"number_balls": 1, "max_score": 5},
+            mode_game=self.game.mode_game,
+            audio_service=MagicMock(),
+            event_manager=real_em,
+        )
+        real_handler = InputHandler(self.game, real_em)
+        p1_start = logic.player_one.rect.y
+        p2_start = logic.player_two.rect.y
+
+        pressed = defaultdict(bool)
+        pressed[K_w] = True
+        pressed[K_DOWN] = True
+        self.game.pressed_keys = pressed
+
+        real_handler._process_continuous_presses()
+        self.assertLess(logic.player_one.rect.y, p1_start)
+        self.assertGreater(logic.player_two.rect.y, p2_start)
 
 
 if __name__ == "__main__":

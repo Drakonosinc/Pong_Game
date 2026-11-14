@@ -1,6 +1,11 @@
+import sys
 from .EventManager import Event
 from src.Core.Domain.DTOs import WorldStateDTO
 import numpy as np
+
+
+sys.modules["Events.GameEvents"] = sys.modules[__name__]
+sys.modules["src.Events.GameEvents"] = sys.modules[__name__]
 
 
 class QuitEvent(Event):
