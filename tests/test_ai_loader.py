@@ -64,6 +64,13 @@ class TestAILoader(unittest.TestCase):
         self.assertIsNotNone(result.model)
         self.assertIsNone(result.error_message)
 
+        # Switching to TensorFlow when only best_model.pth exists must convert weights cleanly
+        self.mock_config.config_AI["type_model"] = {"Pytorch": False, "Tensorflow": True}
+        tf_result = self.loader.load_model_result()
+        self.assertTrue(tf_result.model_found)
+        self.assertIsNotNone(tf_result.model)
+        self.assertIsNone(tf_result.error_message)
+
 
 if __name__ == "__main__":
     unittest.main()

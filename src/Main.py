@@ -1,5 +1,8 @@
+import os
 import sys
 from pathlib import Path
+os.environ.setdefault("TF_ENABLE_ONEDNN_OPTS", "0")
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
 SRC_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = SRC_ROOT.parent
 for path in (PROJECT_ROOT, SRC_ROOT):

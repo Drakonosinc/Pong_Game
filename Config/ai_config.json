@@ -2,12 +2,12 @@
     "config_AI": {
         "model_save": false,
         "type_training": {
-            "Genetic": true,
-            "Q-learning": false
+            "Genetic": false,
+            "Q-learning": true
         },
         "type_model": {
-            "Pytorch": true,
-            "Tensorflow": false
+            "Pytorch": false,
+            "Tensorflow": true
         },
         "genetic": {
             "generation_value": 100,
