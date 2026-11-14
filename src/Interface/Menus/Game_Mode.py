@@ -505,11 +505,11 @@ class GameMode(BaseMenu):
         ]
         if self.interface.mode_game["Training AI"]:
             common_buttons.extend([
-                self.buttons.get("box_type_model"),
-                self.buttons.get("box_type_training"),
                 self.buttons.get("text_S"),
                 self.buttons.get("save_model"),
                 self.buttons["config_model_ai"],
+                self.buttons.get("box_type_model"),
+                self.buttons.get("box_type_training"),
             ])
         for button in common_buttons:
             button.draw()
