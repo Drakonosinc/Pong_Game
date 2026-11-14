@@ -158,6 +158,24 @@ class TestUIElements(unittest.TestCase):
         self.assertEqual(gm.config.config_game["max_score"], 5)
         gm.render()
 
+    def test_live_neural_network_training_background(self):
+        from pyforgeai import build_model
+        from src.Infrastructure.Container import Container
+
+        container = Container()
+        game = container.create_app()
+        game.mode_game["Training AI"] = True
+        game.game_logic.init_entities()
+        model = build_model("Pytorch", input_size=6, output_size=2, hidden_sizes=[6, 6, 6, 6])
+        game.model = model
+        game.ai_handler.set_runtime_model(model)
+
+        # Simulate one frame of game update + AI inference + visuals render
+        game.game_logic.update()
+        self.assertIsNotNone(model.layer_activations)
+        self.assertEqual([len(layer) for layer in model.layer_activations], [6, 6, 6, 6, 6, 2])
+        game.visuals_items.draw()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -58,6 +58,8 @@ class QLearningTrainer(ITrainer):
 
         def run_q_episode(trainer, episode_idx):
             game.qlearning_trainer = trainer
+            if hasattr(trainer, "agent") and hasattr(trainer.agent, "policy_net"):
+                game.model = trainer.agent.policy_net
             game.generation = episode_idx
             return float(game.run_with_model())
 

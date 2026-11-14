@@ -156,33 +156,75 @@ class Visuals_items:
         self._blit_hud_text(screen, self.assets.font, f"Score {self.p1_score}", (45, 380), self.assets.YELLOW, glow_color=(56, 189, 248))
         self._blit_hud_text(screen, self.assets.font, f"Score {self.p2_score}", (580, 380), self.assets.YELLOW, glow_color=(168, 85, 247))
 
-    def draw_activations(self, screen):
-        if self.game.mode_game["AI"]:
+    def _get_live_model(self):
+        if self.game.mode_game.get("AI"):
             self.game.model = self.game.model_training
-        if self.game.model is not None and (getattr(self.game.model, "activations", None) is not None):
-            activations = self.game.model.activations
-            num_activations = activations.shape[1]
-            neuron_positions = [
-                (self.game.WIDTH - 800 + i * 20, self.game.HEIGHT // 2) for i in range(num_activations)
-            ]
-            for pos in neuron_positions:
-                pygame.draw.line(screen, (56, 189, 248), (self.game.WIDTH - 210, self.game.HEIGHT // 2), pos, 1)
-                pygame.draw.line(screen, (168, 85, 247), (self.game.WIDTH - 190, self.game.HEIGHT // 2), pos, 1)
-            for i in range(num_activations):
-                activation_value = float(activations[0][i])
-                activation_value = max(0.0, min(activation_value, 1.0))
-                color = RetroVisualFX.lerp_color((25, 45, 85), (56, 225, 255), activation_value)
-                pygame.draw.circle(screen, color, neuron_positions[i], 6)
-                pygame.draw.circle(screen, (255, 255, 255), neuron_positions[i], 6, 1)
+        elif self.game.mode_game.get("Training AI") and self.game.model is None:
+            trainer = getattr(self.game, "qlearning_trainer", None)
+            if trainer is not None and hasattr(trainer, "agent") and hasattr(trainer.agent, "policy_net"):
+                self.game.model = trainer.agent.policy_net
+        model = self.game.model
+        if model is not None and hasattr(model, "get_internal_model"):
+            return model.get_internal_model()
+        return model
+
+    def draw_activations(self, screen):
+        raw_model = self._get_live_model()
+        layers_sizes = None
+        if raw_model is not None:
+            in_sz = getattr(raw_model, "input_size", None)
+            hid_sz = getattr(raw_model, "hidden_sizes", None)
+            out_sz = getattr(raw_model, "output_size", None)
+            if in_sz is not None and hid_sz is not None and out_sz is not None:
+                layers_sizes = [int(in_sz), *[int(h) for h in hid_sz], int(out_sz)]
+            else:
+                try:
+                    from pyforgeai import infer_architecture
+                    _, inf_in, inf_out, inf_hid = infer_architecture(raw_model)
+                    layers_sizes = [int(inf_in), *[int(h) for h in inf_hid], int(inf_out)]
+                except Exception:
+                    layers_sizes = None
+
+        if not layers_sizes:
+            nn_cfg = self.game.config.config_AI.get("nn", {"hidden_layers": 2, "neurons_per_layer": 6})
+            h_count = max(1, int(nn_cfg.get("hidden_layers", 2)))
+            n_count = max(1, int(nn_cfg.get("neurons_per_layer", 6)))
+            layers_sizes = [6, *([n_count] * h_count), 2]
+
+        layer_activations = getattr(raw_model, "layer_activations", None) if raw_model is not None else None
+        if layer_activations is None and raw_model is not None and getattr(raw_model, "activations", None) is not None:
+            try:
+                first_hidden = list(raw_model.activations.flatten())
+                if self.current_state_dto is not None:
+                    arr = self.current_state_dto.to_array()
+                    span = float(arr.max() - arr.min())
+                    inp_norm = list((arr - arr.min()) / span) if span > 1e-6 else [0.5] * len(arr)
+                else:
+                    inp_norm = [0.5] * layers_sizes[0]
+                layer_activations = [inp_norm, first_hidden]
+            except Exception:
+                layer_activations = None
+
+        net_rect = (82, 86, self.game.WIDTH - 164, self.game.HEIGHT - 138)
+        RetroVisualFX.draw_live_neural_network(
+            screen,
+            net_rect,
+            layers_sizes=layers_sizes,
+            layer_activations=layer_activations,
+            accent_color=(56, 189, 248),
+            secondary_color=(168, 85, 247),
+            pulse_color=(255, 199, 51),
+            opacity=115,
+            show_frame=True,
+        )
 
     def draw_model_data(self, screen):
-        if self.game.mode_game["AI"]:
-            self.game.model = self.game.model_training
-        if self.game.model is not None:
+        raw_model = self._get_live_model()
+        if raw_model is not None:
             try:
                 weights_preview = None
-                if hasattr(self.game.model, "fc1"):
-                    layer = self.game.model.fc1
+                if hasattr(raw_model, "fc1"):
+                    layer = raw_model.fc1
                     if hasattr(layer, "weight"):
                         weights_preview = layer.weight.detach().cpu().numpy().flatten()[:5]
                     elif hasattr(layer, "kernel"):
@@ -198,12 +240,12 @@ class Visuals_items:
                     )
             except Exception:
                 pass
-            if getattr(self.game.model, "activations", None) is not None:
+            if getattr(raw_model, "activations", None) is not None:
                 try:
                     self._blit_hud_text(
                         screen,
                         self.assets.font,
-                        f"Activations: {self.game.model.activations.flatten()[:5]}",
+                        f"Activations: {raw_model.activations.flatten()[:5]}",
                         (10, 70),
                         self.assets.YELLOW,
                         glow_color=(168, 85, 247),
@@ -217,14 +259,15 @@ class Visuals_items:
         screen = self.game.window_manager.canvas
         screen.blit(self.assets.image, (ox, oy))
         self.starfield.update_and_draw(screen, dt)
-        if self.game.mode_game["Training AI"]:
-            self.draw_generation(screen)
         if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:
             self.draw_activations(screen)
-            self.draw_model_data(screen)
         self.images_elements(screen, dt=dt, offset=(ox, oy))
         self.particles.update_and_draw(screen, dt, offset=(ox, oy))
         self.shockwaves.update_and_draw(screen, dt, offset=(ox, oy))
+        if self.game.mode_game["Training AI"]:
+            self.draw_generation(screen)
+        if self.game.mode_game["Training AI"] or self.game.mode_game["AI"]:
+            self.draw_model_data(screen)
         self.scores(screen)
         self.name_players(screen)
         self.mode_speed(screen)

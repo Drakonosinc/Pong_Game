@@ -28,7 +28,7 @@
         },
         "nn": {
             "hidden_layers": 4,
-            "neurons_per_layer": 12
+            "neurons_per_layer": 6
         }
     }
 }

@@ -5,6 +5,7 @@ from pyforgeai import (
     PyTorchAdapter,
     TensorFlowAdapter,
     get_active_qlearning_trainer,
+    wrap_model,
 )
 from src.Events.GameEvents import GameStateChangedEvent, ActionDecidedEvent
 
@@ -33,13 +34,7 @@ class AIHandler:
         current_model = self.model_adapter.get_internal_model() if self.model_adapter else None
         if current_model is model:
             return
-        type_model = self.game.config.config_AI.get("type_model", {})
-        if type_model.get("Pytorch", False):
-            self.model_adapter = PyTorchAdapter(model)
-        elif type_model.get("Tensorflow", False):
-            self.model_adapter = TensorFlowAdapter(model)
-        else:
-            self.model_adapter = MockAdapter(output_size=2)
+        self.model_adapter = wrap_model(model, output_size=2)
 
     def get_state(self):
         game_logic = getattr(self.game, "game_logic", None)
@@ -55,7 +50,11 @@ class AIHandler:
 
     def handle_game_state_changed(self, event: GameStateChangedEvent):
         state_array = event.state_dto.to_array()
-        if self.game.config.config_AI["type_training"]["Q-learning"]:
+        if (
+            self.game.mode_game.get("Training AI", False)
+            and self.game.config.config_AI["type_training"].get("Q-learning", False)
+            and get_active_qlearning_trainer(self.game) is not None
+        ):
             self._qlearning_actions(state_array, event.reward, event.p1_score, event.p2_score)
         else:
             if not self.model_adapter:
